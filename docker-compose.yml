@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: public-library-img
+    container_name: public-library
+    ports:
+      - '3000:3000'
