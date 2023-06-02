@@ -25,7 +25,7 @@ export default function UserRegisterForm({}) {
 
   return (
     <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center'>
-      <h1 className='text-4xl font-extrabold tracking-wide text-primary'>
+      <h1 className='text-4xl font-extrabold text-primary'>
         Create an account
       </h1>
 

@@ -16,7 +16,7 @@ export default function UserLoginForm() {
 
   return (
     <div className='space-y-8 text-center flex flex-col items-center'>
-      <h1 className='text-4xl font-extrabold tracking-wide text-primary'>
+      <h1 className='text-4xl font-extrabold text-primary'>
         Welcome to Digital Library
       </h1>
       <p className='text-primary'>Please enter your details</p>
