@@ -17,6 +17,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className='flex flex-1'>
           <Component {...pageProps} />
         </div>
+
+        <div id='modal-root'></div>
       </div>
     </>
   );
