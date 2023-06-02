@@ -11,13 +11,15 @@ export default function UserAuthentication({}) {
     <div
       className='
         h-full w-full bg-secondary
-        grid grid-cols-2
-
+        grid grid-cols-1 md:grid-cols-2
+        p-4 md:p-14 
+        md:space-x-4
       '
     >
       <div
         className='
           flex flex-col justify-center items-center
+         
         '
       >
         {formState === 'login' && <UserLoginForm />}
@@ -25,7 +27,7 @@ export default function UserAuthentication({}) {
 
         <div className='mt-6'>
           {(formState === 'login' && (
-            <div className='flex flex-row items-center'>
+            <div className='flex flex-row'>
               <p className='text-primary'>Don{"'"}t have an account?</p>
               <button
                 className='
@@ -39,7 +41,7 @@ export default function UserAuthentication({}) {
               </button>
             </div>
           )) || (
-            <div className='flex flex-row items-center'>
+            <div className='flex flex-row'>
               <p className='text-primary'>Already have an account?</p>
               <button
                 className='
@@ -57,8 +59,14 @@ export default function UserAuthentication({}) {
       </div>
 
       {/* bookshelf image */}
-      <div className='flex justify-center items-center'>
-        <div className='relative w-[500px] h-[600px] overflow-clip rounded-[20px]'>
+      <div className='hidden md:flex justify-center items-center'>
+        <div
+          className='relative 
+          w-[350px] h-[450px]
+          lg:w-[500px] lg:h-[600px]
+          overflow-clip rounded-[20px]
+         '
+        >
           <Image
             src='/asset/library.png'
             alt='bookshelf'
