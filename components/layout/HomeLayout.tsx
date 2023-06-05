@@ -1,27 +1,32 @@
 import Image from 'next/image';
 
-import { homePageSearchAtom } from '@/service/recoil';
+import { homePageCategoryAtom, homePageSearchAtom } from '@/service/recoil';
 import { useRecoilState } from 'recoil';
-import { BookCategory } from '@/utils/enum';
+import { BookCategory, HomePageTab } from '@/utils/enum';
 import { useState } from 'react';
 import SideBar from './SideBar';
 
 export default function HomeLayout({
+  currentTab,
+  handlePageRouting,
   children
 }: {
+  currentTab: HomePageTab;
+  handlePageRouting: (tab: HomePageTab) => void;
   children: React.ReactNode;
 }) {
   const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
 
   // handle category
-  const [currentCategory, setCurrentCategory] = useState(BookCategory.ALL);
+  const [currentCategory, setCurrentCategory] =
+    useRecoilState(homePageCategoryAtom);
 
   const handleCategory = (category: string) => {
     setCurrentCategory(category);
   };
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full flex flex-col'>
       {/* search bar row */}
       <div className='w-full flex justify-center items-center py-4 relative'>
         {/* search bar */}
@@ -29,7 +34,7 @@ export default function HomeLayout({
           className='
             w-1/4
             flex justify-center items-center
-           bg-alt-secondary 
+           bg-action 
             p-2 px-4 rounded-xl space-x-6
             box-border border-2 focus-within:border-primary
             transition-colors
@@ -66,11 +71,11 @@ export default function HomeLayout({
       </div>
 
       {/* category row  */}
-      <div className='w-full flex flex-row h-9'>
+      <div className='w-screen flex flex-row h-9 mb-4'>
         {/* offset navigation sidebar */}
-        <div className='w-[200px]'></div>
+        <div className='w-[200px] hidden lg:block'></div>
 
-        <div className='flex space-x-8'>
+        <div className='w-full flex px-8'>
           {Object.keys(BookCategory).map((category: any) => {
             const key = category as keyof typeof BookCategory;
             const value = BookCategory[key];
@@ -82,46 +87,69 @@ export default function HomeLayout({
             ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
 
             return (
-              <div
+              <CategoryButton
                 key={category}
-                className={`
-                  flex items-center justify-center space-x-2 cursor-pointer
-                  transition-all duration-300
-                  ${
-                    isCurrentCategory
-                      ? 'bg-primary p-1 px-8 rounded-xl text-white'
-                      : 'bg-transparent text-primary'
-                  }
-
-                `}
-                onClick={() => handleCategory(value)}
-              >
-                {value !== BookCategory.ALL && (
-                  <Image
-                    src={iconPath}
-                    alt={value}
-                    width={20}
-                    height={20}
-                    className=''
-                  />
-                )}
-                <span>{value}</span>
-              </div>
+                category={category}
+                value={value}
+                iconPath={iconPath}
+                isCurrentCategory={isCurrentCategory}
+                handleCategory={handleCategory}
+              />
             );
           })}
         </div>
       </div>
 
       {/* main row */}
-      <div className='h-full flex flex-1'>
+      <div className='w-screen flex flex-1'>
         {/* side bar */}
-        <SideBar />
+        <SideBar
+          currentTab={currentTab}
+          handlePageRouting={handlePageRouting}
+        />
 
         {/* tab component */}
-        {/* <div className='flex-1'>{children}</div> */}
+        <div className='flex-1 p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0'>
+          <div>{children}</div>
+        </div>
       </div>
     </div>
   );
 }
 
-// q: 174 + 32 ? 206
+function CategoryButton({
+  category,
+  value,
+  iconPath,
+  isCurrentCategory,
+  handleCategory
+}: {
+  category: string;
+  value: string;
+  iconPath: string;
+  isCurrentCategory: boolean;
+  handleCategory: (category: string) => void;
+}) {
+  return (
+    <div
+      key={category}
+      className={`
+        flex items-center justify-center space-x-2 cursor-pointer
+        transition-all duration-300
+        whitespace-nowrap mr-8
+        ${
+          isCurrentCategory
+            ? 'bg-secondary p-1 px-8 rounded-xl text-white'
+            : 'bg-transparent text-alt-secondary '
+        }
+
+      `}
+      onClick={() => handleCategory(value)}
+    >
+      {value !== BookCategory.ALL && (
+        <Image src={iconPath} alt={value} width={20} height={20} className='' />
+      )}
+      <span>{value}</span>
+    </div>
+  );
+}

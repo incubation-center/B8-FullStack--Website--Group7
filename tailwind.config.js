@@ -20,9 +20,10 @@ module.exports = {
       colors: {
         ...colors,
         ...{
-          primary: '#14397d',
-          secondary: '#77b5d9',
-          'alt-secondary': '#d7eaf3',
+          primary: '#523A28',
+          secondary: '#A47551',
+          'alt-secondary': '#D0B49F',
+          action: '#EBEBEB',
           success: '#52B788',
           warning: '#fcd34d',
           danger: '#ef4444'

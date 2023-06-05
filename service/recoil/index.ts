@@ -1,4 +1,4 @@
-import { HomePageTab } from '@/utils/enum';
+import { BookCategory, HomePageTab } from '@/utils/enum';
 import { atom } from 'recoil';
 
 // homepage
@@ -10,4 +10,9 @@ export const homePageTabAtom = atom<HomePageTab>({
 export const homePageSearchAtom = atom<string>({
   key: 'homePageSearch',
   default: ''
+});
+
+export const homePageCategoryAtom = atom<string>({
+  key: 'homePageCategory',
+  default: BookCategory.ALL
 });

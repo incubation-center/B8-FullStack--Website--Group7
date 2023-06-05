@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next/types';
@@ -15,7 +15,7 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   const router = useRouter();
 
   // handling page routing
-  const [tab, setTab] = useRecoilState(homePageTabAtom);
+  const [tab, setTab] = useState(currentTab);
 
   const handlePageRouting = (tab: HomePageTab) => {
     router.push(`/?tab=${tab}`, undefined, { shallow: true });
@@ -35,9 +35,12 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   }, []);
 
   return (
-    <div className='h-full w-full bg-secondary'>
-      <HomeLayout>
-        <div>hi</div>
+    <div className='h-full w-full bg-primary'>
+      <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
+        {tab === HomePageTab.HOME && <div>Home</div>}
+        {tab === HomePageTab.SAVED && <div>Saved</div>}
+        {tab === HomePageTab.REQUEST_STATUS && <div>Request Status</div>}
+        {tab === HomePageTab.PROFILE && <div>Profile</div>}
       </HomeLayout>
     </div>
   );
