@@ -18,7 +18,7 @@ export default function HomeTab() {
         const category = BookCategory[key as keyof typeof BookCategory];
 
         if (category === BookCategory.ALL)
-          return <div id='all' className='w-1/3'></div>;
+          return <div key={key} id='all' className='w-1/3'></div>;
 
         return (
           <div
