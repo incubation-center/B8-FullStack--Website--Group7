@@ -10,7 +10,7 @@ export default function UserAuthentication({}) {
   return (
     <div
       className='
-        h-full w-full bg-secondary
+        h-full w-full bg-primary
         grid grid-cols-1 md:grid-cols-2
         p-4 md:p-14 
         md:space-x-4
@@ -25,14 +25,14 @@ export default function UserAuthentication({}) {
         {formState === 'login' && <UserLoginForm />}
         {formState === 'register' && <UserRegisterForm />}
 
-        <div className='mt-6'>
+        <div className='mt-6 tracking-wider'>
           {(formState === 'login' && (
             <div className='flex flex-row'>
-              <p className='text-primary'>Don{"'"}t have an account?</p>
+              <p className='text-alt-secondary'>Don{"'"}t have an account?</p>
               <button
                 className='
                   ml-2 
-                  text-primary font-bold
+                  text-alt-secondary font-bold
                   hover:underline
                 '
                 onClick={() => setFormState('register')}
@@ -42,11 +42,11 @@ export default function UserAuthentication({}) {
             </div>
           )) || (
             <div className='flex flex-row'>
-              <p className='text-primary'>Already have an account?</p>
+              <p className='text-alt-secondary'>Already have an account?</p>
               <button
                 className='
                   ml-2 
-                  text-primary font-bold
+                  text-alt-secondary font-bold
                   hover:underline
                 '
                 onClick={() => setFormState('login')}

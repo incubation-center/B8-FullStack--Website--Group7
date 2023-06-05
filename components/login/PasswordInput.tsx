@@ -28,7 +28,7 @@ export default function PasswordInput({
 
   return (
     <div className='flex flex-col items-start w-full'>
-      <label htmlFor={name} className='text-primary ml-4 font-medium'>
+      <label htmlFor={name} className='text-alt-secondary ml-4 font-medium'>
         {label}
         <RequiredIcon />
       </label>
@@ -39,8 +39,8 @@ export default function PasswordInput({
           type={isShowPassword ? 'text' : 'password'}
           className='
           w-full px-4 py-2 mt-2 rounded-full
-          bg-alt-secondary 
-          placeholder-black placeholder-opacity-50
+          bg-white
+          placeholder-[#9D9C9C] 
           focus:outline-none
         '
           placeholder={placeholder}
