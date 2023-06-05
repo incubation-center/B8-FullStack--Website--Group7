@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-import UserLoginForm from '@/components/Modals/login/User/loginForm';
-import UserRegisterForm from '@/components/Modals/login/User/RegisterForm';
+import UserLoginForm from '@/components/login/User/loginForm';
+import UserRegisterForm from '@/components/login/User/RegisterForm';
 
 export default function UserAuthentication({}) {
   const [formState, setFormState] = useState<'login' | 'register'>('login');
