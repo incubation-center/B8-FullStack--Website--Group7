@@ -23,10 +23,10 @@ export default function HomeLayout({
   const [currentCategory, setCurrentCategory] =
     useRecoilState(homePageCategoryAtom);
 
-  const handleCategory = (category: string) => {
+  const handleCategory = (categoryKey: string, category: string) => {
     setCurrentCategory(category);
 
-    router.push(`/?tab=${currentTab}#${category.toLowerCase()}`, undefined, {
+    router.push(`/?tab=${currentTab}#${categoryKey.toLowerCase()}`, undefined, {
       shallow: true
     });
   };
@@ -34,7 +34,7 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full flex flex-col'>
       {/* search bar row */}
-      <div className='w-full flex justify-center items-center py-4 relative'>
+      <div className='w-full h-auto flex justify-center items-center py-4 relative'>
         {/* search bar */}
         <div
           className='
@@ -77,34 +77,42 @@ export default function HomeLayout({
       </div>
 
       {/* category row  */}
-      <div className='w-screen flex flex-row h-9 mb-4'>
-        {/* offset navigation sidebar */}
-        <div className='w-[200px] hidden lg:block'></div>
 
-        <div className='w-full flex px-8'>
-          {Object.keys(BookCategory).map((category: any) => {
-            const key = category as keyof typeof BookCategory;
-            const value = BookCategory[key];
+      {currentTab !== HomePageTab.HOME ? (
+        <div className='h-9 mb-4'></div>
+      ) : (
+        <div
+          className='
+          w-screen flex flex-row h-9 mb-4'
+        >
+          {/* offset navigation sidebar */}
+          <div className='w-[200px] hidden lg:block'></div>
 
-            const isCurrentCategory = currentCategory === value;
+          <div className='w-full flex px-8'>
+            {Object.keys(BookCategory).map((category: any) => {
+              const key = category as keyof typeof BookCategory;
+              const value = BookCategory[key];
 
-            const iconPath = `/icon/book-category/${BookCategory[
-              category as keyof typeof BookCategory
-            ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
+              const isCurrentCategory = currentCategory === value;
 
-            return (
-              <CategoryButton
-                key={category}
-                category={category}
-                value={value}
-                iconPath={iconPath}
-                isCurrentCategory={isCurrentCategory}
-                handleCategory={handleCategory}
-              />
-            );
-          })}
+              const iconPath = `/icon/book-category/${BookCategory[
+                category as keyof typeof BookCategory
+              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
+
+              return (
+                <CategoryButton
+                  key={category}
+                  category={category}
+                  value={value}
+                  iconPath={iconPath}
+                  isCurrentCategory={isCurrentCategory}
+                  handleCategory={() => handleCategory(key, value)}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* main row */}
       <div className='w-screen h-1/2 flex flex-1'>
@@ -116,9 +124,7 @@ export default function HomeLayout({
 
         {/* tab component */}
         <div className='w-full max-h-full p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0 overflow-hidden'>
-          <div className='overflow-y-scroll overflow-x-clip h-screen w-screen pb-56 scroll-smooth'>
-            {children}
-          </div>
+          {children}
         </div>
       </div>
     </div>
@@ -136,7 +142,7 @@ function CategoryButton({
   value: string;
   iconPath: string;
   isCurrentCategory: boolean;
-  handleCategory: (category: string) => void;
+  handleCategory: () => void;
 }) {
   return (
     <div
@@ -152,7 +158,7 @@ function CategoryButton({
         }
 
       `}
-      onClick={() => handleCategory(value)}
+      onClick={handleCategory}
     >
       {value !== BookCategory.ALL && (
         <Image src={iconPath} alt={value} width={20} height={20} className='' />
