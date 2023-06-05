@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { useState } from 'react';
 import SideBar from './SideBar';
+import { useRouter } from 'next/router';
 
 export default function HomeLayout({
   currentTab,
@@ -15,6 +16,7 @@ export default function HomeLayout({
   handlePageRouting: (tab: HomePageTab) => void;
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
 
   // handle category
@@ -23,6 +25,10 @@ export default function HomeLayout({
 
   const handleCategory = (category: string) => {
     setCurrentCategory(category);
+
+    router.push(`/?tab=${currentTab}#${category.toLowerCase()}`, undefined, {
+      shallow: true
+    });
   };
 
   return (
@@ -62,7 +68,7 @@ export default function HomeLayout({
               px-4 py-2 rounded-xl
               bg-alt-secondary text-primary
               transition-colors
-              box-border border-2 hover:border-primary
+              box-border border-2 border-alt-secondary hover:border-action
             '
           >
             Log In
@@ -101,7 +107,7 @@ export default function HomeLayout({
       </div>
 
       {/* main row */}
-      <div className='w-screen flex flex-1'>
+      <div className='w-screen h-1/2 flex flex-1'>
         {/* side bar */}
         <SideBar
           currentTab={currentTab}
@@ -109,8 +115,10 @@ export default function HomeLayout({
         />
 
         {/* tab component */}
-        <div className='flex-1 p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0'>
-          <div>{children}</div>
+        <div className='w-full max-h-full p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0 overflow-hidden'>
+          <div className='overflow-y-scroll overflow-x-clip h-screen w-screen pb-56 scroll-smooth'>
+            {children}
+          </div>
         </div>
       </div>
     </div>

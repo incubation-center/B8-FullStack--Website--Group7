@@ -3,12 +3,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next/types';
 
-import { useRecoilState } from 'recoil';
-import { homePageTabAtom } from '@/service/recoil';
-
 import { HomePageTab } from '@/utils/enum';
 
 import HomeLayout from '@/components/layout/HomeLayout';
+import HomeTab from '@/components/Tabs/Home.tab';
 
 export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   // initialize
@@ -37,7 +35,7 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   return (
     <div className='h-full w-full bg-primary'>
       <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
-        {tab === HomePageTab.HOME && <div>Home</div>}
+        {tab === HomePageTab.HOME && <HomeTab />}
         {tab === HomePageTab.SAVED && <div>Saved</div>}
         {tab === HomePageTab.REQUEST_STATUS && <div>Request Status</div>}
         {tab === HomePageTab.PROFILE && <div>Profile</div>}
