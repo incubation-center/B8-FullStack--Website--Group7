@@ -12,20 +12,20 @@ export default function HomeTab() {
   };
 
   return (
-    <div className='ml-4 lg:ml-8'>
+    <div className='ml-4 lg:ml-8 overflow-y-scroll overflow-x-clip h-screen w-screen pb-56 scroll-smooth'>
       {/* loop over category */}
       {Object.keys(BookCategory).map((key, index) => {
         const category = BookCategory[key as keyof typeof BookCategory];
 
         if (category === BookCategory.ALL)
-          return <div id='all' className='w-1/3'></div>;
+          return <div key={key} id='all' className='w-1/3'></div>;
 
         return (
           <div
             key={key}
             className=' w-10/12 select-none flex flex-col flex-grow overflow-x-visible'
           >
-            <div id={category.toLowerCase()} className='invisible h-12'>
+            <div id={key.toLowerCase()} className='invisible h-12'>
               element to scroll to{' '}
             </div>
             {/* title */}
@@ -71,6 +71,8 @@ export default function HomeTab() {
           </div>
         );
       })}
+
+      <div className='h-96'></div>
     </div>
   );
 }

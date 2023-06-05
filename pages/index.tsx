@@ -7,6 +7,7 @@ import { HomePageTab } from '@/utils/enum';
 
 import HomeLayout from '@/components/layout/HomeLayout';
 import HomeTab from '@/components/Tabs/Home.tab';
+import SavedTab from '@/components/Tabs/Saved.tab';
 
 export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   // initialize
@@ -36,7 +37,7 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
     <div className='h-full w-full bg-primary'>
       <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
         {tab === HomePageTab.HOME && <HomeTab />}
-        {tab === HomePageTab.SAVED && <div>Saved</div>}
+        {tab === HomePageTab.SAVED && <SavedTab />}
         {tab === HomePageTab.REQUEST_STATUS && <div>Request Status</div>}
         {tab === HomePageTab.PROFILE && <div>Profile</div>}
       </HomeLayout>
