@@ -16,10 +16,10 @@ export default function UserLoginForm() {
 
   return (
     <div className='space-y-8 text-center flex flex-col items-center'>
-      <h1 className='text-4xl font-extrabold tracking-wide text-primary'>
+      <h1 className='text-4xl font-extrabold text-alt-secondary'>
         Welcome to Digital Library
       </h1>
-      <p className='text-primary'>Please enter your details</p>
+      <p className='text-alt-secondary'>Please enter your details</p>
 
       <form onSubmit={handleSubmit(onSubmit)} className='w-5/6 space-y-4'>
         {/* email address */}
@@ -54,12 +54,12 @@ export default function UserLoginForm() {
             />
             <label
               htmlFor='remember'
-              className=' text-sm text-primary ml-4 font-medium'
+              className=' text-sm text-alt-secondary ml-4 font-medium'
             >
               Remember me
             </label>
           </div>
-          <a href='#' className=' text-sm text-primary font-medium'>
+          <a href='#' className=' text-sm text-alt-secondary font-medium'>
             Forgot password?
           </a>
         </div>
@@ -69,8 +69,9 @@ export default function UserLoginForm() {
             type='submit'
             className='
             w-full px-4 py-2 mt-6 rounded-full
-            bg-primary text-white font-medium tracking-wide 
+            bg-secondary text-white text-xl tracking-wide 
             focus:outline-none
+            font-poppins
           '
           >
             Login
