@@ -4,7 +4,7 @@ export default function RequestTable({ data }: { data: BookRequest[] }) {
   return (
     <table
       className='
-        w-4/5 mx-auto
+        w-full lg:w-4/5 mx-auto
         mb-4 md:mb-8 
         mt-2 md:mt-4 
       '
