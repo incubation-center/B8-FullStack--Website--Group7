@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import BookData from '@/dummydata';
+import { BookData } from '@/dummydata';
 
 export default function SavedTab({}) {
   const router = useRouter();
