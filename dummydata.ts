@@ -1,4 +1,4 @@
-import { Book } from './types';
+import { Book, BookRequest } from './types';
 
 const BookData: Book[] = [
   {
@@ -124,4 +124,63 @@ const BookData: Book[] = [
   }
 ];
 
-export default BookData;
+const RequestData: BookRequest[] = [
+  {
+    requestId: '1',
+    borrower: 'borrower id',
+    book: BookData[0],
+    status: 'Pending',
+    requestDuration: 14,
+    requestDate: new Date()
+  },
+  {
+    requestId: '2',
+    borrower: 'borrower id',
+    book: BookData[1],
+    status: 'Pending',
+    requestDuration: 14,
+    requestDate: new Date()
+  },
+  {
+    requestId: '3',
+    borrower: 'borrower id',
+    book: BookData[2],
+    status: 'Approved',
+    requestDuration: 14,
+    requestDate: new Date()
+  },
+  {
+    requestId: '4',
+    borrower: 'borrower id',
+    book: BookData[3],
+    status: 'Approved',
+    requestDuration: 14,
+    requestDate: new Date()
+  },
+  {
+    requestId: '5',
+    borrower: 'borrower id',
+    book: BookData[4],
+    status: 'Approved',
+    requestDuration: 14,
+    requestDate: new Date()
+  },
+  {
+    requestId: '6',
+    borrower: 'borrower id',
+    book: BookData[5],
+    status: 'Achieved',
+    requestDuration: 14,
+    requestDate: new Date()
+  },
+  {
+    requestId: '7',
+    borrower: 'borrower id',
+    book: BookData[6],
+    status: 'Achieved',
+    requestDuration: 14,
+    requestDate: new Date()
+  }
+];
+
+export { BookData, RequestData };

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import BookData from '@/dummydata';
+import { BookData } from '@/dummydata';
 import { BookCategory } from '@/utils/enum';
 
 export default function HomeTab() {

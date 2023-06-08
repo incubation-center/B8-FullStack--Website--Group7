@@ -7,3 +7,12 @@ export interface Book {
   description: string;
   maximumRequestPeriod: number;
 }
+
+export interface BookRequest {
+  requestId: string;
+  borrower: any;
+  book: Book;
+  status: 'Pending' | 'Approved' | 'Achieved';
+  requestDuration: number;
+  requestDate: Date;
+}
