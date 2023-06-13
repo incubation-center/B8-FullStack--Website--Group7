@@ -9,6 +9,7 @@ import HomeLayout from '@/components/layout/HomeLayout';
 import HomeTab from '@/components/Tabs/Home.tab';
 import SavedTab from '@/components/Tabs/Saved.tab';
 import RequestStatusTab from '@/components/Tabs/RequestStatus.tab';
+import Profile from '@/components/Tabs/Profile.tab';
 
 export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   // initialize
@@ -40,7 +41,7 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
         {tab === HomePageTab.HOME && <HomeTab />}
         {tab === HomePageTab.SAVED && <SavedTab />}
         {tab === HomePageTab.REQUEST_STATUS && <RequestStatusTab />}
-        {tab === HomePageTab.PROFILE && <div>Profile</div>}
+        {tab === HomePageTab.PROFILE && <Profile />}
       </HomeLayout>
     </div>
   );
