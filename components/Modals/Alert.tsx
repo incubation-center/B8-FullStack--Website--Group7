@@ -50,7 +50,7 @@ const useAlertModal = () => {
 
   // modal image variants
   const imagePath = {
-    success: '/icon/success.png',
+    success: '/icon/success.svg',
     error: '/icon/fail.png',
     warning: '/icon/stop-hand.png'
   };
@@ -91,10 +91,10 @@ const useAlertModal = () => {
             {isShowing && (
               <div
                 className='
-              h-screen w-screen overflow-hidden 
-              absolute top-0 left-0 p-6
-              flex justify-center items-center
-            '
+                  h-screen w-screen overflow-hidden 
+                  fixed top-0 left-0 p-6
+                  flex justify-center items-center
+                '
               >
                 <div
                   className='absolute h-screen w-screen bg-black bg-opacity-40 z-[99999] cursor-pointer'
@@ -102,14 +102,14 @@ const useAlertModal = () => {
                 />
                 <motion.div
                   className='
-              bg-white
-                rounded-lg p-6
-                flex flex-col items-center
-                text-center
-                z-[999999]
-                min-w-[300px]
-                overflow-hidden
-              '
+                    bg-alt-secondary
+                    rounded-lg p-6
+                    flex flex-col items-center
+                    text-center
+                    z-[999999]
+                    min-w-[300px]
+                    overflow-hidden
+                  '
                   variants={modalVariants}
                   initial='hidden'
                   animate='visible'
@@ -129,8 +129,10 @@ const useAlertModal = () => {
                   />
 
                   <div>
-                    <h1 className='font-bold text-xl'>{title}</h1>
-                    <p className='font-medium text-black text-opacity-50 whitespace-pre-line'>
+                    <h1 className='font-bold text-xl lg:text-2xl text-primary'>
+                      {title}
+                    </h1>
+                    <p className='font-medium text-primary whitespace-pre-line'>
                       {subtitle}
                     </p>
                   </div>
@@ -170,7 +172,7 @@ export enum AlertType {
   WARNING = 'warning'
 }
 
-type AlertModalTextType = {
+export type AlertModalTextType = {
   title: string;
   subtitle: string;
   type: AlertType | null;
