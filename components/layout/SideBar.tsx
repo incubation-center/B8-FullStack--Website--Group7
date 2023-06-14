@@ -5,6 +5,7 @@ import { homePageTabAtom } from '@/service/recoil';
 import { useRecoilState } from 'recoil';
 
 import { HomePageTab } from '@/utils/enum';
+import Link from 'next/link';
 
 export default function SideBar({
   currentTab,
@@ -14,7 +15,7 @@ export default function SideBar({
   handlePageRouting: (tab: HomePageTab) => void;
 }) {
   return (
-    <div className='w-[200px] h-full px-[16px] space-y-4 hidden md:block'>
+    <div className='w-[200px] h-full px-[16px] space-y-4 hidden md:flex flex-col pb-10'>
       <NavbarBtn
         title='Home'
         iconPath='/icon/sidenav/home.svg'
@@ -43,6 +44,20 @@ export default function SideBar({
         isCurrentTab={currentTab === HomePageTab.PROFILE}
         onClick={() => handlePageRouting(HomePageTab.PROFILE)}
       />
+
+      {/* admin */}
+      <div className='flex-1'></div>
+      <Link
+        href='/admin'
+        className='
+          w-full bg-action text-primary font-bold
+          rounded-xl p-2 px-4
+          flex items-center justify-center cursor-pointer 
+          hover:shadow-xl
+        '
+      >
+        Admin
+      </Link>
     </div>
   );
 }

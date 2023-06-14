@@ -6,6 +6,7 @@ import { BookCategory, HomePageTab } from '@/utils/enum';
 import { useState } from 'react';
 import SideBar from './SideBar';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function HomeLayout({
   currentTab,
@@ -63,7 +64,8 @@ export default function HomeLayout({
 
         {/* login button */}
         <div className='absolute right-8'>
-          <button
+          <Link
+            href='/auth'
             className='
               px-4 py-2 rounded-xl
               bg-alt-secondary text-primary
@@ -72,7 +74,7 @@ export default function HomeLayout({
             '
           >
             Log In
-          </button>
+          </Link>
         </div>
       </div>
 

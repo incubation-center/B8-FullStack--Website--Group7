@@ -15,3 +15,12 @@ export const BookCategory = {
   FANTASY: 'Fantasy',
   SELF_DEVELOPMENT: 'Self Development'
 };
+
+// admin homepage tab
+export enum AdminTab {
+  DASHBOARD = 'dashboard',
+  UPLOAD = 'upload',
+  INCOMING_REQUEST = 'incoming-request',
+  ACTIVE_REQUEST = 'active-request',
+  ARCHIVED_REQUEST = 'archived-request'
+}
