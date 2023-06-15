@@ -7,7 +7,6 @@ export enum HomePageTab {
 }
 
 export const BookCategory = {
-  ALL: 'All',
   EDUCATION: 'Education',
   BUSINESS: 'Business',
   HISTORY: 'History',

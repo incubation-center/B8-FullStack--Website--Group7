@@ -1,8 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-
-import { homePageTabAtom } from '@/service/recoil';
-import { useRecoilState } from 'recoil';
 
 import { HomePageTab } from '@/utils/enum';
 import Link from 'next/link';
@@ -85,13 +82,12 @@ function NavbarBtn({
       `}
       onClick={onClick}
     >
-      <Image
+      <img
         src={isCurrentTab ? activeIconPath : iconPath}
         alt={title}
-        width={20}
-        height={20}
+        className='h-6'
       />
-      <div className='ml-[12px] font-medium'>{title}</div>
+      <div className='ml-[12px] font-bold'>{title}</div>
     </div>
   );
 }

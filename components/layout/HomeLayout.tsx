@@ -20,18 +20,6 @@ export default function HomeLayout({
   const router = useRouter();
   const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
 
-  // handle category
-  const [currentCategory, setCurrentCategory] =
-    useRecoilState(homePageCategoryAtom);
-
-  const handleCategory = (categoryKey: string, category: string) => {
-    setCurrentCategory(category);
-
-    router.push(`/?tab=${currentTab}#${categoryKey.toLowerCase()}`, undefined, {
-      shallow: true
-    });
-  };
-
   return (
     <div className='w-full h-full flex flex-col'>
       {/* search bar row */}
@@ -80,42 +68,6 @@ export default function HomeLayout({
 
       {/* category row  */}
 
-      {currentTab !== HomePageTab.HOME ? (
-        <div className='h-9 mb-4'></div>
-      ) : (
-        <div
-          className='
-          w-screen flex flex-row h-9 mb-4'
-        >
-          {/* offset navigation sidebar */}
-          <div className='w-[200px] hidden lg:block'></div>
-
-          <div className='w-full flex px-8'>
-            {Object.keys(BookCategory).map((category: any) => {
-              const key = category as keyof typeof BookCategory;
-              const value = BookCategory[key];
-
-              const isCurrentCategory = currentCategory === value;
-
-              const iconPath = `/icon/book-category/${BookCategory[
-                category as keyof typeof BookCategory
-              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
-
-              return (
-                <CategoryButton
-                  key={category}
-                  category={category}
-                  value={value}
-                  iconPath={iconPath}
-                  isCurrentCategory={isCurrentCategory}
-                  handleCategory={() => handleCategory(key, value)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      )}
-
       {/* main row */}
       <div className='w-screen h-1/2 flex flex-1'>
         {/* side bar */}
@@ -129,43 +81,6 @@ export default function HomeLayout({
           {children}
         </div>
       </div>
-    </div>
-  );
-}
-
-function CategoryButton({
-  category,
-  value,
-  iconPath,
-  isCurrentCategory,
-  handleCategory
-}: {
-  category: string;
-  value: string;
-  iconPath: string;
-  isCurrentCategory: boolean;
-  handleCategory: () => void;
-}) {
-  return (
-    <div
-      key={category}
-      className={`
-        flex items-center justify-center space-x-2 cursor-pointer
-        transition-all duration-300
-        whitespace-nowrap mr-8
-        ${
-          isCurrentCategory
-            ? 'bg-secondary p-1 px-8 rounded-xl text-white'
-            : 'bg-transparent text-alt-secondary '
-        }
-
-      `}
-      onClick={handleCategory}
-    >
-      {value !== BookCategory.ALL && (
-        <Image src={iconPath} alt={value} width={20} height={20} className='' />
-      )}
-      <span>{value}</span>
     </div>
   );
 }

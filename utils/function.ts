@@ -1,3 +1,7 @@
+'use client';
+import { root } from 'postcss';
+import { RefObject, useEffect, useMemo, useState } from 'react';
+
 export const formatEnumValue = (value: string) => {
   return value
     .split('-')
@@ -6,3 +10,39 @@ export const formatEnumValue = (value: string) => {
     })
     .join(' ');
 };
+
+export function useOnScreen(ref: RefObject<HTMLElement>) {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIntersecting(entry.isIntersecting);
+      },
+      {
+        rootMargin: '0px 0px 300px 0px',
+        threshold: 0.8
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return isIntersecting;
+}
+
+// react debounce function
+export function useDebounce(callback: Function, delay: number) {
+  const debounceCallback = useMemo(() => {
+    let timer: NodeJS.Timeout;
+    return (...args: any) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => callback(...args), delay);
+    };
+  }, [callback, delay]);
+  return debounceCallback;
+}

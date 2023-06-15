@@ -114,14 +114,13 @@ function NavbarBtn({
       `}
       onClick={onClick}
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={isCurrentTab ? activeIconPath : iconPath}
         alt={title}
-        width={20}
-        height={20}
-        className='transition-all duration-300'
+        className='transition-all duration-300 w-6'
       />
-      <div className='ml-[12px] font-medium'>{title}</div>
+      <div className='ml-[12px] font-bold'>{title}</div>
     </div>
   );
 }

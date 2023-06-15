@@ -14,5 +14,5 @@ export const homePageSearchAtom = atom<string>({
 
 export const homePageCategoryAtom = atom<string>({
   key: 'homePageCategory',
-  default: BookCategory.ALL
+  default: ''
 });
