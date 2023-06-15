@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
+import Link from 'next/link';
 
 export default function Navbar({
   currentTab,
@@ -13,7 +14,7 @@ export default function Navbar({
   return (
     <div
       className='
-        h-full min-w-[250px] flex flex-col
+        h-full w-[250px] flex flex-col
         bg-primary
         p-4 z-10
       '
@@ -67,6 +68,20 @@ export default function Navbar({
           onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
         />
       </div>
+
+      {/* admin */}
+      <div className='flex-1'></div>
+      <Link
+        href='/'
+        className='
+          w-full bg-action text-primary font-bold
+          rounded-xl p-2 px-4
+          flex items-center justify-center cursor-pointer 
+          hover:shadow-xl
+        '
+      >
+        Back to Home
+      </Link>
     </div>
   );
 }

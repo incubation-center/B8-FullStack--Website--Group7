@@ -7,8 +7,8 @@ import { BookCategory } from '@/utils/enum';
 export default function HomeTab() {
   const router = useRouter();
 
-  const handleBookClick = (bookId: string) => {
-    router.push(`/book/${bookId}`);
+  const handleBookClick = (id: string) => {
+    router.push(`/book/${id}`);
   };
 
   return (
@@ -45,14 +45,14 @@ export default function HomeTab() {
             >
               <div className='flex flex-row shrink-0 space-x-[35px] '>
                 {BookData.map((book, index) => (
-                  <div key={book.bookId} className='flex flex-col space-y-4'>
+                  <div key={book.id} className='flex flex-col space-y-4'>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       className='w-[120px] object-cover cursor-pointer'
-                      src={book.bookImage}
+                      src={book.bookImg}
                       alt={book.title}
                       draggable={false}
-                      onClick={() => handleBookClick(book.bookId)}
+                      onClick={() => handleBookClick(book.id!)}
                     />
 
                     <button
@@ -60,7 +60,7 @@ export default function HomeTab() {
                         bg-secondary text-white font-light
                         rounded-lg py-1 px-2
                       '
-                      onClick={() => handleBookClick(book.bookId)}
+                      onClick={() => handleBookClick(book.id!)}
                     >
                       View
                     </button>

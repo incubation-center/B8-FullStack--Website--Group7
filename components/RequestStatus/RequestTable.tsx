@@ -33,7 +33,7 @@ export default function RequestTable({ data }: { data: BookRequest[] }) {
           >
             <td>{index + 1}</td>
             <td>{request.book.title}</td>
-            <td>{request.requestDate.toLocaleDateString()}</td>
+            <td>{request.dateOfRequest.toLocaleDateString()}</td>
             <td>{request.status}</td>
           </tr>
         ))}

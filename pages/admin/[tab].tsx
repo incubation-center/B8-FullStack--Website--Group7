@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import DashboardTab from '@/components/admin/tab/Dashboard.tab';
 
 export default function AdminHomePage({
   currentTab
@@ -34,96 +35,14 @@ export default function AdminHomePage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // framer motion animate slide in and out based on tab order
-  const variants = {
-    hidden: {
-      y: '-100%',
-      width: '100vw',
-      transition: {
-        ease: 'easeInOut'
-      }
-    },
-    visible: {
-      y: 0,
-      width: '100vw',
-      transition: {
-        type: 'spring',
-        stiffness: 120,
-        damping: 20
-      }
-    },
-    exit: {
-      y: '100%',
-      transition: {
-        ease: 'easeInOut'
-      },
-      width: '100vw'
-    }
-  };
-
   return (
     <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
       <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
-        {tab === AdminTab.DASHBOARD && (
-          <motion.div
-            variants={variants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            key={AdminTab.DASHBOARD}
-            className='flex-1 h-full w-full'
-          >
-            <div>Dashboard</div>
-          </motion.div>
-        )}
-        {tab === AdminTab.UPLOAD && (
-          <motion.div
-            variants={variants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            key={AdminTab.UPLOAD}
-            className='flex-1 h-full w-full'
-          >
-            Upload
-          </motion.div>
-        )}
-        {tab === AdminTab.INCOMING_REQUEST && (
-          <motion.div
-            variants={variants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            key={AdminTab.INCOMING_REQUEST}
-            className='flex-1 h-full w-full'
-          >
-            Incoming
-          </motion.div>
-        )}
-        {tab === AdminTab.ACTIVE_REQUEST && (
-          <motion.div
-            variants={variants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            key={AdminTab.ACTIVE_REQUEST}
-            className='flex-1 h-full w-full'
-          >
-            Active
-          </motion.div>
-        )}
-        {tab === AdminTab.ARCHIVED_REQUEST && (
-          <motion.div
-            variants={variants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            key={AdminTab.ARCHIVED_REQUEST}
-            className='flex-1 h-full w-full'
-          >
-            Archived
-          </motion.div>
-        )}
+        {tab === AdminTab.DASHBOARD && <DashboardTab />}
+        {tab === AdminTab.UPLOAD && <div>Upload</div>}
+        {tab === AdminTab.INCOMING_REQUEST && <div>Incoming request</div>}
+        {tab === AdminTab.ACTIVE_REQUEST && <div>Active request</div>}
+        {tab === AdminTab.ARCHIVED_REQUEST && <div>Archived request</div>}
       </AnimatePresence>
     </AdminLayout>
   );

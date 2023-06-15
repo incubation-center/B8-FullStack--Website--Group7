@@ -46,7 +46,7 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
           <div className='flex justify-center items-start mb-10 md:mb-0'>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={book.bookImage}
+              src={book.bookImg}
               alt={book.title}
               className='aspect-auto max-h-[400px] object-scale-down'
             />
@@ -58,7 +58,7 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
               <h1 className='font-bold text-2xl'>{book.title}</h1>
 
               <h2>Author: {book.author}</h2>
-              <h2>Genre: {book.genre}</h2>
+              <h2>Genre: {book.category}</h2>
 
               <h2 className='font-bold'>Book Description</h2>
               <p>{book.description}</p>
