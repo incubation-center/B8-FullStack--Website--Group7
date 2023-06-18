@@ -23,7 +23,7 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full flex flex-col'>
       {/* search bar row */}
-      <div className='w-full h-auto flex justify-center items-center py-4 relative'>
+      <div className='w-full flex justify-center items-center py-4 relative'>
         {/* search bar */}
         <div
           className='
@@ -69,7 +69,7 @@ export default function HomeLayout({
       {/* category row  */}
 
       {/* main row */}
-      <div className='w-screen h-1/2 flex flex-1'>
+      <div className='w-screen h-1/2 flex flex-1 pb-4'>
         {/* side bar */}
         <SideBar
           currentTab={currentTab}
@@ -77,7 +77,7 @@ export default function HomeLayout({
         />
 
         {/* tab component */}
-        <div className='w-full max-h-full p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0 overflow-hidden'>
+        <div className='w-full max-h-full p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0 overflow-scroll relative'>
           {children}
         </div>
       </div>

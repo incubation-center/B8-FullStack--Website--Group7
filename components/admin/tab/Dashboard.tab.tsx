@@ -3,6 +3,9 @@ import Image from 'next/image';
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
+import RenterTable from '../table/RenterTable';
+
+import { RequestData } from '@/dummydata';
 
 export default function DashboardTab({}) {
   return (
@@ -10,7 +13,6 @@ export default function DashboardTab({}) {
       {/* Request Data */}
       <div
         className='
-          w-full h-full
           gap-4
           grid grid-cols-2 xl:grid-cols-4  
         '
@@ -55,6 +57,13 @@ export default function DashboardTab({}) {
           }}
         />
       </div>
+
+      {/* Recent Renter*/}
+      <div className='w-full mt-4'>
+        <h1 className='text-primary text-xl font-bold'>Recent renter</h1>
+
+        <RenterTable data={RequestData} />
+      </div>
     </AdminTabLayout>
   );
 }
@@ -73,7 +82,7 @@ const RequestDataShow = ({
   };
 }) => {
   return (
-    <div className='rounded-lg bg-alt-secondary p-4 lg:px-8 min-w-[20 0px] lg:min-w-[250px] h-fit'>
+    <div className='rounded-lg bg-alt-secondary p-4 h-fit'>
       <h1 className='text-lg text-primary font-bold'>{title}</h1>
       <div className='flex h-full items-center justify-between py-4 mb-2 border-b-2'>
         <h1 className='text-4xl text-primary font-extrabold'>{value.total}</h1>

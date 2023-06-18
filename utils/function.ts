@@ -1,5 +1,4 @@
 'use client';
-import { root } from 'postcss';
 import { RefObject, useEffect, useMemo, useState } from 'react';
 
 export const formatEnumValue = (value: string) => {
@@ -20,8 +19,8 @@ export function useOnScreen(ref: RefObject<HTMLElement>) {
         setIntersecting(entry.isIntersecting);
       },
       {
-        rootMargin: '0px 0px 300px 0px',
-        threshold: 0.8
+        rootMargin: '100px',
+        threshold: 1
       }
     );
 

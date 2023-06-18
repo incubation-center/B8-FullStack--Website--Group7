@@ -7,11 +7,15 @@ import { BookCategory } from '@/utils/enum';
 
 import { homePageCategoryAtom, homePageSearchAtom } from '@/service/recoil';
 import { useRecoilState } from 'recoil';
-import { useEffect, useRef } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
 
 export default function HomeTab() {
   const router = useRouter();
+
+  // handle onScroll listener
+  const scrollingRef = useRef(null);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const handleBookClick = (id: string) => {
     router.push(`/book/${id}`);
@@ -24,32 +28,68 @@ export default function HomeTab() {
   const handleCategory = (categoryKey: string, category: string) => {
     setCurrentCategory(category);
 
-    router.push(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
+    router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
       shallow: true
     });
   };
 
   const handleVisibleOnScreen = useDebounce(
     (categoryKey: string, category: string) => {
-      setCurrentCategory(category);
-
-      router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
-        shallow: true,
-        scroll: false
-      });
+      // if (isScrolling) return;
+      // setCurrentCategory(category);
+      // router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
+      //   shallow: true,
+      //   scroll: false
+      // });
     },
     300
   );
 
+  useEffect(() => {
+    // get category from url
+    const categoryKey = router.asPath.split('#')[1];
+
+    if (categoryKey) {
+      const category =
+        BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
+
+      setCurrentCategory(category);
+    }
+
+    // scroll listener
+    const handleScroll = () => {
+      let isScrolling: any;
+
+      setIsScrolling(true);
+
+      // reset back to false after 100ms
+      clearTimeout(isScrolling);
+      isScrolling = setTimeout(() => {
+        setIsScrolling(false);
+      }, 500);
+    };
+
+    if (scrollingRef.current) {
+      (scrollingRef.current as HTMLElement).addEventListener(
+        'scroll',
+        handleScroll
+      );
+    }
+
+    return () => {
+      setCurrentCategory(BookCategory.EDUCATION);
+    };
+  }, []);
+
   return (
-    <div className=' overflow-y-scroll overflow-x-clip h-screen w-screen pb-56 scroll-smooth relative'>
+    <>
       <div
         className='
-          w-screen flex flex-row py-4 bg-alt-secondary 
-          sticky top-0 left-0 z-10
+          w-screen flex flex-row py-4  bg-alt-secondary 
+          sticky -top-5 left-0 z-10 mb-26
         '
       >
-        <div className='w-full flex'>
+        <div className='w-full flex h-[40px]'>
           {Object.keys(BookCategory).map((category: any) => {
             const key = category as keyof typeof BookCategory;
             const value = BookCategory[key];
@@ -74,23 +114,28 @@ export default function HomeTab() {
         </div>
       </div>
 
-      {/* loop over category */}
-      {Object.keys(BookCategory).map((key, index) => {
-        const category = BookCategory[key as keyof typeof BookCategory];
+      <div
+        ref={scrollingRef}
+        className='overflow-y-scroll overflow-x-hidden h-full w-screen scroll-smooth'
+      >
+        {/* loop over category */}
+        {Object.keys(BookCategory).map((key, index) => {
+          const category = BookCategory[key as keyof typeof BookCategory];
 
-        return (
-          <BookSection
-            key={key}
-            categoryKey={key}
-            category={category}
-            handleBookClick={handleBookClick}
-            handleVisibleOnScreen={handleVisibleOnScreen}
-          />
-        );
-      })}
+          return (
+            <BookSection
+              key={key}
+              categoryKey={key}
+              category={category}
+              handleBookClick={handleBookClick}
+              handleVisibleOnScreen={handleVisibleOnScreen}
+            />
+          );
+        })}
 
-      <div className='h-28'></div>
-    </div>
+        <div className='h-[300px]'></div>
+      </div>
+    </>
   );
 }
 
@@ -117,7 +162,7 @@ function CategoryButton({
         text-lg
         ${
           isCurrentCategory
-            ? 'bg-primary p-1 px-8 rounded-xl text-white'
+            ? 'bg-primary p-1 px-8 rounded-lg text-white'
             : 'bg-transparent text-primary '
         }
 
@@ -141,14 +186,17 @@ function BookSection({
   handleBookClick: (id: string) => void;
   handleVisibleOnScreen: (categoryKey: string, category: string) => void;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<any>(null);
   const isVisible = useOnScreen(ref);
 
   useEffect(() => {
     if (isVisible) {
       handleVisibleOnScreen(categoryKey, category);
+      console.log('====================================');
+      console.log('visible', categoryKey);
+      console.log('====================================');
     }
-  }, [isVisible]);
+  }, [category, categoryKey, handleVisibleOnScreen, isVisible]);
 
   return (
     <div
@@ -159,7 +207,7 @@ function BookSection({
         element to scroll to{' '}
       </div>
       {/* title */}
-      <h1 className='w-1/3 text-4xl text-primary mb-4 whitespace-nowrap'>
+      <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 whitespace-nowrap'>
         {category}
       </h1>
 

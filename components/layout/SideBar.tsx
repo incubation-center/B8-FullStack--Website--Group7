@@ -12,7 +12,7 @@ export default function SideBar({
   handlePageRouting: (tab: HomePageTab) => void;
 }) {
   return (
-    <div className='w-[200px] h-full px-[16px] space-y-4 hidden md:flex flex-col pb-10'>
+    <div className='w-52 h-full px-[16px] space-y-4 hidden md:flex flex-col pb-10'>
       <NavbarBtn
         title='Home'
         iconPath='/icon/sidenav/home.svg'

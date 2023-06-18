@@ -6,7 +6,7 @@ export default function AdminTabLayout({
   title: string;
 }) {
   return (
-    <div className='p-4 md:p-8 min-h-full w-full'>
+    <div className='p-4 md:p-8 min-h-full w-full overflow-y-scroll'>
       <h1 className='text-2xl text-primary font-extrabold mb-4'>{title}</h1>
       <div>{children}</div>
     </div>

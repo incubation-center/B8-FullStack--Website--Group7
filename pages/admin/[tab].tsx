@@ -43,6 +43,7 @@ export default function AdminHomePage({
         {tab === AdminTab.INCOMING_REQUEST && <div>Incoming request</div>}
         {tab === AdminTab.ACTIVE_REQUEST && <div>Active request</div>}
         {tab === AdminTab.ARCHIVED_REQUEST && <div>Archived request</div>}
+        {tab === AdminTab.RENTER && <div>Renter</div>}
       </AnimatePresence>
     </AdminLayout>
   );

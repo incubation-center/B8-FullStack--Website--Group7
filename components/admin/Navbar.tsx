@@ -67,6 +67,14 @@ export default function Navbar({
           isCurrentTab={currentTab === AdminTab.ARCHIVED_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
         />
+
+        <NavbarBtn
+          title={formatEnumValue(AdminTab.RENTER)}
+          iconPath='/icon/admin-sidebar/renter.svg'
+          activeIconPath='/icon/admin-sidebar/renter-active.svg'
+          isCurrentTab={currentTab === AdminTab.RENTER}
+          onClick={() => handlePageRouting(AdminTab.RENTER)}
+        />
       </div>
 
       {/* admin */}

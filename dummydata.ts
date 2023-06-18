@@ -204,9 +204,9 @@ const RequestData: BookRequest[] = [
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
-    dateOfAccepted: null,
-    dateOfReturn: null,
-    dateOfReceived: null
+    dateOfAccepted: new Date(),
+    dateOfReturn: new Date(),
+    dateOfReceived: new Date()
   },
   {
     requestId: '7',
@@ -216,9 +216,9 @@ const RequestData: BookRequest[] = [
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
-    dateOfAccepted: null,
-    dateOfReturn: null,
-    dateOfReceived: null
+    dateOfAccepted: new Date(),
+    dateOfReturn: new Date(),
+    dateOfReceived: new Date()
   }
 ];
 
