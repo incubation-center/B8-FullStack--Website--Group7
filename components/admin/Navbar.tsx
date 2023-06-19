@@ -11,6 +11,23 @@ export default function Navbar({
   currentTab: AdminTab;
   handlePageRouting: (tab: AdminTab) => void;
 }) {
+  const handleTranslate = () => {
+    switch (currentTab) {
+      case AdminTab.DASHBOARD:
+        return 'translate-y-0';
+      case AdminTab.UPLOAD:
+        return 'translate-y-12';
+      case AdminTab.INCOMING_REQUEST:
+        return 'translate-y-24';
+      case AdminTab.ACTIVE_REQUEST:
+        return 'translate-y-[9rem]';
+      case AdminTab.ARCHIVED_REQUEST:
+        return 'translate-y-[12rem]';
+      case AdminTab.RENTER:
+        return 'translate-y-[15rem]';
+    }
+  };
+
   return (
     <div
       className='
@@ -27,7 +44,7 @@ export default function Navbar({
       </div>
 
       {/* nav button */}
-      <div className='space-y-4'>
+      <div className='relative'>
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
           iconPath='/icon/admin-sidebar/dashboard.svg'
@@ -75,6 +92,15 @@ export default function Navbar({
           isCurrentTab={currentTab === AdminTab.RENTER}
           onClick={() => handlePageRouting(AdminTab.RENTER)}
         />
+
+        {/* slide */}
+        <div
+          className={`
+          ${handleTranslate()} transition-all duration-300
+          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-xl
+          `}
+          style={{ zIndex: -1 }}
+        ></div>
       </div>
 
       {/* admin */}
@@ -110,21 +136,17 @@ function NavbarBtn({
   return (
     <div
       className={`flex items-center justify-start cursor-pointer rounded-xl 
-      ${
-        isCurrentTab
-          ? 'text-white hover:bg-secondary'
-          : 'text-secondary hover:bg-alt-secondary'
-      }
+      ${isCurrentTab ? 'text-secondary ' : 'text-secondary'}
       transition-all duration-300
       whitespace-nowrap 
-      
       p-1 px-2
+      h-12 z-10
       `}
       onClick={onClick}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={isCurrentTab ? activeIconPath : iconPath}
+        src={iconPath}
         alt={title}
         className='transition-all duration-300 w-6'
       />
