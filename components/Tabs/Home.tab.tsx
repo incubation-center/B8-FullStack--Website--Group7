@@ -9,6 +9,7 @@ import { homePageCategoryAtom, homePageSearchAtom } from '@/service/recoil';
 import { useRecoilState } from 'recoil';
 import { use, useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
+import { GetServerSidePropsContext } from 'next';
 
 export default function HomeTab() {
   const router = useRouter();
@@ -25,13 +26,16 @@ export default function HomeTab() {
   const [currentCategory, setCurrentCategory] =
     useRecoilState(homePageCategoryAtom);
 
-  const handleCategory = (categoryKey: string, category: string) => {
-    setCurrentCategory(category);
+  const handleCategory = useDebounce(
+    (categoryKey: string, category: string) => {
+      setCurrentCategory(category);
 
-    router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
-      shallow: true
-    });
-  };
+      router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
+        shallow: true
+      });
+    },
+    300
+  );
 
   const handleVisibleOnScreen = useDebounce(
     (categoryKey: string, category: string) => {
@@ -45,6 +49,12 @@ export default function HomeTab() {
     300
   );
 
+  const updateRoute = useDebounce((category: any) => {
+    router.replace(`/?tab=home#${category.toLowerCase()}`, undefined, {
+      shallow: true
+    });
+  }, 300);
+
   useEffect(() => {
     // get category from url
     const categoryKey = router.asPath.split('#')[1];
@@ -54,6 +64,9 @@ export default function HomeTab() {
         BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
       setCurrentCategory(category);
+    } else {
+      setCurrentCategory(BookCategory.EDUCATION);
+      updateRoute(BookCategory.EDUCATION);
     }
 
     // scroll listener
@@ -75,6 +88,10 @@ export default function HomeTab() {
         handleScroll
       );
     }
+
+    console.log('====================================');
+    console.log('currentCategory', categoryKey);
+    console.log('====================================');
 
     return () => {
       setCurrentCategory(BookCategory.EDUCATION);
@@ -192,9 +209,6 @@ function BookSection({
   useEffect(() => {
     if (isVisible) {
       handleVisibleOnScreen(categoryKey, category);
-      console.log('====================================');
-      console.log('visible', categoryKey);
-      console.log('====================================');
     }
   }, [category, categoryKey, handleVisibleOnScreen, isVisible]);
 

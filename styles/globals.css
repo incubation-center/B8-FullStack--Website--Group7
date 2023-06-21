@@ -17,8 +17,9 @@
   margin-top: 10px;
   width: fit-content;
   height: 10px;
-  background-color: #f5f5f5;
+  background-color: #a47551;
   border-radius: 10px;
+  opacity: 30%;
 }
 
 .book-scrolling-section::-webkit-scrollbar-thumb {

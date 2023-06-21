@@ -33,7 +33,7 @@ export default function RenterTable({ data }: { data: BookRequest[] }) {
                 whitespace-nowrap
                 text-left   
                 border-y-2 border-primary 
-                [&>*]:py-1 [&>*]:px-1
+                [&>*]:py-2 [&>*]:px-1
               '
             >
               <td className='w-1/5'>{renter.username}</td>
