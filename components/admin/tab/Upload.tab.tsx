@@ -22,7 +22,7 @@ export default function UploadTab() {
   const [selectedCategory, setSelectedCategory] = useState(CategoryOptions[0]);
 
   // handle image upload
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null | undefined>();
   const imageRef = useRef<HTMLInputElement | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +72,7 @@ export default function UploadTab() {
     <AdminTabLayout title='Book Upload'>
       <div className='bg-alt-secondary rounded-xl h-full w-full p-4 flex-1'>
         <form className='space-y-6 h-full flex flex-col flex-grow'>
-          <div className='flex gap-8'>
+          <div className='flex gap-8 items-start'>
             {/* book cover */}
 
             <div className='flex flex-col justify-center'>
