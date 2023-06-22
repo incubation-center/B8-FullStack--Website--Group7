@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import DashboardTab from '@/components/admin/tab/Dashboard.tab';
 import UploadTab from '@/components/admin/tab/Upload.tab';
 import IncomingTab from '@/components/admin/tab/Incoming.tab';
+import ActiveTab from '@/components/admin/tab/Active.tab';
+import ArchivedTab from '@/components/admin/tab/Archived.tab';
 
 export default function AdminHomePage({
   currentTab
@@ -43,8 +45,8 @@ export default function AdminHomePage({
         {tab === AdminTab.DASHBOARD && <DashboardTab />}
         {tab === AdminTab.UPLOAD && <UploadTab />}
         {tab === AdminTab.INCOMING_REQUEST && <IncomingTab />}
-        {tab === AdminTab.ACTIVE_REQUEST && <div>Active request</div>}
-        {tab === AdminTab.ARCHIVED_REQUEST && <div>Archived request</div>}
+        {tab === AdminTab.ACTIVE_REQUEST && <ActiveTab />}
+        {tab === AdminTab.ARCHIVED_REQUEST && <ArchivedTab />}
         {tab === AdminTab.RENTER && <div>Renter</div>}
       </AnimatePresence>
     </AdminLayout>

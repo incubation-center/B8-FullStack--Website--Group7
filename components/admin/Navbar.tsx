@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 
 import { AdminTab } from '@/utils/enum';
@@ -38,9 +39,17 @@ export default function Navbar({
     >
       {/* Logo */}
       <div className='w-full mb-8 mt-4'>
-        <div className='bg-white rounded-full p-4 h-20 w-20 flex items-center justify-center'>
+        {/* <div className='bg-white rounded-full p-4 h-20 w-20 flex items-center justify-center'>
           Logo
-        </div>
+        </div> */}
+
+        <img
+          src='/bootcamp-logo.png'
+          alt=''
+          className='
+              h-fit w-full
+          '
+        />
       </div>
 
       {/* nav button */}

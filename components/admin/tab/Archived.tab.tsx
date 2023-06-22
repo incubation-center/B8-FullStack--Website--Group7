@@ -5,13 +5,13 @@ const RequestTable = dynamic(() => import('../table/RequestTable'), {
 });
 
 import { RequestData } from '@/dummydata';
-import useModal from '@/components/Modals/useModal';
-import RequestDetail from '@/components/Modals/RequestDetail';
-import { useState } from 'react';
-import { BookRequest } from '@/types';
 import { AdminTab } from '@/utils/enum';
+import { useState } from 'react';
+import useModal from '@/components/Modals/useModal';
+import { BookRequest } from '@/types';
+import RequestDetail from '@/components/Modals/RequestDetail';
 
-export default function IncomingTab({}) {
+export default function ArchivedTab() {
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
@@ -21,10 +21,10 @@ export default function IncomingTab({}) {
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
 
-      <AdminTabLayout title='Incoming Request'>
+      <AdminTabLayout title='Active Request'>
         <RequestTable
-          useIn={AdminTab.INCOMING_REQUEST}
-          data={RequestData.filter((request) => request.status === 'Pending')}
+          useIn={AdminTab.ARCHIVED_REQUEST}
+          data={RequestData.filter((request) => request.status === 'Achieved')}
           actions={[
             {
               label: 'View',
@@ -33,16 +33,6 @@ export default function IncomingTab({}) {
                 setViewRequest(request);
                 toggle();
               }
-            },
-            {
-              label: 'Approve',
-              bgColor: 'bg-success text-white',
-              onClick: (request) => console.log(request)
-            },
-            {
-              label: 'Reject',
-              bgColor: 'bg-danger text-white',
-              onClick: (request) => console.log(request)
             }
           ]}
         />

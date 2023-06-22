@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import { BookRequest } from '@/types';
 import { AdminTab } from '@/utils/enum';
@@ -34,8 +36,8 @@ export default function RequestTable({
           <td className='w-2/5'>Book</td>
           <td>Username</td>
           {useIn === AdminTab.INCOMING_REQUEST && <td>Request date</td>}
-          {useIn === AdminTab.ACTIVE_REQUEST && <td>Due date</td>}
-          {useIn === AdminTab.ARCHIVED_REQUEST && <td>Return date</td>}
+          {useIn === AdminTab.ACTIVE_REQUEST && <td>To be returned date</td>}
+          {useIn === AdminTab.ARCHIVED_REQUEST && <td>Status</td>}
           <td>Actions</td>
         </tr>
       </thead>
@@ -72,7 +74,17 @@ export default function RequestTable({
             )}
 
             {useIn === AdminTab.ARCHIVED_REQUEST && (
-              <td>{request.dateOfReceived!.toLocaleString()}</td>
+              <td>
+                <div
+                  className={`
+                    rounded-full px-4 py-2 text-sm font-bold text-white w-fit
+                    ${request.isApproved ? 'bg-success' : 'bg-danger'}
+                  `}
+                >
+                  {request.isApproved && 'Approved'}
+                  {!request.isApproved && 'Rejected'}
+                </div>
+              </td>
             )}
 
             <td>

@@ -10,12 +10,12 @@ export default function RequestDetail({
     <div className='w-full flex flex-col gap-4 p-[30px] bg-white rounded-xl'>
       {/* show loading if request null  */}
       {request && (
-        <div className='w-fit flex gap-10'>
+        <div className='w-fit flex gap-5'>
           {/* Book cover */}
           <img
             src={request.book.bookImg}
             alt={request.book.title}
-            className='max-w-[200px] max-h-[350px] aspect-auto '
+            className='max-w-[200px] max-h-[400px] aspect-auto object-scale-down object-top'
           />
 
           {/* Request detail */}
@@ -44,7 +44,7 @@ export default function RequestDetail({
                 Request
               </p>
               <div className='pl-4 '>
-                <div className='grid grid-cols-3'>
+                <div className='grid grid-cols-3 items-center'>
                   <div>Name:</div>
                   <div className='text-lg font-bold col-span-2'>
                     {request.borrower.username}
@@ -62,15 +62,12 @@ export default function RequestDetail({
 
                   <div>Request status:</div>
                   <div
-                    className={`text-lg font-bold col-span-2 ${
-                      request.isApproved && 'text-success'
-                    } ${
-                      request.status === 'Achieved' && !request.isApproved
-                        ? 'text-danger'
-                        : ''
-                    }`}
+                    className={`
+                      text-lg font-bold col-span-2 
+                      ${request.isApproved ? 'text-success' : 'text-danger'}
+                    `}
                   >
-                    {request.status}
+                    {request.isApproved ? 'Approved' : 'Rejected'}
                   </div>
 
                   <div>Request date:</div>
@@ -96,11 +93,11 @@ export default function RequestDetail({
                     </>
                   )}
 
-                  {request.dateOfReturn && (
+                  {request.dateOfReceived && (
                     <>
                       <div>Returned date:</div>
                       <div className='text-lg font-bold col-span-2'>
-                        {request.dateOfReturn.toLocaleDateString()}
+                        {request.dateOfReceived.toLocaleDateString()}
                       </div>
                     </>
                   )}

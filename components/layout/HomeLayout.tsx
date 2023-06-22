@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 
 import { homePageCategoryAtom, homePageSearchAtom } from '@/service/recoil';
@@ -23,19 +24,19 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full flex flex-col'>
       {/* search bar row */}
-      <div className='w-full h-24 flex justify-center items-center py-4 relative'>
+      <div className='w-full h-28 flex justify-between items-center py-4 px-8 relative'>
         {/* search bar */}
-        <div className='absolute left-8 my-8'>
+        <div className='h-full'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
-            className='w-32 h-fit object-scale-down backdrop-filter'
+            className='w-full h-full object-scale-down'
           />
         </div>
 
         <div
           className='
-            w-1/4
+            w-full max-w-[500px] 
             flex justify-center items-center
            bg-action 
             p-2 px-4 rounded-xl space-x-6
@@ -59,7 +60,7 @@ export default function HomeLayout({
         </div>
 
         {/* login button */}
-        <div className='absolute right-8'>
+        <div className=' '>
           <Link
             href='/auth'
             className='

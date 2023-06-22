@@ -169,7 +169,7 @@ const RequestData: BookRequest[] = [
     dateOfRequest: new Date(),
     isApproved: false,
     dateOfAccepted: null,
-    dateOfReturn: null,
+    dateOfReturn: new Date(),
     dateOfReceived: null
   },
   {
@@ -181,7 +181,7 @@ const RequestData: BookRequest[] = [
     dateOfRequest: new Date(),
     isApproved: false,
     dateOfAccepted: null,
-    dateOfReturn: null,
+    dateOfReturn: new Date(),
     dateOfReceived: null
   },
   {
@@ -193,7 +193,7 @@ const RequestData: BookRequest[] = [
     dateOfRequest: new Date(),
     isApproved: false,
     dateOfAccepted: null,
-    dateOfReturn: null,
+    dateOfReturn: new Date(),
     dateOfReceived: null
   },
   {
@@ -203,7 +203,7 @@ const RequestData: BookRequest[] = [
     status: 'Achieved',
     requestDuration: 14,
     dateOfRequest: new Date(),
-    isApproved: false,
+    isApproved: true,
     dateOfAccepted: new Date(),
     dateOfReturn: new Date(),
     dateOfReceived: new Date()
