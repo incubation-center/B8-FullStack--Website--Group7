@@ -14,7 +14,7 @@ export default function DashboardTab({}) {
       <div
         className='
           gap-4
-          grid grid-cols-2 xl:grid-cols-4  
+          grid grid-cols-2   
         '
       >
         <RequestDataShow
@@ -82,7 +82,7 @@ const RequestDataShow = ({
   };
 }) => {
   return (
-    <div className='rounded-lg bg-alt-secondary p-4 h-fit'>
+    <div className='rounded-lg bg-alt-secondary p-4 h-fit min-h-[200px]'>
       <h1 className='text-lg text-primary font-bold'>{title}</h1>
       <div className='flex h-full items-center justify-between py-4 mb-2 border-b-2'>
         <h1 className='text-4xl text-primary font-extrabold'>{value.total}</h1>

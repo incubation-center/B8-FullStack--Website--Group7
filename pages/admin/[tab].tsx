@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DashboardTab from '@/components/admin/tab/Dashboard.tab';
 import UploadTab from '@/components/admin/tab/Upload.tab';
+import IncomingTab from '@/components/admin/tab/Incoming.tab';
 
 export default function AdminHomePage({
   currentTab
@@ -41,7 +42,7 @@ export default function AdminHomePage({
       <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
         {tab === AdminTab.DASHBOARD && <DashboardTab />}
         {tab === AdminTab.UPLOAD && <UploadTab />}
-        {tab === AdminTab.INCOMING_REQUEST && <div>Incoming request</div>}
+        {tab === AdminTab.INCOMING_REQUEST && <IncomingTab />}
         {tab === AdminTab.ACTIVE_REQUEST && <div>Active request</div>}
         {tab === AdminTab.ARCHIVED_REQUEST && <div>Archived request</div>}
         {tab === AdminTab.RENTER && <div>Renter</div>}

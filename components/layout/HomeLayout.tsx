@@ -23,8 +23,16 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full flex flex-col'>
       {/* search bar row */}
-      <div className='w-full flex justify-center items-center py-4 relative'>
+      <div className='w-full h-24 flex justify-center items-center py-4 relative'>
         {/* search bar */}
+        <div className='absolute left-8 my-8'>
+          <img
+            src='/bootcamp-logo.png'
+            alt='logo'
+            className='w-32 h-fit object-scale-down backdrop-filter'
+          />
+        </div>
+
         <div
           className='
             w-1/4

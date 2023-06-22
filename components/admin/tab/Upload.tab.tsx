@@ -113,18 +113,16 @@ export default function UploadTab() {
                     className='
                       text-primary font-medium whitespace-nowrap 
                       rounded-lg bg-white p-2 cursor-pointer
-                      h-72 w-64 flex justify-center items-end
+                      h-72 w-64 flex flex-col justify-center items-center
 
                     '
                   >
                     <img
-                      src='/icon/upload-img.svg'
+                      src='/icon/admin-sidebar/upload.svg'
                       alt='upload icon'
                       className='w-12 h-12'
                     />
-                  </div>
-                  <div className=' w-full text-center mt-1 text-black text-opacity-60'>
-                    (click to select an image)
+                    <p className='text-primary'>Upload Your Image</p>
                   </div>
                 </label>
               )}
