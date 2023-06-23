@@ -50,7 +50,7 @@ export default function HomeTab() {
 
       handleScrollToCategoryNav(categoryKey, 800);
     },
-    300
+    100
   );
 
   const handleVisibleOnScreen = useDebounce(
