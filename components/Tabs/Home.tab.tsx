@@ -34,7 +34,7 @@ export default function HomeTab() {
         shallow: true
       });
     },
-    300
+    100
   );
 
   const handleVisibleOnScreen = useDebounce(
