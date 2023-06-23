@@ -1,13 +1,18 @@
 import { useState } from 'react';
 
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import { useTheme } from 'next-themes';
+
+import { themes } from '@/utils/enum';
 
 export default function SettingTab() {
   const [systemName, setSystemName] = useState('Kjey Book');
 
+  const { theme, setTheme } = useTheme();
+
   return (
     <AdminTabLayout title='Setting'>
-      <div className='max-w-[1000px] mx-auto space-y-6'>
+      <div className='max-w-[1000px] mx-auto space-y-6 text-primary'>
         <Section title='General Setting'>
           <SubSection title='System Name'>
             <input
@@ -19,6 +24,27 @@ export default function SettingTab() {
               value={systemName}
               onChange={(e) => setSystemName(e.target.value)}
             />
+          </SubSection>
+
+          {/* color themes */}
+          <SubSection title='themes'>
+            <div className='flex gap-2'>
+              {themes.map((theme) => {
+                return (
+                  <div
+                    key={theme.name}
+                    className='p-2 px-4 rounded-full cursor-pointer'
+                    style={{
+                      backgroundColor: theme.primary,
+                      color: theme.secondary
+                    }}
+                    onClick={() => setTheme(theme.name)}
+                  >
+                    <div>{theme.title}</div>
+                  </div>
+                );
+              })}
+            </div>
           </SubSection>
         </Section>
 

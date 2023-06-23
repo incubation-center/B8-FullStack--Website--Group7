@@ -15,7 +15,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
-  darkMode: false,
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -24,7 +24,7 @@ module.exports = {
           primary: 'var(--color-primary)',
           secondary: 'var(--color-secondary)',
           'alt-secondary': 'var(--color-alt-secondary)',
-          action: 'var(--color-action)',
+          action: '#EBEBEB',
           success: '#52B788',
           warning: '#fcd34d',
           danger: '#ef4444',

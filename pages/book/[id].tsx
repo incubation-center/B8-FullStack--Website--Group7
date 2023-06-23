@@ -25,7 +25,7 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
         <BorrowBook close={close} book={book} showAlert={showAlert} />
       </ModalWrapper>
 
-      <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>
+      <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0 '>
         {/* back home */}
         <div className='p-8 flex justify-start'>
           <div

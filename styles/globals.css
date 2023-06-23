@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@import url('./themes.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +9,8 @@
 * {
   font-family: Poppins, sans-serif;
   -webkit-tap-highlight-color: transparent;
+
+  --home-search-bar-height: 100px;
 }
 
 html,
@@ -20,8 +24,13 @@ body {
   width: 0;
 }
 
+.home-search-bar-height {
+  height: var(--home-search-bar-height);
+}
+
 .home-layout-children-height {
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - var(--home-search-bar-height));
+  /* 100px is the  */
 }
 
 /* book scrolling section scrollbar */
@@ -29,13 +38,13 @@ body {
   margin-top: 10px;
   width: fit-content;
   height: 10px;
-  background-color: #a47551;
+  background-color: var(--color-secondary);
   border-radius: 10px;
   opacity: 30%;
 }
 
 .book-scrolling-section::-webkit-scrollbar-thumb {
-  background-color: #523a28;
+  background-color: var(--color-primary);
   width: 10px;
   border-radius: 10px;
 }
@@ -44,22 +53,27 @@ body {
   margin-top: 5px;
   width: fit-content;
   height: 5px;
-  background-color: #a47551;
+  background-color: var(--color-secondary);
   border-radius: 10px;
   opacity: 30%;
 }
 
 .category-section::-webkit-scrollbar-thumb {
-  background-color: #523a28;
+  background-color: var(--color-primary);
   /* width: 10px;    */
   border-radius: 10px;
 }
 
-/* theming */
+.show-scrollbar-vertical::-webkit-scrollbar {
+  /* margin-top: 5px; */
+  width: 10px;
+  height: 100%;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  opacity: 30%;
+}
 
-:root {
-  --color-primary: #523a28;
-  --color-secondary: #a47551;
-  --color-alt-secondary: #d0b49f;
-  --color-action: #ebebeb;
+.show-scrollbar-vertical::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
 }

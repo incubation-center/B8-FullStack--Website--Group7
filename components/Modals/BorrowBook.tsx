@@ -42,7 +42,7 @@ export default function BorrowBook({
       transition={{
         duration: 0.5
       }}
-      className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
+      className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10 text-primary'
     >
       <h1 className='text-2xl font-bold text-primary'>Book Rental Form</h1>
 

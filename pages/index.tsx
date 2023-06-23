@@ -31,11 +31,18 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   // initialize tab state
   useEffect(() => {
     setTab(currentTab);
+
+    // prefetch admin if user is admin, for faster transition
+    const isAdmin = true; // can change when authentication is working
+    if (isAdmin) {
+      router.prefetch('/admin/dashboard');
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className='h-full w-full bg-primary'>
+    <div className='h-full w-full bg-primary '>
       <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
         {tab === HomePageTab.HOME && <HomeTab />}
         {tab === HomePageTab.SAVED && <SavedTab />}
