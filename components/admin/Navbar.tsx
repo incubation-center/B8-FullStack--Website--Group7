@@ -26,6 +26,8 @@ export default function Navbar({
         return 'translate-y-[12rem]';
       case AdminTab.RENTER:
         return 'translate-y-[15rem]';
+      case AdminTab.SETTING:
+        return 'translate-y-[18rem]';
     }
   };
 
@@ -38,16 +40,12 @@ export default function Navbar({
       '
     >
       {/* Logo */}
-      <div className='w-full mb-8 mt-4'>
-        {/* <div className='bg-white rounded-full p-4 h-20 w-20 flex items-center justify-center'>
-          Logo
-        </div> */}
-
+      <div className='w-full md:w-2/3  mb-8 mt-4 mx-auto'>
         <img
           src='/bootcamp-logo.png'
           alt=''
           className='
-              h-fit w-full
+            h-fit w-full
           '
         />
       </div>
@@ -57,7 +55,6 @@ export default function Navbar({
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
           iconPath='/icon/admin-sidebar/dashboard.svg'
-          activeIconPath='/icon/admin-sidebar/dashboard-active.svg'
           isCurrentTab={currentTab === AdminTab.DASHBOARD}
           onClick={() => handlePageRouting(AdminTab.DASHBOARD)}
         />
@@ -65,7 +62,6 @@ export default function Navbar({
         <NavbarBtn
           title={formatEnumValue(AdminTab.UPLOAD)}
           iconPath='/icon/admin-sidebar/upload.svg'
-          activeIconPath='/icon/admin-sidebar/upload-active.svg'
           isCurrentTab={currentTab === AdminTab.UPLOAD}
           onClick={() => handlePageRouting(AdminTab.UPLOAD)}
         />
@@ -73,7 +69,6 @@ export default function Navbar({
         <NavbarBtn
           title={formatEnumValue(AdminTab.INCOMING_REQUEST)}
           iconPath='/icon/admin-sidebar/incoming.svg'
-          activeIconPath='/icon/admin-sidebar/incoming-active.svg'
           isCurrentTab={currentTab === AdminTab.INCOMING_REQUEST}
           onClick={() => handlePageRouting(AdminTab.INCOMING_REQUEST)}
         />
@@ -81,7 +76,6 @@ export default function Navbar({
         <NavbarBtn
           title={formatEnumValue(AdminTab.ACTIVE_REQUEST)}
           iconPath='/icon/admin-sidebar/active.svg'
-          activeIconPath='/icon/admin-sidebar/active-active.svg'
           isCurrentTab={currentTab === AdminTab.ACTIVE_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ACTIVE_REQUEST)}
         />
@@ -89,7 +83,6 @@ export default function Navbar({
         <NavbarBtn
           title={formatEnumValue(AdminTab.ARCHIVED_REQUEST)}
           iconPath='/icon/admin-sidebar/archived.svg'
-          activeIconPath='/icon/admin-sidebar/archived-active.svg'
           isCurrentTab={currentTab === AdminTab.ARCHIVED_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
         />
@@ -97,9 +90,15 @@ export default function Navbar({
         <NavbarBtn
           title={formatEnumValue(AdminTab.RENTER)}
           iconPath='/icon/admin-sidebar/renter.svg'
-          activeIconPath='/icon/admin-sidebar/renter-active.svg'
           isCurrentTab={currentTab === AdminTab.RENTER}
           onClick={() => handlePageRouting(AdminTab.RENTER)}
+        />
+
+        <NavbarBtn
+          title={formatEnumValue(AdminTab.SETTING)}
+          iconPath='/icon/admin-sidebar/setting.svg'
+          isCurrentTab={currentTab === AdminTab.SETTING}
+          onClick={() => handlePageRouting(AdminTab.SETTING)}
         />
 
         {/* slide */}
@@ -132,13 +131,12 @@ export default function Navbar({
 function NavbarBtn({
   title,
   iconPath,
-  activeIconPath,
+
   isCurrentTab,
   onClick
 }: {
   title: string;
   iconPath: string;
-  activeIconPath: string;
   isCurrentTab?: boolean;
   onClick: () => void;
 }) {

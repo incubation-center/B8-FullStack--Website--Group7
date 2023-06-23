@@ -22,5 +22,6 @@ export enum AdminTab {
   INCOMING_REQUEST = 'incoming-request',
   ACTIVE_REQUEST = 'active-request',
   ARCHIVED_REQUEST = 'archived-request',
-  RENTER = 'renter'
+  RENTER = 'renter',
+  SETTING = 'setting'
 }
