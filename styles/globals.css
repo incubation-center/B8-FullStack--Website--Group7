@@ -6,14 +6,22 @@
 
 * {
   font-family: Poppins, sans-serif;
-  /* font-family: 'Open Sans', sans-serif; */
-
   -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  min-height: -webkit-fill-available;
+  height: 100vh;
 }
 
 /* remove scrollbar */
 *::-webkit-scrollbar {
   width: 0;
+}
+
+.home-layout-children-height {
+  max-height: calc(100vh - 100px);
 }
 
 /* book scrolling section scrollbar */

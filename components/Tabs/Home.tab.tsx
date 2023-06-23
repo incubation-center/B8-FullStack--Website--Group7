@@ -16,10 +16,24 @@ export default function HomeTab() {
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(false);
 
   const handleBookClick = (id: string) => {
     router.push(`/book/${id}`);
+  };
+
+  const handleScrollToCategoryNav = (categoryKey: string, timeout: number) => {
+    // scroll to id
+    const element = document.getElementById(categoryKey.toLowerCase() + '-nav');
+
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }, timeout);
+    }
   };
 
   // handle category
@@ -33,6 +47,8 @@ export default function HomeTab() {
       router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
         shallow: true
       });
+
+      handleScrollToCategoryNav(categoryKey, 800);
     },
     100
   );
@@ -64,29 +80,12 @@ export default function HomeTab() {
         BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
       setCurrentCategory(category);
+
+      // scroll to id
+      handleScrollToCategoryNav(categoryKey, 1000);
     } else {
       setCurrentCategory(BookCategory.EDUCATION);
       updateRoute(BookCategory.EDUCATION);
-    }
-
-    // scroll listener
-    const handleScroll = () => {
-      let isScrolling: any;
-
-      setIsScrolling(true);
-
-      // reset back to false after 100ms
-      clearTimeout(isScrolling);
-      isScrolling = setTimeout(() => {
-        setIsScrolling(false);
-      }, 500);
-    };
-
-    if (scrollingRef.current) {
-      (scrollingRef.current as HTMLElement).addEventListener(
-        'scroll',
-        handleScroll
-      );
     }
 
     return () => {
@@ -97,6 +96,7 @@ export default function HomeTab() {
   return (
     <>
       <div
+        id='category-section'
         className='
           category-section
           w-full overflow-x-auto flex flex-row py-4  bg-alt-secondary 
@@ -168,13 +168,14 @@ function CategoryButton({
 }) {
   return (
     <div
+      id={category.toLowerCase() + '-nav'}
       key={category}
       className={`
         flex w-fit items-center justify-center space-x-2 cursor-pointer
         transition-all duration-300
         whitespace-nowrap 
         text-lg
-        mr-8
+        mr-8 select-none
         ${
           isCurrentCategory
             ? 'bg-primary p-1 px-8 rounded-lg text-white'

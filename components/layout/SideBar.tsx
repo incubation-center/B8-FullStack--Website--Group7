@@ -6,10 +6,12 @@ import Link from 'next/link';
 
 export default function SideBar({
   currentTab,
-  handlePageRouting
+  handlePageRouting,
+  isMobile = false
 }: {
   currentTab: HomePageTab;
   handlePageRouting: (tab: HomePageTab) => void;
+  isMobile?: boolean;
 }) {
   const handleTranslate = () => {
     switch (currentTab) {
@@ -25,7 +27,20 @@ export default function SideBar({
   };
 
   return (
-    <div className='w-[250px] h-full px-[16px] hidden md:flex flex-col'>
+    <div
+      className={`
+        w-[250px] h-full px-[16px] 
+        ${isMobile ? 'flex bg-primary py-10 z-50' : 'hidden md:flex'}
+         flex-col
+      `}
+    >
+      {/* logo */}
+      {isMobile && (
+        <div className='flex justify-center items-center mb-10'>
+          <img src='/bootcamp-logo.png' alt='logo' className='w-full h-fit' />
+        </div>
+      )}
+
       <div className='relative'>
         <div className='z-10'>
           <NavbarBtn
