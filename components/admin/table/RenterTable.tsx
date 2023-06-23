@@ -1,6 +1,16 @@
 import { BookRequest } from '@/types';
 
-export default function RenterTable({ data }: { data: BookRequest[] }) {
+export default function RenterTable({
+  data,
+  actions
+}: {
+  data: BookRequest[];
+  actions: {
+    label: string;
+    onClick: (request: BookRequest) => void;
+    bgColor: string;
+  }[];
+}) {
   return (
     <table className='w-full'>
       <thead>
@@ -16,15 +26,17 @@ export default function RenterTable({ data }: { data: BookRequest[] }) {
           <td className='w-2/5'>Email</td>
           <td className='w-1/5'>Approval date</td>
           <td className='w-1/5'>Return date</td>
+          <td className='w-fit'>Actions</td>
         </tr>
       </thead>
 
-      {/* help me render data into rows */}
       <tbody>
         {data.map((request) => {
           const renter = request.borrower;
 
-          if (request.status !== 'Achieved') return null;
+          console.log('====================================');
+          console.log(request);
+          console.log('====================================');
 
           return (
             <tr
@@ -42,6 +54,22 @@ export default function RenterTable({ data }: { data: BookRequest[] }) {
                 {request.dateOfAccepted!.toDateString()}
               </td>
               <td className='w-1/5'>{request.dateOfReturn!.toDateString()}</td>
+              <td className='w-fit'>
+                {actions.map((action) => (
+                  <button
+                    key={action.label}
+                    className={`
+                      rounded-full px-4 py-2 
+                      text-sm text-primary font-bold mr-2 
+                      ${action.bgColor}
+                      hover:bg-opacity-80
+                    `}
+                    onClick={() => action.onClick(request)}
+                  >
+                    {action.label}
+                  </button>
+                ))}
+              </td>
             </tr>
           );
         })}

@@ -10,6 +10,7 @@ import UploadTab from '@/components/admin/tab/Upload.tab';
 import IncomingTab from '@/components/admin/tab/Incoming.tab';
 import ActiveTab from '@/components/admin/tab/Active.tab';
 import ArchivedTab from '@/components/admin/tab/Archived.tab';
+import RenterTab from '@/components/admin/tab/Renter.tab';
 
 export default function AdminHomePage({
   currentTab
@@ -47,7 +48,7 @@ export default function AdminHomePage({
         {tab === AdminTab.INCOMING_REQUEST && <IncomingTab />}
         {tab === AdminTab.ACTIVE_REQUEST && <ActiveTab />}
         {tab === AdminTab.ARCHIVED_REQUEST && <ArchivedTab />}
-        {tab === AdminTab.RENTER && <div>Renter</div>}
+        {tab === AdminTab.RENTER && <RenterTab />}
       </AnimatePresence>
     </AdminLayout>
   );

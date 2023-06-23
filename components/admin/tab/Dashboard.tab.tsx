@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Image from 'next/image';
 
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
@@ -5,11 +6,22 @@ import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
 import RenterTable from '../table/RenterTable';
 
+import useModal from '@/components/Modals/useModal';
+import RequestDetail from '@/components/Modals/RequestDetail';
+import { BookRequest } from '@/types';
+
 import { RequestData } from '@/dummydata';
 
 export default function DashboardTab({}) {
+  const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
+  const { toggle, ModalWrapper } = useModal();
+
   return (
     <AdminTabLayout title={formatEnumValue(AdminTab.DASHBOARD)}>
+      <ModalWrapper>
+        <RequestDetail request={viewRequest} />
+      </ModalWrapper>
+
       {/* Request Data */}
       <div
         className='
@@ -62,7 +74,21 @@ export default function DashboardTab({}) {
       <div className='w-full mt-4'>
         <h1 className='text-primary text-xl font-bold'>Recent renter</h1>
 
-        <RenterTable data={RequestData} />
+        <RenterTable
+          data={RequestData.filter(
+            (request) => request.isApproved && request.status === 'Achieved'
+          )}
+          actions={[
+            {
+              label: 'View',
+              onClick: (request) => {
+                setViewRequest(request);
+                toggle();
+              },
+              bgColor: 'bg-alt-secondary'
+            }
+          ]}
+        />
       </div>
     </AdminTabLayout>
   );
