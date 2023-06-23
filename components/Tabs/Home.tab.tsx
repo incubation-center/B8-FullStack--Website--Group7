@@ -16,10 +16,24 @@ export default function HomeTab() {
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
-  const [isScrolling, setIsScrolling] = useState(false);
 
   const handleBookClick = (id: string) => {
     router.push(`/book/${id}`);
+  };
+
+  const handleScrollToCategory = (categoryKey: string) => {
+    // scroll to id
+    const element = document.getElementById(categoryKey.toLowerCase() + '-nav');
+
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }, 300);
+    }
   };
 
   // handle category
@@ -33,6 +47,8 @@ export default function HomeTab() {
       router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
         shallow: true
       });
+
+      handleScrollToCategory(categoryKey);
     },
     300
   );
@@ -64,29 +80,12 @@ export default function HomeTab() {
         BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
       setCurrentCategory(category);
+
+      // scroll to id
+      handleScrollToCategory(categoryKey);
     } else {
       setCurrentCategory(BookCategory.EDUCATION);
       updateRoute(BookCategory.EDUCATION);
-    }
-
-    // scroll listener
-    const handleScroll = () => {
-      let isScrolling: any;
-
-      setIsScrolling(true);
-
-      // reset back to false after 100ms
-      clearTimeout(isScrolling);
-      isScrolling = setTimeout(() => {
-        setIsScrolling(false);
-      }, 500);
-    };
-
-    if (scrollingRef.current) {
-      (scrollingRef.current as HTMLElement).addEventListener(
-        'scroll',
-        handleScroll
-      );
     }
 
     return () => {
@@ -97,6 +96,7 @@ export default function HomeTab() {
   return (
     <>
       <div
+        id='category-section'
         className='
           category-section
           w-full overflow-x-auto flex flex-row py-4  bg-alt-secondary 
@@ -168,6 +168,7 @@ function CategoryButton({
 }) {
   return (
     <div
+      id={category.toLowerCase() + '-nav'}
       key={category}
       className={`
         flex w-fit items-center justify-center space-x-2 cursor-pointer

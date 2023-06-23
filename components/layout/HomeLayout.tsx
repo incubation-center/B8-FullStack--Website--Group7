@@ -24,8 +24,8 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full overflow-hidden flex flex-col relative'>
       {/* search bar row */}
-      <div className=' w-full h-[100px] gap-2 flex justify-between items-center py-4 px-8'>
-        <div className='h-full'>
+      <div className=' w-full h-[100px] gap-2 flex justify-between items-center py-4 px-4'>
+        <div className='h-full hidden md:block'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
@@ -58,7 +58,7 @@ export default function HomeLayout({
           />
         </div>
 
-        <div className=' '>
+        <div className=' hidden md:block'>
           <Link
             href='/auth'
             className='
