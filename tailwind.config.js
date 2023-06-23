@@ -15,15 +15,16 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
+  darkMode: false,
   theme: {
     extend: {
       colors: {
         ...colors,
         ...{
-          primary: '#523A28',
-          secondary: '#A47551',
-          'alt-secondary': '#D0B49F',
-          action: '#EBEBEB',
+          primary: 'var(--color-primary)',
+          secondary: 'var(--color-secondary)',
+          'alt-secondary': 'var(--color-alt-secondary)',
+          action: 'var(--color-action)',
           success: '#52B788',
           warning: '#fcd34d',
           danger: '#ef4444',

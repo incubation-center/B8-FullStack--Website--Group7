@@ -54,3 +54,12 @@ body {
   /* width: 10px;    */
   border-radius: 10px;
 }
+
+/* theming */
+
+:root {
+  --color-primary: #523a28;
+  --color-secondary: #a47551;
+  --color-alt-secondary: #d0b49f;
+  --color-action: #ebebeb;
+}
