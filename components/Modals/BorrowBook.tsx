@@ -24,12 +24,6 @@ export default function BorrowBook({
   const [selectedDuration, setSelectedDuration] = useState(durations[0]);
 
   const handleBorrowBook = () => {
-    console.log('====================================');
-    console.log('borrow book');
-    console.log('title: ', book.title);
-    console.log('duration: ', selectedDuration.label);
-    console.log('====================================');
-
     close();
 
     showAlert({

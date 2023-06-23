@@ -5,8 +5,8 @@ import { BookData } from '@/dummydata';
 export default function SavedTab({}) {
   const router = useRouter();
 
-  const handleBookClick = (bookId: string) => {
-    router.push(`/book/${bookId}`);
+  const handleBookClick = (id: string) => {
+    router.push(`/book/${id}`);
   };
   return (
     <div className='mt-4 w-full h-screen overflow-y-scroll'>
@@ -25,14 +25,14 @@ export default function SavedTab({}) {
 
         <div className='w-full flex flex-wrap gap-8 justify-center'>
           {BookData.map((book, index) => (
-            <div key={book.bookId} className='flex flex-col space-y-4'>
+            <div key={book.id!} className='flex flex-col space-y-4'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className='w-[120px] object-cover cursor-pointer'
-                src={book.bookImage}
+                src={book.bookImg}
                 alt={book.title}
                 draggable={false}
-                onClick={() => handleBookClick(book.bookId)}
+                onClick={() => handleBookClick(book.id!)}
               />
 
               <button
@@ -40,51 +40,7 @@ export default function SavedTab({}) {
                         bg-secondary text-white font-light
                         rounded-lg py-1 px-2
                       '
-                onClick={() => handleBookClick(book.bookId)}
-              >
-                View
-              </button>
-            </div>
-          ))}
-          {BookData.map((book, index) => (
-            <div key={book.bookId} className='flex flex-col space-y-4'>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className='w-[120px] object-cover cursor-pointer'
-                src={book.bookImage}
-                alt={book.title}
-                draggable={false}
-                onClick={() => handleBookClick(book.bookId)}
-              />
-
-              <button
-                className='
-                        bg-secondary text-white font-light
-                        rounded-lg py-1 px-2
-                      '
-                onClick={() => handleBookClick(book.bookId)}
-              >
-                View
-              </button>
-            </div>
-          ))}
-          {BookData.map((book, index) => (
-            <div key={book.bookId} className='flex flex-col space-y-4'>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className='w-[120px] object-cover cursor-pointer'
-                src={book.bookImage}
-                alt={book.title}
-                draggable={false}
-                onClick={() => handleBookClick(book.bookId)}
-              />
-
-              <button
-                className='
-                        bg-secondary text-white font-light
-                        rounded-lg py-1 px-2
-                      '
-                onClick={() => handleBookClick(book.bookId)}
+                onClick={() => handleBookClick(book.id!)}
               >
                 View
               </button>
