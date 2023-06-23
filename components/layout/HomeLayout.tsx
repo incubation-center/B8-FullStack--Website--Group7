@@ -22,10 +22,9 @@ export default function HomeLayout({
   const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
 
   return (
-    <div className='w-full h-full flex flex-col'>
+    <div className='w-full h-screen overflow-hidden flex flex-col relative'>
       {/* search bar row */}
-      <div className='w-full h-28 flex justify-between items-center py-4 px-8 relative'>
-        {/* search bar */}
+      <div className='w-full h-[100px] gap-2 flex justify-between items-center py-4 px-8 fixed top-0 left-0 z-10'>
         <div className='h-full'>
           <img
             src='/bootcamp-logo.png'
@@ -59,7 +58,6 @@ export default function HomeLayout({
           />
         </div>
 
-        {/* login button */}
         <div className=' '>
           <Link
             href='/auth'
@@ -68,6 +66,7 @@ export default function HomeLayout({
               bg-alt-secondary text-primary
               transition-colors
               box-border border-2 border-alt-secondary hover:border-action
+              whitespace-nowrap
             '
           >
             Log In
@@ -75,10 +74,8 @@ export default function HomeLayout({
         </div>
       </div>
 
-      {/* category row  */}
-
       {/* main row */}
-      <div className='w-screen h-1/2 flex flex-1 pb-4'>
+      <div className='w-screen h-screen pt-[100px] flex flex-1 pb-4 static'>
         {/* side bar */}
         <SideBar
           currentTab={currentTab}
@@ -86,7 +83,7 @@ export default function HomeLayout({
         />
 
         {/* tab component */}
-        <div className='w-full max-h-full p-4 bg-alt-secondary rounded-2xl mr-4 mb-4 ml-4 md:ml-0 overflow-scroll relative'>
+        <div className='w-full p-4 bg-alt-secondary rounded-2xl mr-4 ml-4 md:ml-0 overflow-scroll relative'>
           {children}
         </div>
       </div>

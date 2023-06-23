@@ -31,3 +31,18 @@
   width: 10px;
   border-radius: 10px;
 }
+
+.category-section::-webkit-scrollbar {
+  margin-top: 5px;
+  width: fit-content;
+  height: 5px;
+  background-color: #a47551;
+  border-radius: 10px;
+  opacity: 30%;
+}
+
+.category-section::-webkit-scrollbar-thumb {
+  background-color: #523a28;
+  /* width: 10px;    */
+  border-radius: 10px;
+}
