@@ -22,9 +22,9 @@ export default function HomeLayout({
   const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
 
   return (
-    <div className='w-full h-screen overflow-hidden flex flex-col relative'>
+    <div className='w-full h-full overflow-hidden flex flex-col relative'>
       {/* search bar row */}
-      <div className='w-full h-[100px] gap-2 flex justify-between items-center py-4 px-8 fixed top-0 left-0 z-10'>
+      <div className=' w-full h-[100px] gap-2 flex justify-between items-center py-4 px-8'>
         <div className='h-full'>
           <img
             src='/bootcamp-logo.png'
@@ -75,7 +75,7 @@ export default function HomeLayout({
       </div>
 
       {/* main row */}
-      <div className='w-screen h-screen pt-[100px] flex flex-1 pb-4 static'>
+      <div className='w-screen home-layout-children-height  flex flex-1 pb-4'>
         {/* side bar */}
         <SideBar
           currentTab={currentTab}
@@ -83,7 +83,14 @@ export default function HomeLayout({
         />
 
         {/* tab component */}
-        <div className='w-full p-4 bg-alt-secondary rounded-2xl mr-4 ml-4 md:ml-0 overflow-scroll relative'>
+        <div
+          className='
+            w-full p-4 bg-alt-secondary 
+            rounded-2xl mr-4 ml-4 md:ml-0 
+            overflow-scroll scroll
+            relative
+          '
+        >
           {children}
         </div>
       </div>

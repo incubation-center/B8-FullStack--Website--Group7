@@ -174,7 +174,7 @@ function CategoryButton({
         transition-all duration-300
         whitespace-nowrap 
         text-lg
-        mr-8
+        mr-8 select-none
         ${
           isCurrentCategory
             ? 'bg-primary p-1 px-8 rounded-lg text-white'
