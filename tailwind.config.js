@@ -26,7 +26,8 @@ module.exports = {
           action: '#EBEBEB',
           success: '#52B788',
           warning: '#fcd34d',
-          danger: '#ef4444'
+          danger: '#ef4444',
+          background: '#D9D9D9'
         }
       },
       fontFamily: {
