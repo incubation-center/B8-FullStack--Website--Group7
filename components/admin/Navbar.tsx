@@ -34,7 +34,7 @@ export default function Navbar({
   return (
     <div
       className='
-        h-full w-[250px] flex flex-col
+        h-full w-[250px] min-w-[250px] flex flex-col
         bg-primary
         p-4 z-10
       '
@@ -148,6 +148,7 @@ function NavbarBtn({
       whitespace-nowrap 
       p-1 px-2
       h-12 z-10
+      w-full
       `}
       onClick={onClick}
     >

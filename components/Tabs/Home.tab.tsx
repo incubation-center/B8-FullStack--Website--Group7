@@ -21,7 +21,7 @@ export default function HomeTab() {
     router.push(`/book/${id}`);
   };
 
-  const handleScrollToCategory = (categoryKey: string) => {
+  const handleScrollToCategoryNav = (categoryKey: string, timeout: number) => {
     // scroll to id
     const element = document.getElementById(categoryKey.toLowerCase() + '-nav');
 
@@ -32,7 +32,7 @@ export default function HomeTab() {
           block: 'nearest',
           inline: 'center'
         });
-      }, 300);
+      }, timeout);
     }
   };
 
@@ -48,7 +48,7 @@ export default function HomeTab() {
         shallow: true
       });
 
-      handleScrollToCategory(categoryKey);
+      handleScrollToCategoryNav(categoryKey, 800);
     },
     300
   );
@@ -82,7 +82,7 @@ export default function HomeTab() {
       setCurrentCategory(category);
 
       // scroll to id
-      handleScrollToCategory(categoryKey);
+      handleScrollToCategoryNav(categoryKey, 1000);
     } else {
       setCurrentCategory(BookCategory.EDUCATION);
       updateRoute(BookCategory.EDUCATION);

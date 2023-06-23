@@ -18,7 +18,7 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   const [tab, setTab] = useState(currentTab);
 
   const handlePageRouting = (tab: HomePageTab) => {
-    router.push(`/?tab=${tab}`, undefined, { shallow: true });
+    router.push(`/?tab=${tab}`, undefined, { shallow: true, scroll: false });
   };
   useEffect(() => {
     const tab = router.query.tab;
