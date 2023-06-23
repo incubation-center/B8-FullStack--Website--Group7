@@ -89,10 +89,6 @@ export default function HomeTab() {
       );
     }
 
-    console.log('====================================');
-    console.log('currentCategory', categoryKey);
-    console.log('====================================');
-
     return () => {
       setCurrentCategory(BookCategory.EDUCATION);
     };
@@ -102,11 +98,12 @@ export default function HomeTab() {
     <>
       <div
         className='
-          w-screen flex flex-row py-4  bg-alt-secondary 
-          sticky -top-5 left-0 z-10 mb-26
+          category-section
+          w-full overflow-x-auto flex flex-row py-4  bg-alt-secondary 
+          sticky -top-5 z-10 mb-26 
         '
       >
-        <div className='w-full flex h-[40px]'>
+        <div className='w-full flex flex-nowrap h-[40px]  items-center'>
           {Object.keys(BookCategory).map((category: any) => {
             const key = category as keyof typeof BookCategory;
             const value = BookCategory[key];
@@ -133,7 +130,7 @@ export default function HomeTab() {
 
       <div
         ref={scrollingRef}
-        className='overflow-y-scroll overflow-x-hidden h-full w-screen scroll-smooth'
+        className='overflow-y-scroll overflow-x-hidden h-full w-full scroll-smooth'
       >
         {/* loop over category */}
         {Object.keys(BookCategory).map((key, index) => {
@@ -173,10 +170,11 @@ function CategoryButton({
     <div
       key={category}
       className={`
-        flex items-center justify-center space-x-2 cursor-pointer
+        flex w-fit items-center justify-center space-x-2 cursor-pointer
         transition-all duration-300
-        whitespace-nowrap mr-8
+        whitespace-nowrap 
         text-lg
+        mr-8
         ${
           isCurrentCategory
             ? 'bg-primary p-1 px-8 rounded-lg text-white'
@@ -186,7 +184,7 @@ function CategoryButton({
       `}
       onClick={handleCategory}
     >
-      <img src={iconPath} alt={value} className='h-4' />
+      <img src={iconPath} alt={value} className='h-4 w-fit inline-block' />
       <span>{value}</span>
     </div>
   );
@@ -215,7 +213,7 @@ function BookSection({
   return (
     <div
       ref={ref}
-      className='w-10/12 select-none flex flex-col flex-grow overflow-x-visible'
+      className='w-full select-none flex flex-col flex-grow overflow-x-visible'
     >
       <div id={categoryKey.toLowerCase()} className='invisible h-16'>
         element to scroll to{' '}

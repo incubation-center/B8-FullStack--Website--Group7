@@ -25,7 +25,7 @@ export default function SideBar({
   };
 
   return (
-    <div className='w-[250px] h-full px-[16px] hidden md:flex flex-col pb-10'>
+    <div className='w-[250px] h-full px-[16px] hidden md:flex flex-col'>
       <div className='relative'>
         <div className='z-10'>
           <NavbarBtn
