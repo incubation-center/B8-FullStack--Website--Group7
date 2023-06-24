@@ -24,11 +24,15 @@ module.exports = {
           primary: 'var(--color-primary)',
           secondary: 'var(--color-secondary)',
           'alt-secondary': 'var(--color-alt-secondary)',
+          background: 'var(--color-background)',
+          icon: 'var(--icon-color)',
+          'icon-active': 'var(--icon-color-active)',
+          't-primary': 'var(--text-color-primary)',
+          't-secondary': 'var(--text-color-secondary)',
           action: '#EBEBEB',
           success: '#52B788',
           warning: '#fcd34d',
-          danger: '#ef4444',
-          background: '#D9D9D9'
+          danger: '#ef4444'
         }
       },
       fontFamily: {

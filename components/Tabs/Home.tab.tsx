@@ -99,7 +99,7 @@ export default function HomeTab() {
         id='category-section'
         className='
           category-section
-          w-full overflow-x-auto flex flex-row py-4  bg-alt-secondary 
+          w-full overflow-x-auto flex flex-row py-4 bg-background 
           sticky -top-5 z-10 mb-26 
         '
       >
@@ -220,7 +220,7 @@ function BookSection({
         element to scroll to{' '}
       </div>
       {/* title */}
-      <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 whitespace-nowrap'>
+      <h1 className='w-1/3 text-4xl text-t-primary mb-4 mt-2 whitespace-nowrap'>
         {category}
       </h1>
 

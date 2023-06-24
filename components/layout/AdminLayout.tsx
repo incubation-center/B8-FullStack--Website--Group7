@@ -14,7 +14,7 @@ export default function AdminLayout({
     <div className='w-full flex flex-grow'>
       <Navbar currentTab={currentTab} handlePageRouting={handlePageRouting} />
 
-      <div className='h-full flex flex-grow bg-white'>{children}</div>
+      <div className='h-full flex flex-grow bg-background'>{children}</div>
     </div>
   );
 }

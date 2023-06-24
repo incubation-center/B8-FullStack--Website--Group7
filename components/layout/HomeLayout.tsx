@@ -127,7 +127,7 @@ export default function HomeLayout({
         {/* tab component */}
         <div
           className='
-            w-full p-4 bg-alt-secondary 
+            w-full p-4 bg-background 
             rounded-2xl mr-4 ml-4 md:ml-0 
             overflow-scroll scroll
             relative

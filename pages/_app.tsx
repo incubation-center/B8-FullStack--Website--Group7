@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
           href='/icon/bookshelf-favicon.png'
         ></link>
       </Head>
-      <div className='flex flex-grow h-screen w-screen overflow-clip transition-colors duration-300'>
+      <div className='flex flex-grow h-screen w-screen overflow-clip transition-colors duration-300 '>
         <div className='flex flex-1'>
           <RecoilRoot>
             <ThemeProvider
