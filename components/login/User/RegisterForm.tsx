@@ -24,12 +24,12 @@ export default function UserRegisterForm({}) {
   };
 
   return (
-    <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center'>
+    <div className='space-y-8 text-center flex flex-col items-center'>
       <h1 className='text-4xl font-extrabold text-alt-secondary'>
         Create an account
       </h1>
 
-      <form onSubmit={handleSubmit(onSubmit)} className='w-5/6 space-y-4'>
+      <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-4'>
         <CustomInput
           register={register('username', { required: 'Username is required' })}
           error={errors.username}
