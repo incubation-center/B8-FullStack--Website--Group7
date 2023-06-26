@@ -31,6 +31,8 @@ export default function UserLoginForm() {
           placeholder='Please enter your email'
           register={register('email', { required: 'Email is required' })}
           error={errors.email}
+          labelClassName='text-alt-secondary ml-4 font-medium'
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
         {/* password */}
         <PasswordInput
@@ -39,6 +41,8 @@ export default function UserLoginForm() {
           placeholder='Please enter your password'
           register={register('password', { required: 'Password is required' })}
           error={errors.password}
+          labelClassName='text-alt-secondary ml-4 font-medium'
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
         {/* remember me and forgot password */}
         <div className='flex justify-between items-center w-full px-4'>

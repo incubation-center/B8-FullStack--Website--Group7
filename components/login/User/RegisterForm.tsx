@@ -1,5 +1,6 @@
 import { UserRegisterInputs } from '@/types/auth';
 import { useForm, SubmitHandler } from 'react-hook-form';
+
 import CustomInput from '../CustomInput';
 import PasswordInput from '../PasswordInput';
 
@@ -24,7 +25,7 @@ export default function UserRegisterForm({}) {
   };
 
   return (
-    <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center'>
+    <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center '>
       <h1 className='text-4xl font-extrabold text-alt-secondary'>
         Create an account
       </h1>
@@ -37,6 +38,8 @@ export default function UserRegisterForm({}) {
           type='text'
           placeholder='Enter your username'
           label='Username'
+          labelClassName='text-alt-secondary ml-4 font-medium '
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
 
         <CustomInput
@@ -46,6 +49,8 @@ export default function UserRegisterForm({}) {
           type='email'
           placeholder='Enter your email address'
           label='Email address'
+          labelClassName='text-alt-secondary ml-4 font-medium '
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
 
         <PasswordInput
@@ -60,6 +65,8 @@ export default function UserRegisterForm({}) {
           name='password'
           placeholder='Enter your password'
           label='Password'
+          labelClassName='text-alt-secondary ml-4 font-medium'
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
 
         <PasswordInput
@@ -75,6 +82,8 @@ export default function UserRegisterForm({}) {
           name='confirmPassword'
           placeholder='Confirm your password'
           label='Confirm Password'
+          labelClassName='text-alt-secondary ml-4 font-medium'
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
 
         <CustomInput
@@ -90,6 +99,8 @@ export default function UserRegisterForm({}) {
           type='tel'
           placeholder='Enter your phone number'
           label='Phone Number'
+          labelClassName='text-alt-secondary ml-4 font-medium '
+          errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
         />
 
         {/* sign up button */}
