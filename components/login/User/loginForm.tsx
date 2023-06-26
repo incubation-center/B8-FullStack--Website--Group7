@@ -2,6 +2,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { UserLoginInputs } from '@/types/auth';
 
+import { AuthLogin } from '@/service/api/auth';
+
 import CustomInput from '../CustomInput';
 import PasswordInput from '../PasswordInput';
 
@@ -12,7 +14,13 @@ export default function UserLoginForm() {
     formState: { errors }
   } = useForm<UserLoginInputs>();
 
-  const onSubmit: SubmitHandler<UserLoginInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<UserLoginInputs> = async (data) => {
+    const res = await AuthLogin(data);
+
+    console.log('====================================');
+    console.log(res);
+    console.log('====================================');
+  };
 
   return (
     <div className='space-y-8 text-center flex flex-col items-center'>

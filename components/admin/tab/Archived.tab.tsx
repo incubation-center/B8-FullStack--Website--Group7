@@ -21,7 +21,7 @@ export default function ArchivedTab() {
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
 
-      <AdminTabLayout title='Active Request'>
+      <AdminTabLayout title='Archived Request'>
         <RequestTable
           useIn={AdminTab.ARCHIVED_REQUEST}
           data={RequestData.filter((request) => request.status === 'Achieved')}

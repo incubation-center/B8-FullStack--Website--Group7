@@ -25,3 +25,22 @@ export enum AdminTab {
   RENTER = 'renter',
   SETTING = 'setting'
 }
+
+// auths
+export enum AuthType {
+  LOGIN = 'login',
+  REGISTER = 'register',
+  FORGOT_PASSWORD = 'forgot-password',
+  RESET_PASSWORD = 'reset-password'
+}
+
+// api endpoints
+export const API_ENDPOINT = {
+  AUTH: {
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: '/auth/reset-password',
+    VALIDATE_TOKEN: '/auth/validate-token/{userId}'
+  }
+};
