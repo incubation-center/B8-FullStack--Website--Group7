@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { SampleUser } from '@/dummydata';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import ChangePassword from '../Modals/ChangePassword';
 
 interface ProfileUploadInputs {}
 
@@ -59,6 +60,12 @@ export default function ProfileTab() {
     ModalWrapper: EditInformationWrapper
   } = useModal();
 
+  const {
+    toggle: toggleChangePasswordModal,
+    close: closeChangePasswordModal,
+    ModalWrapper: ChangePasswordModalWrapper
+  } = useModal();
+
   return (
     <>
       <AlertModal />
@@ -70,6 +77,13 @@ export default function ProfileTab() {
           showAlert={showAlert}
         />
       </EditInformationWrapper>
+
+      <ChangePasswordModalWrapper>
+        <ChangePassword
+          close={closeChangePasswordModal}
+          showAlert={showAlert}
+        />
+      </ChangePasswordModalWrapper>
 
       <motion.div
         animate={{ height: 'auto' }}
@@ -221,7 +235,7 @@ export default function ProfileTab() {
             </div>
 
             <button
-              onClick={() => {}}
+              onClick={() => toggleChangePasswordModal()}
               className='
                 bg-secondary text-white font-light rounded-lg py-1 px-7 
                 transition-colors box-border border-2 border-alt-secondary hover:border-action

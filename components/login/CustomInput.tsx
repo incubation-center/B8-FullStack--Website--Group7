@@ -11,7 +11,8 @@ export default function CustomInput({
   placeholder,
   defaultValue,
   label,
-  labelClassName
+  labelClassName,
+  errorClassName
 }: {
   register: UseFormRegisterReturn<any>;
   error: any;
@@ -21,6 +22,7 @@ export default function CustomInput({
   defaultValue?: string;
   label: string;
   labelClassName: HTMLAttributes<HTMLLabelElement>['className'];
+  errorClassName?: HTMLAttributes<HTMLParagraphElement>['className'];
 }) {
   return (
     <div className='flex flex-col items-start w-full'>
@@ -43,7 +45,15 @@ export default function CustomInput({
         placeholder={placeholder}
       />
 
-      {error && <p className='pl-4 text-red-500 text-sm'>{error?.message}</p>}
+      {error && (
+        <p
+          className={
+            errorClassName ? errorClassName : 'pl-4 text-red-500 text-sm'
+          }
+        >
+          {error?.message}
+        </p>
+      )}
     </div>
   );
 }

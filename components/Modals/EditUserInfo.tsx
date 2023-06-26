@@ -66,7 +66,7 @@ export default function EditUserInfo({
               required: 'Username cannot be empty'
             })}
             error={errors.username}
-            labelClassName='text-primary'
+            labelClassName='text-primary ml-4 font-medium'
           />
 
           <CustomInput
@@ -78,7 +78,7 @@ export default function EditUserInfo({
               required: 'Email cannot be empty'
             })}
             error={errors.email}
-            labelClassName='text-primary'
+            labelClassName='text-primary ml-4 font-medium'
           />
 
           <CustomInput
@@ -90,7 +90,7 @@ export default function EditUserInfo({
               required: 'Phone Number cannot be empty'
             })}
             error={errors.phoneNumber}
-            labelClassName='text-primary'
+            labelClassName='text-primary ml-4 font-medium'
           />
         </div>
 
@@ -100,7 +100,7 @@ export default function EditUserInfo({
           <button
             onClick={close}
             className='
-            bg-danger rounded-lg text-white py-2 px-4 w-full md:w-40
+            bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
           '
           >
             Cancel
@@ -109,7 +109,7 @@ export default function EditUserInfo({
           {/* submit button */}
           <button
             className='
-            bg-primary rounded-lg text-white py-2 px-4 w-full md:w-40
+            bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
           '
             type='submit'
           >

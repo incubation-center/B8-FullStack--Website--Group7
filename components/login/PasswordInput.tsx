@@ -11,7 +11,9 @@ export default function PasswordInput({
   name,
   placeholder,
   label,
-  labelClassName
+  labelClassName,
+  errorClassName,
+  autoComplete
 }: {
   register: UseFormRegisterReturn<any>;
   error: any;
@@ -19,6 +21,8 @@ export default function PasswordInput({
   placeholder: string;
   label: string;
   labelClassName: HTMLAttributes<HTMLLabelElement>['className'];
+  errorClassName?: HTMLAttributes<HTMLParagraphElement>['className'];
+  autoComplete?: string;
 }) {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -46,6 +50,7 @@ export default function PasswordInput({
           focus:outline-none
         '
           placeholder={placeholder}
+          autoComplete={autoComplete}
         />
 
         <Image
@@ -58,7 +63,15 @@ export default function PasswordInput({
         />
       </div>
 
-      {error && <p className='pl-4 text-red-500 text-sm'>{error?.message}</p>}
+      {error && (
+        <p
+          className={
+            errorClassName ? errorClassName : 'pl-4 text-red-500 text-sm'
+          }
+        >
+          {error?.message}
+        </p>
+      )}
     </div>
   );
 }
