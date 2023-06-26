@@ -1,15 +1,36 @@
+import { useForm, SubmitHandler } from 'react-hook-form';
+
 import { motion } from 'framer-motion';
 
 import { AlertType, AlertModalTextType } from './Alert';
+import { User } from '@/types';
+import CustomInput from '../login/CustomInput';
+
+interface EditUserInfoInputs {
+  username: string;
+  email: string;
+  phoneNumber: string;
+}
 
 export default function EditUserInfo({
+  userInfo,
   close,
   showAlert
 }: {
+  userInfo: User;
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
-  const handleSaveInfo = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<EditUserInfoInputs>();
+
+  const onSubmit: SubmitHandler<EditUserInfoInputs> = (data) => {
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
     close();
 
     showAlert({
@@ -20,91 +41,82 @@ export default function EditUserInfo({
   };
 
   return (
-    <motion.div
-      animate={{
-        height: 'auto'
-      }}
-      transition={{
-        duration: 0.5
-      }}
-      className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
-    >
-      <h1 className='text-2xl font-bold text-primary'>Personal Information</h1>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <motion.div
+        animate={{
+          height: 'auto'
+        }}
+        transition={{
+          duration: 0.5
+        }}
+        className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
+      >
+        <h1 className='text-2xl font-bold text-primary'>
+          Personal Information
+        </h1>
 
-      {/* User Information */}
-      <div className='w-full text-left space-y-4'>
-        <div>
-          <label htmlFor='bookTitle' className='ml-4 font-medium text-primary'>
-            Username
-          </label>
-          <input
-            id='username'
+        {/* User Information */}
+        <div className='w-full text-left space-y-4'>
+          <CustomInput
+            label='Username'
             name='username'
             type='text'
-            className='
-            w-full px-4 py-2 mt-2 rounded-full
-            bg-white
-            placeholder-[#9D9C9C] 
-            focus:outline-none
-          '
+            defaultValue={userInfo.username}
+            register={register('username', {
+              required: 'Username cannot be empty'
+            })}
+            error={errors.username}
+            labelClassName='text-primary'
           />
-        </div>
-        <div>
-          <label htmlFor='bookTitle' className='ml-4 font-medium text-primary'>
-            Email
-          </label>
-          <input
-            id='emailUser'
-            name='emailUser'
-            type='text'
-            className='
-            w-full px-4 py-2 mt-2 rounded-full
-            bg-white
-            placeholder-[#9D9C9C] 
-            focus:outline-none
-          '
-          />
-        </div>
-        <div>
-          <label htmlFor='bookTitle' className='ml-4 font-medium text-primary'>
-            Phone Number
-          </label>
-          <input
-            id='phoneNum'
-            name='phoneNum'
-            type='text'
-            className='
-            w-full px-4 py-2 mt-2 rounded-full
-            bg-white
-            placeholder-[#9D9C9C] 
-            focus:outline-none
-          '
-          />
-        </div>
-      </div>
 
-      {/* actions */}
-      <div className='w-full flex justify-evenly gap-4'>
-        {/* cancel button */}
-        <button
-          onClick={close}
-          className='
+          <CustomInput
+            label='Email'
+            name='email'
+            type='email'
+            defaultValue={userInfo.email}
+            register={register('email', {
+              required: 'Email cannot be empty'
+            })}
+            error={errors.email}
+            labelClassName='text-primary'
+          />
+
+          <CustomInput
+            label='Phone Number'
+            name='phoneNumber'
+            type='tel'
+            defaultValue={userInfo.phoneNumber}
+            register={register('phoneNumber', {
+              required: 'Phone Number cannot be empty'
+            })}
+            error={errors.phoneNumber}
+            labelClassName='text-primary'
+          />
+        </div>
+
+        {/* actions */}
+        <div className='w-full flex justify-evenly gap-4'>
+          {/* cancel button */}
+          <button
+            onClick={close}
+            className='
             bg-danger rounded-lg text-white py-2 px-4 w-full md:w-40
           '
-        >
-          Cancel
-        </button>
+          >
+            Cancel
+          </button>
 
-        {/* submit button */}
-        <button
-          className='
+          {/* submit button */}
+          <button
+            className='
             bg-primary rounded-lg text-white py-2 px-4 w-full md:w-40
           '
-          onClick={handleSaveInfo}
-        >
-          Save
-        </button>
-      </div>
-    </motion.div>
+            type='submit'
+          >
+            Save
+          </button>
+        </div>
+      </motion.div>
+    </form>
   );
 }

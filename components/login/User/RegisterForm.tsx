@@ -37,6 +37,7 @@ export default function UserRegisterForm({}) {
           type='text'
           placeholder='Enter your username'
           label='Username'
+          labelClassName='text-alt-secondary ml-4 font-medium '
         />
 
         <CustomInput
@@ -46,6 +47,7 @@ export default function UserRegisterForm({}) {
           type='email'
           placeholder='Enter your email address'
           label='Email address'
+          labelClassName='text-alt-secondary ml-4 font-medium '
         />
 
         <PasswordInput
@@ -60,6 +62,7 @@ export default function UserRegisterForm({}) {
           name='password'
           placeholder='Enter your password'
           label='Password'
+          labelClassName='text-alt-secondary ml-4 font-medium'
         />
 
         <PasswordInput
@@ -75,6 +78,7 @@ export default function UserRegisterForm({}) {
           name='confirmPassword'
           placeholder='Confirm your password'
           label='Confirm Password'
+          labelClassName='text-alt-secondary ml-4 font-medium'
         />
 
         <CustomInput
@@ -90,6 +94,7 @@ export default function UserRegisterForm({}) {
           type='tel'
           placeholder='Enter your phone number'
           label='Phone Number'
+          labelClassName='text-alt-secondary ml-4 font-medium '
         />
 
         {/* sign up button */}

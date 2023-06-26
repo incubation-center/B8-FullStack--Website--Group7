@@ -64,7 +64,11 @@ export default function ProfileTab() {
       <AlertModal />
 
       <EditInformationWrapper>
-        <EditUserInfo close={closeInformationModal} showAlert={showAlert} />
+        <EditUserInfo
+          userInfo={user}
+          close={closeInformationModal}
+          showAlert={showAlert}
+        />
       </EditInformationWrapper>
 
       <motion.div
@@ -167,44 +171,65 @@ export default function ProfileTab() {
           <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
             Personal Information
           </h1>
-          <div className='w-full mt-5 h-[300px] justify-center bg-[#EBEBEB] rounded-xl'>
+          <div className='w-full my-5 p-5 h-fit justify-center bg-[#EBEBEB] rounded-xl relative'>
             <button
-              onClick={(request) => toggleInformationModal()}
-              className='bg-secondary text-white font-light rounded-lg py-1 px-7 mt-7 absolute right-8 transition-colors box-border border-2 border-alt-secondary hover:border-action'
+              onClick={() => toggleInformationModal()}
+              className='
+                bg-secondary text-white font-light rounded-lg py-1 px-7 
+                transition-colors box-border border-2 border-alt-secondary hover:border-action
+                absolute top-5 right-5
+              '
             >
               Edit
             </button>
-            <div
-              className='ml-16 text-primary text-start text-lg md:text-xl md:space-y-5
+
+            <div className='grid grid-cols-2 gap-4'>
+              <div
+                className=' 
+                text-primary text-start text-lg 
+                  col-span-2 
                 '
-            >
-              <h5 className='pt-10 font-extrabold'>Username</h5>
-              <h5>Kanhchana Kao</h5>
-            </div>
-            <div className=' text-primary text-lg absolute left-2/4 md:text-xl md:space-y-5 '>
-              <h5 className='pt-6 font-extrabold'>Phone Number</h5>
-              <h5>+855 12345678</h5>
-            </div>
-            <div className='ml-16 text-primary text-start text-lg md:text-xl md:space-y-5'>
-              <h5 className='pt-6 font-extrabold'>Email</h5>
-              <h5>kanhchana19@kit.edu.kh</h5>
+              >
+                <div className='font-extrabold'>Username</div>
+                <div>{SampleUser.username}</div>
+              </div>
+              <div className=' text-primary text-lg   '>
+                <div className=' font-extrabold'>Phone Number</div>
+                <div>{SampleUser.phoneNumber}</div>
+              </div>
+              <div className=' text-primary text-start text-lg '>
+                <div className=' font-extrabold'>Email</div>
+                <div>{SampleUser.email}</div>
+              </div>
             </div>
           </div>
         </div>
-        <div className='mt-5 relative justify-start w-full lg:w-3/5 mx-auto'>
+
+        {/* Privacy setting */}
+        <div className='relative justify-start w-full lg:w-3/5 mx-auto mt-5'>
           <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
             Privacy Setting
           </h1>
-          <div className='w-full mt-5 h-[70px] justify-center bg-[#EBEBEB] rounded-xl'>
-            <button className='bg-secondary text-white font-light rounded-lg py-1 px-7 mt-4 absolute right-8 transition-colors box-border border-2 border-alt-secondary hover:border-action'>
-              Edit
-            </button>
-            <h5
-              className='
-                font-extrabold ml-16 pt-6 text-primary text-start text-lg md:text-xl md:space-y-5 '
+          <div className='w-full my-5 p-5 h-fit flex justify-between items-center bg-[#EBEBEB] rounded-xl '>
+            <div
+              className=' 
+                text-primary text-start text-lg 
+                 
+                '
             >
-              Password
-            </h5>
+              <div className='font-extrabold'>Password</div>
+            </div>
+
+            <button
+              onClick={() => {}}
+              className='
+                bg-secondary text-white font-light rounded-lg py-1 px-7 
+                transition-colors box-border border-2 border-alt-secondary hover:border-action
+               
+              '
+            >
+              Change Password
+            </button>
           </div>
         </div>
       </motion.div>
