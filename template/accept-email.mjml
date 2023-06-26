@@ -1,0 +1,131 @@
+<mjml>
+  <mj-head>
+    <mj-font name="Poppins" href="https://fonts.googleapis.com/css2?family=Poppins" />
+    <mj-attributes>
+      <mj-all font-family="Poppins" font-size="16px" line-height="normal" />
+    </mj-attributes>
+
+    <mj-style>
+      .poster {
+        border-radius: 20px;
+        overflow: clip;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body>
+    <mj-wrapper background-color="#fff" padding="0">
+      <!-- header image section -->
+      <mj-section background-color="#A37551">
+        <mj-column>
+          <mj-image width="150px" src="https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/bootcamp-logo.png?alt=media&token=d34e1be2-9163-4932-8e48-eb6c4d8d3af2" />
+        </mj-column>
+      </mj-section>
+
+      <!-- header text section -->
+      <mj-section background-color="#fff">
+        <mj-column width="100%">
+          <mj-text font-size="20px" font-weight="700">
+            Dear {{borrower}},
+          </mj-text>
+          <mj-text>
+            We are pleased to inform you that your book rental request has been approved.
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+
+      <!-- request detail -->
+      <mj-section background-color="#fff" padding-bottom="0px" padding-top="0px">
+        <mj-column width="100%">
+          <mj-text align="center" font-weight="700" font-size="20px">
+            Here is the request detail:
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section padding-left="20px" padding-right="20px" padding-top="5px" padding-bottom="0">
+        <mj-column width="500px" css-class="poster" background-color="rgba(208, 180, 159, 0.2)" padding="20px">
+          <mj-image width="167px" src="https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/education%2F1.jpg?alt=media&token=f491da18-0db6-496f-a958-3e8643f94c35" alt="image cover" />
+          <mj-text align="center">
+            <!-- book title -->
+            <span style="font-weight: 700; font-size: 20px">{{bookTitle}}</span><br /><br />
+            <!-- book author -->
+            Author: <span style="font-weight: 700">{{bookAuthor}}</span>
+          </mj-text>
+        </mj-column>
+
+        <mj-column width="100%" padding-top="5px" padding-bottom="5px">
+          <mj-text>
+            <ul style="margin: 0; padding: 0">
+              <li style="
+                  margin: 0 0 1em;
+                  list-style: disc inside;
+                  mso-special-format: bullet;
+                ">
+                <span style="font-weight: 700">Request Date</span>: {{requestDate}}
+              </li>
+              <li style="
+                  list-style: disc inside;
+                  mso-special-format: bullet;
+                ">
+                <span style="font-weight: 700">Return Date:</span> {{returnDate}}
+              </li>
+            </ul>
+          </mj-text>
+        </mj-column>
+
+        <mj-column width="500px" css-class="poster" background-color="rgba(208, 180, 159, 0.2)" padding="20px" padding-top="10px" padding-bottom="10px">
+          <mj-text align="left">
+            You can come to get your book starting from <span style="font-weight: 700;">{{pickupDate}}</span> or <span style="font-weight: 700;">{{pickupDate+1}}</span>.<br />
+            Please make sure to return the book by the <span style="font-weight: 700;">{{returnDate}}</span> to avoid any late fees or penalties.
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <!-- footer text -->
+      <mj-section padding-bottom='0px'>
+        <mj-column width="100%" padding-top="0px">
+          <mj-text>
+            If you have any questions or need further assistance, feel free to contact our support team.
+            <br />
+            <br />
+            Thank you for choosing our book rental service!
+          </mj-text>
+
+          <mj-text>
+            Best regards,<br>
+            <span style="font-weight: 700">The Kjey Book Team</span>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <!-- footer -->
+      <mj-section padding-top='5px'>
+        <mj-column width="100%">
+          <mj-button height="30px" width="200px" background-color="#A37551" border-radius="15px" font-weight="700" href="https://kjeybook.vercel.app">
+            EXPLORE MORE
+          </mj-button>
+          <mj-divider border-color="#A37551" border-width="2px" />
+        </mj-column>
+
+        <mj-column width="100%">
+          <mj-social font-size="15px" icon-size="40px" mode="horizontal">
+            <mj-social-element background-color="#A37551" name="facebook" href="https://kjeybook.vercel.app">
+            </mj-social-element>
+            <mj-social-element background-color="#A37551" name="instagram" href="https://kjeybook.vercel.app">
+            </mj-social-element>
+            <mj-social-element background-color="#A37551" name="twitter" href="https://kjeybook.vercel.app">
+            </mj-social-element>
+          </mj-social>
+        </mj-column>
+
+        <mj-column width="100%">
+          <mj-text align="center" font-size="12px">
+            © 2021 Kjey Book. All rights reserved.
+          </mj-text>
+        </mj-column>
+
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>
