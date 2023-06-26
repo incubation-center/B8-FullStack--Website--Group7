@@ -12,49 +12,54 @@ export default function UserAuthentication({}) {
       className='
         h-full w-full bg-primary
         grid grid-cols-1 md:grid-cols-2
-        p-4 md:p-14 
+        p-4  
         md:space-x-4
+        overflow-y-scroll
       '
     >
-      <div
-        className='
+      <div className='flex justify-center items-center'>
+        <div
+          className='
           flex flex-col justify-center items-center
+          h-fit w-fit
+          overflow-y-scroll
          
         '
-      >
-        {formState === 'login' && <UserLoginForm />}
-        {formState === 'register' && <UserRegisterForm />}
+        >
+          {formState === 'login' && <UserLoginForm />}
+          {formState === 'register' && <UserRegisterForm />}
 
-        <div className='mt-6 tracking-wider'>
-          {(formState === 'login' && (
-            <div className='flex flex-row'>
-              <p className='text-alt-secondary'>Don{"'"}t have an account?</p>
-              <button
-                className='
+          <div className='mt-6 tracking-wider'>
+            {(formState === 'login' && (
+              <div className='flex flex-row'>
+                <p className='text-alt-secondary'>Don{"'"}t have an account?</p>
+                <button
+                  className='
                   ml-2 
                   text-alt-secondary font-bold
                   hover:underline
                 '
-                onClick={() => setFormState('register')}
-              >
-                Sign Up
-              </button>
-            </div>
-          )) || (
-            <div className='flex flex-row'>
-              <p className='text-alt-secondary'>Already have an account?</p>
-              <button
-                className='
+                  onClick={() => setFormState('register')}
+                >
+                  Sign Up
+                </button>
+              </div>
+            )) || (
+              <div className='flex flex-row'>
+                <p className='text-alt-secondary'>Already have an account?</p>
+                <button
+                  className='
                   ml-2 
                   text-alt-secondary font-bold
                   hover:underline
                 '
-                onClick={() => setFormState('login')}
-              >
-                Login
-              </button>
-            </div>
-          )}
+                  onClick={() => setFormState('login')}
+                >
+                  Login
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

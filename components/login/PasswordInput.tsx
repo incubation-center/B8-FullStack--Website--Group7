@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import Image from 'next/image';
 
 import { UseFormRegisterReturn } from 'react-hook-form';
@@ -10,13 +10,19 @@ export default function PasswordInput({
   error,
   name,
   placeholder,
-  label
+  label,
+  labelClassName,
+  errorClassName,
+  autoComplete
 }: {
   register: UseFormRegisterReturn<any>;
   error: any;
   name: string;
   placeholder: string;
   label: string;
+  labelClassName: HTMLAttributes<HTMLLabelElement>['className'];
+  errorClassName?: HTMLAttributes<HTMLParagraphElement>['className'];
+  autoComplete?: string;
 }) {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -28,7 +34,7 @@ export default function PasswordInput({
 
   return (
     <div className='flex flex-col items-start w-full'>
-      <label htmlFor={name} className='text-alt-secondary ml-4 font-medium'>
+      <label htmlFor={name} className={labelClassName}>
         {label}
         <RequiredIcon />
       </label>
@@ -44,6 +50,7 @@ export default function PasswordInput({
           focus:outline-none
         '
           placeholder={placeholder}
+          autoComplete={autoComplete}
         />
 
         <Image
@@ -56,7 +63,15 @@ export default function PasswordInput({
         />
       </div>
 
-      {error && <p className='pl-4 text-red-500 text-sm'>{error?.message}</p>}
+      {error && (
+        <p
+          className={
+            errorClassName ? errorClassName : 'pl-4 text-red-500 text-sm'
+          }
+        >
+          {error?.message}
+        </p>
+      )}
     </div>
   );
 }
