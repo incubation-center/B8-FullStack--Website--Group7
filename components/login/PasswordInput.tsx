@@ -13,7 +13,8 @@ export default function PasswordInput({
   label,
   labelClassName,
   errorClassName,
-  autoComplete
+  autoComplete,
+  disabled = false
 }: {
   register: UseFormRegisterReturn<any>;
   error: any;
@@ -23,6 +24,7 @@ export default function PasswordInput({
   labelClassName: HTMLAttributes<HTMLLabelElement>['className'];
   errorClassName?: HTMLAttributes<HTMLParagraphElement>['className'];
   autoComplete?: string;
+  disabled?: boolean;
 }) {
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -51,6 +53,7 @@ export default function PasswordInput({
         '
           placeholder={placeholder}
           autoComplete={autoComplete}
+          disabled={disabled}
         />
 
         <Image

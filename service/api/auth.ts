@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 
-import { UserLoginInputs } from '../../types/auth';
+import { UserLoginInputs, UserRegisterInputs } from '../../types/auth';
 import { API_ENDPOINT } from '../../utils/enum';
 import createAxiosInstance from '../axios';
 
@@ -20,9 +20,12 @@ export async function AuthLogin({ email, password }: UserLoginInputs) {
   }
 }
 
-export async function AuthRegister({ email, password }: UserLoginInputs) {
+export async function AuthRegister(formData: UserRegisterInputs) {
   try {
-    const response = await axiosClient.post(API_ENDPOINT.AUTH.REGISTER, {});
+    const response = await axiosClient.post(
+      API_ENDPOINT.AUTH.REGISTER,
+      formData
+    );
 
     return response;
   } catch (error) {

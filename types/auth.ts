@@ -9,4 +9,5 @@ export type UserRegisterInputs = {
   password: string;
   confirmPassword: string;
   phoneNumber: string;
+  profileUrl?: string;
 };
