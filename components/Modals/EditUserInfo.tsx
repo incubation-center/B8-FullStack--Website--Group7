@@ -1,27 +1,20 @@
-import { useState } from 'react';
-import { Listbox } from '@headlessui/react';
 import { motion } from 'framer-motion';
 
-import { Book } from '@/types';
-import useAlertModal, { AlertType, AlertModalTextType } from './Alert';
+import { AlertType, AlertModalTextType } from './Alert';
 
 export default function EditUserInfo({
-  book,
   close,
   showAlert
 }: {
-  book: Book;
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
-
   const handleSaveInfo = () => {
     close();
 
     showAlert({
       title: 'Your Information have been updated!',
-      subtitle:
-        'Thank you!',
+      subtitle: 'Thank you!',
       type: AlertType.SUCCESS
     });
   };
