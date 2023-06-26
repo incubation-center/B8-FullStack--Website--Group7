@@ -1,18 +1,32 @@
 export interface Book {
-  bookId: string;
-  title: string;
+  id?: string;
   author: string;
-  genre: string;
-  bookImage: string;
+  category: string;
+  bookImg: string;
   description: string;
+  title: string;
   maximumRequestPeriod: number;
+}
+
+export interface User {
+  userId?: string;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  profileImg: string;
+  role: 'ADMIN' | 'USER';
+  favoriteBooks: Book[];
 }
 
 export interface BookRequest {
   requestId: string;
-  borrower: any;
+  borrower: User;
   book: Book;
   status: 'Pending' | 'Approved' | 'Achieved';
+  isApproved: boolean;
   requestDuration: number;
-  requestDate: Date;
+  dateOfRequest: Date;
+  dateOfAccepted?: Date | null;
+  dateOfReturn?: Date | null;
+  dateOfReceived?: Date | null;
 }

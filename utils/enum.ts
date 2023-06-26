@@ -7,7 +7,6 @@ export enum HomePageTab {
 }
 
 export const BookCategory = {
-  ALL: 'All',
   EDUCATION: 'Education',
   BUSINESS: 'Business',
   HISTORY: 'History',
@@ -15,3 +14,14 @@ export const BookCategory = {
   FANTASY: 'Fantasy',
   SELF_DEVELOPMENT: 'Self Development'
 };
+
+// admin homepage tab
+export enum AdminTab {
+  DASHBOARD = 'dashboard',
+  UPLOAD = 'upload',
+  INCOMING_REQUEST = 'incoming-request',
+  ACTIVE_REQUEST = 'active-request',
+  ARCHIVED_REQUEST = 'archived-request',
+  RENTER = 'renter',
+  SETTING = 'setting'
+}

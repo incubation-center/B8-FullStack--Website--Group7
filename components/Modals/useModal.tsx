@@ -33,13 +33,14 @@ export default function useModal() {
               key='modal'
               className='
                 z-10 
-                w-full md:w-1/2 lg:w-1/3
+                min-w-[600px]
+                w-fit
                 h-fit mx-auto
               '
               initial={{ y: -100, scale: 0 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ y: 100, scale: 0 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.2 }}
             >
               {children}
             </motion.div>
