@@ -130,7 +130,7 @@ const SampleUser: User = {
   favoriteBooks: [],
   phoneNumber: '0123456789',
   profileImg:
-    'https://ui-avatars.com/api/?name=Nel+Sokchhunly&background=random&size=128',
+    'https://i.pinimg.com/736x/a0/25/04/a025049f3035cf3db789cc4cba5dd29e.jpg',
   role: 'USER',
   username: 'Nel Sokchhunly'
 };

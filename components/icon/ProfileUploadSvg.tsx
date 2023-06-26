@@ -1,9 +1,11 @@
+import { HTMLAttributes } from 'react';
+
 export default function ProfileUploadSvg({
   color,
   className
 }: {
   color: string;
-  className: string;
+  className?: HTMLAttributes<HTMLElement>['className'];
 }): JSX.Element {
   return (
     <div className={className}>
