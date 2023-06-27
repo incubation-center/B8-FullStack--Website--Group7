@@ -33,7 +33,7 @@ export default function useModal() {
               key='modal'
               className='
                 z-10 
-                min-w-[600px]
+                min-w-[300px] md:min-w-[600px]
                 w-fit
                 h-fit mx-auto
               '

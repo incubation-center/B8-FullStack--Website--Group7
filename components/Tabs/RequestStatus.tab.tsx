@@ -6,13 +6,17 @@ import { BookRequest } from '@/types';
 import RequestTable from '../RequestStatus/RequestTable';
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 
-export default function RequestStatusTab() {
+export default function RequestStatusTab({
+  onClickExplore
+}: {
+  onClickExplore: () => void;
+}) {
   return (
     <NotLoggedInLayout>
       <div className='w-full h-full overflow-y-scroll p-4'>
         <h1
           className='
-          font-extrabold text-primary text-center
+          font-bold text-primary text-center
           text-2xl md:text-4xl
           pb-4 md:pb-8 
           pt-2 md:pt-4 

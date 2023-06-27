@@ -50,6 +50,10 @@ export default function Home({
     setTab(currentTab);
     setAuthObj(authStore);
 
+    console.log('====================================');
+    console.log('authStore', authStore);
+    console.log('====================================');
+
     // prefetching
     if (authStore.isAdmin) router.prefetch('/admin');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,8 +63,16 @@ export default function Home({
     <div className='h-full w-full bg-primary'>
       <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
         {tab === HomePageTab.HOME && <HomeTab />}
-        {tab === HomePageTab.SAVED && <SavedTab />}
-        {tab === HomePageTab.REQUEST_STATUS && <RequestStatusTab />}
+        {tab === HomePageTab.SAVED && (
+          <SavedTab
+            onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
+          />
+        )}
+        {tab === HomePageTab.REQUEST_STATUS && (
+          <RequestStatusTab
+            onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
+          />
+        )}
         {tab === HomePageTab.PROFILE && <Profile />}
       </HomeLayout>
     </div>

@@ -90,7 +90,7 @@ export default function BookDetail({ book }: { book: Book }) {
 
             <button
               onClick={() => open()}
-              className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg mt-10'
+              className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
             >
               Borrow
             </button>

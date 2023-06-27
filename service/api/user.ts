@@ -22,3 +22,13 @@ export async function getUserInfo(token: string, id: string) {
     throw error;
   }
 }
+
+export async function updateUserInfo(id: string, data: any) {
+  try {
+    const response = await axiosClient.patch(API_ENDPOINT.USER.INFO(id), data);
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

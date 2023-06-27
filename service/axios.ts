@@ -3,7 +3,7 @@ import { getCookie } from 'cookies-next';
 
 // create asn axios instance function
 export default function createAxiosInstance(): AxiosInstance {
-  const token = getCookie('jwtToken');
+  const token = getCookie('accessToken');
 
   const client = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
