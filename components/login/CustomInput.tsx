@@ -12,7 +12,8 @@ export default function CustomInput({
   defaultValue,
   label,
   labelClassName,
-  errorClassName
+  errorClassName,
+  disabled = false
 }: {
   register: UseFormRegisterReturn<any>;
   error: any;
@@ -23,6 +24,7 @@ export default function CustomInput({
   label: string;
   labelClassName: HTMLAttributes<HTMLLabelElement>['className'];
   errorClassName?: HTMLAttributes<HTMLParagraphElement>['className'];
+  disabled?: boolean;
 }) {
   return (
     <div className='flex flex-col items-start w-full'>
@@ -43,6 +45,7 @@ export default function CustomInput({
           focus:outline-none
         '
         placeholder={placeholder}
+        disabled={disabled}
       />
 
       {error && (

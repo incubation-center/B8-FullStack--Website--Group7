@@ -34,10 +34,6 @@ export default function RenterTable({
         {data.map((request) => {
           const renter = request.borrower;
 
-          console.log('====================================');
-          console.log(request);
-          console.log('====================================');
-
           return (
             <tr
               key={request.requestId}

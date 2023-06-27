@@ -1,3 +1,4 @@
+import { AuthStore } from '@/types/auth';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { atom } from 'recoil';
 
@@ -15,4 +16,14 @@ export const homePageSearchAtom = atom<string>({
 export const homePageCategoryAtom = atom<string>({
   key: 'homePageCategory',
   default: ''
+});
+
+// admin
+export const AuthAtom = atom<AuthStore>({
+  key: 'AuthAtom',
+  default: {
+    isLoggedIn: false,
+    isAdmin: false,
+    user: null
+  }
 });

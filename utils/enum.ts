@@ -1,3 +1,5 @@
+import { User } from '../types';
+
 // homepage
 export enum HomePageTab {
   HOME = 'home',
@@ -25,3 +27,34 @@ export enum AdminTab {
   RENTER = 'renter',
   SETTING = 'setting'
 }
+
+// auths
+export enum AuthType {
+  LOGIN = 'login',
+  REGISTER = 'register',
+  FORGOT_PASSWORD = 'forgot-password',
+  RESET_PASSWORD = 'reset-password'
+}
+
+// api endpoints
+// some key is a function, so we can pass params to it
+export const API_ENDPOINT = {
+  AUTH: {
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
+    FORGOT_PASSWORD: '/auth/forgot-password',
+    RESET_PASSWORD: '/auth/reset-password',
+    VALIDATE_TOKEN: (id: string) => '/auth/validate-token/' + id
+  },
+  USER: {
+    INFO: (id: string) => '/user/' + id
+  }
+};
+
+export const handleFallBackProfileImage = (user: User) => {
+  if (user.profileImg) return user.profileImg;
+
+  const usernameWithNoSpace = user.username.trim().replace(' ', '+');
+
+  return `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`;
+};

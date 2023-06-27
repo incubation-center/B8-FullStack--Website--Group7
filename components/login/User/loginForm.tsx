@@ -2,17 +2,52 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { UserLoginInputs } from '@/types/auth';
 
+import { AuthLogin } from '@/service/api/auth';
+
 import CustomInput from '../CustomInput';
 import PasswordInput from '../PasswordInput';
+import { useState } from 'react';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 
 export default function UserLoginForm() {
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<UserLoginInputs>();
 
-  const onSubmit: SubmitHandler<UserLoginInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<UserLoginInputs> = async ({
+    email,
+    password
+  }) => {
+    setIsLoggingIn(true);
+    try {
+      const res = await AuthLogin({ email, password });
+
+      if (res.status !== 200) throw new Error('Login failed');
+
+      const data = await res.data;
+
+      const accessToken = data['access_token'];
+
+      // set access token to cookies using next-cookies
+      setCookie('accessToken', accessToken);
+      setIsLoggingIn(false);
+
+      router.push('/');
+    } catch (errors) {
+      console.log('====================================');
+      console.log(errors);
+      console.log('====================================');
+    }
+
+    setIsLoggingIn(false);
+  };
 
   return (
     <div className='space-y-8 text-center flex flex-col items-center'>
@@ -33,6 +68,7 @@ export default function UserLoginForm() {
           error={errors.email}
           labelClassName='text-alt-secondary ml-4 font-medium'
           errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
+          disabled={isLoggingIn}
         />
         {/* password */}
         <PasswordInput
@@ -43,6 +79,7 @@ export default function UserLoginForm() {
           error={errors.password}
           labelClassName='text-alt-secondary ml-4 font-medium'
           errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
+          disabled={isLoggingIn}
         />
         {/* remember me and forgot password */}
         <div className='flex justify-between items-center w-full px-4'>
@@ -71,14 +108,22 @@ export default function UserLoginForm() {
         <div>
           <button
             type='submit'
-            className='
-            w-full px-4 py-2 mt-6 rounded-full
-            bg-secondary text-white text-xl tracking-wide 
-            focus:outline-none
-            font-poppins
-          '
+            className={`
+              w-full px-4 py-2 mt-6 rounded-full
+              bg-secondary text-white text-xl tracking-wide 
+              focus:outline-none
+              font-poppins
+              ${isLoggingIn && 'cursor-not-allowed bg-opacity-50'}
+            `}
+            disabled={isLoggingIn}
           >
-            Login
+            {!isLoggingIn && 'Login'}
+            {isLoggingIn && (
+              <div className='flex justify-center items-center'>
+                <h1>Logging in</h1>
+                <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
+              </div>
+            )}
           </button>
         </div>
       </form>
