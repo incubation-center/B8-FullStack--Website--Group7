@@ -37,16 +37,13 @@ export default function UserLoginForm() {
 
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
-      setIsLoggingIn(false);
-
       router.push('/');
     } catch (errors) {
       console.log('====================================');
       console.log(errors);
       console.log('====================================');
+      setIsLoggingIn(false);
     }
-
-    setIsLoggingIn(false);
   };
 
   return (

@@ -89,13 +89,15 @@ export default function HomeLayout({
             </Link>
           )}
 
-          {authStore.isLoggedIn && authStore.user && (
-            <img
-              src={handleFallBackProfileImage(authStore.user)}
-              alt='profile'
-              className='w-12 h-12 rounded-full object-cover hidden md:block'
-            />
-          )}
+          {authStore.isLoggedIn &&
+            authStore.user &&
+            currentTab !== HomePageTab.PROFILE && (
+              <img
+                src={handleFallBackProfileImage(authStore.user)}
+                alt='profile'
+                className='w-12 h-12 rounded-full object-cover hidden md:block'
+              />
+            )}
         </div>
       </div>
 

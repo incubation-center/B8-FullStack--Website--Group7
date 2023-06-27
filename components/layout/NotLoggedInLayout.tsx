@@ -20,7 +20,7 @@ export default function NotLoggedInLayout({
         text-primary text-lg font-medium
         '
       >
-        You are not authorized
+        You are not logged in
       </div>
 
       <Link
