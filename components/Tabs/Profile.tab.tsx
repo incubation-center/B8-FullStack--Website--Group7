@@ -19,7 +19,8 @@ import { User } from '@/types';
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import { handleFallBackProfileImage } from '@/utils/function';
 import { deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
+import { uploadImage } from '@/service/firebase';
+import { updateUserInfo } from '@/service/api/user';
 
 interface ProfileUploadInputs {}
 
@@ -46,16 +47,50 @@ export default function ProfileTab() {
     imageRef.current && (imageRef.current.value = '');
   };
 
-  const handleSaveImage = () => {
-    // setIsUpdatingImage(false);
+  const handleSaveImage = async () => {
     setIsUploadingImage(true);
 
-    setTimeout(() => {
-      setIsUpdatingImage(false);
-      setIsUploadingImage(false);
-      setImage(null);
-      imageRef.current && (imageRef.current.value = '');
-    }, 3000);
+    try {
+      const res = await uploadImage(
+        image as File,
+        authStore.user?.userId as string
+      );
+
+      if (res) {
+        // update user image
+        const result = await updateUserInfo(authStore.user?.userId as string, {
+          profileImg: res
+        });
+
+        if (result) {
+          setAuthStore({
+            ...authStore,
+            user: {
+              ...(authStore.user as User),
+              profileImg: res
+            }
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsUpdatingImage(false);
+    setIsUploadingImage(false);
+    setImage(null);
+    imageRef.current && (imageRef.current.value = '');
+  };
+
+  // handle logout
+  const handleLogout = () => {
+    deleteCookie('accessToken');
+
+    setAuthStore({
+      user: null,
+      isAdmin: false,
+      isLoggedIn: false
+    });
   };
 
   const { showAlert, AlertModal } = useAlertModal();
@@ -71,17 +106,6 @@ export default function ProfileTab() {
     close: closeChangePasswordModal,
     ModalWrapper: ChangePasswordModalWrapper
   } = useModal();
-
-  // handle logout
-  const handleLogout = () => {
-    deleteCookie('accessToken');
-
-    setAuthStore({
-      user: null,
-      isAdmin: false,
-      isLoggedIn: false
-    });
-  };
 
   return (
     <NotLoggedInLayout>
@@ -116,13 +140,14 @@ export default function ProfileTab() {
                 id='profileImg'
                 type='file'
                 className='
-                col-span-3 p-1
-                w-full bg-transparent
-                border-b border-primary
-                hidden
+                  col-span-3 p-1
+                  w-full bg-transparent
+                  border-b border-primary
+                  hidden
                 '
                 onChange={handleSelectImage}
                 accept='image/*'
+                disabled={isUploadingImage}
               />
 
               <div className='w-40 h-40 mx-auto relative rounded-full'>
@@ -150,7 +175,9 @@ export default function ProfileTab() {
 
                 <label htmlFor='profileImg'>
                   <ProfileUploadSvg
-                    className='absolute bottom-0 right-0 w-10 h-10 bg-white fill-primary rounded-full p-2 cursor-pointer '
+                    className={`absolute bottom-0 right-0 w-10 h-10 bg-white fill-primary rounded-full p-2 ${
+                      isUploadingImage ? 'cursor-not-allowed' : 'cursor-pointer'
+                    }`}
                     color='var(--icon-color)'
                   />
                 </label>
