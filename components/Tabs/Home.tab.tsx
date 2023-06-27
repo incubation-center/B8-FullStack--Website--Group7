@@ -5,14 +5,19 @@ import { useRouter } from 'next/router';
 import { BookData } from '@/dummydata';
 import { BookCategory } from '@/utils/enum';
 
-import { homePageCategoryAtom, homePageSearchAtom } from '@/service/recoil';
+import { AllBooksAtom, homePageCategoryAtom } from '@/service/recoil';
+
 import { useRecoilState } from 'recoil';
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
-import { GetServerSidePropsContext } from 'next';
+import { Book } from '@/types';
+import { getAllBooks } from '@/service/api/book';
 
 export default function HomeTab() {
   const router = useRouter();
+
+  const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
+  const [isFetchingBooks, setIsFetchingBooks] = useState(false);
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
@@ -80,27 +85,35 @@ export default function HomeTab() {
         BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
       setCurrentCategory(category);
-
-      // scroll to id
-      handleScrollToCategoryNav(categoryKey, 1000);
     } else {
       setCurrentCategory(BookCategory.EDUCATION);
       updateRoute(BookCategory.EDUCATION);
     }
 
+    // setBooks(books);
+    if (allBooks.length === 0) {
+      setIsFetchingBooks(true);
+      getAllBooks().then((books) => {
+        setAllBooks(books);
+        setIsFetchingBooks(false);
+        handleScrollToCategoryNav(categoryKey, 500);
+      });
+    }
+
     return () => {
       setCurrentCategory(BookCategory.EDUCATION);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
+    <div className='px-4'>
       <div
         id='category-section'
         className='
           category-section
-          w-full overflow-x-auto flex flex-row py-4  bg-alt-secondary 
-          sticky -top-5 z-10 mb-26 
+          w-full overflow-x-auto flex flex-row  bg-alt-secondary 
+          sticky top-0 z-10 py-4
         '
       >
         <div className='w-full flex flex-nowrap h-[40px]  items-center'>
@@ -122,6 +135,7 @@ export default function HomeTab() {
                 iconPath={iconPath}
                 isCurrentCategory={isCurrentCategory}
                 handleCategory={() => handleCategory(key, value)}
+                disabled={isFetchingBooks || allBooks.length === 0}
               />
             );
           })}
@@ -130,16 +144,31 @@ export default function HomeTab() {
 
       <div
         ref={scrollingRef}
-        className='overflow-y-scroll overflow-x-hidden h-full w-full scroll-smooth'
+        className='overflow-y-scroll overflow-x-hidden w-full scroll-smooth'
       >
+        {isFetchingBooks && (
+          // fetching books skeleton
+          <>
+            <BookSectionSkeleton />
+            <BookSectionSkeleton />
+          </>
+        )}
+
         {/* loop over category */}
         {Object.keys(BookCategory).map((key, index) => {
           const category = BookCategory[key as keyof typeof BookCategory];
+
+          const books = allBooks.filter(
+            (book) => book.category.trim() === category.trim()
+          );
+
+          if (books.length === 0) return null;
 
           return (
             <BookSection
               key={key}
               categoryKey={key}
+              books={books}
               category={category}
               handleBookClick={handleBookClick}
               handleVisibleOnScreen={handleVisibleOnScreen}
@@ -147,9 +176,9 @@ export default function HomeTab() {
           );
         })}
 
-        <div className='h-[300px]'></div>
+        {/* <div className='h-[300px]'></div> */}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -158,16 +187,18 @@ function CategoryButton({
   value,
   iconPath,
   isCurrentCategory,
-  handleCategory
+  handleCategory,
+  disabled
 }: {
   category: string;
   value: string;
   iconPath: string;
   isCurrentCategory: boolean;
   handleCategory: () => void;
+  disabled?: boolean;
 }) {
   return (
-    <div
+    <button
       id={category.toLowerCase() + '-nav'}
       key={category}
       className={`
@@ -184,21 +215,24 @@ function CategoryButton({
 
       `}
       onClick={handleCategory}
+      disabled={disabled}
     >
       <img src={iconPath} alt={value} className='h-4 w-fit inline-block' />
       <span>{value}</span>
-    </div>
+    </button>
   );
 }
 
 function BookSection({
   categoryKey,
   category,
+  books,
   handleBookClick,
   handleVisibleOnScreen
 }: {
   categoryKey: string;
   category: string;
+  books: Book[];
   handleBookClick: (id: string) => void;
   handleVisibleOnScreen: (categoryKey: string, category: string) => void;
 }) {
@@ -235,7 +269,7 @@ function BookSection({
       '
       >
         <div className='flex flex-row shrink-0 space-x-[35px] '>
-          {BookData.map((book, index) => (
+          {books.map((book, index) => (
             <div key={book.id} className='flex flex-col space-y-4'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -259,6 +293,29 @@ function BookSection({
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function BookSectionSkeleton() {
+  return (
+    <div className='w-full select-none flex flex-col flex-grow overflow-x-visible animate-pulse'>
+      {/* title */}
+      <div className='w-40 h-4 mt-4 rounded-full text-4xl bg-primary mb-2 whitespace-nowrap'></div>
+
+      {/* book */}
+      <div
+        className='
+        w-full pb-2
+        flex flex-row 
+        overflow-x-auto overscroll-x-contain
+        book-scrolling-section relative
+        z-0
+      '
+      >
+        <div className='bg-primary w-full h-40 rounded-lg '></div>
+      </div>
+      <div className='bg-primary w-full h-2 rounded-lg '></div>
     </div>
   );
 }

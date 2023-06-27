@@ -7,7 +7,7 @@ import RequestTable from '../RequestStatus/RequestTable';
 
 export default function RequestStatusTab() {
   return (
-    <div className='w-full h-full overflow-y-scroll'>
+    <div className='w-full h-full overflow-y-scroll p-4'>
       <h1
         className='
           font-extrabold text-primary text-center

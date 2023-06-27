@@ -48,13 +48,11 @@ export const API_ENDPOINT = {
   },
   USER: {
     INFO: (id: string) => '/user/' + id
+  },
+  BOOK: {
+    GET_ALL_BOOKS: '/book',
+    GET_BOOK_BY_ID: (id: string) => '/book/' + id,
+    GET_BOOK_BY_TITLE: (title: string) => '/book/title?title=' + title,
+    GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author
   }
-};
-
-export const handleFallBackProfileImage = (user: User) => {
-  if (user.profileImg) return user.profileImg;
-
-  const usernameWithNoSpace = user.username.trim().replace(' ', '+');
-
-  return `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`;
 };

@@ -67,7 +67,7 @@ export default function ProfileTab() {
   } = useModal();
 
   return (
-    <>
+    <div className='p-4'>
       <AlertModal />
 
       <EditInformationWrapper>
@@ -247,6 +247,6 @@ export default function ProfileTab() {
           </div>
         </div>
       </motion.div>
-    </>
+    </div>
   );
 }

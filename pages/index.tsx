@@ -13,8 +13,10 @@ import Profile from '@/components/Tabs/Profile.tab';
 import { processUserToken } from '@/service/token';
 
 import { useRecoilState } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
+import { AllBooksAtom, AuthAtom } from '@/service/recoil';
 import { AuthStore } from '@/types/auth';
+import { Book } from '@/types';
+import { getAllBooks } from '@/service/api/book';
 
 export default function Home({
   currentTab,
@@ -48,10 +50,6 @@ export default function Home({
     setTab(currentTab);
     setAuthObj(authStore);
 
-    console.log('====================================');
-    console.log('authStore', authStore);
-    console.log('====================================');
-
     // prefetching
     if (authStore.isAdmin) router.prefetch('/admin');
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,11 +74,6 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     tab: HomePageTab;
   } = context.query;
 
-  // check if user is admin
-  const token = context.req.cookies.accessToken;
-
-  const authObj = await processUserToken(token);
-
   if (!tab) {
     return {
       redirect: {
@@ -89,6 +82,16 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
       }
     };
   }
+
+  // check if user is admin
+  const token = context.req.cookies.accessToken;
+
+  const authObj = await processUserToken(token);
+
+  // let books: Book[] = [];
+  // if (tab === HomePageTab.HOME) {
+  //   books = await getAllBooks();
+  // }
 
   return {
     props: {

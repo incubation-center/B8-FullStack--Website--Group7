@@ -7,15 +7,12 @@ import {
   homePageSearchAtom
 } from '@/service/recoil';
 import { useRecoilState } from 'recoil';
-import {
-  BookCategory,
-  HomePageTab,
-  handleFallBackProfileImage
-} from '@/utils/enum';
+import { BookCategory, HomePageTab } from '@/utils/enum';
 import { useState } from 'react';
 import SideBar from './SideBar';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { handleFallBackProfileImage } from '@/utils/function';
 
 export default function HomeLayout({
   currentTab,
@@ -146,9 +143,9 @@ export default function HomeLayout({
         {/* tab component */}
         <div
           className='
-            w-full p-4 bg-alt-secondary 
+            w-full  bg-alt-secondary 
             rounded-2xl mr-4 ml-4 md:ml-0 
-            overflow-scroll scroll
+            overflow-scroll scroll-smooth
             relative
           '
         >

@@ -11,7 +11,7 @@ export default function SavedTab({}) {
   };
 
   return (
-    <div className='mt-4 w-full h-screen overflow-y-scroll'>
+    <div className='mt-4 w-full h-screen overflow-y-scroll p-4'>
       <div className='w-full flex flex-col justify-center px-4 space-y-4 md:px-8 md:space-y-8  mb-96'>
         <h1
           className='

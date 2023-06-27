@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios';
 
-import { UserLoginInputs, UserRegisterInputs } from '../../types/auth';
 import { API_ENDPOINT } from '../../utils/enum';
 import createAxiosInstance from '../axios';
 

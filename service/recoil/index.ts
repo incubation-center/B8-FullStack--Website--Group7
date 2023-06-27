@@ -1,3 +1,4 @@
+import { Book } from '@/types';
 import { AuthStore } from '@/types/auth';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { atom } from 'recoil';
@@ -26,4 +27,10 @@ export const AuthAtom = atom<AuthStore>({
     isAdmin: false,
     user: null
   }
+});
+
+// books
+export const AllBooksAtom = atom<Book[]>({
+  key: 'AllBooksAtom',
+  default: []
 });
