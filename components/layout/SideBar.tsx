@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 import { HomePageTab } from '@/utils/enum';
 import Link from 'next/link';
+import { useRecoilValue } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
 
 export default function SideBar({
   currentTab,
@@ -13,6 +15,8 @@ export default function SideBar({
   handlePageRouting: (tab: HomePageTab) => void;
   isMobile?: boolean;
 }) {
+  const authStore = useRecoilValue(AuthAtom);
+
   const handleTranslate = () => {
     switch (currentTab) {
       case HomePageTab.HOME:
@@ -86,17 +90,19 @@ export default function SideBar({
 
       {/* admin */}
       <div className='flex-1'></div>
-      <Link
-        href='/admin'
-        className='
+      {authStore.isAdmin && (
+        <Link
+          href='/admin'
+          className='
           w-full bg-action text-primary font-bold
           rounded-xl p-2 px-4
           flex items-center justify-center cursor-pointer 
           hover:shadow-xl
         '
-      >
-        Admin
-      </Link>
+        >
+          Admin
+        </Link>
+      )}
     </div>
   );
 }

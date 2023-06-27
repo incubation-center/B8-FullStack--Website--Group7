@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
-import { isAdmin, isTokenValid } from './service/token';
+import { isUserAdmin, isTokenValid } from './service/token';
 
 export async function middleware(request: NextRequest) {
   // => public routes
@@ -34,11 +34,13 @@ export async function middleware(request: NextRequest) {
   } else if (isAdminRoute) {
     // in case, user try to access admin route via url
     if (!token) {
-      return NextResponse.redirect(new URL('/', request.nextUrl).href);
+      return NextResponse.redirect(
+        new URL('/unauthorized-page', request.nextUrl).href
+      );
     }
 
     // check if user is admin
-    const adminValidation = isAdmin(token);
+    const adminValidation = isUserAdmin(token);
     if (!adminValidation) {
       return NextResponse.redirect(
         new URL('/unauthorized-page', request.nextUrl).href

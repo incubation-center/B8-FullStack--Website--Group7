@@ -10,8 +10,22 @@ import HomeTab from '@/components/Tabs/Home.tab';
 import SavedTab from '@/components/Tabs/Saved.tab';
 import RequestStatusTab from '@/components/Tabs/RequestStatus.tab';
 import Profile from '@/components/Tabs/Profile.tab';
+import { processUserToken } from '@/service/token';
 
-export default function Home({ currentTab }: { currentTab: HomePageTab }) {
+import { useRecoilState } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
+import { AuthStore } from '@/types/auth';
+
+export default function Home({
+  currentTab,
+  authStore
+}: {
+  currentTab: HomePageTab;
+  authStore: AuthStore;
+}) {
+  // atoms
+  const [_, setAuthObj] = useRecoilState(AuthAtom);
+
   // initialize
   const router = useRouter();
 
@@ -32,6 +46,14 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   // initialize tab state
   useEffect(() => {
     setTab(currentTab);
+    setAuthObj(authStore);
+
+    console.log('====================================');
+    console.log('authStore', authStore);
+    console.log('====================================');
+
+    // prefetching
+    if (authStore.isAdmin) router.prefetch('/admin');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,6 +76,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     tab: HomePageTab;
   } = context.query;
 
+  // check if user is admin
+  const token = context.req.cookies.accessToken;
+
+  const authObj = await processUserToken(token);
+
   if (!tab) {
     return {
       redirect: {
@@ -65,7 +92,8 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
   return {
     props: {
-      currentTab: tab
+      currentTab: tab,
+      authStore: authObj
     }
   };
 };

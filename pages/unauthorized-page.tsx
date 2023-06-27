@@ -1,6 +1,14 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function UnauthorizedPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch('/');
+  }, []);
+
   return (
     <div
       className='
@@ -31,16 +39,15 @@ export default function UnauthorizedPage() {
         You are not authorized to access this page
       </p>
 
-      <Link href='/'>
-        <div
-          className='
-                    bg-primary text-white px-4 py-2 rounded-full
-                    text-lg font-medium mt-4
-                '
-        >
-          Go back to home
-        </div>
-      </Link>
+      <button
+        className='
+            bg-primary text-white px-4 py-2 rounded-full
+            text-lg font-medium mt-4
+          '
+        onClick={() => router.replace('/')}
+      >
+        Go back to home
+      </button>
     </div>
   );
 }

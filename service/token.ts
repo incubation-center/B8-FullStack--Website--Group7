@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import createAxiosInstance from './axios';
 import { API_ENDPOINT } from '@/utils/enum';
+import { getUserInfo } from './api/user';
 
 export interface Token {
   id: string;
@@ -19,7 +20,7 @@ export const decodeToken = (token: any): Token | false => {
   }
 };
 
-export const isAdmin = (token: any): boolean => {
+export const isUserAdmin = (token: any): boolean => {
   if (!token) return false;
 
   const data = decodeToken(token);
@@ -41,9 +42,7 @@ export const isTokenValid = async (token: any) => {
   const client = createAxiosInstance();
 
   const url =
-    process.env.NEXT_PUBLIC_API_URL +
-    API_ENDPOINT.AUTH.VALIDATE_TOKEN +
-    `/${id}`;
+    process.env.NEXT_PUBLIC_API_URL! + API_ENDPOINT.AUTH.VALIDATE_TOKEN(id);
 
   const res = await fetch(url, {
     method: 'POST',
@@ -55,4 +54,48 @@ export const isTokenValid = async (token: any) => {
   const status = await res.json().then((res) => res.statusCode);
 
   return status === 'OK';
+};
+
+export const processUserToken = async (token: any) => {
+  let isLoggedIn = false;
+  let admin = false;
+  let user = null;
+
+  if (token) {
+    const tokenData = decodeToken(token);
+
+    if (tokenData) {
+      isLoggedIn = true;
+
+      const fetchUserInfo = getUserInfo(token, tokenData.id);
+      const fetchTokenValidation = isTokenValid(token);
+
+      // promise allSettled
+      const [userInfoRes, tokenValidationRes] = await Promise.allSettled([
+        fetchUserInfo,
+        fetchTokenValidation
+      ]);
+
+      if (userInfoRes.status === 'fulfilled') {
+        user = userInfoRes.value.data;
+      }
+
+      let tokenValidation = false;
+      if (tokenValidationRes.status === 'fulfilled') {
+        tokenValidation = tokenValidationRes.value;
+      }
+
+      const adminValidation = isUserAdmin(token);
+
+      if (adminValidation && tokenValidation) {
+        admin = true;
+      }
+    }
+  }
+
+  return {
+    isLoggedIn,
+    admin,
+    user
+  };
 };
