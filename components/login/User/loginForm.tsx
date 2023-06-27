@@ -9,9 +9,11 @@ import PasswordInput from '../PasswordInput';
 import { useState } from 'react';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 
 export default function UserLoginForm() {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -35,10 +37,9 @@ export default function UserLoginForm() {
 
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
+      setIsLoggingIn(false);
 
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
+      router.push('/');
     } catch (errors) {
       console.log('====================================');
       console.log(errors);

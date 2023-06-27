@@ -41,6 +41,6 @@ export const API_ENDPOINT = {
     REGISTER: '/auth/register',
     FORGOT_PASSWORD: '/auth/forgot-password',
     RESET_PASSWORD: '/auth/reset-password',
-    VALIDATE_TOKEN: '/auth/validate-token/{userId}'
+    VALIDATE_TOKEN: `/auth/validate-token`
   }
 };
