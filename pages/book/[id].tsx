@@ -8,13 +8,20 @@ import { Book } from '@/types';
 import useModal from '@/components/Modals/useModal';
 import BorrowBook from '@/components/Modals/BorrowBook';
 import useAlertModal from '@/components/Modals/Alert';
+import { useEffect } from 'react';
+import { HomePageTab } from '@/utils/enum';
+import { getBookById } from '@/service/api/book';
 
-export default function BookDetail({ id, book }: { id: string; book: Book }) {
+export default function BookDetail({ book }: { book: Book }) {
   const router = useRouter();
 
   const { open, close, ModalWrapper } = useModal();
 
   const { showAlert, AlertModal } = useAlertModal();
+
+  useEffect(() => {
+    router.prefetch(`/?tab=${HomePageTab.HOME}`);
+  }, []);
 
   return (
     <>
@@ -94,14 +101,13 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
   );
 }
 
-export function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
 
-  const book = BookData[0];
+  const book = await getBookById(id);
 
   return {
     props: {
-      id,
       book
     }
   };
