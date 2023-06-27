@@ -82,7 +82,7 @@ export default function HomeLayout({
               bg-alt-secondary text-primary
               transition-colors
               box-border border-2 border-alt-secondary hover:border-action
-              whitespace-nowrap
+              whitespace-nowrap hidden md:block
             '
             >
               Log In

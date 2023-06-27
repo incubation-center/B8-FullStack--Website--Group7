@@ -96,7 +96,6 @@ export default function HomeTab() {
       getAllBooks().then((books) => {
         setAllBooks(books);
         setIsFetchingBooks(false);
-        handleScrollToCategoryNav(categoryKey, 500);
       });
     }
 

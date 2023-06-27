@@ -90,6 +90,20 @@ export default function SideBar({
 
       {/* admin */}
       <div className='flex-1'></div>
+      {!authStore.isLoggedIn && (
+        <Link
+          href='/auth'
+          className='
+              px-4 py-2 rounded-xl
+              bg-alt-secondary text-primary
+              transition-colors
+              box-border border-2 border-alt-secondary hover:border-action
+              whitespace-nowrap md:hidden
+            '
+        >
+          Log In
+        </Link>
+      )}
       {authStore.isAdmin && (
         <Link
           href='/admin'
