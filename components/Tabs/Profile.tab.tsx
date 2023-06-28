@@ -89,7 +89,8 @@ export default function ProfileTab() {
     setAuthStore({
       user: null,
       isAdmin: false,
-      isLoggedIn: false
+      isLoggedIn: false,
+      isFetched: true
     });
   };
 

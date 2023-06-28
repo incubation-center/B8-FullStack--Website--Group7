@@ -7,6 +7,7 @@ export default function UnauthorizedPage() {
 
   useEffect(() => {
     router.prefetch('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
