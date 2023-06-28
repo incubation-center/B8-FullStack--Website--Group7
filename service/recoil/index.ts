@@ -19,6 +19,12 @@ export const homePageCategoryAtom = atom<string>({
   default: ''
 });
 
+// auth
+export const RememberMeAtom = atom<boolean>({
+  key: 'RememberMeAtom',
+  default: false
+});
+
 // admin
 export const AuthAtom = atom<AuthStore>({
   key: 'AuthAtom',

@@ -125,6 +125,7 @@ export default function ProfileTab() {
             <ChangePassword
               close={closeChangePasswordModal}
               showAlert={showAlert}
+              userInfo={authStore.user as User}
             />
           </ChangePasswordModalWrapper>
 

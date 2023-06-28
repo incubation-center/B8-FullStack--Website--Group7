@@ -47,7 +47,8 @@ export const API_ENDPOINT = {
     VALIDATE_TOKEN: (id: string) => '/auth/validate-token/' + id
   },
   USER: {
-    INFO: (id: string) => '/user/' + id
+    INFO: (id: string) => '/user/' + id,
+    CHANGE_PASSWORD: (id: string) => `/user/${id}/password`
   },
   BOOK: {
     GET_ALL_BOOKS: '/book',
