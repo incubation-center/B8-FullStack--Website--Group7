@@ -15,6 +15,8 @@ html,
 body {
   min-height: -webkit-fill-available;
   height: 100vh;
+  height: 100dvh;
+  /* dvh new height unit that exclude browser element */
 }
 
 /* remove scrollbar */
@@ -24,6 +26,7 @@ body {
 
 .home-layout-children-height {
   max-height: calc(100vh - 100px);
+  max-height: calc(100dvh - 100px);
 }
 
 /* book scrolling section scrollbar */
@@ -52,6 +55,21 @@ body {
 }
 
 .category-section::-webkit-scrollbar-thumb {
+  background-color: #523a28;
+  /* width: 10px;    */
+  border-radius: 10px;
+}
+
+.vertical-scroll::-webkit-scrollbar {
+  margin-top: 5px;
+  width: 5px;
+  height: fit-content;
+  background-color: #a47551;
+  border-radius: 10px;
+  opacity: 30%;
+}
+
+.vertical-scroll::-webkit-scrollbar-thumb {
   background-color: #523a28;
   /* width: 10px;    */
   border-radius: 10px;

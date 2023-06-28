@@ -1,7 +1,8 @@
-import { Book } from '@/types';
+import { Book, BookRequest } from '@/types';
 import { AuthStore } from '@/types/auth';
 import { BookCategory, HomePageTab } from '@/utils/enum';
-import { atom, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
+import { getAllRequest } from '../api/request';
 
 // fetching
 export const isMakingRequestAtom = atom<boolean>({

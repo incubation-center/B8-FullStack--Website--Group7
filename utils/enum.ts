@@ -59,6 +59,7 @@ export const API_ENDPOINT = {
     GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author
   },
   REQUEST: {
+    GET_ALL_REQUEST: (userId: string) => '/request?userId=' + userId,
     CREATE_REQUEST: '/request'
   }
 };

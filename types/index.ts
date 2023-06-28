@@ -22,7 +22,7 @@ export interface BookRequest {
   requestId: string;
   borrower: User;
   book: Book;
-  status: 'Pending' | 'Approved' | 'Achieved';
+  status: 'PENDING' | 'APPROVED' | 'ACHIEVED';
   isApproved: boolean;
   requestDuration: number;
   dateOfRequest: Date;

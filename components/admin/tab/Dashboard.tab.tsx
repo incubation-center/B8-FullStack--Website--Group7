@@ -68,7 +68,7 @@ export default function DashboardTab({}) {
 
         <RenterTable
           data={RequestData.filter(
-            (request) => request.isApproved && request.status === 'Achieved'
+            (request) => request.isApproved && request.status === 'ACHIEVED'
           )}
           actions={[
             {

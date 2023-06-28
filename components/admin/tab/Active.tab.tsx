@@ -24,7 +24,7 @@ export default function ActiveTab() {
       <AdminTabLayout title='Active Request'>
         <RequestTable
           useIn={AdminTab.ACTIVE_REQUEST}
-          data={RequestData.filter((request) => request.status === 'Approved')}
+          data={RequestData.filter((request) => request.status === 'APPROVED')}
           actions={[
             {
               label: 'View',

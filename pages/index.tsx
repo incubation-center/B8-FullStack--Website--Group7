@@ -97,13 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
   // check if user is admin
   const token = context.req.cookies.accessToken;
-
   const authObj = await processUserToken(token);
-
-  // let books: Book[] = [];
-  // if (tab === HomePageTab.HOME) {
-  //   books = await getAllBooks();
-  // }
 
   return {
     props: {

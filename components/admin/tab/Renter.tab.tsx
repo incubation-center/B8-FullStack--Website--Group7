@@ -20,7 +20,7 @@ export default function RenterTab() {
 
       <RenterTable
         data={RequestData.filter(
-          (request) => request.isApproved && request.status === 'Achieved'
+          (request) => request.isApproved && request.status === 'ACHIEVED'
         )}
         actions={[
           {

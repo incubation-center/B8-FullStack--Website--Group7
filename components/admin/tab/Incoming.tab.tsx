@@ -24,7 +24,7 @@ export default function IncomingTab({}) {
       <AdminTabLayout title='Incoming Request'>
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}
-          data={RequestData.filter((request) => request.status === 'Pending')}
+          data={RequestData.filter((request) => request.status === 'PENDING')}
           actions={[
             {
               label: 'View',
