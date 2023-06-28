@@ -45,3 +45,27 @@ export async function changePassword(id: string, data: any) {
     throw error;
   }
 }
+
+export async function saveBookToFavorites(userId: string, bookId: string) {
+  try {
+    const response = await axiosClient.patch(
+      API_ENDPOINT.USER.BOOK_TO_FAVORITES(userId, bookId)
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function removeBookFromFavorites(userId: string, bookId: string) {
+  try {
+    const response = await axiosClient.delete(
+      API_ENDPOINT.USER.BOOK_TO_FAVORITES(userId, bookId)
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

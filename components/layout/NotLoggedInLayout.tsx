@@ -14,10 +14,11 @@ export default function NotLoggedInLayout({
   }
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center p-4 text-center'>
+    <div className=' w-full h-full flex flex-col justify-center items-center p-4 text-center'>
       <div
         className='
         text-primary text-lg font-medium
+          
         '
       >
         You are not logged in

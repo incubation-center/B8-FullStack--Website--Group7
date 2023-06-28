@@ -8,7 +8,7 @@ export default function SpinningLoadingSvg({
   return (
     <div className={className}>
       <svg
-        className='animate-spin -ml-1 mr-3 h-full w-full '
+        className='animate-spin h-full w-full '
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'

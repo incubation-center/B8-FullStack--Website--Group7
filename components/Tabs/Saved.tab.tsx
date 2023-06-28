@@ -52,7 +52,7 @@ export default function SavedTab({
               <div key={book.id!} className='flex flex-col space-y-4'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className='w-[120px] object-cover cursor-pointer'
+                  className='w-fit h-[200px] object-cover cursor-pointer'
                   src={book.bookImg}
                   alt={book.title}
                   draggable={false}

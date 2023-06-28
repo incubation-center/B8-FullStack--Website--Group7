@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRecoilValue } from 'recoil';
+import { isMakingRequestAtom } from '@/service/recoil';
 
 // DESC: reuseable modal hook
 export default function useModal() {
+  const isMakingRequest = useRecoilValue(isMakingRequestAtom);
   const [isShowing, setIsShowing] = useState(false);
 
   const toggle = () => setIsShowing(!isShowing);
@@ -47,7 +50,7 @@ export default function useModal() {
 
             {/* overlay */}
             <div
-              onClick={handleClickedOutside}
+              onClick={isMakingRequest ? undefined : handleClickedOutside}
               className='w-full h-full fixed cursor-pointer'
             ></div>
           </motion.div>

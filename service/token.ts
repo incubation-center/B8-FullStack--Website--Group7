@@ -97,6 +97,7 @@ export const processUserToken = async (token: any): Promise<AuthStore> => {
   return {
     isLoggedIn,
     isAdmin,
-    user
+    user,
+    isFetched: true
   };
 };

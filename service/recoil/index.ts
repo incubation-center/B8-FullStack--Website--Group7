@@ -1,7 +1,13 @@
 import { Book } from '@/types';
 import { AuthStore } from '@/types/auth';
 import { BookCategory, HomePageTab } from '@/utils/enum';
-import { atom } from 'recoil';
+import { atom, selectorFamily } from 'recoil';
+
+// fetching
+export const isMakingRequestAtom = atom<boolean>({
+  key: 'isMakingRequestAtom',
+  default: false
+});
 
 // homepage
 export const homePageTabAtom = atom<HomePageTab>({
@@ -31,7 +37,8 @@ export const AuthAtom = atom<AuthStore>({
   default: {
     isLoggedIn: false,
     isAdmin: false,
-    user: null
+    user: null,
+    isFetched: false
   }
 });
 
@@ -39,4 +46,26 @@ export const AuthAtom = atom<AuthStore>({
 export const AllBooksAtom = atom<Book[]>({
   key: 'AllBooksAtom',
   default: []
+});
+
+export const isBookAlreadySaved = selectorFamily<boolean, string>({
+  key: 'isBookAlreadySaved',
+  get:
+    (bookId: string) =>
+    ({ get }) => {
+      const { user } = get(AuthAtom);
+
+      if (!user) return false;
+
+      let isSaved = false;
+
+      user.favoriteBooks.forEach((book) => {
+        if (book.id === bookId) {
+          isSaved = true;
+          return;
+        }
+      });
+
+      return isSaved;
+    }
 });

@@ -12,8 +12,13 @@ import { deleteCookie, setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { AxiosError } from 'axios';
+import { processUserToken } from '@/service/token';
+import { useRecoilState } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
 
 export default function UserLoginForm() {
+  const [_, setAuthStore] = useRecoilState(AuthAtom);
+
   const [rememberMe, setRememberMe] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const router = useRouter();
@@ -46,7 +51,11 @@ export default function UserLoginForm() {
 
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
-      router.push('/');
+
+      const authObj = await processUserToken(accessToken);
+      setAuthStore(authObj);
+
+      router.reload();
     } catch (errors) {
       let message = 'An unknown error occurred';
       if (errors instanceof AxiosError) {

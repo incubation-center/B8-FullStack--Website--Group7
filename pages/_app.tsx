@@ -1,27 +1,12 @@
+import { processUserToken } from '@/service/token';
 import '@/styles/globals.css';
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
 export default function App({ Component, pageProps }: AppProps) {
-  // useEffect(() => {
-  //   // check if rememberMe exists in localStorage, if not, set it to false
-  //   const remember = localStorage.getItem('rememberMe');
-  //   if (remember === null) {
-  //     localStorage.setItem('rememberMe', 'false');
-  //   }
-
-  //   window.addEventListener('beforeunload', () => {
-  //     const rememberMe = localStorage.getItem('rememberMe');
-
-  //     if (rememberMe === 'false') {
-  //       deleteCookie('accessToken');
-  //     }
-  //   });
-  // }, []);
-
   return (
     <>
       <Head>
