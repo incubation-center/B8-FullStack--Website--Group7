@@ -47,14 +47,19 @@ export const API_ENDPOINT = {
     VALIDATE_TOKEN: (id: string) => '/auth/validate-token/' + id
   },
   USER: {
-    INFO: (id: string) => '/user/' + id
+    INFO: (id: string) => '/user/' + id,
+    CHANGE_PASSWORD: (id: string) => `/user/${id}/password`,
+    BOOK_TO_FAVORITES: (id: string, bookId: string) =>
+      `/user/${id}/favorites/${bookId}`
+  },
+  BOOK: {
+    GET_ALL_BOOKS: '/book',
+    GET_BOOK_BY_ID: (id: string) => '/book/' + id,
+    GET_BOOK_BY_TITLE: (title: string) => '/book/title?title=' + title,
+    GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author
+  },
+  REQUEST: {
+    GET_ALL_REQUEST: (userId: string) => '/request?userId=' + userId,
+    CREATE_REQUEST: '/request'
   }
-};
-
-export const handleFallBackProfileImage = (user: User) => {
-  if (user.profileImg) return user.profileImg;
-
-  const usernameWithNoSpace = user.username.trim().replace(' ', '+');
-
-  return `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`;
 };

@@ -1,40 +1,108 @@
+/* eslint-disable @next/next/no-img-element */
 import { BookRequest } from '@/types';
 
-export default function RequestTable({ data }: { data: BookRequest[] }) {
+export default function RequestTable({
+  data,
+  actions
+}: {
+  data: BookRequest[];
+  actions?: {
+    label: string;
+    onClick: (request: BookRequest) => void;
+    bgColor: string;
+  }[];
+}) {
   return (
-    <table
-      className='
-        w-full lg:w-4/5 mx-auto
-        mb-4 md:mb-8 
-        mt-2 md:mt-4 
-      '
-    >
+    <table className='w-full  '>
       <thead>
         <tr
           className='
-          text-primary font-extrabold text-base border-b-2 border-primary
+            border-b-2 border-primary 
+            font-bold text-base md:text-lg text-primary 
+            [&>td]:py-4 w-full
+            [&<td]:w-fit [&<td]:whitespace-nowrap
           '
         >
-          <td>No</td>
-          <td>Book Name</td>
-          <td>Request Date</td>
-          <td>Status</td>
+          <td className='w-full'>Book</td>
+          <td className='hidden lg:table-cell'>Date</td>
+          <td className='hidden md:table-cell'>Status</td>
+          <td>Actions</td>
         </tr>
       </thead>
       <tbody>
-        {data.map((request, index) => (
+        {data.map((request) => (
           <tr
-            key={index}
+            key={request.requestId}
             className='
-              text-primary font-light text-base
               border-b-2 border-primary
-              [&>*]:pt-4
+              text-primary text-base
+              w-full
+              [&>td]:p-2
+              [&>td]:whitespace-nowrap
             '
           >
-            <td>{index + 1}</td>
-            <td>{request.book.title}</td>
-            <td>{request.dateOfRequest.toLocaleDateString()}</td>
-            <td>{request.status}</td>
+            <td className='w-full flex flex-grow gap-2 items-center'>
+              <img
+                src={request.book.bookImg}
+                alt={request.book.title}
+                className='w-14 hidden md:block'
+              />
+              <div className='whitespace-pre-wrap text-left'>
+                {request.book.title}
+              </div>
+            </td>
+
+            <td className='hidden lg:table-cell'>
+              {request.dateOfRequest.toLocaleDateString()}
+            </td>
+
+            <td className='hidden md:table-cell'>
+              {request.status === 'PENDING' ? (
+                <div
+                  className={`
+                    rounded-full 
+                    px-2 py-1 text-xs 
+                    md:text-sm md:px-4 md:py-2
+                    font-bold text-white w-fit
+                    bg-secondary
+                  `}
+                >
+                  Pending
+                </div>
+              ) : (
+                <div
+                  className={`
+                    rounded-full 
+                    px-2 py-1 text-xs 
+                    md:text-sm md:px-4 md:py-2
+                    font-bold text-white w-fit
+                    ${request.isApproved ? 'bg-success' : 'bg-danger'}
+                  `}
+                >
+                  {request.isApproved && 'Approved'}
+                  {!request.isApproved && 'Rejected'}
+                </div>
+              )}
+            </td>
+
+            <td>
+              {actions?.map((action) => (
+                <button
+                  key={action.label}
+                  className={`
+                    rounded-full 
+                    px-2 py-1 text-xs
+                    md:text-sm md:px-4 md:py-2
+                    text-primary font-bold mr-2 
+                    ${action.bgColor}
+                    hover:bg-opacity-80
+                  `}
+                  onClick={() => action.onClick(request)}
+                >
+                  {action.label}
+                </button>
+              ))}
+            </td>
           </tr>
         ))}
       </tbody>

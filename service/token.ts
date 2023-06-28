@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode';
 import createAxiosInstance from './axios';
 import { API_ENDPOINT } from '@/utils/enum';
 import { getUserInfo } from './api/user';
+import { AuthStore } from '@/types/auth';
 
 export interface Token {
   id: string;
@@ -56,9 +57,9 @@ export const isTokenValid = async (token: any) => {
   return status === 'OK';
 };
 
-export const processUserToken = async (token: any) => {
+export const processUserToken = async (token: any): Promise<AuthStore> => {
   let isLoggedIn = false;
-  let admin = false;
+  let isAdmin = false;
   let user = null;
 
   if (token) {
@@ -88,14 +89,15 @@ export const processUserToken = async (token: any) => {
       const adminValidation = isUserAdmin(token);
 
       if (adminValidation && tokenValidation) {
-        admin = true;
+        isAdmin = true;
       }
     }
   }
 
   return {
     isLoggedIn,
-    admin,
-    user
+    isAdmin,
+    user,
+    isFetched: true
   };
 };

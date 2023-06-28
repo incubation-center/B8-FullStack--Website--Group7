@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios';
 
-import { UserLoginInputs, UserRegisterInputs } from '../../types/auth';
 import { API_ENDPOINT } from '../../utils/enum';
 import createAxiosInstance from '../axios';
 
@@ -17,6 +16,53 @@ export async function getUserInfo(token: string, id: string) {
         Authorization: `Bearer ${token}`
       }
     });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function updateUserInfo(id: string, data: any) {
+  try {
+    const response = await axiosClient.patch(API_ENDPOINT.USER.INFO(id), data);
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function changePassword(id: string, data: any) {
+  try {
+    const response = await axiosClient.patch(
+      API_ENDPOINT.USER.CHANGE_PASSWORD(id),
+      data
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function saveBookToFavorites(userId: string, bookId: string) {
+  try {
+    const response = await axiosClient.patch(
+      API_ENDPOINT.USER.BOOK_TO_FAVORITES(userId, bookId)
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function removeBookFromFavorites(userId: string, bookId: string) {
+  try {
+    const response = await axiosClient.delete(
+      API_ENDPOINT.USER.BOOK_TO_FAVORITES(userId, bookId)
+    );
 
     return response;
   } catch (error) {

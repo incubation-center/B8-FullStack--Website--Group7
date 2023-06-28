@@ -1,6 +1,9 @@
+import { processUserToken } from '@/service/token';
 import '@/styles/globals.css';
+import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -21,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </RecoilRoot>
         </div>
 
-        <div id='modal-root'></div>
+        <div id='modal-root' className='z-[9999]'></div>
       </div>
     </>
   );

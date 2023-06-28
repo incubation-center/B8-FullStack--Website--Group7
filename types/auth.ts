@@ -18,4 +18,5 @@ export type AuthStore = {
   isLoggedIn: boolean;
   isAdmin: boolean;
   user: User | null;
+  isFetched: boolean;
 };

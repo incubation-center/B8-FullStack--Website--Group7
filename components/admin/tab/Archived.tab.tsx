@@ -24,7 +24,7 @@ export default function ArchivedTab() {
       <AdminTabLayout title='Archived Request'>
         <RequestTable
           useIn={AdminTab.ARCHIVED_REQUEST}
-          data={RequestData.filter((request) => request.status === 'Achieved')}
+          data={RequestData.filter((request) => request.status === 'ACHIEVED')}
           actions={[
             {
               label: 'View',

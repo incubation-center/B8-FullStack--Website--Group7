@@ -2,19 +2,128 @@ import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { BookData } from '@/dummydata';
-import { Book } from '@/types';
+import { Book, User } from '@/types';
 
 import useModal from '@/components/Modals/useModal';
 import BorrowBook from '@/components/Modals/BorrowBook';
-import useAlertModal from '@/components/Modals/Alert';
+import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { useEffect, useState } from 'react';
+import { HomePageTab } from '@/utils/enum';
+import { getBookById } from '@/service/api/book';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { AuthAtom, isBookAlreadySaved } from '@/service/recoil';
+import NotLoggedInLayout from '@/components/layout/NotLoggedInLayout';
+import { getCookie } from 'cookies-next';
+import { processUserToken } from '@/service/token';
+import {
+  removeBookFromFavorites,
+  saveBookToFavorites
+} from '@/service/api/user';
+import { AxiosError } from 'axios';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
+import { AuthStore } from '@/types/auth';
 
-export default function BookDetail({ id, book }: { id: string; book: Book }) {
+export default function BookDetail({ book }: { book: Book }) {
   const router = useRouter();
+  const [authStore, setAuthStore] = useRecoilState(AuthAtom);
+  const isSaved = useRecoilValue(isBookAlreadySaved(book.id as string));
+
+  const [isSaving, setIsSaving] = useState(false);
 
   const { open, close, ModalWrapper } = useModal();
 
   const { showAlert, AlertModal } = useAlertModal();
+
+  const getAuthObj = async () => {
+    const token = getCookie('accessToken');
+    const authObj = await processUserToken(token);
+
+    setAuthStore(authObj);
+  };
+
+  useEffect(() => {
+    router.prefetch(`/?tab=${HomePageTab.HOME}`);
+
+    if (authStore.isFetched === false) getAuthObj();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSaveToFav = async () => {
+    if (!authStore.isLoggedIn) {
+      open();
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      if (!authStore.user || !book.id) return;
+
+      const res = await saveBookToFavorites(
+        authStore.user.userId as string,
+        book.id
+      );
+      if (res.status !== 200) throw new Error('Save failed');
+
+      await getAuthObj(); // update user's fav list
+
+      showAlert({
+        title: 'Save success',
+        subtitle: res.data,
+        type: AlertType.SUCCESS
+      });
+    } catch (err) {
+      let message = 'An unknown error occurred';
+      if (err instanceof AxiosError) {
+        message = err.response?.data.error;
+      }
+
+      close();
+      showAlert({
+        title: 'Save failed',
+        subtitle: message,
+        type: AlertType.ERROR
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleRemoveFromFav = async () => {
+    setIsSaving(true);
+    try {
+      if (!authStore.user || !book.id) return;
+
+      const res = await removeBookFromFavorites(
+        authStore.user.userId as string,
+        book.id
+      );
+      if (res.status !== 200) throw new Error('Remove failed');
+
+      await getAuthObj(); // update user's fav list
+
+      showAlert({
+        title: 'Remove success',
+        subtitle: res.data,
+        type: AlertType.SUCCESS
+      });
+    } catch (err) {
+      let message = 'An unknown error occurred';
+      if (err instanceof AxiosError) {
+        message = err.response?.data.error;
+      }
+
+      close();
+      showAlert({
+        title: 'Remove failed',
+        subtitle: message,
+        type: AlertType.ERROR
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <>
@@ -22,7 +131,12 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
       <AlertModal />
 
       <ModalWrapper>
-        <BorrowBook close={close} book={book} showAlert={showAlert} />
+        <BorrowBook
+          close={close}
+          book={book}
+          user={authStore.user as User}
+          showAlert={showAlert}
+        />
       </ModalWrapper>
 
       <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>
@@ -54,39 +168,64 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
 
           {/* description */}
           <div className='md:col-span-2 relative'>
-            <div className='space-y-[10px] text-alt-secondary font-light'>
-              <h1 className='font-bold text-2xl'>{book.title}</h1>
+            <div className='w-full flex justify-between items-start gap-2'>
+              <div className='space-y-[10px] text-alt-secondary font-light'>
+                <h1 className='font-bold text-2xl'>{book.title}</h1>
 
-              <h2>Author: {book.author}</h2>
-              <h2>Genre: {book.category}</h2>
+                <h2>Author: {book.author}</h2>
+                <h2>Genre: {book.category}</h2>
 
-              <h2 className='font-bold'>Book Description</h2>
-              <p>{book.description}</p>
+                <h2 className='font-bold'>Book Description</h2>
+              </div>
+
+              {authStore.isFetched && (
+                <div className='w-20'>
+                  <button
+                    className={`
+                     bg-white w-12 h-12 
+                      flex justify-center items-center
+                      rounded-full mx-auto
+                      overflow-hidden
+                      ${
+                        isSaving
+                          ? 'cursor-not-allowed shadow-inner shadow-primary'
+                          : 'cursor-pointer hover:shadow-inner hover:shadow-primary'
+                      }
+                      transition-all duration-300
+                    `}
+                    disabled={isSaving}
+                    onClick={isSaved ? handleRemoveFromFav : handleSaveToFav}
+                  >
+                    {isSaving ? (
+                      <SpinningLoadingSvg className='w-6 h-6 text-primary' />
+                    ) : (
+                      <SaveToFavSvg
+                        className='w-6 h-6 fill-primary'
+                        saved={isSaved}
+                      />
+                    )}
+                  </button>
+                  {!isSaving && (
+                    <div className='w-full text-center text-alt-secondary text-sm mt-1'>
+                      {isSaved ? 'Remove' : 'Save'}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
-            <button
-              className='
-              bg-white p-4 w-12 h-12
-              flex justify-center items-center 
-              absolute right-0 top-0 
-              rounded-full
-              hover:shadow-inner hover:shadow-primary
-            '
-            >
-              <Image
-                src='/icon/add-to-save.svg'
-                alt='save to fav'
-                width={18}
-                height={18}
-              />
-            </button>
+            <p className='mt-[10px] text-alt-secondary font-light'>
+              {book.description}
+            </p>
 
-            <button
-              onClick={() => open()}
-              className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg mt-10'
-            >
-              Borrow
-            </button>
+            {authStore.isFetched && (
+              <button
+                onClick={() => open()}
+                className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
+              >
+                Borrow
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -94,14 +233,13 @@ export default function BookDetail({ id, book }: { id: string; book: Book }) {
   );
 }
 
-export function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
 
-  const book = BookData[0];
+  const book = await getBookById(id);
 
   return {
     props: {
-      id,
       book
     }
   };

@@ -3,6 +3,11 @@ import PasswordInput from '../login/PasswordInput';
 import { AlertModalTextType, AlertType } from './Alert';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import CustomInput from '../login/CustomInput';
+import { User } from '@/types';
+import { changePassword } from '@/service/api/user';
+import { useState } from 'react';
+import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import { AxiosError } from 'axios';
 
 interface ChangePasswordInputs {
   currentPassword: string;
@@ -11,12 +16,16 @@ interface ChangePasswordInputs {
 }
 
 export default function ChangePassword({
+  userInfo,
   close,
   showAlert
 }: {
+  userInfo: User;
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -24,17 +33,36 @@ export default function ChangePassword({
     formState: { errors }
   } = useForm<ChangePasswordInputs>();
 
-  const onSubmit: SubmitHandler<ChangePasswordInputs> = (data) => {
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
-    close();
+  const onSubmit: SubmitHandler<ChangePasswordInputs> = async (data) => {
+    setIsUpdating(true);
+    try {
+      const formData = {
+        oldPassword: data.currentPassword,
+        newPassword: data.newPassword
+      };
 
-    showAlert({
-      title: 'Your Information have been updated!',
-      subtitle: 'Thank you!',
-      type: AlertType.SUCCESS
-    });
+      const res = await changePassword(userInfo.userId as string, formData);
+
+      close();
+      showAlert({
+        title: 'Your Information have been updated!',
+        subtitle: 'Thank you!',
+        type: AlertType.SUCCESS
+      });
+    } catch (err) {
+      let message = 'An unknown error occurred';
+      if (err instanceof AxiosError) {
+        message = err.response?.data.error;
+      }
+      close();
+      showAlert({
+        title: message,
+        subtitle: 'Please try again',
+        type: AlertType.ERROR
+      });
+    }
+
+    setIsUpdating(false);
   };
 
   return (
@@ -78,7 +106,7 @@ export default function ChangePassword({
             })}
             error={errors.newPassword}
             name='newPassword'
-            placeholder='Enter your new password'
+            placeholder='new password'
             label='New Password'
             labelClassName='text-primary ml-4 font-medium'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
@@ -95,7 +123,7 @@ export default function ChangePassword({
             })}
             error={errors.confirmPassword}
             name='confirmPassword'
-            placeholder='Confirm your password'
+            placeholder='Confirm new password'
             label='Confirm Password'
             labelClassName='text-primary ml-4 font-medium'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center '
@@ -105,23 +133,34 @@ export default function ChangePassword({
         {/* actions */}
         <div className='w-full flex justify-evenly gap-4'>
           {/* cancel button */}
-          <button
-            onClick={close}
-            className='
-            bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
-          '
-          >
-            Cancel
-          </button>
+          {!isUpdating && (
+            <button
+              onClick={close}
+              className='
+              bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
+            '
+            >
+              Cancel
+            </button>
+          )}
 
           {/* submit button */}
           <button
-            className='
-            bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
-          '
+            className={`
+            bg-primary rounded-full text-white py-2 px-4 w-full 
+            ${!isUpdating ? 'md:w-40' : 'md:w-80 bg-opacity-80'}
+         `}
             type='submit'
+            disabled={isUpdating}
           >
-            Save
+            {!isUpdating ? (
+              <div>save</div>
+            ) : (
+              <div className='flex justify-center items-center'>
+                <SpinningLoadingSvg className='inline-block w-6 h-6 ml-2' />
+                <span>Updating your password</span>
+              </div>
+            )}
           </button>
         </div>
       </motion.div>
