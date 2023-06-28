@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { Book } from '@/types';
+import { Book, User } from '@/types';
 
 import useModal from '@/components/Modals/useModal';
 import BorrowBook from '@/components/Modals/BorrowBook';
@@ -131,7 +131,12 @@ export default function BookDetail({ book }: { book: Book }) {
       <AlertModal />
 
       <ModalWrapper>
-        <BorrowBook close={close} book={book} showAlert={showAlert} />
+        <BorrowBook
+          close={close}
+          book={book}
+          user={authStore.user as User}
+          showAlert={showAlert}
+        />
       </ModalWrapper>
 
       <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>

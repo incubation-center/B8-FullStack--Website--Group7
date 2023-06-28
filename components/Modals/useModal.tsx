@@ -51,7 +51,9 @@ export default function useModal() {
             {/* overlay */}
             <div
               onClick={isMakingRequest ? undefined : handleClickedOutside}
-              className='w-full h-full fixed cursor-pointer'
+              className={`w-full h-full fixed ${
+                isMakingRequest ? 'cursor-default' : 'cursor-pointer'
+              }`}
             ></div>
           </motion.div>
         )}
