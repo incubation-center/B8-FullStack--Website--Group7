@@ -13,6 +13,7 @@ import RequestDetail from '@/components/Modals/RequestDetail';
 
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import useConfirmModal from '@/components/Modals/useCofirm';
 
 export default function ActiveTab() {
   const requestData = useRecoilValue(AdminAllRequestAtom);
@@ -20,8 +21,16 @@ export default function ActiveTab() {
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
+  const { ConfirmModal, showConfirmModal } = useConfirmModal();
+
+  const handleReceiveBook = (request: BookRequest) => {
+    console.log(request);
+  };
+
   return (
     <>
+      <ConfirmModal />
+
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
@@ -42,7 +51,13 @@ export default function ActiveTab() {
             {
               label: 'Receive',
               bgColor: 'bg-success text-white',
-              onClick: (request) => console.log(request)
+              onClick: (request) => {
+                showConfirmModal({
+                  title: 'Receive Book',
+                  subtitle: 'Are you sure you want to receive this book?',
+                  onConfirm: () => handleReceiveBook(request)
+                });
+              }
             }
           ]}
         />
