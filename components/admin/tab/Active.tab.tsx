@@ -4,14 +4,19 @@ const RequestTable = dynamic(() => import('../table/RequestTable'), {
   ssr: false
 });
 
-import { RequestData } from '@/dummydata';
+// import { RequestData } from '@/dummydata';
 import { AdminTab } from '@/utils/enum';
 import { useState } from 'react';
 import useModal from '@/components/Modals/useModal';
 import { BookRequest } from '@/types';
 import RequestDetail from '@/components/Modals/RequestDetail';
 
+import { useRecoilValue } from 'recoil';
+import { AdminAllRequestAtom } from '@/service/recoil/admin';
+
 export default function ActiveTab() {
+  const requestData = useRecoilValue(AdminAllRequestAtom);
+
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
@@ -24,7 +29,7 @@ export default function ActiveTab() {
       <AdminTabLayout title='Active Request'>
         <RequestTable
           useIn={AdminTab.ACTIVE_REQUEST}
-          data={RequestData.filter((request) => request.status === 'APPROVED')}
+          data={requestData.filter((request) => request.status === 'APPROVED')}
           actions={[
             {
               label: 'View',

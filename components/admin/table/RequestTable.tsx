@@ -105,6 +105,14 @@ export default function RequestTable({
             </td>
           </tr>
         ))}
+
+        {data.length === 0 && (
+          <tr className='text-primary text-xl'>
+            <td colSpan={5} className='text-center p-4'>
+              No request
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );
