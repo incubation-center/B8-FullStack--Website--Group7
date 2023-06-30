@@ -15,8 +15,12 @@ import SettingTab from '@/components/admin/tab/Setting.tab';
 import { getAllRequestAdmin } from '@/service/api/admin';
 import { BookRequest } from '@/types';
 import { useRecoilState } from 'recoil';
-import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import {
+  AdminAllRequestAtom,
+  isRefreshingRequestAtom
+} from '@/service/recoil/admin';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { useDebounce } from '@/utils/function';
 
 export default function AdminHomePage({
   currentTab
@@ -25,6 +29,9 @@ export default function AdminHomePage({
 }) {
   const [allRequests, setAllRequests] = useRecoilState(AdminAllRequestAtom);
   const [isFetched, setIsFetched] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useRecoilState(
+    isRefreshingRequestAtom
+  );
 
   // initialize
   const router = useRouter();
@@ -61,12 +68,23 @@ export default function AdminHomePage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleRefreshRequest = useDebounce(() => {
+    setIsRefreshing(true);
+    getAllRequestAdmin()
+      .then((requests: BookRequest[]) => {
+        setAllRequests(requests);
+      })
+      .finally(() => {
+        setIsRefreshing(false);
+      });
+  }, 100);
+
   return (
     <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
       {!isFetched && (
         <div className='w-full flex-1 flex gap-4 justify-center items-center'>
           <div className='text-center text-primary font-medium'>
-            Fetching your request
+            Fetching requests
           </div>
           <SpinningLoadingSvg className='w-8 h-8 text-primary' />
         </div>
@@ -74,12 +92,24 @@ export default function AdminHomePage({
 
       {isFetched && (
         <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
-          {tab === AdminTab.DASHBOARD && <DashboardTab />}
-          {tab === AdminTab.UPLOAD && <UploadTab />}
-          {tab === AdminTab.INCOMING_REQUEST && <IncomingTab />}
-          {tab === AdminTab.ACTIVE_REQUEST && <ActiveTab />}
-          {tab === AdminTab.ARCHIVED_REQUEST && <ArchivedTab />}
-          {tab === AdminTab.RENTER && <RenterTab />}
+          {tab === AdminTab.DASHBOARD && (
+            <DashboardTab handleRefreshRequest={handleRefreshRequest} />
+          )}
+          {tab === AdminTab.UPLOAD && (
+            <UploadTab handleRefreshRequest={handleRefreshRequest} />
+          )}
+          {tab === AdminTab.INCOMING_REQUEST && (
+            <IncomingTab handleRefreshRequest={handleRefreshRequest} />
+          )}
+          {tab === AdminTab.ACTIVE_REQUEST && (
+            <ActiveTab handleRefreshRequest={handleRefreshRequest} />
+          )}
+          {tab === AdminTab.ARCHIVED_REQUEST && (
+            <ArchivedTab handleRefreshRequest={handleRefreshRequest} />
+          )}
+          {tab === AdminTab.RENTER && (
+            <RenterTab handleRefreshRequest={handleRefreshRequest} />
+          )}
           {tab === AdminTab.SETTING && <SettingTab />}
         </AnimatePresence>
       )}

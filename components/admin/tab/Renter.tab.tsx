@@ -9,14 +9,18 @@ import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
 
-export default function RenterTab() {
+export default function RenterTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
   return (
-    <AdminTabLayout title='Renter'>
+    <AdminTabLayout title='Renter' handleRefreshRequest={handleRefreshRequest}>
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>

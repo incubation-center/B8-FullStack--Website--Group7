@@ -18,7 +18,11 @@ const CategoryOptions = [
   { value: BookCategory.SELF_DEVELOPMENT, label: BookCategory.SELF_DEVELOPMENT }
 ];
 
-export default function UploadTab() {
+export default function UploadTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const [selectedCategory, setSelectedCategory] = useState(CategoryOptions[0]);
 
   // handle image upload

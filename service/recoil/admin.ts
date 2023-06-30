@@ -5,3 +5,8 @@ export const AdminAllRequestAtom = atom<BookRequest[]>({
   key: 'AdminAllRequestAtom',
   default: []
 });
+
+export const isRefreshingRequestAtom = atom<boolean>({
+  key: 'isRefreshingRequestAtom',
+  default: false
+});

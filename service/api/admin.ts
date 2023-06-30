@@ -115,3 +115,20 @@ export async function rejectIncomingRequest(id: string, reason: string) {
     throw error;
   }
 }
+
+export async function receiveBook(id: string) {
+  try {
+    const res = await axiosClient.patch(API_ENDPOINT.ADMIN.RECEIVE_BOOK(id));
+
+    if (res.status !== 200) throw new Error('Something went wrong');
+
+    const { data } = res;
+
+    return data;
+  } catch (error) {
+    console.log('====================================');
+    console.log(error);
+    console.log('====================================');
+    throw error;
+  }
+}

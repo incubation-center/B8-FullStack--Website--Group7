@@ -148,8 +148,8 @@ export default function EditUserInfo({
               {!isUpdating ? (
                 <div>save</div>
               ) : (
-                <div className='flex justify-center items-center'>
-                  <SpinningLoadingSvg className='inline-block w-6 h-6 ml-2' />
+                <div className='flex gap-2 justify-center items-center'>
+                  <SpinningLoadingSvg className='inline-block w-6 h-6 mr-2' />
                   <span>Updating your information</span>
                 </div>
               )}

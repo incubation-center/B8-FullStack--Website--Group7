@@ -21,7 +21,11 @@ import {
 } from '@/service/api/admin';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 
-export default function IncomingTab({}) {
+export default function IncomingTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
@@ -40,6 +44,8 @@ export default function IncomingTab({}) {
         subtitle: 'Request has been approved.',
         type: AlertType.SUCCESS
       });
+
+      handleRefreshRequest();
     } catch (err) {
       console.log(err);
       showAlert({
@@ -57,7 +63,8 @@ export default function IncomingTab({}) {
       showAlert({
         title: 'Success',
         subtitle: 'Request has been rejected.',
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
+        onModalClose: () => handleRefreshRequest()
       });
     } catch (err) {
       console.log(err);
@@ -79,7 +86,10 @@ export default function IncomingTab({}) {
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
 
-      <AdminTabLayout title='Incoming Request'>
+      <AdminTabLayout
+        title='Incoming Request'
+        handleRefreshRequest={handleRefreshRequest}
+      >
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}
           data={requestData.filter(

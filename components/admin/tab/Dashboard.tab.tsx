@@ -14,14 +14,21 @@ import { BookRequest, RequestStatus } from '@/types';
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
 
-export default function DashboardTab({}) {
+export default function DashboardTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
   return (
-    <AdminTabLayout title={formatEnumValue(AdminTab.DASHBOARD)}>
+    <AdminTabLayout
+      title={formatEnumValue(AdminTab.DASHBOARD)}
+      handleRefreshRequest={handleRefreshRequest}
+    >
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
