@@ -1,14 +1,17 @@
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import RenterTable from '../table/RenterTable';
 
-import { RequestData } from '@/dummydata';
-
 import useModal from '@/components/Modals/useModal';
 import RequestDetail from '@/components/Modals/RequestDetail';
 import { BookRequest } from '@/types';
 import { useState } from 'react';
 
+import { useRecoilValue } from 'recoil';
+import { AdminAllRequestAtom } from '@/service/recoil/admin';
+
 export default function RenterTab() {
+  const requestData = useRecoilValue(AdminAllRequestAtom);
+
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
@@ -19,8 +22,8 @@ export default function RenterTab() {
       </ModalWrapper>
 
       <RenterTable
-        data={RequestData.filter(
-          (request) => request.isApproved && request.status === 'Achieved'
+        data={requestData.filter(
+          (request) => request.isApproved && request.status === 'ACHIEVED'
         )}
         actions={[
           {

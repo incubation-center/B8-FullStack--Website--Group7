@@ -9,8 +9,25 @@ import HomeLayout from '@/components/layout/HomeLayout';
 import HomeTab from '@/components/Tabs/Home.tab';
 import SavedTab from '@/components/Tabs/Saved.tab';
 import RequestStatusTab from '@/components/Tabs/RequestStatus.tab';
+import Profile from '@/components/Tabs/Profile.tab';
+import { processUserToken } from '@/service/token';
 
-export default function Home({ currentTab }: { currentTab: HomePageTab }) {
+import { useRecoilState } from 'recoil';
+import { AllBooksAtom, AuthAtom } from '@/service/recoil';
+import { AuthStore } from '@/types/auth';
+import { Book } from '@/types';
+import { getAllBooks } from '@/service/api/book';
+
+export default function Home({
+  currentTab,
+  authStore
+}: {
+  currentTab: HomePageTab;
+  authStore: AuthStore;
+}) {
+  // atoms
+  const [_, setAuthObj] = useRecoilState(AuthAtom);
+
   // initialize
   const router = useRouter();
 
@@ -31,13 +48,14 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
   // initialize tab state
   useEffect(() => {
     setTab(currentTab);
+    setAuthObj(authStore);
 
-    // prefetch admin if user is admin, for faster transition
-    const isAdmin = true; // can change when authentication is working
-    if (isAdmin) {
-      router.prefetch('/admin/dashboard');
-    }
+    console.log('====================================');
+    console.log('authStore', authStore);
+    console.log('====================================');
 
+    // prefetching
+    if (authStore.isAdmin) router.prefetch('/admin');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,9 +63,17 @@ export default function Home({ currentTab }: { currentTab: HomePageTab }) {
     <div className='h-full w-full bg-primary '>
       <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
         {tab === HomePageTab.HOME && <HomeTab />}
-        {tab === HomePageTab.SAVED && <SavedTab />}
-        {tab === HomePageTab.REQUEST_STATUS && <RequestStatusTab />}
-        {tab === HomePageTab.PROFILE && <div>Profile</div>}
+        {tab === HomePageTab.SAVED && (
+          <SavedTab
+            onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
+          />
+        )}
+        {tab === HomePageTab.REQUEST_STATUS && (
+          <RequestStatusTab
+            onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
+          />
+        )}
+        {tab === HomePageTab.PROFILE && <Profile />}
       </HomeLayout>
     </div>
   );
@@ -69,9 +95,14 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     };
   }
 
+  // check if user is admin
+  const token = context.req.cookies.accessToken;
+  const authObj = await processUserToken(token);
+
   return {
     props: {
-      currentTab: tab
+      currentTab: tab,
+      authStore: authObj
     }
   };
 };

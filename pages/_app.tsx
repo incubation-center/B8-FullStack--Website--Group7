@@ -1,7 +1,10 @@
+import { processUserToken } from '@/service/token';
 import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
+import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
           href='/icon/bookshelf-favicon.png'
         ></link>
       </Head>
-      <div className='flex flex-grow h-screen w-screen overflow-clip transition-colors duration-300 '>
+      <div className='flex-1 flex flex-grow h-full w-screen overflow-clip'>
         <div className='flex flex-1'>
           <RecoilRoot>
             <ThemeProvider
@@ -28,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </RecoilRoot>
         </div>
 
-        <div id='modal-root'></div>
+        <div id='modal-root' className='z-[9999]'></div>
       </div>
     </>
   );

@@ -1,13 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 
-import { homePageCategoryAtom, homePageSearchAtom } from '@/service/recoil';
+import {
+  AuthAtom,
+  homePageCategoryAtom,
+  homePageSearchAtom
+} from '@/service/recoil';
 import { useRecoilState } from 'recoil';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { useState } from 'react';
 import SideBar from './SideBar';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { handleFallBackProfileImage } from '@/utils/function';
 
 export default function HomeLayout({
   currentTab,
@@ -18,15 +23,16 @@ export default function HomeLayout({
   handlePageRouting: (tab: HomePageTab) => void;
   children: React.ReactNode;
 }) {
+  const [authStore, setAuthStore] = useRecoilState(AuthAtom);
   const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
 
   const [isShowSideBar, setIsShowSideBar] = useState(false);
 
   return (
-    <div className='w-full h-screen overflow-clip flex flex-col relative'>
+    <div className='w-full h-full overflow-clip flex flex-col relative'>
       {/* search bar row */}
-      <div className='home-search-bar-height w-full gap-2 flex justify-between items-center py-4 px-4'>
-        <div className='h-full flex justify-center items-center  mx-4'>
+      <div className=' w-full h-[100px] gap-2 flex justify-between items-center py-4 px-4 '>
+        <div className='h-full flex justify-center items-center mx-4'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
@@ -67,19 +73,31 @@ export default function HomeLayout({
           />
         </div>
 
-        <div className=' hidden md:block'>
-          <Link
-            href='/auth'
-            className='
+        <div>
+          {!authStore.isLoggedIn && (
+            <Link
+              href='/auth'
+              className='
               px-4 py-2 rounded-xl
               bg-alt-secondary text-primary
               transition-colors
               box-border border-2 border-alt-secondary hover:border-action
-              whitespace-nowrap
+              whitespace-nowrap hidden md:block
             '
-          >
-            Log In
-          </Link>
+            >
+              Log In
+            </Link>
+          )}
+
+          {authStore.isLoggedIn &&
+            authStore.user &&
+            currentTab !== HomePageTab.PROFILE && (
+              <img
+                src={handleFallBackProfileImage(authStore.user)}
+                alt='profile'
+                className='w-12 h-12 rounded-full object-cover hidden md:block'
+              />
+            )}
         </div>
       </div>
 
@@ -127,9 +145,9 @@ export default function HomeLayout({
         {/* tab component */}
         <div
           className='
-            w-full p-4 bg-background 
+            w-full bg-background 
             rounded-2xl mr-4 ml-4 md:ml-0 
-            overflow-scroll scroll
+            overflow-scroll scroll-smooth
             relative
           '
         >

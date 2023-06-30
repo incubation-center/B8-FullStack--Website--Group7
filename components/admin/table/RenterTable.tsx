@@ -70,6 +70,15 @@ export default function RenterTable({
             </tr>
           );
         })}
+
+        {/* no data */}
+        {data.length === 0 && (
+          <tr className='text-center h-full '>
+            <td colSpan={5} className='p-4 font-medium text-lg text-primary'>
+              No renter found
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

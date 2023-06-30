@@ -50,7 +50,7 @@ export default function RequestTable({
               text-primary text-xl
               w-full
               [&>td]:p-2
-              [&>td]:whitespace-nowrap
+              [&>td]:whitespace-pre-wrap
             '
           >
             <td className='w-full flex flex-grow gap-2 items-center'>
@@ -59,7 +59,7 @@ export default function RequestTable({
                 alt={request.book.title}
                 className='w-14'
               />
-              <div className='whitespace-pre text-center'>
+              <div className='whitespace-pre-wrap text-center'>
                 {request.book.title}
               </div>
             </td>
@@ -93,7 +93,7 @@ export default function RequestTable({
                   key={action.label}
                   className={`
                     rounded-full px-4 py-2 
-                    text-sm text-primary font-bold mr-2 
+                    text-sm text-primary font-bold m-1
                     ${action.bgColor}
                     hover:bg-opacity-80
                   `}
@@ -105,6 +105,14 @@ export default function RequestTable({
             </td>
           </tr>
         ))}
+
+        {data.length === 0 && (
+          <tr className='text-primary text-xl'>
+            <td colSpan={5} className='text-center p-4'>
+              No request
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

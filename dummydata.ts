@@ -16,7 +16,7 @@ const BookData: Book[] = [
     id: '2',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Education',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -27,7 +27,7 @@ const BookData: Book[] = [
     id: '3',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Business',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -38,7 +38,7 @@ const BookData: Book[] = [
     id: '4',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Drama',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -49,7 +49,7 @@ const BookData: Book[] = [
     id: '5',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'History',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -93,7 +93,7 @@ const BookData: Book[] = [
     id: '9',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Self Development',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -130,7 +130,7 @@ const SampleUser: User = {
   favoriteBooks: [],
   phoneNumber: '0123456789',
   profileImg:
-    'https://ui-avatars.com/api/?name=Nel+Sokchhunly&background=random&size=128',
+    'https://i.pinimg.com/736x/a0/25/04/a025049f3035cf3db789cc4cba5dd29e.jpg',
   role: 'USER',
   username: 'Nel Sokchhunly'
 };
@@ -140,7 +140,7 @@ const RequestData: BookRequest[] = [
     requestId: '1',
     borrower: SampleUser,
     book: BookData[0],
-    status: 'Pending',
+    status: 'PENDING',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -152,7 +152,7 @@ const RequestData: BookRequest[] = [
     requestId: '2',
     borrower: SampleUser,
     book: BookData[1],
-    status: 'Pending',
+    status: 'PENDING',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -164,7 +164,7 @@ const RequestData: BookRequest[] = [
     requestId: '3',
     borrower: SampleUser,
     book: BookData[2],
-    status: 'Approved',
+    status: 'APPROVED',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -176,7 +176,7 @@ const RequestData: BookRequest[] = [
     requestId: '4',
     borrower: SampleUser,
     book: BookData[3],
-    status: 'Approved',
+    status: 'APPROVED',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -188,7 +188,7 @@ const RequestData: BookRequest[] = [
     requestId: '5',
     borrower: SampleUser,
     book: BookData[4],
-    status: 'Approved',
+    status: 'APPROVED',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -200,7 +200,7 @@ const RequestData: BookRequest[] = [
     requestId: '6',
     borrower: SampleUser,
     book: BookData[5],
-    status: 'Achieved',
+    status: 'ACHIEVED',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: true,
@@ -212,7 +212,7 @@ const RequestData: BookRequest[] = [
     requestId: '7',
     borrower: SampleUser,
     book: BookData[6],
-    status: 'Achieved',
+    status: 'ACHIEVED',
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
