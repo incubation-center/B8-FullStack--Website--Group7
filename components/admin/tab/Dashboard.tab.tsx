@@ -9,19 +9,26 @@ import RenterTable from '../table/RenterTable';
 
 import useModal from '@/components/Modals/useModal';
 import RequestDetail from '@/components/Modals/RequestDetail';
-import { BookRequest } from '@/types';
+import { BookRequest, RequestStatus } from '@/types';
 
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
 
-export default function DashboardTab({}) {
+export default function DashboardTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
   return (
-    <AdminTabLayout title={formatEnumValue(AdminTab.DASHBOARD)}>
+    <AdminTabLayout
+      title={formatEnumValue(AdminTab.DASHBOARD)}
+      handleRefreshRequest={handleRefreshRequest}
+    >
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
@@ -73,7 +80,8 @@ export default function DashboardTab({}) {
         <RenterTable
           data={requestData
             .filter(
-              (request) => request.isApproved && request.status === 'ACHIEVED'
+              (request) =>
+                request.isApproved && request.status === RequestStatus.ACHIEVED
             )
             .slice(0, 5)}
           actions={[

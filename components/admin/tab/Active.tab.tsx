@@ -8,37 +8,65 @@ const RequestTable = dynamic(() => import('../table/RequestTable'), {
 import { AdminTab } from '@/utils/enum';
 import { useState } from 'react';
 import useModal from '@/components/Modals/useModal';
-import { BookRequest } from '@/types';
+import { BookRequest, RequestStatus } from '@/types';
 import RequestDetail from '@/components/Modals/RequestDetail';
 
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
 import useConfirmModal from '@/components/Modals/useCofirm';
+import { receiveBook } from '@/service/api/admin';
+import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 
-export default function ActiveTab() {
+export default function ActiveTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
-
+  const { AlertModal, showAlert } = useAlertModal();
   const { ConfirmModal, showConfirmModal } = useConfirmModal();
 
-  const handleReceiveBook = (request: BookRequest) => {
-    console.log(request);
+  const handleReceiveBook = async (request: BookRequest) => {
+    try {
+      await receiveBook(request.requestId);
+
+      showAlert({
+        title: 'Success',
+        subtitle: 'Book has been received.',
+        type: AlertType.SUCCESS,
+        onModalClose: () => handleRefreshRequest()
+      });
+    } catch (err) {
+      console.log(err);
+      showAlert({
+        title: 'Error',
+        subtitle: 'Something went wrong. Please try again later.',
+        type: AlertType.ERROR
+      });
+    }
   };
 
   return (
     <>
+      <AlertModal />
       <ConfirmModal />
 
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
 
-      <AdminTabLayout title='Active Request'>
+      <AdminTabLayout
+        title='Active Request'
+        handleRefreshRequest={handleRefreshRequest}
+      >
         <RequestTable
           useIn={AdminTab.ACTIVE_REQUEST}
-          data={requestData.filter((request) => request.status === 'APPROVED')}
+          data={requestData.filter(
+            (request) => request.status === RequestStatus.ACCEPTED
+          )}
           actions={[
             {
               label: 'View',

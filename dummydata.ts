@@ -1,4 +1,4 @@
-import { Book, BookRequest, User } from './types';
+import { Book, BookRequest, RequestStatus, User } from './types';
 
 const BookData: Book[] = [
   {
@@ -140,7 +140,7 @@ const RequestData: BookRequest[] = [
     requestId: '1',
     borrower: SampleUser,
     book: BookData[0],
-    status: 'PENDING',
+    status: RequestStatus.PENDING,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -152,7 +152,7 @@ const RequestData: BookRequest[] = [
     requestId: '2',
     borrower: SampleUser,
     book: BookData[1],
-    status: 'PENDING',
+    status: RequestStatus.PENDING,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -164,7 +164,7 @@ const RequestData: BookRequest[] = [
     requestId: '3',
     borrower: SampleUser,
     book: BookData[2],
-    status: 'APPROVED',
+    status: RequestStatus.ACCEPTED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -176,7 +176,7 @@ const RequestData: BookRequest[] = [
     requestId: '4',
     borrower: SampleUser,
     book: BookData[3],
-    status: 'APPROVED',
+    status: RequestStatus.ACCEPTED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -188,7 +188,7 @@ const RequestData: BookRequest[] = [
     requestId: '5',
     borrower: SampleUser,
     book: BookData[4],
-    status: 'APPROVED',
+    status: RequestStatus.ACCEPTED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -200,7 +200,7 @@ const RequestData: BookRequest[] = [
     requestId: '6',
     borrower: SampleUser,
     book: BookData[5],
-    status: 'ACHIEVED',
+    status: RequestStatus.ACHIEVED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: true,
@@ -212,7 +212,7 @@ const RequestData: BookRequest[] = [
     requestId: '7',
     borrower: SampleUser,
     book: BookData[6],
-    status: 'ACHIEVED',
+    status: RequestStatus.ACHIEVED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,

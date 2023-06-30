@@ -8,32 +8,77 @@ const RequestTable = dynamic(() => import('../table/RequestTable'), {
 import useModal from '@/components/Modals/useModal';
 import RequestDetail from '@/components/Modals/RequestDetail';
 import { useState } from 'react';
-import { BookRequest } from '@/types';
+import { BookRequest, RequestStatus } from '@/types';
 import { AdminTab } from '@/utils/enum';
 
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
 import useConfirmModal from '@/components/Modals/useCofirm';
 import useConfirmRejectModal from '@/components/Modals/useReject';
+import {
+  approveIncomingRequest,
+  rejectIncomingRequest
+} from '@/service/api/admin';
+import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 
-export default function IncomingTab({}) {
+export default function IncomingTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
+
+  const { AlertModal, showAlert } = useAlertModal();
   const { ConfirmModal, showConfirmModal } = useConfirmModal();
   const { ConfirmRejectModal, showRejectModal } = useConfirmRejectModal();
 
-  const handleApproveRequest = (request: BookRequest) => {
-    console.log(request);
+  const handleApproveRequest = async (request: BookRequest) => {
+    try {
+      const res = await approveIncomingRequest(request.requestId);
+
+      showAlert({
+        title: 'Success',
+        subtitle: 'Request has been approved.',
+        type: AlertType.SUCCESS
+      });
+
+      handleRefreshRequest();
+    } catch (err) {
+      console.log(err);
+      showAlert({
+        title: 'Error',
+        subtitle: 'Something went wrong. Please try again later.',
+        type: AlertType.ERROR
+      });
+    }
   };
 
-  const handleRejectRequest = (reason: string, request: BookRequest) => {
-    console.log(reason, request);
+  const handleRejectRequest = async (reason: string, request: BookRequest) => {
+    try {
+      const res = await rejectIncomingRequest(request.requestId, reason);
+
+      showAlert({
+        title: 'Success',
+        subtitle: 'Request has been rejected.',
+        type: AlertType.SUCCESS,
+        onModalClose: () => handleRefreshRequest()
+      });
+    } catch (err) {
+      console.log(err);
+      showAlert({
+        title: 'Error',
+        subtitle: 'Something went wrong. Please try again later.',
+        type: AlertType.ERROR
+      });
+    }
   };
 
   return (
     <>
+      <AlertModal />
       <ConfirmModal />
       <ConfirmRejectModal />
 
@@ -41,10 +86,15 @@ export default function IncomingTab({}) {
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
 
-      <AdminTabLayout title='Incoming Request'>
+      <AdminTabLayout
+        title='Incoming Request'
+        handleRefreshRequest={handleRefreshRequest}
+      >
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}
-          data={requestData.filter((request) => request.status === 'PENDING')}
+          data={requestData.filter(
+            (request) => request.status === RequestStatus.PENDING
+          )}
           actions={[
             {
               label: 'View',

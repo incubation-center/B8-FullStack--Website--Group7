@@ -63,6 +63,9 @@ export const API_ENDPOINT = {
     CREATE_REQUEST: '/request'
   },
   ADMIN: {
-    GET_ALL_REQUEST: '/request'
+    GET_ALL_REQUEST: '/request',
+    APPROVE_INCOMING_REQUEST: (id: string) => '/request/' + id + '/accept',
+    REJECT_INCOMING_REQUEST: (id: string) => '/request/' + id + '/reject',
+    RECEIVE_BOOK: (id: string) => '/request/' + id + '/return'
   }
 };
