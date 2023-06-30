@@ -22,11 +22,17 @@ export interface BookRequest {
   requestId: string;
   borrower: User;
   book: Book;
-  status: 'PENDING' | 'APPROVED' | 'ACHIEVED';
+  status: RequestStatus;
   isApproved: boolean;
   requestDuration: number;
   dateOfRequest: Date;
   dateOfAccepted?: Date | null;
   dateOfReturn?: Date | null;
   dateOfReceived?: Date | null;
+}
+
+export enum RequestStatus {
+  PENDING = 'PENDING',
+  ACCEPTED = 'ACCEPTED',
+  ACHIEVED = 'ARCHIVED'
 }

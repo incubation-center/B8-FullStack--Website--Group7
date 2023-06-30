@@ -3,7 +3,7 @@ import RenterTable from '../table/RenterTable';
 
 import useModal from '@/components/Modals/useModal';
 import RequestDetail from '@/components/Modals/RequestDetail';
-import { BookRequest } from '@/types';
+import { BookRequest, RequestStatus } from '@/types';
 import { useState } from 'react';
 
 import { useRecoilValue } from 'recoil';
@@ -23,7 +23,8 @@ export default function RenterTab() {
 
       <RenterTable
         data={requestData.filter(
-          (request) => request.isApproved && request.status === 'ACHIEVED'
+          (request) =>
+            request.isApproved && request.status === RequestStatus.ACHIEVED
         )}
         actions={[
           {
