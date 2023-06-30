@@ -14,9 +14,15 @@
 html,
 body {
   min-height: -webkit-fill-available;
-  height: 100vh;
-  height: 100dvh;
+  /* height: 100vh;
+  height: 100dvh; */
+  display: flex;
+  flex-grow: 3;
   /* dvh new height unit that exclude browser element */
+}
+
+.app-wrapper {
+  min-height: auto;
 }
 
 /* remove scrollbar */

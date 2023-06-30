@@ -11,9 +11,12 @@ import useModal from '@/components/Modals/useModal';
 import RequestDetail from '@/components/Modals/RequestDetail';
 import { BookRequest } from '@/types';
 
-import { RequestData } from '@/dummydata';
+import { useRecoilValue } from 'recoil';
+import { AdminAllRequestAtom } from '@/service/recoil/admin';
 
 export default function DashboardTab({}) {
+  const requestData = useRecoilValue(AdminAllRequestAtom);
+
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
@@ -27,7 +30,8 @@ export default function DashboardTab({}) {
       <div
         className='
           gap-4
-          grid grid-cols-3 
+          lg:grid grid-cols-3 
+          flex flex-wrap
           w-full max-w-[1000px] mx-auto
         '
       >
@@ -67,9 +71,11 @@ export default function DashboardTab({}) {
         <h1 className='text-primary text-xl font-bold'>Recent renter</h1>
 
         <RenterTable
-          data={RequestData.filter(
-            (request) => request.isApproved && request.status === 'ACHIEVED'
-          )}
+          data={requestData
+            .filter(
+              (request) => request.isApproved && request.status === 'ACHIEVED'
+            )
+            .slice(0, 5)}
           actions={[
             {
               label: 'View',
@@ -100,7 +106,7 @@ const RequestDataShow = ({
   };
 }) => {
   return (
-    <div className='rounded-lg bg-alt-secondary p-4 h-fit min-h-[180px] flex flex-col flex-grow'>
+    <div className='rounded-lg bg-alt-secondary p-4 h-fit min-h-[180px] flex flex-col flex-grow whitespace-nowrap'>
       <h1 className='text-lg text-primary font-bold'>{title}</h1>
       <div className='flex flex-1 h-full items-center justify-between py-4 mb-2 border-b-2'>
         <h1 className='text-5xl text-primary font-extrabold'>{value.total}</h1>

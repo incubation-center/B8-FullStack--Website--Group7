@@ -247,9 +247,12 @@ function BookSection({
   return (
     <div
       ref={ref}
-      className='w-full select-none flex flex-col flex-grow overflow-x-visible'
+      className='w-full select-none flex flex-col flex-grow overflow-x-visible relative'
     >
-      <div id={categoryKey.toLowerCase()} className='invisible h-20'>
+      <div
+        id={categoryKey.toLowerCase()}
+        className='invisible h-2 w-full absolute -top-[4.5rem] '
+      >
         element to scroll to{' '}
       </div>
       {/* title */}

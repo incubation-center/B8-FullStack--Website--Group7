@@ -16,7 +16,7 @@ const BookData: Book[] = [
     id: '2',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Education',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -27,7 +27,7 @@ const BookData: Book[] = [
     id: '3',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Business',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -38,7 +38,7 @@ const BookData: Book[] = [
     id: '4',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Drama',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -49,7 +49,7 @@ const BookData: Book[] = [
     id: '5',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'History',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:
@@ -93,7 +93,7 @@ const BookData: Book[] = [
     id: '9',
     title: 'The Hobbit',
     author: 'J.R.R. Tolkien',
-    category: 'Fantasy',
+    category: 'Self Development',
     bookImg:
       'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
     description:

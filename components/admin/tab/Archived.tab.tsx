@@ -11,7 +11,12 @@ import useModal from '@/components/Modals/useModal';
 import { BookRequest } from '@/types';
 import RequestDetail from '@/components/Modals/RequestDetail';
 
+import { useRecoilValue } from 'recoil';
+import { AdminAllRequestAtom } from '@/service/recoil/admin';
+
 export default function ArchivedTab() {
+  const requestData = useRecoilValue(AdminAllRequestAtom);
+
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
@@ -24,7 +29,7 @@ export default function ArchivedTab() {
       <AdminTabLayout title='Archived Request'>
         <RequestTable
           useIn={AdminTab.ARCHIVED_REQUEST}
-          data={RequestData.filter((request) => request.status === 'ACHIEVED')}
+          data={requestData.filter((request) => request.status === 'ACHIEVED')}
           actions={[
             {
               label: 'View',
