@@ -13,7 +13,8 @@ export default function CustomInput({
   label,
   labelClassName,
   errorClassName,
-  disabled = false
+  disabled = false,
+  required = false
 }: {
   register: UseFormRegisterReturn<any>;
   error: any;
@@ -25,13 +26,15 @@ export default function CustomInput({
   labelClassName: HTMLAttributes<HTMLLabelElement>['className'];
   errorClassName?: HTMLAttributes<HTMLParagraphElement>['className'];
   disabled?: boolean;
+  required?: boolean;
 }) {
   return (
     <div className='flex flex-col items-start w-full'>
       <label htmlFor={name} className={labelClassName}>
         {label}
-        <RequiredIcon />
+        {required && <RequiredIcon />}
       </label>
+
       <input
         {...register}
         id={name}

@@ -53,14 +53,16 @@ export default function RequestTable({
               [&>td]:whitespace-pre-wrap
             '
           >
-            <td className='w-full flex flex-grow gap-2 items-center'>
-              <img
-                src={request.book.bookImg}
-                alt={request.book.title}
-                className='w-14'
-              />
-              <div className='whitespace-pre-wrap text-center'>
-                {request.book.title}
+            <td className=''>
+              <div className='flex flex-grow gap-2 items-center'>
+                <img
+                  src={request.book.bookImg}
+                  alt={request.book.title}
+                  className='w-14'
+                />
+                <div className='whitespace-pre-wrap text-center'>
+                  {request.book.title}
+                </div>
               </div>
             </td>
             <td>{request.borrower.username}</td>
