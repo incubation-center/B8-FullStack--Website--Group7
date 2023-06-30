@@ -12,12 +12,20 @@ import ActiveTab from '@/components/admin/tab/Active.tab';
 import ArchivedTab from '@/components/admin/tab/Archived.tab';
 import RenterTab from '@/components/admin/tab/Renter.tab';
 import SettingTab from '@/components/admin/tab/Setting.tab';
+import { getAllRequestAdmin } from '@/service/api/admin';
+import { BookRequest } from '@/types';
+import { useRecoilState } from 'recoil';
+import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 
 export default function AdminHomePage({
   currentTab
 }: {
   currentTab: AdminTab;
 }) {
+  const [allRequests, setAllRequests] = useRecoilState(AdminAllRequestAtom);
+  const [isFetched, setIsFetched] = useState(false);
+
   // initialize
   const router = useRouter();
 
@@ -38,20 +46,43 @@ export default function AdminHomePage({
   // initialize tab state
   useEffect(() => {
     setTab(currentTab);
+
+    // update all requests
+    getAllRequestAdmin()
+      .then((requests: BookRequest[]) => {
+        setAllRequests(requests);
+        console.log('====================================');
+        console.log('all requests', requests);
+        console.log('====================================');
+      })
+      .finally(() => {
+        setIsFetched(true);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
-      <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
-        {tab === AdminTab.DASHBOARD && <DashboardTab />}
-        {tab === AdminTab.UPLOAD && <UploadTab />}
-        {tab === AdminTab.INCOMING_REQUEST && <IncomingTab />}
-        {tab === AdminTab.ACTIVE_REQUEST && <ActiveTab />}
-        {tab === AdminTab.ARCHIVED_REQUEST && <ArchivedTab />}
-        {tab === AdminTab.RENTER && <RenterTab />}
-        {tab === AdminTab.SETTING && <SettingTab />}
-      </AnimatePresence>
+      {!isFetched && (
+        <div className='w-full flex-1 flex gap-4 justify-center items-center'>
+          <div className='text-center text-primary font-medium'>
+            Fetching your request
+          </div>
+          <SpinningLoadingSvg className='w-8 h-8 text-primary' />
+        </div>
+      )}
+
+      {isFetched && (
+        <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
+          {tab === AdminTab.DASHBOARD && <DashboardTab />}
+          {tab === AdminTab.UPLOAD && <UploadTab />}
+          {tab === AdminTab.INCOMING_REQUEST && <IncomingTab />}
+          {tab === AdminTab.ACTIVE_REQUEST && <ActiveTab />}
+          {tab === AdminTab.ARCHIVED_REQUEST && <ArchivedTab />}
+          {tab === AdminTab.RENTER && <RenterTab />}
+          {tab === AdminTab.SETTING && <SettingTab />}
+        </AnimatePresence>
+      )}
     </AdminLayout>
   );
 }
@@ -69,6 +100,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       }
     };
   }
+
+  // const token = context.req.cookies.accessToken;
+  // const requests = await getAllRequestAdmin(token);
 
   return {
     props: {

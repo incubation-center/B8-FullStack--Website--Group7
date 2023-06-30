@@ -61,5 +61,8 @@ export const API_ENDPOINT = {
   REQUEST: {
     GET_ALL_REQUEST: (userId: string) => '/request?userId=' + userId,
     CREATE_REQUEST: '/request'
+  },
+  ADMIN: {
+    GET_ALL_REQUEST: '/request'
   }
 };
