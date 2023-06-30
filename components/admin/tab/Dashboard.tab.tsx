@@ -71,9 +71,11 @@ export default function DashboardTab({}) {
         <h1 className='text-primary text-xl font-bold'>Recent renter</h1>
 
         <RenterTable
-          data={requestData.filter(
-            (request) => request.isApproved && request.status === 'ACHIEVED'
-          )}
+          data={requestData
+            .filter(
+              (request) => request.isApproved && request.status === 'ACHIEVED'
+            )
+            .slice(0, 5)}
           actions={[
             {
               label: 'View',
