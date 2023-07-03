@@ -87,6 +87,7 @@ export default function ProfileTab() {
   // handle logout
   const handleLogout = () => {
     deleteCookie('accessToken');
+    deleteCookie('refreshToken');
 
     setAuthStore({
       user: null,

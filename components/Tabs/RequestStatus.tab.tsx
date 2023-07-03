@@ -27,10 +27,13 @@ export default function RequestStatusTab({
   const { toggle, ModalWrapper } = useModal();
 
   const fetchRequest = useDebounce(async () => {
-    getAllRequest(authStore.user?.userId as string).then((res) => {
+    try {
+      const res = await getAllRequest(authStore.user?.userId as string);
       setRequests(res);
       setIsFetched(true);
-    });
+    } catch (error) {
+      console.error(error);
+    }
   }, 100);
 
   useEffect(() => {
@@ -87,7 +90,7 @@ export default function RequestStatusTab({
           )}
 
           {/* table */}
-          {isFetched && (
+          {isFetched && requests.length !== 0 && (
             <RequestTable
               data={requests}
               actions={[

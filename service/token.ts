@@ -11,13 +11,28 @@ export interface Token {
   iat: number;
   exp: number;
   sub: string;
+  value: string;
+  isExpired: boolean;
 }
 
-export const decodeToken = (token: any): Token | false => {
+export const decodeToken = (token: any): Token | null => {
   try {
-    return jwtDecode(token);
+    if (!token) return null;
+
+    const data = jwtDecode(token) as Token;
+
+    if (!data) return null;
+
+    const isExpired = Date.now() >= data.exp * 1000;
+
+    return {
+      ...data,
+      value: token,
+      isExpired
+    };
   } catch (err) {
-    throw err; // fallback for invalid token
+    // throw err; // fallback for invalid token
+    return null;
   }
 };
 
@@ -66,6 +81,15 @@ export const processUserToken = async (token: any): Promise<AuthStore> => {
     const tokenData = decodeToken(token);
 
     if (tokenData) {
+      if (tokenData.isExpired) {
+        return {
+          isLoggedIn: false,
+          isAdmin: false,
+          user: null,
+          isFetched: true
+        };
+      }
+
       isLoggedIn = true;
 
       const fetchUserInfo = getUserInfo(token, tokenData.id);

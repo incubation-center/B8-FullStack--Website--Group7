@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
-import { isUserAdmin, isTokenValid } from './service/token';
+import { isUserAdmin, isTokenValid, decodeToken, Token } from './service/token';
 
 export async function middleware(request: NextRequest) {
   // => public routes
@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 
   // get token from cookie
-  const token = request.cookies.get('accessToken')?.value;
+  const accessToken = decodeToken(request.cookies.get('accessToken')?.value);
 
   // condition
   const isAuthRoute = url.pathname.startsWith('/auth');
@@ -22,9 +22,7 @@ export async function middleware(request: NextRequest) {
 
   // if logged in, redirect to homepage page
   if (isAuthRoute) {
-    if (!token) return;
-
-    const tokenValidation = await isTokenValid(token);
+    const tokenValidation = await isTokenValid((accessToken as Token).value);
 
     if (tokenValidation) {
       return NextResponse.redirect(new URL('/', request.nextUrl).href);
@@ -33,14 +31,14 @@ export async function middleware(request: NextRequest) {
     return;
   } else if (isAdminRoute) {
     // in case, user try to access admin route via url
-    if (!token) {
+    if (!accessToken) {
       return NextResponse.redirect(
         new URL('/unauthorized-page', request.nextUrl).href
       );
     }
 
     // check if user is admin
-    const adminValidation = isUserAdmin(token);
+    const adminValidation = isUserAdmin((accessToken as Token).value);
     if (!adminValidation) {
       return NextResponse.redirect(
         new URL('/unauthorized-page', request.nextUrl).href
@@ -49,7 +47,7 @@ export async function middleware(request: NextRequest) {
 
     // at this point, user is admin
     // check if token is valid
-    const tokenValidation = await isTokenValid(token);
+    const tokenValidation = await isTokenValid((accessToken as Token).value);
     if (!tokenValidation) {
       return NextResponse.redirect(new URL('/', request.nextUrl).href);
     }
