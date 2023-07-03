@@ -46,3 +46,15 @@ export async function AuthRefreshToken(refreshToken: string) {
     throw error;
   }
 }
+
+export async function AuthForgotPassword(email: string) {
+  try {
+    const response = await axiosClient.post(
+      API_ENDPOINT.AUTH.FORGOT_PASSWORD(email)
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

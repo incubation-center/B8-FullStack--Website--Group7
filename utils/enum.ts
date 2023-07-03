@@ -42,7 +42,7 @@ export const API_ENDPOINT = {
   AUTH: {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
-    FORGOT_PASSWORD: '/auth/forgot-password',
+    FORGOT_PASSWORD: (email: string) => '/user/forgot-password?email=' + email,
     RESET_PASSWORD: '/auth/reset-password',
     VALIDATE_TOKEN: (id: string) => '/auth/validate-token/' + id,
     REFRESH_TOKEN: '/auth/refresh-token/'
