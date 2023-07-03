@@ -1,13 +1,16 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, CSSProperties } from 'react';
 
-export default function ActiveAdminSvg({
-  className
-}: {
+interface ArchivedSvgProps {
   className?: HTMLAttributes<HTMLElement>['className'];
-}): JSX.Element {
+}
+
+export default function ArchivedSvg({ className }: ArchivedSvgProps): JSX.Element {
+  const maskStyle: CSSProperties = {
+    maskType: 'luminance',
+  };
   return (
-    <svg width="27" height="27" viewBox="0 0 27 27" fill="inherit" xmlns="http://www.w3.org/2000/svg">
-    <mask id="mask0_508_246" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="27" height="27">
+    <svg className={className} width="27" height="27" viewBox="0 0 27 27" fill="inherit" xmlns="http://www.w3.org/2000/svg">
+    <mask id="mask0_508_246" style={maskStyle} maskUnits="userSpaceOnUse" x="0" y="0" width="27" height="27">
     <path d="M27 0H0V27H27V0Z" fill="inherit"/>
     </mask>
     <g mask="url(#mask0_508_246)">
