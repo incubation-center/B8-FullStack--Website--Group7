@@ -48,7 +48,9 @@ export default function RequestTable({
                 className='w-14 hidden md:block'
               />
               <div className='whitespace-pre-wrap text-left'>
-                {request.book.title}
+                {request.book.title.length > 50
+                  ? request.book.title.slice(0, 50) + '...'
+                  : request.book.title}
               </div>
             </td>
 

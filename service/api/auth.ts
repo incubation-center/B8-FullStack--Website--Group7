@@ -50,7 +50,7 @@ export async function AuthRefreshToken(refreshToken: string) {
 export async function AuthForgotPassword(email: string) {
   try {
     const response = await axiosClient.post(
-      API_ENDPOINT.AUTH.FORGOT_PASSWORD(email)
+      API_ENDPOINT.USER.FORGOT_PASSWORD(email)
     );
 
     return response;
