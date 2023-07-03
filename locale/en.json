@@ -1,0 +1,119 @@
+{
+    "navbar-Home": "Home",
+    "navbar-Saved": "Saved",
+    "navbar-Request": "Request",
+    "navbar-Profile": "Profile",
+
+    "navbar-admin-button": "Admin",
+
+    "category-section-Education": "Education",
+    "category-section-Business": "Business",
+    "category-section-History": "History",
+    "category-section-Drama": "Drama",
+    "category-section-Fantasy": "Fantasy",
+    "category-section-Self Development": "Self Development",
+
+    "h1-category-Education": "Education",
+    "h1-category-Business": "Business",
+    "h1-category-History": "History",
+    "h1-category-Fantasy": "Fantasy",
+    "h1-category-Self Development": "Self Development",
+
+    "search-box-text": "Search name of the book",
+
+    "view-button-text": "View",
+    "a-long in-button-text": "Long In",
+    "admin-button-text": "Admin",
+
+    "not-login-text": "You are not logged in",
+
+
+
+    "save-Page-text-no-save": "You have no saved books",
+    "save-page-h1-Save": "Saved",
+    "save-page-explore-books-button": "explore books",
+
+
+
+    "request-page-h1-text": "Request Status",
+    "request-page-td-book": "Book",
+    "request-page-td-date": "Date",
+    "request-page-td-status": "Status",
+    "request-page-td-actions": "Actions",
+
+    "request-page-pending-button": "Pending",
+    "request-page-rejected-button": "Rejected",
+    "request-page-approved-button": "Approved",
+    "request-page-view-button": "View",
+
+
+
+    "profile-page-h1-personal-information": "Personal Information",
+    "profile-page-username": "Username",
+    "profile-page-phone-number": "Phone Number",
+    "profile-page-email": "Email",
+    "profile-page-h1-privacy-setting": "Privacy Setting",
+
+    "profile-page-edit-button": "Edit",
+    "profile-page-change-password-button": "Change Password",
+    "profile-page-logout-button": "Logout",
+
+    "profile-page-logout-pop-up-h1-logout": "Logout",
+    "profile-page-logout-pop-up-p-text": "Are you sure you want to logout?",
+    "profile-page-logout-pop-up-no-button": "No",
+    "profile-page-logout-pop-up-yes-button": "Yes",
+
+    "profile-page-edit-pop-up-h1-personal-information": "Personal Information",
+    "profile-page-edit-pop-up-usernames": "Usernames",
+    "profile-page-edit-pop-up-email": "Email",
+    "profile-page-edit-pop-up-phone-number": "Phone Number",
+    "profile-page-edit-pop-up-cancel-button": "Cancel",
+    "profile-page-edit-pop-up-save-button": "Save",
+
+    "profile-page-change-password-pop-up-h1-change-password": "change Password",
+    "profile-page-change-password-pop-up-text-password": "Password",
+    "profile-page-change-password-pop-up-currentPassword": "Enter your current password",
+    "profile-page-change-password-pop-up-text-newPassword": "new password",
+    "profile-page-change-password-pop-up-newPassword": "new password",
+    "profile-page-change-password-pop-up-text-confirmPassword": "Confirm Password",
+    "profile-page-change-password-pop-up-cancel-button": "Cancel",
+    "profile-page-change-password-pop-up-save-button": "save",
+
+
+
+    "login-page-h1-Welcome": "Welcome to Digital Library",
+    "login-page-EnterDetails": "Please enter your details",
+    "login-page-EmailAddress": "Email Address",
+    "login-page-emailText": "Please enter your email",
+    "login-page-password": "Password",
+    "login-page-passwordText": "Please enter your password",
+    "login-page-ForgotPassword": "Forgot password?",
+    "login-page-PassRequired": "Password is required",
+    "login-page-login-button": "Login",
+    "login-page-p-NoAccount": "Don't have an account?",
+    "login-page-SignUp-button": "Sign Up",
+
+    "login-page-pop-up-TraAgain": "Please try again",
+    "login-page-pop-up-close-button": "Close",
+
+
+
+    "sign-up-page-h1": "Create an account",
+    "sign-up-page-username": "Username",
+    "sign-up-page-usernameText": "Enter your username",
+    "sign-up-page-email": "Email address",
+    "sign-up-page-emailText": "Enter your email address",
+    "sign-up-page-password": "Password",
+    "sign-up-page-passwordText": "Enter your password",
+    "sign-up-page-confirmPassword": "Confirm Password",
+    "sign-up-page-confirmPasswordText": "Confirm your password",
+    "sign-up-page-phoneNumber": "Phone Number",
+    "sign-up-page-phoneNumberText": "Enter your phone number",
+
+    "sign-up-page-SignUp-button": "Sign Up",
+
+    "sign-up-page-HaveAccount": "Already have an account?",
+    "sign-up-page-Login-button": "Login"
+
+
+}
