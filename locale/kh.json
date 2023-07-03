@@ -1,0 +1,20 @@
+
+{
+    "homepage": {
+        "sidebar": {
+            "home": "ទំំព័រដើម",
+            "save": "រក្សាទុក",
+            "request": "ស្នើសំុ",
+            "profile": "គណនី",
+
+            "admin-btn": "អ្នកគ្រប់គ្រង"
+        },
+
+        "category-section": {
+
+        }
+    }
+    
+    
+}
+
