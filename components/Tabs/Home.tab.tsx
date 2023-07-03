@@ -18,6 +18,7 @@ export default function HomeTab() {
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
   const [isFetchingBooks, setIsFetchingBooks] = useState(false);
+  const [fetchedBookError, setFetchedBookError] = useState(false);
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
@@ -93,10 +94,16 @@ export default function HomeTab() {
     // setBooks(books);
     if (allBooks.length === 0) {
       setIsFetchingBooks(true);
-      getAllBooks().then((books) => {
-        setAllBooks(books);
-        setIsFetchingBooks(false);
-      });
+      getAllBooks()
+        .then((books) => {
+          setAllBooks(books);
+          setIsFetchingBooks(false);
+        })
+        .catch(() => {
+          setIsFetchingBooks(false);
+          setAllBooks([]);
+          setFetchedBookError(true);
+        });
     }
 
     return () => {
@@ -274,18 +281,26 @@ function BookSection({
           {books.map((book, index) => (
             <div key={book.id} className='flex flex-col space-y-4'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className='w-fit h-[200px] object-cover cursor-pointer'
-                src={book.bookImg}
-                alt={book.title}
-                draggable={false}
-                onClick={() => handleBookClick(book.id!)}
-              />
+
+              <div className='relative h-[250px] w-[200px] '>
+                <Image
+                  className='w-full h-full object-bottom object-contain'
+                  src={book.bookImg}
+                  alt={book.title}
+                  draggable={false}
+                  fill
+                  style={{
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  onClick={() => handleBookClick(book.id!)}
+                />
+              </div>
 
               <button
                 className='
                 bg-secondary text-white font-light
-                rounded-lg py-1 px-2
+                rounded-lg py-1 px-2 w-40 mx-auto
               '
                 onClick={() => handleBookClick(book.id!)}
               >

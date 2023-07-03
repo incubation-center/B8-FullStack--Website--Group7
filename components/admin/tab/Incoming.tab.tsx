@@ -42,10 +42,9 @@ export default function IncomingTab({
       showAlert({
         title: 'Success',
         subtitle: 'Request has been approved.',
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
+        onModalClose: () => handleRefreshRequest()
       });
-
-      handleRefreshRequest();
     } catch (err) {
       console.log(err);
       showAlert({

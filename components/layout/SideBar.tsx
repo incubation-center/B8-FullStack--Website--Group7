@@ -42,7 +42,7 @@ export default function SideBar({
       {/* logo */}
       {isMobile && (
         <div className='flex justify-center items-center mb-10'>
-          <img src='/bootcamp-logo.png' alt='logo' className='w-full h-fit' />
+          <img src='/bootcamp-logo.png' alt='logo' className='w-full h-auto' />
         </div>
       )}
 
