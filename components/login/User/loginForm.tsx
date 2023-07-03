@@ -25,10 +25,6 @@ export default function UserLoginForm() {
 
   const { showAlert, AlertModal } = useAlertModal();
 
-  // useEffect(() => {
-  //   localStorage.setItem('rememberMe', rememberMe.toString());
-  // }, [rememberMe]);
-
   const {
     register,
     handleSubmit,
@@ -48,9 +44,11 @@ export default function UserLoginForm() {
       const data = await res.data;
 
       const accessToken = data['access_token'];
+      const refreshToken = data['refresh-token'];
 
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
+      setCookie('refreshToken', refreshToken);
 
       const authObj = await processUserToken(accessToken);
       setAuthStore(authObj);

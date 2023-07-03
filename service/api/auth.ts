@@ -32,3 +32,17 @@ export async function AuthRegister(formData: UserRegisterInputs) {
     throw error;
   }
 }
+
+export async function AuthRefreshToken(refreshToken: string) {
+  try {
+    const response = await axiosClient.post(API_ENDPOINT.AUTH.REFRESH_TOKEN, {
+      Headers: {
+        Authorization: `Bearer ${refreshToken}`
+      }
+    });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
