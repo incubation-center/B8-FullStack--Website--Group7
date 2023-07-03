@@ -22,6 +22,8 @@ export async function middleware(request: NextRequest) {
 
   // if logged in, redirect to homepage page
   if (isAuthRoute) {
+    if (!accessToken) return;
+
     const tokenValidation = await isTokenValid((accessToken as Token).value);
 
     if (tokenValidation) {

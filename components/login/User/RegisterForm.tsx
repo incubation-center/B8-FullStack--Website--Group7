@@ -75,7 +75,7 @@ export default function UserRegisterForm({}) {
               required: 'Username is required'
             })}
             error={errors.username}
-            name='name'
+            name='username'
             type='text'
             placeholder='Enter your username'
             label='Username'
@@ -154,11 +154,11 @@ export default function UserRegisterForm({}) {
             <button
               type='submit'
               className={`
-            w-full px-4 py-2 mt-6 rounded-full
-            bg-secondary text-white font-medium tracking-wide 
-            focus:outline-none
-            ${isRegistering ? 'opacity-50 cursor-not-allowed' : ''}
-          `}
+                w-full px-4 py-2 mt-6 rounded-full
+                bg-secondary text-white font-medium tracking-wide 
+                focus:outline-none
+                ${isRegistering ? 'opacity-50 cursor-not-allowed' : ''}
+              `}
               disabled={isRegistering}
             >
               Sign Up
