@@ -27,7 +27,10 @@ export default function BookTab() {
 
   return (
     <AdminTabLayout title='Books' handleRefresh={handleRefreshBook}>
+      {/* tab element */}
       <HomeTab isUseInAdminPage />
+
+      {/* view/edit book */}
     </AdminTabLayout>
   );
 }

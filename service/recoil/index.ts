@@ -3,6 +3,7 @@ import { AuthStore } from '@/types/auth';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { atom, selector, selectorFamily } from 'recoil';
 import { getAllRequest } from '../api/request';
+import { getBookById } from '../api/book';
 
 // fetching
 export const isMakingRequestAtom = atom<boolean>({
@@ -47,6 +48,35 @@ export const AuthAtom = atom<AuthStore>({
 export const AllBooksAtom = atom<Book[]>({
   key: 'AllBooksAtom',
   default: []
+});
+
+export const getBookByIdAtom = selectorFamily<Book | null, string>({
+  key: 'getBookById',
+  get:
+    (bookId: string) =>
+    async ({ get }) => {
+      const books = get(AllBooksAtom);
+
+      let book = null;
+
+      // all books data is not fetched yet
+      books.forEach((b) => {
+        if (b.id === bookId) {
+          book = b;
+          return;
+        }
+      });
+
+      if (!book) {
+        try {
+          book = (await getBookById(bookId)) || null;
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      return book;
+    }
 });
 
 export const isBookAlreadySaved = selectorFamily<boolean, string>({
