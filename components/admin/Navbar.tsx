@@ -71,7 +71,7 @@ export default function Navbar({
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.BOOKS)}
-          iconPath='/icon/admin-sidebar/upload.svg'
+          iconPath='/icon/admin-sidebar/book_admin.svg'
           isCurrentTab={currentTab === AdminTab.BOOKS}
           onClick={() => handlePageRouting(AdminTab.BOOKS)}
         />
