@@ -1,7 +1,11 @@
-import useAlertModal from '@/components/Modals/Alert';
+import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import PasswordInput from '@/components/login/PasswordInput';
+import { AuthResetPassword } from '@/service/api/auth';
+import { AxiosError } from 'axios';
 import { GetServerSidePropsContext } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -26,7 +30,11 @@ export default function ResetPassword({
   userId: string;
   token: string;
 }) {
+  const router = useRouter();
+
   const [isResettingPassword, setIsResettingPassword] = useState(false);
+
+  const { AlertModal, showAlert } = useAlertModal();
 
   const {
     register,
@@ -41,9 +49,41 @@ export default function ResetPassword({
   const onSubmit: SubmitHandler<{
     password: string;
     confirmPassword: string;
-  }> = async (data) => {};
+  }> = async (data) => {
+    setIsResettingPassword(true);
 
-  const { AlertModal, showAlert } = useAlertModal();
+    try {
+      const formData = {
+        userId,
+        newPassword: data.password,
+        resetPwdToken: token
+      };
+
+      const res = await AuthResetPassword(formData);
+
+      if (res.status !== 200) throw new Error('An unknown error occurred');
+
+      showAlert({
+        title: 'Success',
+        subtitle: 'Your password has been reset',
+        type: AlertType.SUCCESS,
+        onModalClose: () => {
+          router.push('/auth');
+        }
+      });
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        showAlert({
+          title: 'Error',
+          subtitle: err.response?.data?.error || 'An unknown error occurred',
+          type: AlertType.ERROR
+        });
+      }
+      console.error(err);
+    } finally {
+      setIsResettingPassword(false);
+    }
+  };
 
   return (
     <>
@@ -73,7 +113,11 @@ export default function ResetPassword({
               {/* password */}
               <PasswordInput
                 register={register('password', {
-                  required: 'Please enter your password'
+                  required: 'Password is required',
+                  minLength: {
+                    value: 8,
+                    message: 'Password must be at least 8 characters long'
+                  }
                 })}
                 error={errors.password}
                 name='password'

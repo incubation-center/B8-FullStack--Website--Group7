@@ -56,11 +56,10 @@ export default function UserLoginForm() {
 
       router.reload();
     } catch (errors) {
-      let message = 'An unknown error occurred';
+      let message;
       if (errors instanceof AxiosError) {
-        message = errors.response?.data.error;
+        message = errors.response?.data.error || 'An unknown error occurred';
       }
-      close();
       showAlert({
         title: message,
         subtitle: 'Please try again',

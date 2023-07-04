@@ -17,6 +17,7 @@ import { AllBooksAtom, AuthAtom } from '@/service/recoil';
 import { AuthStore } from '@/types/auth';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 
 export default function Home({
   currentTab,
@@ -46,6 +47,7 @@ export default function Home({
   // end: handling page routing
 
   // initialize tab state
+  const [isFetched, setIsFetched] = useState(false);
   useEffect(() => {
     setTab(currentTab);
     setAuthObj(authStore);
@@ -53,6 +55,7 @@ export default function Home({
     console.log('====================================');
     console.log('authStore', authStore);
     console.log('====================================');
+    setIsFetched(true);
 
     // prefetching
     if (authStore.isAdmin) router.prefetch('/admin');
@@ -61,20 +64,28 @@ export default function Home({
 
   return (
     <div className='h-full w-full bg-primary'>
-      <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
-        {tab === HomePageTab.HOME && <HomeTab />}
-        {tab === HomePageTab.SAVED && (
-          <SavedTab
-            onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
-          />
-        )}
-        {tab === HomePageTab.REQUEST_STATUS && (
-          <RequestStatusTab
-            onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
-          />
-        )}
-        {tab === HomePageTab.PROFILE && <Profile />}
-      </HomeLayout>
+      {!isFetched && (
+        <div className='h-full w-full flex justify-center items-center gap-4'>
+          <SpinningLoadingSvg className='h-8 w-8 text-white' />
+          <div className='text-white text-lg font-normal'> Loading...</div>
+        </div>
+      )}
+      {isFetched && (
+        <HomeLayout currentTab={tab} handlePageRouting={handlePageRouting}>
+          {tab === HomePageTab.HOME && <HomeTab />}
+          {tab === HomePageTab.SAVED && (
+            <SavedTab
+              onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
+            />
+          )}
+          {tab === HomePageTab.REQUEST_STATUS && (
+            <RequestStatusTab
+              onClickExplore={() => handlePageRouting(HomePageTab.HOME)}
+            />
+          )}
+          {tab === HomePageTab.PROFILE && <Profile />}
+        </HomeLayout>
+      )}
     </div>
   );
 }

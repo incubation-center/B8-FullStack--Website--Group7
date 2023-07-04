@@ -58,3 +58,25 @@ export async function AuthForgotPassword(email: string) {
     throw error;
   }
 }
+
+export async function AuthResetPassword({
+  userId,
+  newPassword,
+  resetPwdToken
+}: {
+  userId: string;
+  newPassword: string;
+  resetPwdToken: string;
+}) {
+  try {
+    const response = await axiosClient.post(API_ENDPOINT.USER.RESET_PASSWORD, {
+      userId,
+      newPassword,
+      resetPwdToken
+    });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

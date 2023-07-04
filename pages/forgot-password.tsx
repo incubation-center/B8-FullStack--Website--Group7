@@ -3,6 +3,7 @@ import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import CustomInput from '@/components/login/CustomInput';
 import { AuthForgotPassword } from '@/service/api/auth';
 import { AxiosError } from 'axios';
+import Link from 'next/link';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -105,6 +106,10 @@ export default function ForgotPassword() {
                 )}
               </button>
             </form>
+
+            <Link href='/auth'>
+              <span className='text-alt-secondary'>Go back to Login</span>
+            </Link>
           </div>
         </div>
       </div>
