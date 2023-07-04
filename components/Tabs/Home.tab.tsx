@@ -293,6 +293,7 @@ function BookSection({
                     height: '100%',
                     width: '100%'
                   }}
+                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
                   onClick={() => handleBookClick(book.id!)}
                 />
               </div>
