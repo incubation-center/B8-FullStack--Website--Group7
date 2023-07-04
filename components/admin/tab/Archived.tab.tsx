@@ -32,7 +32,7 @@ export default function ArchivedTab({
 
       <AdminTabLayout
         title='Archived Request'
-        handleRefreshRequest={handleRefreshRequest}
+        handleRefresh={handleRefreshRequest}
       >
         <RequestTable
           useIn={AdminTab.ARCHIVED_REQUEST}

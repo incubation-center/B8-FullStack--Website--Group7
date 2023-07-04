@@ -60,10 +60,11 @@ export const API_ENDPOINT = {
     GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author
   },
   REQUEST: {
-    GET_ALL_REQUEST: (userId: string) => '/request?userId=' + userId,
+    GET_ALL_REQUEST: (userId: string) => '/request/user?userId=' + userId,
     CREATE_REQUEST: '/request'
   },
   ADMIN: {
+    GET_ALL_REQUEST_COUNT: '/request/count',
     GET_ALL_REQUEST: '/request',
     APPROVE_INCOMING_REQUEST: (id: string) => '/request/' + id + '/accept',
     REJECT_INCOMING_REQUEST: (id: string) => '/request/' + id + '/reject',

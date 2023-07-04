@@ -2,11 +2,25 @@ import { AxiosInstance } from 'axios';
 
 import { API_ENDPOINT } from '../../utils/enum';
 import createAxiosInstance from '../axios';
-import { BookRequest } from '@/types';
+import { BookRequest, RequestCount } from '@/types';
 
 const axiosClient: AxiosInstance = createAxiosInstance();
 
 // request
+
+export async function getAllRequestCount(): Promise<RequestCount> {
+  try {
+    const response = await axiosClient.get(
+      API_ENDPOINT.ADMIN.GET_ALL_REQUEST_COUNT
+    );
+
+    const { data } = response;
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export async function getAllRequestAdmin(): Promise<BookRequest[]> {
   try {

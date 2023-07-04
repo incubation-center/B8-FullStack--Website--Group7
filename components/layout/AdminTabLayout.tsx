@@ -8,11 +8,11 @@ import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 export default function AdminTabLayout({
   children,
   title,
-  handleRefreshRequest
+  handleRefresh
 }: {
   children: React.ReactNode;
   title: string;
-  handleRefreshRequest?: () => void;
+  handleRefresh?: () => void;
 }) {
   const isRefreshing = useRecoilValue(isRefreshingRequestAtom);
 
@@ -21,11 +21,11 @@ export default function AdminTabLayout({
       <div className='flex justify-between items-center  mb-4'>
         <h1 className='text-xl xl:text-2xl text-primary font-bold'>{title}</h1>
 
-        {handleRefreshRequest && (
+        {handleRefresh && (
           <motion.button
             initial={{ width: 100 }}
             animate={{ width: isRefreshing ? 140 : 100 }}
-            onClick={handleRefreshRequest}
+            onClick={handleRefresh}
             disabled={isRefreshing}
             className={`bg-primary text-white rounded-full px-4 py-2 flex justify-center items-center 
             ${

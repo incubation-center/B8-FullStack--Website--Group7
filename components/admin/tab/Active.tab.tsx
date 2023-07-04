@@ -60,7 +60,7 @@ export default function ActiveTab({
 
       <AdminTabLayout
         title='Active Request'
-        handleRefreshRequest={handleRefreshRequest}
+        handleRefresh={handleRefreshRequest}
       >
         <RequestTable
           useIn={AdminTab.ACTIVE_REQUEST}

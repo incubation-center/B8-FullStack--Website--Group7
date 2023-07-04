@@ -12,11 +12,12 @@ import ActiveTab from '@/components/admin/tab/Active.tab';
 import ArchivedTab from '@/components/admin/tab/Archived.tab';
 import RenterTab from '@/components/admin/tab/Renter.tab';
 import SettingTab from '@/components/admin/tab/Setting.tab';
-import { getAllRequestAdmin } from '@/service/api/admin';
-import { BookRequest } from '@/types';
+import { getAllRequestAdmin, getAllRequestCount } from '@/service/api/admin';
+import { BookRequest, RequestCount } from '@/types';
 import { useRecoilState } from 'recoil';
 import {
   AdminAllRequestAtom,
+  AdminAllRequestCountAtom,
   isRefreshingRequestAtom
 } from '@/service/recoil/admin';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
@@ -27,11 +28,11 @@ export default function AdminHomePage({
 }: {
   currentTab: AdminTab;
 }) {
-  const [allRequests, setAllRequests] = useRecoilState(AdminAllRequestAtom);
   const [isFetched, setIsFetched] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useRecoilState(
-    isRefreshingRequestAtom
-  );
+
+  const [_, setAllRequests] = useRecoilState(AdminAllRequestAtom);
+  const [__, setAllRequestsCount] = useRecoilState(AdminAllRequestCountAtom);
+  const [___, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
 
   // initialize
   const router = useRouter();
@@ -68,15 +69,23 @@ export default function AdminHomePage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleRefreshRequest = useDebounce(() => {
+  const handleRefreshRequest = useDebounce(async () => {
     setIsRefreshing(true);
-    getAllRequestAdmin()
-      .then((requests: BookRequest[]) => {
+    try {
+      await getAllRequestAdmin().then((requests: BookRequest[]) => {
         setAllRequests(requests);
-      })
-      .finally(() => {
-        setIsRefreshing(false);
       });
+      //
+      await getAllRequestCount().then((count: RequestCount) => {
+        setAllRequestsCount(count);
+      });
+    } catch (err) {
+      console.log('====================================');
+      console.log('error', err);
+      console.log('====================================');
+    } finally {
+      setIsRefreshing(false);
+    }
   }, 100);
 
   return (
