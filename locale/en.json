@@ -7,13 +7,51 @@
             "request": "Request",
             "profile": "Profile",
 
-            "admin-btn": "Admin"
+            "admin-btn": "Admin",
+            "login-btn": "Login",
+            "view-btn": "View"
+
         },
 
-        "category-section": {
+        "category": {
+            "education": "Education",
+            "business": "Business",
+            "history": "History",
+            "drama": "Drama",
+            "fantasy": "Fantasy",
+            "development": "Self Development"
+        },
 
+        "search-box": {
+            "box-text": "Search name of the book"
         }
-    }
+
+    },
+
+    "save-tab": {
+
+    },
+
+    "request-tab": {
+
+    },
+
+    "profile-tab": {
+
+    },
+
+    "not-logged-in": {
+        "not-logged-in text": "You are not logged in"
+    },
+
+    "login-tab": {
+        "h1-login-tap": "Welcome to Digital Library",
+        "p-details-login-tap": "Please enter your details",
+        "a-login-tap": "Forgot password?",
+        "p-NoAccount": "Don't have an account?"
+
+
+    },
 
     
 }
