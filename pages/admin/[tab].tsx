@@ -4,7 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import DashboardTab from '@/components/admin/tab/Dashboard.tab';
 import UploadTab from '@/components/admin/tab/Upload.tab';
 import IncomingTab from '@/components/admin/tab/Incoming.tab';
@@ -13,7 +13,7 @@ import ArchivedTab from '@/components/admin/tab/Archived.tab';
 import RenterTab from '@/components/admin/tab/Renter.tab';
 import SettingTab from '@/components/admin/tab/Setting.tab';
 import { getAllRequestAdmin, getAllRequestCount } from '@/service/api/admin';
-import { BookRequest, RequestCount } from '@/types';
+
 import { useRecoilState } from 'recoil';
 import {
   AdminAllRequestAtom,
@@ -22,6 +22,8 @@ import {
 } from '@/service/recoil/admin';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import { useDebounce } from '@/utils/function';
+
+import BookTab from '@/components/admin/tab/Book.tab';
 
 export default function AdminHomePage({
   currentTab
@@ -122,6 +124,7 @@ export default function AdminHomePage({
           {tab === AdminTab.UPLOAD && (
             <UploadTab handleRefreshRequest={handleRefreshRequest} />
           )}
+          {tab === AdminTab.BOOKS && <BookTab />}
           {tab === AdminTab.INCOMING_REQUEST && (
             <IncomingTab handleRefreshRequest={handleRefreshRequest} />
           )}

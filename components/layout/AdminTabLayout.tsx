@@ -17,8 +17,8 @@ export default function AdminTabLayout({
   const isRefreshing = useRecoilValue(isRefreshingRequestAtom);
 
   return (
-    <div className='p-4 md:p-8 min-h-full w-full overflow-y-scroll flex flex-grow flex-col'>
-      <div className='flex justify-between items-center  mb-4'>
+    <div className='p-4 md:p-8 min-h-full w-full overflow-y-scroll flex flex-grow flex-col '>
+      <div className='left-0 z-10 flex justify-between items-center mb-4'>
         <h1 className='text-xl xl:text-2xl text-primary font-bold'>{title}</h1>
 
         {handleRefresh && (

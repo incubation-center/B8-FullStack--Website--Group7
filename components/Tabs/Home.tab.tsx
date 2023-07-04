@@ -13,7 +13,11 @@ import { useDebounce, useOnScreen } from '@/utils/function';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
 
-export default function HomeTab() {
+export default function HomeTab({
+  isUseInAdminPage = false
+}: {
+  isUseInAdminPage?: boolean;
+}) {
   const router = useRouter();
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
@@ -49,11 +53,13 @@ export default function HomeTab() {
     (categoryKey: string, category: string) => {
       setCurrentCategory(category);
 
-      router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
-        shallow: true
-      });
-
       handleScrollToCategoryNav(categoryKey, 800);
+
+      if (!isUseInAdminPage) {
+        router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
+          shallow: true
+        });
+      }
     },
     100
   );
@@ -87,7 +93,8 @@ export default function HomeTab() {
       setCurrentCategory(category);
     } else {
       setCurrentCategory(BookCategory.EDUCATION);
-      updateRoute(BookCategory.EDUCATION);
+
+      if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
     }
 
     // setBooks(books);
@@ -106,40 +113,42 @@ export default function HomeTab() {
   }, []);
 
   return (
-    <div className='px-4'>
-      <div
-        id='category-section'
-        className='
+    <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
+      {!isUseInAdminPage && (
+        <div
+          id='category-section'
+          className='
           category-section
-          w-full overflow-x-auto flex flex-row  bg-alt-secondary 
+          w-full overflow-x-auto flex flex-row bg-inherit
           sticky top-0 z-10 py-4
         '
-      >
-        <div className='w-full flex flex-nowrap h-[40px]  items-center'>
-          {Object.keys(BookCategory).map((category: any) => {
-            const key = category as keyof typeof BookCategory;
-            const value = BookCategory[key];
+        >
+          <div className='w-full flex flex-nowrap h-[40px]  items-center'>
+            {Object.keys(BookCategory).map((category: any) => {
+              const key = category as keyof typeof BookCategory;
+              const value = BookCategory[key];
 
-            const isCurrentCategory = currentCategory === value;
+              const isCurrentCategory = currentCategory === value;
 
-            const iconPath = `/icon/book-category/${BookCategory[
-              category as keyof typeof BookCategory
-            ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
+              const iconPath = `/icon/book-category/${BookCategory[
+                category as keyof typeof BookCategory
+              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
 
-            return (
-              <CategoryButton
-                key={category}
-                category={category}
-                value={value}
-                iconPath={iconPath}
-                isCurrentCategory={isCurrentCategory}
-                handleCategory={() => handleCategory(key, value)}
-                disabled={isFetchingBooks || allBooks.length === 0}
-              />
-            );
-          })}
+              return (
+                <CategoryButton
+                  key={category}
+                  category={category}
+                  value={value}
+                  iconPath={iconPath}
+                  isCurrentCategory={isCurrentCategory}
+                  handleCategory={() => handleCategory(key, value)}
+                  disabled={isFetchingBooks || allBooks.length === 0}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       <div
         ref={scrollingRef}

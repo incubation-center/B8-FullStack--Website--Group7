@@ -21,6 +21,7 @@ export const BookCategory = {
 export enum AdminTab {
   DASHBOARD = 'dashboard',
   UPLOAD = 'upload',
+  BOOKS = 'books',
   INCOMING_REQUEST = 'incoming-request',
   ACTIVE_REQUEST = 'active-request',
   ARCHIVED_REQUEST = 'archived-request',

@@ -18,23 +18,26 @@ export default function Navbar({
         return 'translate-y-0';
       case AdminTab.UPLOAD:
         return 'translate-y-12';
-      case AdminTab.INCOMING_REQUEST:
+      case AdminTab.BOOKS:
         return 'translate-y-24';
-      case AdminTab.ACTIVE_REQUEST:
+      case AdminTab.INCOMING_REQUEST:
         return 'translate-y-[9rem]';
-      case AdminTab.ARCHIVED_REQUEST:
+      case AdminTab.ACTIVE_REQUEST:
         return 'translate-y-[12rem]';
-      case AdminTab.RENTER:
+      case AdminTab.ARCHIVED_REQUEST:
         return 'translate-y-[15rem]';
-      case AdminTab.SETTING:
+      case AdminTab.RENTER:
         return 'translate-y-[18rem]';
+      case AdminTab.SETTING:
+        return 'translate-y-[21rem]';
     }
   };
 
   return (
     <div
       className='
-        h-full w-[250px] min-w-[250px] flex flex-col
+        w-[300px]
+        h-full flex flex-col
         bg-primary
         p-2 z-10
       '
@@ -64,6 +67,13 @@ export default function Navbar({
           iconPath='/icon/admin-sidebar/upload.svg'
           isCurrentTab={currentTab === AdminTab.UPLOAD}
           onClick={() => handlePageRouting(AdminTab.UPLOAD)}
+        />
+
+        <NavbarBtn
+          title={formatEnumValue(AdminTab.BOOKS)}
+          iconPath='/icon/admin-sidebar/upload.svg'
+          isCurrentTab={currentTab === AdminTab.BOOKS}
+          onClick={() => handlePageRouting(AdminTab.BOOKS)}
         />
 
         <NavbarBtn
