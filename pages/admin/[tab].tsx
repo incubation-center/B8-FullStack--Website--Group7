@@ -51,34 +51,49 @@ export default function AdminHomePage({
   }, [router.query.tab, setTab]);
   // end: handling page routing
 
+  const initializeData = async () => {
+    try {
+      const [requestsResult, countResult] = await Promise.allSettled([
+        getAllRequestAdmin(),
+        getAllRequestCount()
+      ]);
+      if (requestsResult.status === 'fulfilled') {
+        setAllRequests(requestsResult.value);
+      }
+      if (countResult.status === 'fulfilled') {
+        setAllRequestsCount(countResult.value);
+      }
+    } catch (err) {
+      console.log('====================================');
+      console.log('error', err);
+      console.log('====================================');
+    } finally {
+      setIsFetched(true);
+    }
+  };
+
   // initialize tab state
   useEffect(() => {
     setTab(currentTab);
 
-    // update all requests
-    getAllRequestAdmin()
-      .then((requests: BookRequest[]) => {
-        setAllRequests(requests);
-        console.log('====================================');
-        console.log('all requests', requests);
-        console.log('====================================');
-      })
-      .finally(() => {
-        setIsFetched(true);
-      });
+    initializeData();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRefreshRequest = useDebounce(async () => {
     setIsRefreshing(true);
     try {
-      await getAllRequestAdmin().then((requests: BookRequest[]) => {
-        setAllRequests(requests);
-      });
-      //
-      await getAllRequestCount().then((count: RequestCount) => {
-        setAllRequestsCount(count);
-      });
+      const [requestsResult, countResult] = await Promise.allSettled([
+        getAllRequestAdmin(),
+        getAllRequestCount()
+      ]);
+      if (requestsResult.status === 'fulfilled') {
+        setAllRequests(requestsResult.value);
+      }
+      if (countResult.status === 'fulfilled') {
+        setAllRequestsCount(countResult.value);
+      }
     } catch (err) {
       console.log('====================================');
       console.log('error', err);

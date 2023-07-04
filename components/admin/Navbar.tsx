@@ -36,7 +36,7 @@ export default function Navbar({
       className='
         h-full w-[250px] min-w-[250px] flex flex-col
         bg-primary
-        p-4 z-10
+        p-2 z-10
       '
     >
       {/* Logo */}
@@ -51,7 +51,7 @@ export default function Navbar({
       </div>
 
       {/* nav button */}
-      <div className='relative'>
+      <div className='relative px-2'>
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
           iconPath='/icon/admin-sidebar/dashboard.svg'
@@ -105,7 +105,7 @@ export default function Navbar({
         <div
           className={`
           ${handleTranslate()} transition-all duration-300
-          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-xl
+          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full
           `}
           style={{ zIndex: -1 }}
         ></div>
@@ -142,8 +142,8 @@ function NavbarBtn({
 }) {
   return (
     <div
-      className={`flex items-center justify-start cursor-pointer rounded-xl 
-      ${isCurrentTab ? 'text-secondary ' : 'text-secondary'}
+      className={`flex items-center justify-start cursor-pointer rounded-full 
+      ${isCurrentTab ? 'text-primary ' : 'text-secondary'}
       transition-all duration-300
       whitespace-nowrap 
       p-1 px-2

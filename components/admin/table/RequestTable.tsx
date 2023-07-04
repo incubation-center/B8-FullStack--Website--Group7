@@ -22,6 +22,10 @@ export default function RequestTable({
   actions,
   useIn
 }: RequestTableProps) {
+  console.log('====================================');
+  console.log('data', data);
+  console.log('====================================');
+
   return (
     <table className='w-full '>
       <thead>

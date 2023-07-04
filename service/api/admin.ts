@@ -28,6 +28,8 @@ export async function getAllRequestAdmin(): Promise<BookRequest[]> {
 
     const { data } = response;
 
+    const bangkokOffset = 7 * 60; // Bangkok is UTC+7
+
     // format date
     data.forEach((request: any) => {
       request.dateOfRequest = request.dateOfRequest
