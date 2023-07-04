@@ -1,19 +1,26 @@
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import PasswordInput from '@/components/login/PasswordInput';
-import { AuthResetPassword } from '@/service/api/auth';
+import {
+  AuthResetPassword,
+  AuthValidateResetPasswordToken
+} from '@/service/api/auth';
 import { AxiosError } from 'axios';
 import { GetServerSidePropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-export function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { userId, token } = context.params as {
     userId: string;
     token: string;
   };
+
+  // validate if token is valid
+  // if not valid, redirect to -> /link-expired
+  // if valid, render this page
 
   return {
     props: {

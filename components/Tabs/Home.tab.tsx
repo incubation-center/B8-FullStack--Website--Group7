@@ -282,9 +282,9 @@ function BookSection({
             <div key={book.id} className='flex flex-col space-y-4'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
 
-              <div className='relative h-[250px] w-[200px] '>
+              <div className='relative h-[200px] w-[150px] mx-auto'>
                 <Image
-                  className='w-full h-full object-bottom object-contain'
+                  className='w-full h-full object-bottom  object-contain'
                   src={book.bookImg}
                   alt={book.title}
                   draggable={false}

@@ -80,3 +80,17 @@ export async function AuthResetPassword({
     throw error;
   }
 }
+
+export async function AuthValidateResetPasswordToken(
+  resetPwdToken: string
+): Promise<boolean> {
+  try {
+    const response = await axiosClient.post(
+      API_ENDPOINT.AUTH.VALIDATE_RESET_PASSWORD_TOKEN(resetPwdToken)
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
