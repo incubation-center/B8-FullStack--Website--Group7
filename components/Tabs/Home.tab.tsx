@@ -14,9 +14,11 @@ import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
 
 export default function HomeTab({
-  isUseInAdminPage = false
+  isUseInAdminPage = false,
+  onClickViewInAdminPage
 }: {
   isUseInAdminPage?: boolean;
+  onClickViewInAdminPage?: (book: Book) => void;
 }) {
   const router = useRouter();
 
@@ -26,8 +28,16 @@ export default function HomeTab({
   // handle onScroll listener
   const scrollingRef = useRef(null);
 
-  const handleBookClick = (id: string) => {
-    router.push(`/book/${id}`);
+  const handleBookClick = (book: Book) => {
+    if (!isUseInAdminPage) {
+      router.push(`/book/${book.id}`);
+      return;
+    }
+
+    // if use in admin page
+    if (onClickViewInAdminPage) {
+      onClickViewInAdminPage(book);
+    }
   };
 
   const handleScrollToCategoryNav = (categoryKey: string, timeout: number) => {
@@ -241,7 +251,7 @@ function BookSection({
   categoryKey: string;
   category: string;
   books: Book[];
-  handleBookClick: (id: string) => void;
+  handleBookClick: (book: Book) => void;
   handleVisibleOnScreen: (categoryKey: string, category: string) => void;
 }) {
   const ref = useRef<any>(null);
@@ -288,7 +298,7 @@ function BookSection({
                 src={book.bookImg}
                 alt={book.title}
                 draggable={false}
-                onClick={() => handleBookClick(book.id!)}
+                onClick={() => handleBookClick(book)}
               />
 
               <button
@@ -296,7 +306,7 @@ function BookSection({
                 bg-secondary text-white font-light
                 rounded-lg py-1 px-2
               '
-                onClick={() => handleBookClick(book.id!)}
+                onClick={() => handleBookClick(book)}
               >
                 View
               </button>
