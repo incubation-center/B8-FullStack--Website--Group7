@@ -121,6 +121,16 @@
         "phone-number-fill": "Enter your phone number"
     },
 
+    "book-tap": {
+        "author": "Author",
+        "genre": "Genre",
+        "book-description": "Book description",
+
+        "borrow-btn": "Borrow",
+        "goback-btn": "Go Back",
+        "save-btn": "Save"
+    },
+
     "btn": {
         "sing-up-btn": "Sign Up",
         "login-btn": "Login"

@@ -121,6 +121,16 @@
         "phone-number-fill": "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក"
     },
 
+    "book-tap": {
+        "author": "អ្នកនិពន្ធ",
+        "genre": "ប្រភេទ",
+        "book-description": "ការពិពណ៌នាសៀវភៅ",
+
+        "borrow-btn": "ខ្ចី",
+        "goback-btn": "ត្រឡប់​ក្រោយ",
+        "save-btn": "រក្សាទុក"
+    },
+
     "btn": {
         "sing-up-btn": "បង្កើត​គណនី",
         "login-btn": "ចូលគណនី"
