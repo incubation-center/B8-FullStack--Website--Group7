@@ -4,8 +4,8 @@ import Image from 'next/image';
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import { useRecoilValue } from 'recoil';
 import { AuthAtom, filteredSavedBooksAtom } from '@/service/recoil';
-import { useState } from 'react';
-import { Book } from '@/types';
+
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function SavedTab({
   onClickExplore
@@ -53,42 +53,44 @@ export default function SavedTab({
                 </button>
               </div>
             )}
-            {favBooks.map((book, index) => (
-              <div key={book.id!} className='flex flex-col space-y-4'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                {/* <img
-                  className='w-fit h-[200px] object-cover cursor-pointer'
-                  src={book.bookImg}
-                  alt={book.title}
-                  draggable={false}
-                  onClick={() => handleBookClick(book.id!)}
-                /> */}
-                <div className='relative h-[250px] w-[200px] '>
-                  <Image
-                    className='w-full h-full object-bottom object-contain'
-                    src={book.bookImg}
-                    alt={book.title}
-                    draggable={false}
-                    fill
-                    style={{
-                      height: '100%',
-                      width: '100%'
-                    }}
-                    onClick={() => handleBookClick(book.id!)}
-                  />
-                </div>
+            <AnimatePresence>
+              {favBooks.map((book, index) => (
+                <motion.div
+                  layout
+                  animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+                  exit={{ opacity: [1, 0], scale: [1, 0.5] }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  key={book.id!}
+                  className='flex flex-col space-y-4'
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <div className='relative h-[250px] w-[200px] '>
+                    <Image
+                      className='w-full h-full object-bottom object-contain'
+                      src={book.bookImg}
+                      alt={book.title}
+                      draggable={false}
+                      fill
+                      style={{
+                        height: '100%',
+                        width: '100%'
+                      }}
+                      onClick={() => handleBookClick(book.id!)}
+                    />
+                  </div>
 
-                <button
-                  className='
+                  <button
+                    className='
                           bg-secondary text-white font-light
                           rounded-lg py-1 px-2 w-40 mx-auto 
                         '
-                  onClick={() => handleBookClick(book.id!)}
-                >
-                  View
-                </button>
-              </div>
-            ))}
+                    onClick={() => handleBookClick(book.id!)}
+                  >
+                    View
+                  </button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       )}

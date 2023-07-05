@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { BookData } from '@/dummydata';
 import { BookCategory } from '@/utils/enum';
 
@@ -310,9 +312,13 @@ function BookSection({
       >
         <div className='flex flex-row shrink-0 space-x-[35px] '>
           {books.map((book, index) => (
-            <div key={book.id} className='flex flex-col space-y-4'>
+            <motion.div
+              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              key={book.id}
+              className='flex flex-col space-y-4'
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-
               <div className='relative h-[200px] w-[150px] mx-auto'>
                 <Image
                   className='w-full h-full object-bottom  object-contain'
@@ -338,7 +344,7 @@ function BookSection({
               >
                 View
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -380,37 +386,46 @@ function FilteredBooksList({
     <div className='w-full h-full py-4 space-y-8'>
       <h1 className='font-medium text-lg text-primary'>Search result:</h1>
       <div className='flex flex-row flex-wrap shrink-0 justify-center gap-4'>
-        {books.map((book, index) => (
-          <div key={book.id} className='flex flex-col space-y-4'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+        <AnimatePresence>
+          {books.map((book, index) => (
+            <motion.div
+              layout
+              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+              exit={{ opacity: [1, 0], scale: [1, 0.5] }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              key={book.id}
+              className='flex flex-col space-y-4'
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
 
-            <div className='relative h-[200px] w-[150px] mx-auto'>
-              <Image
-                className='w-full h-full object-bottom  object-contain'
-                src={book.bookImg}
-                alt={book.title}
-                draggable={false}
-                fill
-                style={{
-                  height: '100%',
-                  width: '100%'
-                }}
-                sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
-                onClick={() => handleBookClick(book)}
-              />
-            </div>
+              <div className='relative h-[200px] w-[150px] mx-auto'>
+                <Image
+                  className='w-full h-full object-bottom  object-contain'
+                  src={book.bookImg}
+                  alt={book.title}
+                  draggable={false}
+                  fill
+                  style={{
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
+                  onClick={() => handleBookClick(book)}
+                />
+              </div>
 
-            <button
-              className='
+              <button
+                className='
                 bg-secondary text-white font-light
                 rounded-lg py-1 px-2 w-32 mx-auto
               '
-              onClick={() => handleBookClick(book)}
-            >
-              View
-            </button>
-          </div>
-        ))}
+                onClick={() => handleBookClick(book)}
+              >
+                View
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   );
