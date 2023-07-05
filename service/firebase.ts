@@ -42,3 +42,31 @@ export async function uploadImage(file: File, id: string) {
 
   return imageUrl;
 }
+
+export async function updateCoverImage(
+  file: File,
+  id: string,
+  category: string
+) {
+  // const fileExtension = file.name.split('.').pop();
+  const newFileNames = `${id}`;
+  // since without file extension the image upload still works
+  // so I don't need to add file extension to the file name
+
+  const renamedFile = new File([file], newFileNames, {
+    type: file.type,
+    lastModified: file.lastModified
+  });
+
+  const imageRef = ref(ref(storage, category), renamedFile.name);
+
+  const imageUrl = await uploadBytes(imageRef, file)
+    .then((snapshot) => {
+      return getDownloadURL(snapshot.ref);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  return imageUrl;
+}

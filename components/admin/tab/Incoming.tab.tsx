@@ -87,7 +87,7 @@ export default function IncomingTab({
 
       <AdminTabLayout
         title='Incoming Request'
-        handleRefreshRequest={handleRefreshRequest}
+        handleRefresh={handleRefreshRequest}
       >
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}

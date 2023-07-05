@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
@@ -12,7 +12,10 @@ import RequestDetail from '@/components/Modals/RequestDetail';
 import { BookRequest, RequestStatus } from '@/types';
 
 import { useRecoilValue } from 'recoil';
-import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import {
+  AdminAllRequestAtom,
+  AdminAllRequestCountAtom
+} from '@/service/recoil/admin';
 
 export default function DashboardTab({
   handleRefreshRequest
@@ -20,6 +23,7 @@ export default function DashboardTab({
   handleRefreshRequest: () => void;
 }) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
+  const requestCount = useRecoilValue(AdminAllRequestCountAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
@@ -27,7 +31,7 @@ export default function DashboardTab({
   return (
     <AdminTabLayout
       title={formatEnumValue(AdminTab.DASHBOARD)}
-      handleRefreshRequest={handleRefreshRequest}
+      handleRefresh={handleRefreshRequest}
     >
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
@@ -37,7 +41,7 @@ export default function DashboardTab({
       <div
         className='
           gap-4
-          lg:grid grid-cols-3 
+          lg:grid grid-cols-4 
           flex flex-wrap
           w-full max-w-[1000px] mx-auto
         '
@@ -45,31 +49,25 @@ export default function DashboardTab({
         <RequestDataShow
           title='Total Incoming'
           icon='/icon/admin-sidebar/incoming-admin.svg'
-          value={{
-            total: 52,
-            today: 11,
-            yesterday: 19
-          }}
+          value={requestCount.PENDING}
         />
 
         <RequestDataShow
           title='Total Active'
           icon='/icon/admin-sidebar/active-admin.svg'
-          value={{
-            total: 52,
-            today: 11,
-            yesterday: 19
-          }}
+          value={requestCount.ACCEPTED}
+        />
+
+        <RequestDataShow
+          title='Total Renter'
+          icon='/icon/admin-sidebar/renter.svg'
+          value={requestCount.RENTER}
         />
 
         <RequestDataShow
           title='Total Archived'
           icon='/icon/admin-sidebar/archived-admin.svg'
-          value={{
-            total: 52,
-            today: 11,
-            yesterday: 19
-          }}
+          value={requestCount.ARCHIVED}
         />
       </div>
 

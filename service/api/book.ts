@@ -31,3 +31,16 @@ export async function getBookById(id: string): Promise<Book> {
     throw error;
   }
 }
+
+export async function updateBookById(id: string, formData: any) {
+  try {
+    const response = await axiosClient.patch(
+      API_ENDPOINT.BOOK.UPDATE_BOOK_BY_ID(id),
+      formData
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

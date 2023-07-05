@@ -31,6 +31,19 @@ export interface BookRequest {
   dateOfReceived?: Date | null;
 }
 
+type Count = {
+  total: number;
+  today: number;
+  yesterday: number;
+};
+
+export interface RequestCount {
+  PENDING: Count;
+  ACCEPTED: Count;
+  RENTER: Count;
+  ARCHIVED: Count;
+}
+
 export enum RequestStatus {
   PENDING = 'PENDING',
   ACCEPTED = 'ACCEPTED',
