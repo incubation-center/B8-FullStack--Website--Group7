@@ -5,6 +5,7 @@ import { atom, selector, selectorFamily } from 'recoil';
 import { getAllRequest } from '../api/request';
 import { getBookById } from '../api/book';
 import Fuse from 'fuse.js';
+import { title } from 'process';
 
 // fetching
 export const isMakingRequestAtom = atom<boolean>({
@@ -30,7 +31,33 @@ export const homePageCategoryAtom = atom<string>({
 
 export const UserRequestAtom = atom<BookRequest[]>({
   key: 'UserRequestAtom',
-  default: []
+  default: undefined
+});
+
+export const filteredUserRequestAtom = selector<BookRequest[]>({
+  key: 'filteredUserRequestAtom',
+  get: ({ get }) => {
+    const requests = get(UserRequestAtom);
+    const keyword = get(searchKeywordAtom);
+    const tab = get(homePageTabAtom);
+
+    if (tab !== HomePageTab.REQUEST_STATUS || keyword === '') return requests;
+
+    const options = {
+      includeScore: true,
+      useExtendedSearch: true,
+      threshold: 0.5,
+      keys: ['book.title', 'book.author', 'book.category']
+    };
+
+    const fuse = new Fuse(requests, options);
+
+    const fuseResult = fuse.search(
+      keyword.toLowerCase().replace(/\s/g, '').trim()
+    );
+
+    return fuseResult.map((item) => item.item);
+  }
 });
 
 // auth
@@ -68,7 +95,7 @@ export const filteredBooksAtom = selector<Book[] | undefined>({
     const options = {
       includeScore: true,
       useExtendedSearch: true,
-      threshold: 0.8,
+      threshold: 0.5,
       keys: ['title', 'author']
     };
 
@@ -96,7 +123,7 @@ export const filteredSavedBooksAtom = selector<Book[]>({
     const options = {
       includeScore: true,
       useExtendedSearch: true,
-      threshold: 0.8,
+      threshold: 0.5,
       keys: ['title', 'author', 'category']
     };
 
