@@ -45,7 +45,7 @@ export const API_ENDPOINT = {
     VALIDATE_TOKEN: (id: string) => '/auth/validate-token/' + id,
     REFRESH_TOKEN: '/auth/refresh-token/',
     VALIDATE_RESET_PASSWORD_TOKEN: (token: string) =>
-      '/user/validate/reset-password-token?resetPwdToken=' + token
+      '/user/validate/reset-password-token/?resetPwdToken=' + token
   },
   USER: {
     INFO: (id: string) => '/user/' + id,

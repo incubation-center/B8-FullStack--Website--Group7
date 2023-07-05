@@ -81,12 +81,10 @@ export async function AuthResetPassword({
   }
 }
 
-export async function AuthValidateResetPasswordToken(
-  resetPwdToken: string
-): Promise<boolean> {
+export async function AuthValidateResetPasswordToken(resetPwdToken: string) {
   try {
     const response = await axiosClient.post(
-      API_ENDPOINT.AUTH.VALIDATE_RESET_PASSWORD_TOKEN(resetPwdToken)
+      API_ENDPOINT.AUTH.VALIDATE_RESET_PASSWORD_TOKEN(resetPwdToken.trim())
     );
 
     return response.data;

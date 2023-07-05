@@ -18,9 +18,23 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     token: string;
   };
 
-  // validate if token is valid
-  // if not valid, redirect to -> /link-expired
-  // if valid, render this page
+  try {
+    await AuthValidateResetPasswordToken(token);
+
+    return {
+      props: {
+        userId,
+        token
+      }
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/reset-password/expired',
+        permanent: true
+      }
+    };
+  }
 
   return {
     props: {
