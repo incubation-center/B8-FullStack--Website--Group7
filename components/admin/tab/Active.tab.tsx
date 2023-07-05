@@ -64,9 +64,9 @@ export default function ActiveTab({
       >
         <RequestTable
           useIn={AdminTab.ACTIVE_REQUEST}
-          data={requestData.filter(
-            (request) => request.status === RequestStatus.ACCEPTED
-          )}
+          data={requestData
+            .filter((request) => request.status === RequestStatus.ACCEPTED)
+            .sort((a, b) => (a.dateOfReturn as any) - (b.dateOfReturn as any))}
           actions={[
             {
               label: 'View',

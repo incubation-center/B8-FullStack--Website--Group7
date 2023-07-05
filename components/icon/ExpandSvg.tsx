@@ -28,9 +28,9 @@ export default function ExpandSvg({
               ease: 'easeInOut'
             }}
             stroke='inherit'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
             d='M9 20l7 7 7-7M23 12l-7-7-7 7'
           />
         )}
@@ -45,9 +45,9 @@ export default function ExpandSvg({
               ease: 'easeInOut'
             }}
             stroke='inherit'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='2'
             d='M23 26l-7-7-7 7M9 6l7 7 7-7'
           />
         )}

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+/* eslint-disable @next/next/no-img-element */
+import { useRef, useState } from 'react';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Book } from '@/types';
 import RightArrowSvg from '../icon/RightArrowSvg';
@@ -17,6 +18,8 @@ import { useRecoilState } from 'recoil';
 import { AllBooksAtom } from '@/service/recoil';
 import { BookCategory } from '@/utils/enum';
 import EditBookCategory from './EditBookCategory';
+import EditSvg from '../icon/EditSvg';
+import { updateCoverImage } from '@/service/firebase';
 
 interface BookUploadInputs extends Book {}
 
@@ -48,6 +51,15 @@ export default function ViewEditBook({
   const [isUpdating, setIsUpdating] = useState(false);
   const isViewing = !isEditing && !isUpdating;
 
+  const [image, setImage] = useState<File>();
+  const imageRef = useRef<HTMLInputElement | null>(null);
+  const handleSelectImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+    }
+  };
+
   const [description, setDescription] = useState(book.description);
 
   const onChangeDescription = useDebounce((text: string) => {
@@ -75,8 +87,19 @@ export default function ViewEditBook({
         title: data.title.trim(),
         author: data.author.trim(),
         category: selectedCategory.value,
-        description: description.trim()
+        description: description.trim(),
+        bookImg: book.bookImg
       };
+
+      if (image) {
+        const res = (await updateCoverImage(
+          image as File,
+          book.id as string,
+          selectedCategory.value.toLowerCase().replace(' ', '_')
+        )) as string;
+
+        formData.bookImg = res;
+      }
 
       const res = await updateBookById(book.id as string, formData);
 
@@ -92,6 +115,8 @@ export default function ViewEditBook({
         category: res.data.category
       });
       setDescription(res.data.description);
+      setImage(undefined);
+      imageRef.current?.value && (imageRef.current.value = '');
 
       showAlert({
         title: 'Success',
@@ -135,6 +160,8 @@ export default function ViewEditBook({
           category: book.category
         });
         setDescription(book.description);
+        setImage(undefined);
+        imageRef.current?.value && (imageRef.current.value = '');
         setIsEditing(false);
       }
     });
@@ -226,6 +253,7 @@ export default function ViewEditBook({
         exit='exit'
         className='fixed right-0 top-0 w-2/3 2xl:w-1/2 h-screen z-[99999] flex items-center overflow-clip'
       >
+        {/* close */}
         <button
           className=' bg-primary p-4 z-0 rounded-l-full translate-x-2 shadow-xl'
           onClick={onClose}
@@ -236,31 +264,95 @@ export default function ViewEditBook({
               transition: { delay: 0.3, duration: 0.5 }
             }}
           >
-            <RightArrowSvg className='h-7 w-7 text-alt-secondary translate-x-1' />
+            <RightArrowSvg className='h-5 w-5 2xl:h-7 2xl:w-7 text-alt-secondary translate-x-1' />
           </motion.div>
         </button>
-        {/* book */}
 
+        {/* book */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='h-screen flex flex-col'
+          className='h-screen w-full flex flex-col'
         >
           {/* form body */}
           <div className='h-screen w-full bg-primary p-4 overflow-auto z-10 relative'>
             {/* book cover */}
-            <div className='relative w-fit h-64 mb-10 md:mb-0'>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={book.bookImg}
-                alt={book.title}
-                className='aspect-auto h-full w-full object-contain object-left'
+            <div className='relative h-56 2xl:h-64 w-fit'>
+              {image && (
+                <button
+                  onClick={() => {
+                    setImage(undefined);
+                    if (imageRef.current) {
+                      imageRef.current.value = '';
+                    }
+                  }}
+                  type='button'
+                  className='absolute -top-2 -right-2 z-10'
+                >
+                  <img
+                    src='/icon/fail.png'
+                    alt='close icon'
+                    className='w-6 h-6 cursor-pointer'
+                  />
+                </button>
+              )}
+              {/* image */}
+              <AnimatePresence>
+                <img
+                  src={image ? URL.createObjectURL(image) : book.bookImg}
+                  alt='book cover'
+                  className='w-full h-full object-cover'
+                />
+
+                {/* hover to edit image */}
+                {isEditing && (
+                  <motion.label
+                    key='edit image'
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    htmlFor='profileImg'
+                    className='
+                      w-full h-full
+                      absolute top-0 left-0
+                      backdrop-blur-[3px] bg-black/10
+                      cursor-pointer
+                      flex flex-col justify-center items-center
+                      text-white font-medium
+                      transition-all duration-300
+                    '
+                  >
+                    <EditSvg className='w-4 h-fit fill-white' />
+                    <span>Edit</span>
+                  </motion.label>
+                )}
+              </AnimatePresence>
+
+              <input
+                ref={imageRef}
+                name='profileImg'
+                id='profileImg'
+                type='file'
+                className='
+                  col-span-3 p-1
+                  w-full bg-transparent
+                  border-b border-primary
+                  hidden
+                '
+                onChange={handleSelectImage}
+                accept='image/*'
+                disabled={isViewing || isUpdating}
               />
             </div>
+            {!isViewing && (
+              <div className='w-fit text-center mt-2 text-white text-xs text-opacity-60'>
+                (click to change image)
+              </div>
+            )}
 
             {/* book detail */}
-            <div className='flex justify-between items-end gap-2 mt-10'>
+            <div className='flex justify-between items-end gap-2 mt-5'>
               <div className='w-full space-y-[10px] text-alt-secondary font-light'>
-                <h2 className='font-bold text-2xl'>
+                <h2 className='font-bold text-xl 2xl:text-2xl'>
                   <input
                     {...register('title', { required: 'Title is required' })}
                     placeholder='Title'
@@ -319,6 +411,11 @@ export default function ViewEditBook({
               </h2>
 
               <div className='mt-[10px] text-alt-secondary font-light w-full'>
+                {isViewing && description.length <= 0 && (
+                  <div className='text-alt-secondary text-opacity-70'>
+                    No description provided
+                  </div>
+                )}
                 <div
                   suppressContentEditableWarning={true}
                   contentEditable={isEditing && !isUpdating}
@@ -340,7 +437,7 @@ export default function ViewEditBook({
           <div className='flex justify-end gap-2 w-full p-4 bg-primary'>
             {isViewing && (
               <button
-                className=' bg-secondary w-32 p-2 px-8 text-white rounded-full'
+                className=' bg-secondary w-32 p-2 px-8 text-white rounded-full flex justify-center items-baseline'
                 onClick={() => {
                   setIsEditing(true);
                 }}
