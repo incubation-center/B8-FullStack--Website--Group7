@@ -4,6 +4,7 @@ import { BookCategory, HomePageTab } from '@/utils/enum';
 import { atom, selector, selectorFamily } from 'recoil';
 import { getAllRequest } from '../api/request';
 import { getBookById } from '../api/book';
+import Fuse from 'fuse.js';
 
 // fetching
 export const isMakingRequestAtom = atom<boolean>({
@@ -17,14 +18,19 @@ export const homePageTabAtom = atom<HomePageTab>({
   default: HomePageTab.HOME
 });
 
-export const homePageSearchAtom = atom<string>({
-  key: 'homePageSearch',
+export const searchKeywordAtom = atom<string>({
+  key: 'searchKeyword',
   default: ''
 });
 
 export const homePageCategoryAtom = atom<string>({
   key: 'homePageCategory',
   default: ''
+});
+
+export const UserRequestAtom = atom<BookRequest[]>({
+  key: 'UserRequestAtom',
+  default: []
 });
 
 // auth
@@ -48,6 +54,32 @@ export const AuthAtom = atom<AuthStore>({
 export const AllBooksAtom = atom<Book[]>({
   key: 'AllBooksAtom',
   default: []
+});
+
+export const filteredBooksAtom = selector<Book[] | undefined>({
+  key: 'filteredBooksAtom',
+  get: ({ get }) => {
+    const books = get(AllBooksAtom);
+    const keyword = get(searchKeywordAtom);
+    const tab = get(homePageTabAtom);
+
+    if (tab !== HomePageTab.HOME || keyword === '') return undefined;
+
+    const options = {
+      includeScore: true,
+      useExtendedSearch: true,
+      threshold: 0.8,
+      keys: ['title', 'author']
+    };
+
+    const fuse = new Fuse(books, options);
+
+    const fuseResult = fuse.search(
+      keyword.toLowerCase().replace(/\s/g, '').trim()
+    );
+
+    return fuseResult.map((item) => item.item);
+  }
 });
 
 export const getBookByIdAtom = selectorFamily<Book | null, string>({

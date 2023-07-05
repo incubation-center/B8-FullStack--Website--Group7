@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next/types';
 
-import { HomePageTab } from '@/utils/enum';
+import { BookCategory, HomePageTab } from '@/utils/enum';
 
 import HomeLayout from '@/components/layout/HomeLayout';
 import HomeTab from '@/components/Tabs/Home.tab';
@@ -13,7 +13,7 @@ import Profile from '@/components/Tabs/Profile.tab';
 import { processUserToken } from '@/service/token';
 
 import { useRecoilState } from 'recoil';
-import { AllBooksAtom, AuthAtom } from '@/service/recoil';
+import { AllBooksAtom, AuthAtom, homePageTabAtom } from '@/service/recoil';
 import { AuthStore } from '@/types/auth';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
@@ -28,28 +28,46 @@ export default function Home({
 }) {
   // atoms
   const [_, setAuthObj] = useRecoilState(AuthAtom);
+  const [__, setCurrentTab] = useRecoilState(homePageTabAtom);
+  const [tab, setTab] = useState(currentTab);
 
   // initialize
   const router = useRouter();
 
-  // handling page routing
-  const [tab, setTab] = useState(currentTab);
+  const updateTab = (tab: HomePageTab) => {
+    setTab(tab as HomePageTab);
+    setCurrentTab(tab);
+  };
 
+  // handling page routing
   const handlePageRouting = (tab: HomePageTab) => {
+    if (tab === HomePageTab.HOME) {
+      router.push(
+        `/?tab=${tab}#${BookCategory.EDUCATION.toLowerCase()}`,
+        undefined,
+        {
+          shallow: true,
+          scroll: false
+        }
+      );
+      return;
+    }
+
     router.push(`/?tab=${tab}`, undefined, { shallow: true, scroll: false });
   };
   useEffect(() => {
     const tab = router.query.tab;
     if (tab) {
-      setTab(tab as HomePageTab);
+      updateTab(tab as HomePageTab);
     }
-  }, [router.query.tab, setTab]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query.tab]);
   // end: handling page routing
 
   // initialize tab state
   const [isFetched, setIsFetched] = useState(false);
   useEffect(() => {
-    setTab(currentTab);
+    updateTab(currentTab);
     setAuthObj(authStore);
 
     console.log('====================================');
