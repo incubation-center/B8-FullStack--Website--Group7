@@ -29,15 +29,65 @@
     },
 
     "save-tab": {
+        "h1-save": "Save"
 
     },
 
     "request-tab": {
+        "h1-request-status": "Request Status",
+        "book": "Book",
+        "date": "Date",
+        "status": "Status",
+        "action": "Action",
+
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
 
     },
 
     "profile-tab": {
+        "personal-info": "Personal Information",
+        "username": "Username",
+        "phone number": "Phone Number",
+        "email": "Email",
 
+        "privacy-set": "Privacy Setting",
+        "password": "Password",
+
+        "edit-btn": "Edit",
+        "changePass-btn": "Change Password",
+        "logout-btn": "Logout"
+
+    },
+
+    "Edit-tap": {
+        "personal-info": "Personal Information",
+        "username": "Username",
+        "email": "Email",
+        "phone-number": "Phone Number",
+
+        "cancel-btn": "Cancel",
+        "save-btn": "save"
+    },
+
+    "change-pass-tap": {
+        "password": "Password",
+        "password-fill": "Enter your current password",
+        "new-password": "New Password",
+        "new-password-fill": "new password",
+        "confirm-password": "Confirm Password",
+        "confirm-password-fill": "Confirm new password",
+
+        "cancel-btn": "Cancel",
+        "save-btn": "save"
+    },
+
+    "logout-tap": {
+        "logout": "Logout",
+
+        "no-btn": "No",
+        "yes-btn": "Yes"
     },
 
     "not-logged-in": {
@@ -48,10 +98,153 @@
         "h1-login-tap": "Welcome to Digital Library",
         "p-details-login-tap": "Please enter your details",
         "a-login-tap": "Forgot password?",
-        "p-NoAccount": "Don't have an account?"
+        "p-NoAccount": "Don't have an account?",
 
-
+        "login-email": "Email Address",
+        "login-email-fill": "Please enter your email",
+        "login-password": "Password",
+        "login-password-fill": "Please enter your password"
     },
 
-    
+    "sign-up-tab": {
+        "h1-sign-up-tap": "Create an account",
+        "p-HaveAccount": "Already have an account?",
+
+        "username": "Username",
+        "username-fill": "Enter your username",
+        "email-address": "Email address",
+        "password": "Password",
+        "password-fill": "Enter your password",
+        "confirm-password": "Confirm Password",
+        "confirm-password-fill": "Confirm your password",
+        "phone-number": "Phone Number",
+        "phone-number-fill": "Enter your phone number"
+    },
+
+    "btn": {
+        "sing-up-btn": "Sign Up",
+        "login-btn": "Login"
+    },
+
+
+    "admin": {
+        "sidebar": {
+            "dashboard": "Dashboard",
+            "upload": "Upload",
+            "incoming-request": "Incoming Request",
+            "active-request": "Active Request",
+            "archived-request": "Archived Request",
+            "renter": "Renter",
+            "settings": "Setting",
+
+            "back-to-home-btn": "Back to Home"
+        },
+
+        "dashboard-tap": {
+            "dashboard": "Dashboard",
+            "total-incoming": "Total Incoming",
+            "total-active": "Total Active",
+            "total-archived": "Total Archived",
+
+            "recent-renter": "Recent Renter",
+            "name": "Name",
+            "email": "Email",
+            "approval-date": "Approval date",
+            "return-date": "Return date",
+            "actions": "Actions",
+
+            "refresh-btn": "Refresh",
+            "view-btn": "View"
+        },
+
+        "upload-tap": {
+            "book-upload": "Book Upload",
+            "book-cover": "Book cover",
+            "upload-img": "Upload Your Image",
+
+            "book-title": "Book Title",
+            "author": "Author",
+            "category": "Category",
+            "description": "Description",
+
+            "upload-book-btn": "Upload book"
+        },
+
+        "incoming-request-tap": {
+            "incoming-request":"Incoming Request",
+
+            "book": "Book",
+            "username":"Username",
+            "request-date": "Request date",
+            "actions": "Actions",
+
+            "approve-btn": "Approve",
+            "reject-btn": "Reject",
+
+            "approve-request-tap": {
+                "approve-request": "Approve Request",
+                "p-approve-request-tap": "Are you sure you want to approve this request?",
+
+                "no-btn": "No",
+                "yes-btn": "Yes"
+            },
+
+            "reject-request-tap": {
+                "reject-request": "Reject Request",
+                "p-reject-request": "Are you sure you want to reject this request?",
+
+                "reject-reason": "Reject reasons",
+                "reject-reason-fill": "Please input your reason",
+
+                "no-btn": "No",
+                "yes-btn": "Yes"
+            }
+        },
+
+        "active-request-tap": {
+            "active-request": "Active Request",
+            "book": "Book",
+            "username": "Username",
+            "to-be-returned-date": "To be returned date",
+            "actions": "Actions",
+
+            "receive-btn": "Receive"
+        },
+
+        "archived-request-tap": {
+            "archived-request":"Archived Request",
+            "book": "Book",
+            "username":"Username",
+            "status": "Status",
+            "actions": "Actions",
+
+            "approved": "Approved",
+            "rejected": "Rejected"
+        },
+
+        "renter-tap": {
+            "renter": "Renter",
+            "name": "Name",
+            "email": "Email",
+            "approval-date": "Approval date",
+            "return-date": "Return date",
+            "actions": "Actions"
+        },
+
+        "setting-tap": {
+            "setting": "Setting",
+            "general-setting": "General Setting",
+            "system-name": "System Name",
+
+            "security-policy": "Security & Policy",
+            "password":"Password",
+            "password-fill": "The admin able to change the system credentials",
+            "activity-log": "Activity log",
+            "activity-log-fill": "The admin able to see the login activity in the system",
+
+            "change-btn": "Change",
+            "view-btn": "View"
+        }
+    }
+
 }
