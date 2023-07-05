@@ -41,7 +41,7 @@ export default function DashboardTab({
       <div
         className='
           gap-4
-          lg:grid grid-cols-3 
+          lg:grid grid-cols-4 
           flex flex-wrap
           w-full max-w-[1000px] mx-auto
         '
@@ -56,6 +56,12 @@ export default function DashboardTab({
           title='Total Active'
           icon='/icon/admin-sidebar/active-admin.svg'
           value={requestCount.ACCEPTED}
+        />
+
+        <RequestDataShow
+          title='Total Renter'
+          icon='/icon/admin-sidebar/renter.svg'
+          value={requestCount.RENTER}
         />
 
         <RequestDataShow

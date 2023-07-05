@@ -15,8 +15,19 @@ import useAlertModal, { AlertType } from '../Modals/Alert';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 import { useRecoilState } from 'recoil';
 import { AllBooksAtom } from '@/service/recoil';
+import { BookCategory } from '@/utils/enum';
+import EditBookCategory from './EditBookCategory';
 
 interface BookUploadInputs extends Book {}
+
+const CategoryOptions = [
+  { value: BookCategory.EDUCATION, label: BookCategory.EDUCATION },
+  { value: BookCategory.BUSINESS, label: BookCategory.BUSINESS },
+  { value: BookCategory.HISTORY, label: BookCategory.HISTORY },
+  { value: BookCategory.DRAMA, label: BookCategory.DRAMA },
+  { value: BookCategory.FANTASY, label: BookCategory.FANTASY },
+  { value: BookCategory.SELF_DEVELOPMENT, label: BookCategory.SELF_DEVELOPMENT }
+];
 
 export default function ViewEditBook({
   book,
@@ -29,6 +40,9 @@ export default function ViewEditBook({
   const { AlertModal, showAlert } = useAlertModal();
 
   const [AllBooks, setAllBooks] = useRecoilState(AllBooksAtom);
+  const [selectedCategory, setSelectedCategory] = useState(
+    CategoryOptions.find((c) => c.value === book.category) ?? CategoryOptions[0]
+  );
 
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -60,7 +74,7 @@ export default function ViewEditBook({
       const formData = {
         title: data.title.trim(),
         author: data.author.trim(),
-        category: data.category.trim(),
+        category: selectedCategory.value,
         description: description.trim()
       };
 
@@ -232,7 +246,7 @@ export default function ViewEditBook({
           className='h-screen flex flex-col'
         >
           {/* form body */}
-          <div className=' w-full bg-primary p-4 overflow-auto z-10 relative'>
+          <div className='h-screen w-full bg-primary p-4 overflow-auto z-10 relative'>
             {/* book cover */}
             <div className='relative w-fit h-64 mb-10 md:mb-0'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -279,25 +293,18 @@ export default function ViewEditBook({
                   />
                   <InputError error={errors.author?.message} />
                 </h2>
-                <h2>
-                  <span className='font-medium'>
+                <div>
+                  <h2 className='font-medium'>
                     Genre
                     {isEditing && <RequiredIcon />}
-                  </span>
-                  <br />
-                  <input
-                    {...register('category', {
-                      required: 'Category is required'
-                    })}
-                    type='text'
-                    disabled={!isEditing || isUpdating}
-                    className={`
-                      ${isEditing ? activeClassName : defaultClassName} 
-                      transition-all duration-300 w-full
-                    `}
+                  </h2>
+                  <EditBookCategory
+                    options={CategoryOptions}
+                    selectedOption={selectedCategory as any}
+                    setSelectedOption={setSelectedCategory}
+                    disabled={isViewing}
                   />
-                  <InputError error={errors.category?.message} />
-                </h2>
+                </div>
               </div>
             </div>
 
