@@ -82,6 +82,34 @@ export const filteredBooksAtom = selector<Book[] | undefined>({
   }
 });
 
+export const filteredSavedBooksAtom = selector<Book[]>({
+  key: 'filteredSavedBooksAtom',
+  get: ({ get }) => {
+    const savedBooks = get(AuthAtom).user?.favoriteBooks ?? [];
+    const keyword = get(searchKeywordAtom);
+    const tab = get(homePageTabAtom);
+
+    if (tab !== HomePageTab.SAVED || keyword === '') return savedBooks;
+
+    if (savedBooks.length === 0) return [];
+
+    const options = {
+      includeScore: true,
+      useExtendedSearch: true,
+      threshold: 0.8,
+      keys: ['title', 'author', 'category']
+    };
+
+    const fuse = new Fuse(savedBooks, options);
+
+    const fuseResult = fuse.search(
+      keyword.toLowerCase().replace(/\s/g, '').trim()
+    );
+
+    return fuseResult.map((item) => item.item);
+  }
+});
+
 export const getBookByIdAtom = selectorFamily<Book | null, string>({
   key: 'getBookById',
   get:

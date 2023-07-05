@@ -3,7 +3,9 @@ import Image from 'next/image';
 
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import { useRecoilValue } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
+import { AuthAtom, filteredSavedBooksAtom } from '@/service/recoil';
+import { useState } from 'react';
+import { Book } from '@/types';
 
 export default function SavedTab({
   onClickExplore
@@ -11,6 +13,8 @@ export default function SavedTab({
   onClickExplore: () => void;
 }) {
   const authStore = useRecoilValue(AuthAtom);
+  const favBooks = useRecoilValue(filteredSavedBooksAtom);
+
   const router = useRouter();
 
   const handleBookClick = (id: string) => {
@@ -33,7 +37,7 @@ export default function SavedTab({
             Saved
           </h1>
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
-            {authStore.user.favoriteBooks.length === 0 && (
+            {favBooks.length === 0 && (
               <div className='h-full w-full flex flex-col justify-center items-center'>
                 <h1 className='text-center text-primary font-medium'>
                   You have no saved books
@@ -49,7 +53,7 @@ export default function SavedTab({
                 </button>
               </div>
             )}
-            {authStore.user.favoriteBooks.map((book, index) => (
+            {favBooks.map((book, index) => (
               <div key={book.id!} className='flex flex-col space-y-4'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 {/* <img

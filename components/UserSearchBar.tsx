@@ -23,7 +23,7 @@ export default function UserSearchBar({
     if (currentTab === HomePageTab.HOME) {
       setPlaceholder('Title, Author');
     } else if (currentTab === HomePageTab.SAVED) {
-      setPlaceholder('Title, Author');
+      setPlaceholder('Title, Author, Category');
     } else if (currentTab === HomePageTab.REQUEST_STATUS) {
       setPlaceholder('Title, Author, Category, Status');
     } else if (currentTab === HomePageTab.PROFILE) {
