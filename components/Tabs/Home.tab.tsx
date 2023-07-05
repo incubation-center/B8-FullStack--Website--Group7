@@ -110,10 +110,16 @@ export default function HomeTab({
     // setBooks(books);
     if (allBooks.length === 0) {
       setIsFetchingBooks(true);
-      getAllBooks().then((books) => {
-        setAllBooks(books);
-        setIsFetchingBooks(false);
-      });
+      getAllBooks()
+        .then((books) => {
+          setAllBooks(books);
+          setIsFetchingBooks(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAllBooks(BookData);
+          setIsFetchingBooks(false);
+        });
     }
 
     return () => {

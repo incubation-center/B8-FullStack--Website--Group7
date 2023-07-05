@@ -1,4 +1,4 @@
-import { HTMLAttributes, useLayoutEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -6,6 +6,17 @@ import { Book } from '@/types';
 import RightArrowSvg from '../icon/RightArrowSvg';
 import Image from 'next/image';
 import { useDebounce } from '@/utils/function';
+import { SubmitHandler, set, useForm } from 'react-hook-form';
+import RequiredIcon from '../login/RequiredIcon';
+import useConfirmModal from '../Modals/useCofirm';
+import { updateBookById } from '@/service/api/book';
+import { AxiosError } from 'axios';
+import useAlertModal, { AlertType } from '../Modals/Alert';
+import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import { useRecoilState } from 'recoil';
+import { AllBooksAtom } from '@/service/recoil';
+
+interface BookUploadInputs extends Book {}
 
 export default function ViewEditBook({
   book,
@@ -14,19 +25,128 @@ export default function ViewEditBook({
   book: Book;
   close: () => void;
 }) {
-  const [defaultBook, setDefaultBook] = useState(book);
+  const { ConfirmModal, showConfirmModal } = useConfirmModal();
+  const { AlertModal, showAlert } = useAlertModal();
+
+  const [AllBooks, setAllBooks] = useRecoilState(AllBooksAtom);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const isViewing = !isEditing && !isUpdating;
+
+  const [description, setDescription] = useState(book.description);
 
   const onChangeDescription = useDebounce((text: string) => {
-    setDefaultBook((prev) => {
-      return {
-        ...prev,
-        description: text
-      };
-    });
+    setDescription(text);
   }, 300);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<BookUploadInputs>({
+    defaultValues: {
+      title: book.title,
+      author: book.author,
+      category: book.category
+    }
+  });
+
+  const onSubmit: SubmitHandler<BookUploadInputs> = async (data) => {
+    setIsUpdating(true);
+
+    try {
+      const formData = {
+        title: data.title.trim(),
+        author: data.author.trim(),
+        category: data.category.trim(),
+        description: description.trim()
+      };
+
+      const res = await updateBookById(book.id as string, formData);
+
+      if (res.status !== 200) {
+        throw new Error('Something went wrong');
+      }
+
+      setIsUpdating(false);
+      setIsEditing(false);
+      reset({
+        title: res.data.title,
+        author: res.data.author,
+        category: res.data.category
+      });
+      setDescription(res.data.description);
+
+      showAlert({
+        title: 'Success',
+        subtitle: 'Book updated successfully',
+        type: AlertType.SUCCESS,
+        onModalClose: () => {
+          setAllBooks((prev) => {
+            const newBooks = prev.map((b) => {
+              if (b.id === book.id) {
+                return res.data;
+              }
+              return b;
+            });
+            return newBooks;
+          });
+        }
+      });
+    } catch (error) {
+      setIsEditing(false);
+      setIsUpdating(false);
+      let message = 'Something went wrong';
+      if (error instanceof AxiosError) {
+        message = error.response?.data.message || message;
+      }
+      showAlert({
+        title: 'Error',
+        subtitle: message,
+        type: AlertType.ERROR
+      });
+    }
+  };
+
+  const onCancelForm = () => {
+    showConfirmModal({
+      title: 'Cancel Editing',
+      subtitle: 'Are you sure you want to cancel the form?',
+      onConfirm: () => {
+        reset({
+          title: book.title,
+          author: book.author,
+          category: book.category
+        });
+        setDescription(book.description);
+        setIsEditing(false);
+      }
+    });
+  };
+
+  const onClose = () => {
+    if (isViewing) {
+      close();
+      return;
+    }
+
+    showConfirmModal({
+      title: 'Cancel',
+      subtitle: 'Are you sure you want to close and cancel the form?',
+      onConfirm: () => {
+        reset({
+          title: book.title,
+          author: book.author,
+          category: book.category
+        });
+        setDescription(book.description);
+        setIsEditing(false);
+        close();
+      }
+    });
+  };
 
   const variants = {
     hidden: {
@@ -61,6 +181,9 @@ export default function ViewEditBook({
 
   return (
     <>
+      <ConfirmModal />
+      <AlertModal />
+
       {/* overlay */}
       <motion.div
         key='overlay'
@@ -74,10 +197,10 @@ export default function ViewEditBook({
           opacity: [1, 0],
           transition: { delay: 0.3 }
         }}
-        className='fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-50 filter backdrop-blur-sm'
-        onClick={() => {
-          close();
-        }}
+        className={`fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-50 filter backdrop-blur-sm ${
+          isViewing && 'cursor-pointer'
+        }`}
+        onClick={isViewing ? close : undefined}
       ></motion.div>
 
       {/* view-edit */}
@@ -87,13 +210,11 @@ export default function ViewEditBook({
         initial='hidden'
         animate='visible'
         exit='exit'
-        className='fixed right-0 top-0 w-2/3 2xl:w-1/2 h-screen z-[999999] flex items-center shadow-xl'
+        className='fixed right-0 top-0 w-2/3 2xl:w-1/2 h-screen z-[99999] flex items-center overflow-clip'
       >
         <button
           className=' bg-primary p-4 z-0 rounded-l-full translate-x-2 shadow-xl'
-          onClick={() => {
-            close();
-          }}
+          onClick={onClose}
         >
           <motion.div
             animate={{
@@ -106,128 +227,94 @@ export default function ViewEditBook({
         </button>
         {/* book */}
 
-        <div className='h-screen w-full bg-primary p-4 overflow-auto z-10 relative'>
-          {/* edit button */}
-          <div className='absolute top-4 right-4 flex gap-2'>
-            {!isEditing ? (
-              <button
-                className=' bg-secondary w-32 p-2 px-8 text-white rounded-full'
-                onClick={() => {
-                  setIsEditing(true);
-                }}
-              >
-                Edit
-              </button>
-            ) : (
-              <>
-                <button
-                  className=' bg-danger  w-32 p-2 px-8 text-white rounded-full'
-                  onClick={() => {
-                    setIsEditing(false);
-                    setDefaultBook(book);
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  className=' bg-success  w-32 p-2 px-8 text-white rounded-full'
-                  onClick={() => {
-                    setIsUpdating(true);
-                  }}
-                >
-                  Save
-                </button>
-              </>
-            )}
-          </div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='h-screen flex flex-col'
+        >
+          {/* form body */}
+          <div className=' w-full bg-primary p-4 overflow-auto z-10 relative'>
+            {/* book cover */}
+            <div className='relative w-fit h-64 mb-10 md:mb-0'>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={book.bookImg}
+                alt={book.title}
+                className='aspect-auto h-full w-full object-contain object-left'
+              />
+            </div>
 
-          {/* book cover */}
-          <div className='relative w-56 h-64 mb-10 md:mb-0'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <Image
-              src={book.bookImg}
-              alt={book.title}
-              fill
-              className='aspect-auto max-w-[200px] max-h-[300px] object-contain object-left'
-            />
-          </div>
-
-          {/* book detail */}
-          <form>
+            {/* book detail */}
             <div className='flex justify-between items-end gap-2 mt-10'>
               <div className='w-full space-y-[10px] text-alt-secondary font-light'>
-                <h1 className='font-bold text-2xl'>
+                <h2 className='font-bold text-2xl'>
                   <input
+                    {...register('title', { required: 'Title is required' })}
+                    placeholder='Title'
                     type='text'
-                    value={defaultBook.title}
-                    onChange={(e) => {
-                      setDefaultBook((prev) => {
-                        return {
-                          ...prev,
-                          title: e.target.value ?? ''
-                        };
-                      });
-                    }}
-                    disabled={!isEditing}
+                    disabled={!isEditing || isUpdating}
                     className={`
                       ${isEditing ? activeClassName : defaultClassName} 
                       transition-all duration-300 focus:outline-none w-full
+                      placeholder:text-alt-secondary placeholder:text-opacity-50
                     `}
                   />
-                </h1>
+                  <InputError error={errors.title?.message} />
+                </h2>
 
                 <h2>
-                  <span className='font-medium'>Author:</span>
+                  <span className='font-medium'>
+                    Author
+                    {isEditing && <RequiredIcon />}
+                  </span>
                   <br />
                   <input
+                    {...register('author', { required: 'Author is required' })}
+                    // ref={authorRef}
                     type='text'
-                    value={defaultBook.author}
-                    onChange={(e) => {
-                      setDefaultBook((prev) => {
-                        return {
-                          ...prev,
-                          author: e.target.value ?? ''
-                        };
-                      });
-                    }}
-                    disabled={!isEditing}
+                    disabled={!isEditing || isUpdating}
                     className={`
                       ${isEditing ? activeClassName : defaultClassName} 
-                      transition-all duration-300
+                      transition-all duration-300 w-full
                     `}
                   />
+                  <InputError error={errors.author?.message} />
                 </h2>
                 <h2>
-                  <span className='font-medium'>Genre:</span>
+                  <span className='font-medium'>
+                    Genre
+                    {isEditing && <RequiredIcon />}
+                  </span>
                   <br />
                   <input
+                    {...register('category', {
+                      required: 'Category is required'
+                    })}
                     type='text'
-                    value={defaultBook.category}
-                    onChange={(e) => {
-                      setDefaultBook((prev) => {
-                        return {
-                          ...prev,
-                          category: e.target.value ?? ''
-                        };
-                      });
-                    }}
-                    disabled={!isEditing}
+                    disabled={!isEditing || isUpdating}
                     className={`
                       ${isEditing ? activeClassName : defaultClassName} 
-                      transition-all duration-300
+                      transition-all duration-300 w-full
                     `}
                   />
+                  <InputError error={errors.category?.message} />
                 </h2>
               </div>
             </div>
 
             <div className='text-alt-secondary mt-4'>
-              <h2 className='font-bold'>Book Description</h2>
+              <h2 className='font-bold'>
+                Book Description
+                {isEditing && (
+                  <span className='ml-2 text-alt-secondary text-opacity-70'>
+                    (optional)
+                  </span>
+                )}
+              </h2>
 
               <div className='mt-[10px] text-alt-secondary font-light w-full'>
                 <div
                   suppressContentEditableWarning={true}
-                  contentEditable={isEditing}
+                  contentEditable={isEditing && !isUpdating}
                   onInput={(e) =>
                     onChangeDescription(e.currentTarget.textContent || '')
                   }
@@ -236,13 +323,60 @@ export default function ViewEditBook({
                     transition-all duration-300 w-full  
                   `}
                 >
-                  {defaultBook.description}
+                  {description}
                 </div>
+                <InputError error={errors.description?.message} />
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+          {/* edit button */}
+          <div className='flex justify-end gap-2 w-full p-4 bg-primary'>
+            {isViewing && (
+              <button
+                className=' bg-secondary w-32 p-2 px-8 text-white rounded-full'
+                onClick={() => {
+                  setIsEditing(true);
+                }}
+              >
+                Edit
+              </button>
+            )}
+            {isEditing && !isUpdating && (
+              <>
+                <button
+                  className=' bg-danger  w-32 p-2 px-8 text-white rounded-full'
+                  onClick={onCancelForm}
+                  type='button'
+                >
+                  Cancel
+                </button>
+                <button
+                  className=' bg-secondary  w-32 p-2 px-8 text-white rounded-full'
+                  type='submit'
+                >
+                  Save
+                </button>
+              </>
+            )}
+            {isUpdating && (
+              <div className='bg-secondary w-fit p-2 px-4 text-white rounded-full flex gap-2 font-medium opacity-80'>
+                <SpinningLoadingSvg className='h-6 w-6 text-white' />
+                Updating...
+              </div>
+            )}
+          </div>
+        </form>
       </motion.div>
     </>
   );
 }
+
+const InputError = ({ error }: { error: any }) => {
+  if (!error) return <></>;
+
+  return (
+    <p className='font-medium bg-red-500 text-white rounded-full w-fit px-4 mt-2 text-sm text-center'>
+      {error}
+    </p>
+  );
+};

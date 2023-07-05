@@ -61,7 +61,7 @@ export const getBookByIdAtom = selectorFamily<Book | null, string>({
 
       // all books data is not fetched yet
       books.forEach((b) => {
-        if (b.id === bookId) {
+        if (b.id == bookId) {
           book = b;
           return;
         }

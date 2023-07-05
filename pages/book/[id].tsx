@@ -26,7 +26,6 @@ import {
 import { AxiosError } from 'axios';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
-import { AuthStore } from '@/types/auth';
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();

@@ -58,7 +58,8 @@ export const API_ENDPOINT = {
     GET_ALL_BOOKS: '/book',
     GET_BOOK_BY_ID: (id: string) => '/book/' + id,
     GET_BOOK_BY_TITLE: (title: string) => '/book/title?title=' + title,
-    GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author
+    GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author,
+    UPDATE_BOOK_BY_ID: (id: string) => '/book/' + id
   },
   REQUEST: {
     GET_ALL_REQUEST: (userId: string) => '/request/user?userId=' + userId,
