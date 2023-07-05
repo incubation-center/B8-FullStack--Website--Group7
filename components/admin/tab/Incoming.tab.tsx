@@ -42,10 +42,9 @@ export default function IncomingTab({
       showAlert({
         title: 'Success',
         subtitle: 'Request has been approved.',
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
+        onModalClose: () => handleRefreshRequest()
       });
-
-      handleRefreshRequest();
     } catch (err) {
       console.log(err);
       showAlert({
@@ -88,7 +87,7 @@ export default function IncomingTab({
 
       <AdminTabLayout
         title='Incoming Request'
-        handleRefreshRequest={handleRefreshRequest}
+        handleRefresh={handleRefreshRequest}
       >
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}

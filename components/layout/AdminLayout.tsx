@@ -11,10 +11,12 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className='w-full max-h-screen flex flex-grow'>
+    <div className='w-screen max-h-screen flex flex-grow overflow-clip'>
       <Navbar currentTab={currentTab} handlePageRouting={handlePageRouting} />
 
-      <div className='h-full flex flex-grow'>{children}</div>
+      <div className='w-full h-full overflow-clip flex flex-grow'>
+        {children}
+      </div>
     </div>
   );
 }

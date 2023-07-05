@@ -21,6 +21,7 @@ export const BookCategory = {
 export enum AdminTab {
   DASHBOARD = 'dashboard',
   UPLOAD = 'upload',
+  BOOKS = 'books',
   INCOMING_REQUEST = 'incoming-request',
   ACTIVE_REQUEST = 'active-request',
   ARCHIVED_REQUEST = 'archived-request',
@@ -57,13 +58,15 @@ export const API_ENDPOINT = {
     GET_ALL_BOOKS: '/book',
     GET_BOOK_BY_ID: (id: string) => '/book/' + id,
     GET_BOOK_BY_TITLE: (title: string) => '/book/title?title=' + title,
-    GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author
+    GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author,
+    UPDATE_BOOK_BY_ID: (id: string) => '/book/' + id
   },
   REQUEST: {
-    GET_ALL_REQUEST: (userId: string) => '/request?userId=' + userId,
+    GET_ALL_REQUEST: (userId: string) => '/request/user?userId=' + userId,
     CREATE_REQUEST: '/request'
   },
   ADMIN: {
+    GET_ALL_REQUEST_COUNT: '/request/count',
     GET_ALL_REQUEST: '/request',
     APPROVE_INCOMING_REQUEST: (id: string) => '/request/' + id + '/accept',
     REJECT_INCOMING_REQUEST: (id: string) => '/request/' + id + '/reject',
