@@ -24,6 +24,7 @@ export default function HomeTab({
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
   const [isFetchingBooks, setIsFetchingBooks] = useState(false);
+  const [fetchedBookError, setFetchedBookError] = useState(false);
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
@@ -299,18 +300,27 @@ function BookSection({
           {books.map((book, index) => (
             <div key={book.id} className='flex flex-col space-y-4'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className='w-fit h-[200px] object-cover cursor-pointer'
-                src={book.bookImg}
-                alt={book.title}
-                draggable={false}
-                onClick={() => handleBookClick(book)}
-              />
+
+              <div className='relative h-[200px] w-[150px] mx-auto'>
+                <Image
+                  className='w-full h-full object-bottom  object-contain'
+                  src={book.bookImg}
+                  alt={book.title}
+                  draggable={false}
+                  fill
+                  style={{
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
+                  onClick={() => handleBookClick(book)}
+                />
+              </div>
 
               <button
                 className='
                 bg-secondary text-white font-light
-                rounded-lg py-1 px-2
+                rounded-lg py-1 px-2 w-40 mx-auto
               '
                 onClick={() => handleBookClick(book)}
               >

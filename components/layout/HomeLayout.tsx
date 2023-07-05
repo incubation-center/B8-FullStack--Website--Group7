@@ -13,6 +13,7 @@ import SideBar from './SideBar';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { handleFallBackProfileImage } from '@/utils/function';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function HomeLayout({
   currentTab,
@@ -89,15 +90,27 @@ export default function HomeLayout({
             </Link>
           )}
 
-          {authStore.isLoggedIn &&
-            authStore.user &&
-            currentTab !== HomePageTab.PROFILE && (
-              <img
-                src={handleFallBackProfileImage(authStore.user)}
-                alt='profile'
-                className='w-12 h-12 rounded-full object-cover hidden md:block'
-              />
-            )}
+          <AnimatePresence mode='popLayout'>
+            {authStore.isLoggedIn &&
+              (authStore.user && currentTab !== HomePageTab.PROFILE ? (
+                <motion.div
+                  key='profile'
+                  initial={{ x: 100 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: 100 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => handlePageRouting(HomePageTab.PROFILE)}
+                >
+                  <img
+                    src={handleFallBackProfileImage(authStore.user)}
+                    alt='profile'
+                    className='w-12 h-12 rounded-full object-cover hidden md:block'
+                  />
+                </motion.div>
+              ) : (
+                <div className='h-12 w-12'></div>
+              ))}
+          </AnimatePresence>
         </div>
       </div>
 

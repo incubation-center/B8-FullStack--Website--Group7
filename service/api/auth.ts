@@ -46,3 +46,49 @@ export async function AuthRefreshToken(refreshToken: string) {
     throw error;
   }
 }
+
+export async function AuthForgotPassword(email: string) {
+  try {
+    const response = await axiosClient.post(
+      API_ENDPOINT.USER.FORGOT_PASSWORD(email)
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function AuthResetPassword({
+  userId,
+  newPassword,
+  resetPwdToken
+}: {
+  userId: string;
+  newPassword: string;
+  resetPwdToken: string;
+}) {
+  try {
+    const response = await axiosClient.post(API_ENDPOINT.USER.RESET_PASSWORD, {
+      userId,
+      newPassword,
+      resetPwdToken
+    });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function AuthValidateResetPasswordToken(resetPwdToken: string) {
+  try {
+    const response = await axiosClient.post(
+      API_ENDPOINT.AUTH.VALIDATE_RESET_PASSWORD_TOKEN(resetPwdToken.trim())
+    );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
