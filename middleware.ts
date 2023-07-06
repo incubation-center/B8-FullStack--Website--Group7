@@ -13,14 +13,22 @@ export async function middleware(request: NextRequest) {
   // url
   const url = request.nextUrl.clone();
 
+  // condition
+  const isPublicRoute = url.pathname === '/';
+  const isBookRouter = url.pathname.startsWith('/book');
+  const isAuthRoute = url.pathname.startsWith('/auth');
+  const isAdminRoute = url.pathname.startsWith('/admin');
+
+  // if public route, do nothing
+  if (isPublicRoute) return;
+
+  // if book route, do nothing
+  if (isBookRouter) return;
+
   // get token from cookie
   const accessToken = decodeToken(
     request.cookies.get('accessToken')?.value ?? ''
   );
-
-  // condition
-  const isAuthRoute = url.pathname.startsWith('/auth');
-  const isAdminRoute = url.pathname.startsWith('/admin');
 
   // if logged in, redirect to homepage page
   if (isAuthRoute) {

@@ -166,3 +166,22 @@ export async function createBook(formData: Book): Promise<Book> {
     throw error;
   }
 }
+
+export async function deleteBookById(id: string) {
+  try {
+    const res = await axiosClient.delete(
+      API_ENDPOINT.BOOK.DELETE_BOOK_BY_ID(id)
+    );
+
+    if (res.status !== 200) throw new Error('Something went wrong');
+
+    const { data } = res;
+
+    return data;
+  } catch (error) {
+    console.log('====================================');
+    console.log(error);
+    console.log('====================================');
+    throw error;
+  }
+}
