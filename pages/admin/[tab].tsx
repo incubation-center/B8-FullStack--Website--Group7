@@ -5,6 +5,11 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { AnimatePresence } from 'framer-motion';
+import { Book } from '@/types';
+import { getAllBooks } from '@/service/api/book';
+import { AllBooksAtom } from '@/service/recoil';
+
+// import { AnimatePresence } from 'framer-motion';
 import DashboardTab from '@/components/admin/tab/Dashboard.tab';
 import UploadTab from '@/components/admin/tab/Upload.tab';
 import IncomingTab from '@/components/admin/tab/Incoming.tab';
@@ -35,6 +40,7 @@ export default function AdminHomePage({
   const [_, setAllRequests] = useRecoilState(AdminAllRequestAtom);
   const [__, setAllRequestsCount] = useRecoilState(AdminAllRequestCountAtom);
   const [___, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
+  const [____, setAllBooks] = useRecoilState(AllBooksAtom);
 
   // initialize
   const router = useRouter();
@@ -105,6 +111,17 @@ export default function AdminHomePage({
     }
   }, 100);
 
+  const handleRefreshBooks = useDebounce(() => {
+    setIsRefreshing(true);
+    getAllBooks()
+      .then((books: Book[]) => {
+        setAllBooks(books);
+      })
+      .finally(() => {
+        setIsRefreshing(false);
+      });
+  }, 100);
+
   return (
     <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
       {!isFetched && (
@@ -122,7 +139,7 @@ export default function AdminHomePage({
             <DashboardTab handleRefreshRequest={handleRefreshRequest} />
           )}
           {tab === AdminTab.UPLOAD && (
-            <UploadTab handleRefreshRequest={handleRefreshRequest} />
+            <UploadTab handleRefreshRequest={handleRefreshBooks} />
           )}
           {tab === AdminTab.BOOKS && <BookTab />}
           {tab === AdminTab.INCOMING_REQUEST && (

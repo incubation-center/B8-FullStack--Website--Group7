@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 
 import { API_ENDPOINT } from '../../utils/enum';
 import createAxiosInstance from '../axios';
-import { BookRequest, RequestCount } from '@/types';
+import { Book, BookRequest, RequestCount } from '@/types';
 
 const axiosClient: AxiosInstance = createAxiosInstance();
 
@@ -135,6 +135,24 @@ export async function rejectIncomingRequest(id: string, reason: string) {
 export async function receiveBook(id: string) {
   try {
     const res = await axiosClient.patch(API_ENDPOINT.ADMIN.RECEIVE_BOOK(id));
+
+    if (res.status !== 200) throw new Error('Something went wrong');
+
+    const { data } = res;
+
+    return data;
+  } catch (error) {
+    console.log('====================================');
+    console.log(error);
+    console.log('====================================');
+    throw error;
+  }
+}
+
+// upload book
+export async function createBook(formData: Book): Promise<Book> {
+  try {
+    const res = await axiosClient.post(API_ENDPOINT.BOOK.CREATE_BOOK, formData);
 
     if (res.status !== 200) throw new Error('Something went wrong');
 

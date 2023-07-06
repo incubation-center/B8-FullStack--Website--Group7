@@ -9,14 +9,12 @@ import BorrowBook from '@/components/Modals/BorrowBook';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { useEffect, useState } from 'react';
 import { HomePageTab } from '@/utils/enum';
-import { getBookById } from '@/service/api/book';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   AuthAtom,
   getBookByIdAtom,
   isBookAlreadySaved
 } from '@/service/recoil';
-import NotLoggedInLayout from '@/components/layout/NotLoggedInLayout';
 import { getCookie } from 'cookies-next';
 import { processUserToken } from '@/service/token';
 import {
@@ -166,7 +164,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
             <img
               src={book.bookImg}
               alt={book.title}
-              className='aspect-auto max-h-[400px] object-scale-down'
+              className='aspect-auto max-h-[400px] w-full object-contain'
             />
           </div>
 

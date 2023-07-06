@@ -70,3 +70,39 @@ export async function updateCoverImage(
 
   return imageUrl;
 }
+
+export async function uploadBookCover({
+  id,
+  file,
+  category
+}: {
+  id: any;
+  file: File;
+  category: string;
+}) {
+  // const fileExtension = file.name.split('.').pop();
+  const newFileNames = `${id}`;
+  // since without file extension the image upload still works
+  // so I don't need to add file extension to the file name
+
+  const renamedFile = new File([file], newFileNames, {
+    type: file.type,
+    lastModified: file.lastModified
+  });
+
+  let categoryRef = category.toLowerCase().replace(' ', '_');
+
+  const coverRef = ref(storage, categoryRef);
+
+  const imageRef = ref(coverRef, renamedFile.name);
+
+  const imageUrl = await uploadBytes(imageRef, file)
+    .then((snapshot) => {
+      return getDownloadURL(snapshot.ref);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  return imageUrl;
+}
