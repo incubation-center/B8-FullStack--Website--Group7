@@ -22,14 +22,14 @@ export default function RequestTable({
         <tr
           className='
             border-b-2 border-primary 
-            font-bold text-base md:text-lg text-primary 
+            font-bold text-lg md:text-lg text-primary 
             [&>td]:py-4 w-full 
             [&<td]:w-fit [&<td]:whitespace-nowrap text-center
           '
         >
-          <td className='w-full text-xl text-left pl-2'>Book</td>
-          <td className='hidden lg:table-cell text-xl'>Date</td>
-          <td className='hidden md:table-cell text-xl'>Status</td>
+          <td className='w-full text-left pl-2'>Book</td>
+          <td className='hidden lg:table-cell '>Date</td>
+          <td className='hidden md:table-cell'>Status</td>
           <td>Actions</td>
         </tr>
       </thead>
