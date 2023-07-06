@@ -278,6 +278,12 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   {book.description}
                 </p>
 
+                {book.description.length <= 0 && (
+                  <div className='text-alt-secondary text-opacity-70'>
+                    No description provided
+                  </div>
+                )}
+
                 {authStore.isFetched && (
                   <button
                     onClick={() => open()}
