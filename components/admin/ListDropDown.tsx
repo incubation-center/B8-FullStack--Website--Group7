@@ -1,18 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import { Listbox, Transition } from '@headlessui/react';
-import RequiredIcon from '../login/RequiredIcon';
-import { Fragment } from 'react';
+import { Listbox, Transition } from "@headlessui/react";
+import RequiredIcon from "../login/RequiredIcon";
+import { Fragment } from "react";
 
 export default function CustomListDropDown({
   options,
   selectedOption,
   setSelectedOption,
-  label
+  label,
+  disabled = false,
 }: {
   options: { value: string; label: string }[];
   selectedOption: { value: string; label: string };
   setSelectedOption: (value: { value: string; label: string }) => void;
   label: string;
+  disabled?: boolean;
 }) {
   return (
     <div className='grid gap-4 grid-cols-4'>
@@ -29,6 +31,7 @@ export default function CustomListDropDown({
         value={options}
         onChange={(value) => setSelectedOption(value as any)}
         className='col-span-3 relative'
+        disabled={disabled}
       >
         <Listbox.Button
           className='
@@ -79,7 +82,7 @@ export default function CustomListDropDown({
                 key={category.value}
                 value={category}
                 className={({ active }) =>
-                  `${active ? ' bg-primary bg-opacity-10' : ''}
+                  `${active ? " bg-primary bg-opacity-10" : ""}
                       text-primary cursor-pointer select-none relative py-2 px-4 pl-2
                       hover:bg-primary hover:bg-opacity-30
                         overflow-clip
@@ -92,8 +95,8 @@ export default function CustomListDropDown({
                     alt='check'
                     className={`w-6 h-6 ${
                       selectedOption.value === category.value
-                        ? 'block'
-                        : 'invisible'
+                        ? "block"
+                        : "invisible"
                     }`}
                   />
                   <span>

@@ -1,33 +1,36 @@
-import AdminLayout from '@/components/layout/AdminLayout';
-import { AdminTab } from '@/utils/enum';
-import { GetServerSidePropsContext } from 'next';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import AdminLayout from "@/components/layout/AdminLayout";
+import { AdminTab } from "@/utils/enum";
+import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import DashboardTab from '@/components/admin/tab/Dashboard.tab';
-import UploadTab from '@/components/admin/tab/Upload.tab';
-import IncomingTab from '@/components/admin/tab/Incoming.tab';
-import ActiveTab from '@/components/admin/tab/Active.tab';
-import ArchivedTab from '@/components/admin/tab/Archived.tab';
-import RenterTab from '@/components/admin/tab/Renter.tab';
-import SettingTab from '@/components/admin/tab/Setting.tab';
-import { getAllRequestAdmin } from '@/service/api/admin';
-import { BookRequest } from '@/types';
-import { useRecoilState } from 'recoil';
+import { motion, AnimatePresence } from "framer-motion";
+import DashboardTab from "@/components/admin/tab/Dashboard.tab";
+import UploadTab from "@/components/admin/tab/Upload.tab";
+import IncomingTab from "@/components/admin/tab/Incoming.tab";
+import ActiveTab from "@/components/admin/tab/Active.tab";
+import ArchivedTab from "@/components/admin/tab/Archived.tab";
+import RenterTab from "@/components/admin/tab/Renter.tab";
+import SettingTab from "@/components/admin/tab/Setting.tab";
+import { getAllRequestAdmin } from "@/service/api/admin";
+import { Book, BookRequest } from "@/types";
+import { useRecoilState } from "recoil";
 import {
   AdminAllRequestAtom,
-  isRefreshingRequestAtom
-} from '@/service/recoil/admin';
-import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
-import { useDebounce } from '@/utils/function';
+  isRefreshingRequestAtom,
+} from "@/service/recoil/admin";
+import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
+import { useDebounce } from "@/utils/function";
+import { getAllBooks } from "@/service/api/book";
+import { AllBooksAtom } from "@/service/recoil";
 
 export default function AdminHomePage({
-  currentTab
+  currentTab,
 }: {
   currentTab: AdminTab;
 }) {
   const [allRequests, setAllRequests] = useRecoilState(AdminAllRequestAtom);
+  const [_, setAllBooks] = useRecoilState(AllBooksAtom);
   const [isFetched, setIsFetched] = useState(false);
   const [isRefreshing, setIsRefreshing] = useRecoilState(
     isRefreshingRequestAtom
@@ -58,9 +61,9 @@ export default function AdminHomePage({
     getAllRequestAdmin()
       .then((requests: BookRequest[]) => {
         setAllRequests(requests);
-        console.log('====================================');
-        console.log('all requests', requests);
-        console.log('====================================');
+        console.log("====================================");
+        console.log("all requests", requests);
+        console.log("====================================");
       })
       .finally(() => {
         setIsFetched(true);
@@ -73,6 +76,17 @@ export default function AdminHomePage({
     getAllRequestAdmin()
       .then((requests: BookRequest[]) => {
         setAllRequests(requests);
+      })
+      .finally(() => {
+        setIsRefreshing(false);
+      });
+  }, 100);
+
+  const handleRefreshBooks = useDebounce(() => {
+    setIsRefreshing(true);
+    getAllBooks()
+      .then((books: Book[]) => {
+        setAllBooks(books);
       })
       .finally(() => {
         setIsRefreshing(false);
@@ -96,7 +110,7 @@ export default function AdminHomePage({
             <DashboardTab handleRefreshRequest={handleRefreshRequest} />
           )}
           {tab === AdminTab.UPLOAD && (
-            <UploadTab handleRefreshRequest={handleRefreshRequest} />
+            <UploadTab handleRefreshRequest={handleRefreshBooks} />
           )}
           {tab === AdminTab.INCOMING_REQUEST && (
             <IncomingTab handleRefreshRequest={handleRefreshRequest} />
@@ -126,8 +140,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return {
       redirect: {
         destination: `/admin/${AdminTab.DASHBOARD}`,
-        permanent: false
-      }
+        permanent: false,
+      },
     };
   }
 
@@ -136,7 +150,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      currentTab: tab || AdminTab.DASHBOARD
-    }
+      currentTab: tab || AdminTab.DASHBOARD,
+    },
   };
 }
