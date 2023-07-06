@@ -5,6 +5,7 @@ import { searchKeywordAtom } from '@/service/recoil';
 import { HomePageTab } from '@/utils/enum';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import SearchSvg from './icon/Search';
 
 export default function UserSearchBar({
   currentTab
@@ -49,7 +50,7 @@ export default function UserSearchBar({
             transition-colors
           '
         >
-          <Image src='/icon/search.svg' alt='search' width={20} height={20} />
+          <SearchSvg className='h-6 w-6 fill-primary ' />
 
           <input
             type='text'
