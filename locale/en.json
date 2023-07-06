@@ -1,3 +1,4 @@
+
 {
     "homepage": {
         "sidebar": {
@@ -28,12 +29,18 @@
     },
 
     "save-tab": {
-        "h1-save": "Save"
+        "h1-save": "Save",
+        "no-save-text": "You have no saved books",
+
+        "explore-books-btn": "explore books"
 
     },
 
     "request-tab": {
         "h1-request-status": "Request Status",
+        "no-request-text": "You have no request",
+        "explore-books-btn": "explore books",
+
         "book": "Book",
         "date": "Date",
         "status": "Status",
@@ -72,18 +79,26 @@
 
     "change-pass-tap": {
         "password": "Password",
-        "password-fill": "Enter your current password",
+        "password-placeholder": "Enter your current password",
         "new-password": "New Password",
-        "new-password-fill": "new password",
+        "new-password-placeholder": "new password",
         "confirm-password": "Confirm Password",
-        "confirm-password-fill": "Confirm new password",
+        "confirm-password-placeholder": "Confirm new password",
 
         "cancel-btn": "Cancel",
-        "save-btn": "save"
+        "save-btn": "save",
+
+        "information-update": {
+            "info-update-text": "Your Information have been updated!",
+            "thank-you": "Thanks you!",
+
+            "close-btn": "Close"
+        }
     },
 
     "logout-tap": {
         "logout": "Logout",
+        "logout-text": "Are you sure you want to logout?",
 
         "no-btn": "No",
         "yes-btn": "Yes"
@@ -167,6 +182,7 @@
         "sidebar": {
             "dashboard": "Dashboard",
             "upload": "Upload",
+            "books": "Books",
             "incoming-request": "Incoming Request",
             "active-request": "Active Request",
             "archived-request": "Archived Request",
@@ -181,6 +197,8 @@
             "total-incoming": "Total Incoming",
             "total-active": "Total Active",
             "total-archived": "Total Archived",
+
+            "no-renter-found": "No renter found",
 
             "recent-renter": "Recent Renter",
             "name": "Name",
@@ -213,11 +231,46 @@
             "books-h1-history": "History",
             "books-h1-drama": "Drama",
             "books-h1-fantasy": "Fantasy",
-            "books-h1-self-development": "Self Development"
+            "books-h1-self-development": "Self Development",
+
+            "books-view-tap": {
+                "author": "Author",
+                "genre": "Genre",
+                "book-description":"Book description",
+
+                "delete-btn": "Delete",
+                "edit-btn": "Edit",
+                "save-btn": "Save",
+                "cancel-btn": "Cancel",
+
+                "success-tap": {
+                    "success": "Success",
+                    "book-update-text": "Book updated successfully",
+
+                    "close-btn": "Close"
+                }
+            },
+
+            "delete-book-tap": {
+                "delete-book": "Delete Book",
+                "delete-book-text": "Are you sure you want to delete this book?",
+
+                "yes-btn": "Yes",
+                "no-btn": "No",
+
+                "success-tap": {
+                    "success":"Success",
+                    "book-delete-text": "Book deleted successfully",
+
+                    "close-btn":"Close"
+                }
+            }
+
         },
 
         "incoming-request-tap": {
             "incoming-request":"Incoming Request",
+            "no-request": "No request",
 
             "book": "Book",
             "username":"Username",
@@ -249,6 +302,8 @@
 
         "active-request-tap": {
             "active-request": "Active Request",
+            "no-request": "No request",
+
             "book": "Book",
             "username": "Username",
             "to-be-returned-date": "To be returned date",
@@ -259,6 +314,8 @@
 
         "archived-request-tap": {
             "archived-request":"Archived Request",
+            "no-request": "No request",
+
             "book": "Book",
             "username":"Username",
             "status": "Status",
@@ -270,6 +327,8 @@
 
         "renter-tap": {
             "renter": "Renter",
+            "no-renter-found": "No renter found",
+            
             "name": "Name",
             "email": "Email",
             "approval-date": "Approval date",
@@ -284,9 +343,9 @@
 
             "security-policy": "Security & Policy",
             "password":"Password",
-            "password-fill": "The admin able to change the system credentials",
+            "password-placeholder": "The admin able to change the system credentials",
             "activity-log": "Activity log",
-            "activity-log-fill": "The admin able to see the login activity in the system",
+            "activity-log-placeholder": "The admin able to see the login activity in the system",
 
             "change-btn": "Change",
             "view-btn": "View"
@@ -329,7 +388,14 @@
         "password-placeholder": "Enter your new password",
         "conf-pass-placeholder": "Confirm your new password",
 
-        "reset-pass-btn": "Reset Password"
+        "reset-pass-btn": "Reset Password",
+
+        "success-tap": {
+            "success": "Success",
+            "pass-been-reset": "Your password has been reset",
+
+            "close-btn": "Close"
+        }
 
     },
 
@@ -343,3 +409,5 @@
 
 
 }
+
+

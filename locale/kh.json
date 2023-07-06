@@ -1,7 +1,8 @@
+
 {
     "homepage": {
         "sidebar": {
-            "home": "ទំព័រដើម",
+            "home": "ទំំព័រដើម",
             "save": "រក្សាទុក",
             "request": "ការស្នើរសុំ",
             "profile": "គណនី",
@@ -17,7 +18,7 @@
             "business": "អាជីវកម្ម",
             "history": "ប្រវត្តិសាស្ត្រ",
             "drama": "រឿងមនោសញ្ចេតនា",
-            "fantasy": "រឿងស្រមើលស្រមៃ",
+            "fantasy": "រឿងស្រមើស្រមៃ",
             "development": "ការអភិវឌ្ឍន៍ខ្លួន"
         },
 
@@ -28,12 +29,18 @@
     },
 
     "save-tab": {
-        "h1-save": "រក្សាទុក"
+        "h1-save": "រក្សាទុក",
+        "no-save-text": "អ្នកមិនមានសៀវភៅដែលបានរក្សាទុកទេ",
+
+        "explore-books-btn": "ស្វែងរកសៀវភៅ"
 
     },
 
     "request-tab": {
         "h1-request-status": "ស្ថានភាពស្នើសុំ",
+        "no-request-text": "អ្នកគ្មានសំណើទេ",
+        "explore-books-btn": "ស្វែងរកសៀវភៅ",
+
         "book": "ឈ្មោះសៀវភៅ",
         "date": "កាលបរិច្ឆេទ",
         "status": "ស្ថានភាព",
@@ -46,12 +53,12 @@
     },
 
     "profile-tab": {
-        "personal-info": "ព័ត៌មានផ្ទាល់ខ្លួន",
+        "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
         "username": "ឈ្មោះ",
         "phone number": "លេខទូរសព្ទ",
         "email": "អ៊ីមែល",
 
-        "privacy-set": "ការកំណត់ ឯកជនភាព",
+        "privacy-set": "ការកំណត់​ ឯកជនភាព",
         "password": "ពាក្យសម្ងាត់",
 
         "edit-btn": "កែសម្រួល",
@@ -61,10 +68,10 @@
     },
 
     "Edit-tap": {
-        "personal-info": "ព័ត៌មានផ្ទាល់ខ្លួន",
+        "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
         "username": "ឈ្មោះ",
         "email": "អ៊ីមែល",
-        "phone-number": "លេខទូរស័ព្ទ",
+        "phone-number": "លេខទូរសព្ទ",
 
         "cancel-btn": "បោះបង់",
         "save-btn": "រក្សាទុក"
@@ -72,25 +79,33 @@
 
     "change-pass-tap": {
         "password": "ពាក្យសម្ងាត់",
-        "password-fill": "បញ្ចូលពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នក",
-        "new-password": "ពាក្យសម្ងាត់ថ្មី",
-        "new-password-fill": "ពាក្យសម្ងាត់ថ្មី",
+        "password-placeholder": "បញ្ចូលពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នក",
+        "new-password": "ពាក្យសម្ងាត់​ថ្មី",
+        "new-password-placeholder": "ពាក្យសម្ងាត់​ថ្មី",
         "confirm-password": "បញ្ជាក់ពាក្យសម្ងាត់",
-        "confirm-password-fill": "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី",
+        "confirm-password-placeholder": "បញ្ជាក់​ពាក្យសម្ងាត់ថ្មី",
 
         "cancel-btn": "បោះបង់",
-        "save-btn": "រក្សាទុក"
+        "save-btn": "រក្សាទុក",
+
+        "information-update": {
+            "info-update-text": "ព័ត៌មានរបស់អ្នកត្រូវបានធ្វើបច្ចុប្បន្នភាព!",
+            "thank-you": "សូមអរគុណ!",
+
+            "close-btn": "បិទ"
+        }
     },
 
     "logout-tap": {
         "logout": "ចាកចេញ",
+        "logout-text": "តើអ្នកប្រាកដថាអ្នកចង់ចេញពីគណនី",
 
         "no-btn": "ទេ",
-        "yes-btn": "បាទ/ចាស"
+        "yes-btn": "យល់ព្រម"
     },
 
     "not-logged-in": {
-        "not-logged-in text": "អ្នកមិនបានចូលគណនីទេ"
+        "not-logged-in text": "អ្នក​មិន​បាន​ចូលគណនី​ទេ"
     },
 
     "login-tab": {
@@ -105,11 +120,11 @@
         "email-placeholder": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
         "password-placeholder": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
         "email-required-alert": "ត្រូវការបញ្ចូលអ៊ីម៉េល",
-        "password-required-alert": "ត្រូវការបញ្ចូលពាក្យសម្ងាត់",
+        "password-required-alert": "ត្រូវការបញ្ចូលពាក្យ​សម្ងាត់​",
 
         "invalid-credential-modal": {
-            "invalid-credential-text": "ព័ត៌មានលម្អិតមិនត្រឹមត្រូវ!!",
-            "try-again-text": "សូមព្យាយាមម្តងទៀត",
+            "invalid-credential-text": "ព័ត៌មានលម្អិតមិន​ត្រឹមត្រូវ!!",
+            "try-again-text": "សូម​ព្យាយាម​ម្តង​ទៀត",
             "close-btn": "បិទ"
         }
     },
@@ -129,10 +144,10 @@
 
         "email-required-alert": "ត្រូវការបញ្ចូលអ៊ីម៉េល",
         "user-required-alert": "ត្រូវការបញ្ចូលឈ្មោះ",
-        "password-required-alert": "ត្រូវការបញ្ចូលពាក្យសម្ងាត់",
-        "cfm-password-required-alert": "ត្រូវការបញ្ជាក់កើពាក្យសម្ងាត់",
+        "password-required-alert": "ត្រូវការបញ្ចូលពាក្យ​សម្ងាត់​",
+        "cfm-password-required-alert": "ត្រូវការបញ្ជាក់ពាក្យ​សម្ងាត់​",
         "phone-required-alert": "ត្រូវការបញ្ចូលលេខទូរសព្ទ",
-        "invalid-password-alert": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងតិច ៨ តួអក្សរ",
+        "invalid-password-alert": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងតិច ៨​ តួអក្សរ",
         "password-not-matched": "បញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នា",
 
         "Sign-up-btn": "បង្កើតគណនី",
@@ -153,12 +168,12 @@
         "book-description": "ការពិពណ៌នាសៀវភៅ",
 
         "borrow-btn": "ខ្ចី",
-        "go-back-btn": "ត្រឡប់ក្រោយ",
+        "go-back-btn": "ត្រឡប់​ក្រោយ",
         "save-btn": "រក្សាទុក"
     },
 
     "btn": {
-        "sing-up-btn": "បង្កើតគណនី",
+        "sing-up-btn": "បង្កើត​គណនី",
         "login-btn": "ចូលគណនី"
     },
 
@@ -167,9 +182,10 @@
         "sidebar": {
             "dashboard": "ផ្ទាំងគ្រប់គ្រង",
             "upload": "ផ្ទុកឡើង",
-            "incoming-request": "សំណើរចូល",
-            "active-request": "សំណើរសកម្ម",
-            "archived-request": "សំណើរដែលបានទុក",
+            "books":"សៀវភៅ",
+            "incoming-request": "សំណើចូល",
+            "active-request": "សំណើសកម្ម",
+            "archived-request": "សំណើដែលបានទុក",
             "renter": "អ្នកជួល",
             "settings": "ការកំណត់",
 
@@ -178,9 +194,11 @@
 
         "dashboard-tap": {
             "dashboard": "ផ្ទាំងគ្រប់គ្រង",
-            "total-incoming": "សំណើរចូលសរុប",
-            "total-active": "សំណើរសកម្មសរុប",
-            "total-archived": "សំណើរដែលបានទុកសរុប",
+            "total-incoming": "សំណើចូលសរុប",
+            "total-active": "សំណើសកម្ម​សរុប",
+            "total-archived": "សំណើដែលបានទុកសរុប",
+
+            "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
 
             "recent-renter": "អ្នកជួលថ្មីៗ",
             "name": "ឈ្មោះ",
@@ -211,44 +229,81 @@
             "books-h1-education": "ការអប់រំ",
             "books-h1-business": "អាជីវកម្ម",
             "books-h1-history": "ប្រវត្តិសាស្ត្រ",
-            "books-h1-drama": "រឿងមនោសញ្ចេតនា",
-            "books-h1-fantasy": "រឿងស្រមើលស្រមៃ",
-            "books-h1-self-development": "ការអភិវឌ្ឍន៍ខ្លួន"
+            "books-h1-drama": "រឿង",
+            "books-h1-fantasy": "រឿងស្រមើស្រមៃ",
+            "books-h1-self-development": "ការអភិវឌ្ឍន៍ខ្លួន",
+
+            "books-view-tap": {
+                "author": "អ្នកនិពន្ធ",
+                "genre": "ប្រភេទ",
+                "book-description":"ការពិពណ៌នាសៀវភៅ",
+
+                "delete-btn": "លុប",
+                "edit-btn": "កែសម្រួល",
+                "save-btn": "រក្សាទុក",
+                "cancel-btn": "បោះបង់",
+
+                "success-tap": {
+                    "success": "ជោគជ័យ",
+                    "book-update-text": "ធ្វើបច្ចុប្បន្នភាពសៀវភៅដោយជោគជ័យ",
+
+                    "close-btn": "បិទ"
+                }
         },
 
+        "delete-book-tap": {
+                "delete-book": "លុបសៀវភៅ",
+                "delete-book-text": "តើអ្នកប្រាកដទេថាអ្នកចង់លុបសៀវភៅនេះ?",
+
+                "yes-btn": "យល់ព្រម",
+                "no-btn": "ទេ",
+
+                "success-tap": {
+                    "success":"ជោគជ័យ",
+                    "book-delete-text": "បានលុបសៀវភៅដោយជោគជ័យ",
+
+                    "close-btn":"បិទ"
+                }
+            }
+
+    },
+
         "incoming-request-tap": {
-            "incoming-request":"សំណើរចូល",
+            "incoming-request":"សំណើចូល",
+            "no-request": "គ្មានសំណើ",
 
             "book": "សៀវភៅ",
             "username":"ឈ្មោះ",
-            "request-date": "កាលបរិច្ឆេទស្នើរសុំ",
+            "request-date": "កាលបរិច្ឆេទស្នើសំុ",
             "actions": "សកម្មភាព",
 
             "approve-btn": "យល់ព្រម",
             "reject-btn": "បដិសេដ",
 
             "approve-request-tap": {
-                "approve-request": "យល់ព្រមសំណើរ",
-                "p-approve-request-tap": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើរនេះទេ?",
+                "approve-request": "យល់ព្រម​សំណើ",
+                "p-approve-request-tap": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើនេះទេ?",
 
                 "no-btn": "ទេ",
-                "yes-btn": "បាទ/ចាស"
+                "yes-btn": "យល់ព្រម"
             },
 
             "reject-request-tap": {
                 "reject-request": "បដិសេដសំណើរ",
-                "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើរនេះទេ?",
+                "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើនេះទេ?",
 
                 "reject-reason": "ហេតុផលបដិសេដ",
                 "reject-reason-fill": "សូមបញ្ចូលហេតុផលរបស់អ្នក",
 
                 "no-btn": "ទេ",
-                "yes-btn": "បាទ/ចាស"
+                "yes-btn": "យល់ព្រម"
             }
         },
 
         "active-request-tap": {
-            "active-request": "សំណើរសកម្ម",
+            "active-request": "សំណើសកម្ម",
+            "no-request": "គ្មានសំណើ",
+
             "book": "សៀវភៅ",
             "username": "ឈ្មោះ",
             "to-be-returned-date": "កាលបរិច្ឆេទដែលត្រូវប្រគល់មកវិញ",
@@ -258,7 +313,9 @@
         },
 
         "archived-request-tap": {
-            "archived-request":"សំណើរដែលបានទុក",
+            "archived-request":"សំណើដែលបានទុក",
+            "no-request": "គ្មានសំណើ",
+
             "book": "សៀវភៅ",
             "username":"ឈ្មោះ",
             "status": "ស្ថានភាព",
@@ -270,6 +327,8 @@
 
         "renter-tap": {
             "renter": "អ្នកជួល",
+            "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
+
             "name": "ឈ្មោះ",
             "email": "អ៊ីមែល",
             "approval-date": "កាលបរិច្ឆេទយល់ព្រម",
@@ -284,9 +343,9 @@
 
             "security-policy": "សុវត្ថិភាព & គោលការណ៏",
             "password":"ពាក្យសម្ងាត់",
-            "password-fill": "អ្នកគ្រប់គ្រងអាចផ្លាស់ប្តូរព័ត៌មានប្រព័ន្",
+            "password-placeholder": "អ្នកគ្រប់គ្រងអាចផ្លាស់ប្តូរព័ត៌មានប្រព័ន្",
             "activity-log": "សកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
-            "activity-log-fill": "អ្នកគ្រប់គ្រងអាចឃើញសកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
+            "activity-log-placeholder": "អ្នកគ្រប់គ្រងអាចឃើញសកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
 
             "change-btn": "ផ្លាស់ប្តូរ",
             "view-btn": "មើល"
@@ -298,7 +357,7 @@
         "unauthorized": "គ្មានការអនុញ្ញាត",
         "p-not-authorized": "អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យចូលប្រើទំព័រនេះទេ",
 
-        "go-back-to-home-btn": "ត្រឡប់ទៅទំព័រដើម"
+        "go-back-to-home-btn": "ត្រឡប់​ទៅទំព័រដើម"
     },
 
     "forgot-password-tap": {
@@ -312,7 +371,7 @@
         "go-back-to-login": "ត្រលប់ទៅការចូលគណនី",
 
         "email-sent-tap": {
-            "email-sent": "អ៊ីម៉ែលបានផ្ញើ!!!",
+            "email-sent": "អ៊ី​ម៉ែ​ល​បាន​ផ្ញើ!!!",
             "check-email": "ពិនិត្យអ៊ីមែលរបស់អ្នកដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញ",
 
             "close-btn": "បិទ"
@@ -329,13 +388,20 @@
         "password-placeholder": "បញ្ចូលពាក្យសម្ងាត់ថ្មី",
         "conf-pass-placeholder": "បញ្ជាក់ពាក្យសម្ងាត់ថ្មី",
 
-        "reset-pass-btn": "កំណត់ពាក្យសម្ងាត់ថ្មី"
+        "reset-pass-btn": "កំណត់ពាក្យសម្ងាត់ថ្មី",
+
+        "success-tap": {
+        "success": "ជោគជ័យ",
+        "pass-been-reset": "ពាក្យសម្ងាត់របស់អ្នកត្រូវបានកំណត់ឡើងវិញ",
+
+        "close-btn": "បិទ"
+        }
 
     },
 
     "expired-tap": {
         "link-expired": "តំណផុតកំណត់",
-        "expired-tap-p": "តំណដែលអ្នកបានប្រើដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញបានផុតកំណត់ហើយ។ សូមស្នើសុំតំណថ្មីពីទំព័រភ្លេចពាក្យសម្ងាត់។",
+        "expired-tap-p": "តំណដែលអ្នកបានប្រើដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញបានផុតកំណត់ហើយ។​ សូមស្នើសុំតំណថ្មីពីទំព័រភ្លេចពាក្យសម្ងាត់។",
 
         "back-to-forgot-pass-btn": "ត្រឡប់ទៅ ភ្លេចពាក្យសម្ងាត់"
 
