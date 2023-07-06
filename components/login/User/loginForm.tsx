@@ -1,21 +1,21 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler } from "react-hook-form";
 
-import { UserLoginInputs } from '@/types/auth';
+import { UserLoginInputs } from "@/types/auth";
 
-import { AuthLogin } from '@/service/api/auth';
+import { AuthLogin } from "@/service/api/auth";
 
-import CustomInput from '../CustomInput';
-import PasswordInput from '../PasswordInput';
-import { useEffect, useState } from 'react';
-import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
-import { deleteCookie, setCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
-import useAlertModal, { AlertType } from '@/components/Modals/Alert';
-import { AxiosError } from 'axios';
-import { processUserToken } from '@/service/token';
-import { useRecoilState } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
-import Link from 'next/link';
+import CustomInput from "../CustomInput";
+import PasswordInput from "../PasswordInput";
+import { useEffect, useState } from "react";
+import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
+import { deleteCookie, setCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import useAlertModal, { AlertType } from "@/components/Modals/Alert";
+import { AxiosError } from "axios";
+import { processUserToken } from "@/service/token";
+import { useRecoilState } from "recoil";
+import { AuthAtom } from "@/service/recoil";
+import Link from "next/link";
 
 export default function UserLoginForm() {
   const [_, setAuthStore] = useRecoilState(AuthAtom);
@@ -29,27 +29,27 @@ export default function UserLoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<UserLoginInputs>();
 
   const onSubmit: SubmitHandler<UserLoginInputs> = async ({
     email,
-    password
+    password,
   }) => {
     setIsLoggingIn(true);
     try {
       const res = await AuthLogin({ email, password });
 
-      if (res.status !== 200) throw new Error('Login failed');
+      if (res.status !== 200) throw new Error("Login failed");
 
       const data = await res.data;
 
-      const accessToken = data['access_token'];
-      const refreshToken = data['refresh-token'];
+      const accessToken = data["access_token"];
+      const refreshToken = data["refresh-token"];
 
       // set access token to cookies using next-cookies
-      setCookie('accessToken', accessToken);
-      setCookie('refreshToken', refreshToken);
+      setCookie("accessToken", accessToken);
+      setCookie("refreshToken", refreshToken);
 
       const authObj = await processUserToken(accessToken);
       setAuthStore(authObj);
@@ -58,12 +58,12 @@ export default function UserLoginForm() {
     } catch (errors) {
       let message;
       if (errors instanceof AxiosError) {
-        message = errors.response?.data.error || 'An unknown error occurred';
+        message = errors.response?.data.error || "An unknown error occurred";
       }
       showAlert({
         title: message,
-        subtitle: 'Please try again',
-        type: AlertType.ERROR
+        subtitle: "Please try again",
+        type: AlertType.ERROR,
       });
       setIsLoggingIn(false);
     }
@@ -75,7 +75,7 @@ export default function UserLoginForm() {
 
       <div className='space-y-8 text-center flex flex-col items-center'>
         <h1 className='text-4xl font-extrabold text-alt-secondary'>
-          Welcome to Digital Library
+          Welcome to KJEY BOOK
         </h1>
         <p className='text-alt-secondary'>Please enter your details</p>
 
@@ -87,7 +87,7 @@ export default function UserLoginForm() {
             name='email'
             type='email'
             placeholder='Please enter your email'
-            register={register('email', { required: 'Email is required' })}
+            register={register("email", { required: "Email is required" })}
             error={errors.email}
             labelClassName='text-alt-secondary ml-4 font-medium'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
@@ -98,8 +98,8 @@ export default function UserLoginForm() {
             label='Password'
             name='password'
             placeholder='Please enter your password'
-            register={register('password', {
-              required: 'Password is required'
+            register={register("password", {
+              required: "Password is required",
             })}
             error={errors.password}
             labelClassName='text-alt-secondary ml-4 font-medium'
@@ -124,11 +124,11 @@ export default function UserLoginForm() {
               bg-secondary text-white text-xl tracking-wide 
               focus:outline-none
               font-poppins
-              ${isLoggingIn && 'cursor-not-allowed bg-opacity-50'}
+              ${isLoggingIn && "cursor-not-allowed bg-opacity-50"}
             `}
               disabled={isLoggingIn}
             >
-              {!isLoggingIn && 'Login'}
+              {!isLoggingIn && "Login"}
               {isLoggingIn && (
                 <div className='flex justify-center items-center'>
                   <h1>Logging in</h1>

@@ -1,12 +1,12 @@
-import { UserRegisterInputs } from '@/types/auth';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { UserRegisterInputs } from "@/types/auth";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-import CustomInput from '../CustomInput';
-import PasswordInput from '../PasswordInput';
-import { AuthRegister } from '@/service/api/auth';
-import { setCookie } from 'cookies-next';
-import { useState } from 'react';
-import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import CustomInput from "../CustomInput";
+import PasswordInput from "../PasswordInput";
+import { AuthRegister } from "@/service/api/auth";
+import { setCookie } from "cookies-next";
+import { useState } from "react";
+import useAlertModal, { AlertType } from "@/components/Modals/Alert";
 
 export default function UserRegisterForm({}) {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -16,41 +16,41 @@ export default function UserRegisterForm({}) {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm<UserRegisterInputs>();
 
   const onSubmit: SubmitHandler<UserRegisterInputs> = async (data) => {
     setIsRegistering(true);
 
     try {
-      const usernameWithNoSpace = data.username.trim().replace(' ', '+');
+      const usernameWithNoSpace = data.username.trim().replace(" ", "+");
 
       // add default profile url
       const formData = {
         ...data,
-        profileUrl: `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`
+        profileUrl: `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`,
       };
 
       const res = await AuthRegister(formData);
 
-      if (res.status !== 200) throw new Error('Login failed');
+      if (res.status !== 200) throw new Error("Login failed");
 
       const result = await res.data;
 
-      const accessToken = result['access_token'];
-      const refreshToken = result['refresh-token'];
+      const accessToken = result["access_token"];
+      const refreshToken = result["refresh-token"];
 
       // set access token to cookies using next-cookies
-      setCookie('accessToken', accessToken);
-      setCookie('refreshToken', refreshToken);
+      setCookie("accessToken", accessToken);
+      setCookie("refreshToken", refreshToken);
     } catch (errors) {
-      console.log('====================================');
+      console.log("====================================");
       console.log(errors);
-      console.log('====================================');
+      console.log("====================================");
       showAlert({
-        title: 'Error',
-        subtitle: 'An error occurred while registering your account',
-        type: AlertType.ERROR
+        title: "Error",
+        subtitle: "An error occurred while registering your account",
+        type: AlertType.ERROR,
       });
     }
 
@@ -62,7 +62,7 @@ export default function UserRegisterForm({}) {
       <AlertModal />
       <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center '>
         <h1 className='text-4xl font-extrabold text-alt-secondary'>
-          Create an account
+          Create an Account
         </h1>
 
         <form
@@ -71,8 +71,8 @@ export default function UserRegisterForm({}) {
           autoComplete='off'
         >
           <CustomInput
-            register={register('username', {
-              required: 'Username is required'
+            register={register("username", {
+              required: "Username is required",
             })}
             error={errors.username}
             name='username'
@@ -85,7 +85,7 @@ export default function UserRegisterForm({}) {
           />
 
           <CustomInput
-            register={register('email', { required: 'Email is required' })}
+            register={register("email", { required: "Email is required" })}
             error={errors.email}
             name='email'
             type='email'
@@ -97,12 +97,12 @@ export default function UserRegisterForm({}) {
           />
 
           <PasswordInput
-            register={register('password', {
-              required: 'Password is required',
+            register={register("password", {
+              required: "Password is required",
               minLength: {
                 value: 8,
-                message: 'Password must be at least 8 characters long'
-              }
+                message: "Password must be at least 8 characters long",
+              },
             })}
             error={errors.password}
             name='password'
@@ -114,13 +114,13 @@ export default function UserRegisterForm({}) {
           />
 
           <PasswordInput
-            register={register('confirmPassword', {
-              required: 'Confirm password is required',
+            register={register("confirmPassword", {
+              required: "Confirm password is required",
               validate: (val: string) => {
-                if (watch('password') != val) {
-                  return 'Confirm password do not match';
+                if (watch("password") != val) {
+                  return "Confirm password do not match";
                 }
-              }
+              },
             })}
             error={errors.confirmPassword}
             name='confirmPassword'
@@ -132,12 +132,12 @@ export default function UserRegisterForm({}) {
           />
 
           <CustomInput
-            register={register('phoneNumber', {
-              required: 'Phone number is required',
+            register={register("phoneNumber", {
+              required: "Phone number is required",
               minLength: {
                 value: 9,
-                message: 'Phone number must be at least 9 characters long'
-              }
+                message: "Phone number must be at least 9 characters long",
+              },
             })}
             error={errors.phoneNumber}
             name='phoneNumber'
@@ -157,7 +157,7 @@ export default function UserRegisterForm({}) {
                 w-full px-4 py-2 mt-6 rounded-full
                 bg-secondary text-white font-medium tracking-wide 
                 focus:outline-none
-                ${isRegistering ? 'opacity-50 cursor-not-allowed' : ''}
+                ${isRegistering ? "opacity-50 cursor-not-allowed" : ""}
               `}
               disabled={isRegistering}
             >
