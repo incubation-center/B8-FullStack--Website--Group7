@@ -321,6 +321,19 @@
 
     },
 
+    "reset-password-tap": {
+        "reset-password-text": "Reset Your Password",
+        "enter-new-pass": "Please enter new password",
+
+        "password": "Password",
+        "conf-pass": "Confirm Password",
+        "password-placeholder": "Enter your new password",
+        "conf-pass-placeholder": "Confirm your new password",
+
+        "reset-pass-btn": "Reset Password"
+
+    },
+
     "expired-tap": {
         "link-expired": "Link Expired",
         "expired-tap-p": "The link you used to reset your password has expired.Please request a new link from the forgot password page.",
