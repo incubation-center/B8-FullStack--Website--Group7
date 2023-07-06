@@ -20,6 +20,7 @@ import { BookCategory } from '@/utils/enum';
 import EditBookCategory from './EditBookCategory';
 import EditSvg from '../icon/EditSvg';
 import { updateCoverImage } from '@/service/firebase';
+import { deleteBookById } from '@/service/api/admin';
 
 interface BookUploadInputs extends Book {}
 
@@ -44,11 +45,13 @@ export default function ViewEditBook({
 
   const [AllBooks, setAllBooks] = useRecoilState(AllBooksAtom);
   const [selectedCategory, setSelectedCategory] = useState(
-    CategoryOptions.find((c) => c.value === book.category) ?? CategoryOptions[0]
+    CategoryOptions.find((c) => c.value.trim() === book.category.trim()) ??
+      CategoryOptions[0]
   );
 
   const [isEditing, setIsEditing] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const isViewing = !isEditing && !isUpdating;
 
   const [image, setImage] = useState<File>();
@@ -189,6 +192,41 @@ export default function ViewEditBook({
     });
   };
 
+  const onDeleteBook = async () => {
+    setIsDeleting(true);
+
+    try {
+      await deleteBookById(book.id as string);
+
+      setIsDeleting(false);
+      showAlert({
+        title: 'Success',
+        subtitle: 'Book deleted successfully',
+        type: AlertType.SUCCESS,
+        onModalClose: () => {
+          setAllBooks((prev) => {
+            const newBooks = prev.filter((b) => b.id !== book.id);
+            return newBooks;
+          });
+          close();
+        }
+      });
+    } catch (error) {
+      setIsDeleting(false);
+      let message = 'Something went wrong';
+      if (error instanceof AxiosError) {
+        message = error.response?.data.message || message;
+      }
+      showAlert({
+        title: 'Error',
+        subtitle: message,
+        type: AlertType.ERROR
+      });
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const variants = {
     hidden: {
       x: '100%',
@@ -314,7 +352,7 @@ export default function ViewEditBook({
                     className='
                       w-full h-full
                       absolute top-0 left-0
-                      backdrop-blur-[3px] bg-black/10
+                      backdrop-blur-[3px] bg-black/20
                       cursor-pointer
                       flex flex-col justify-center items-center
                       text-white font-medium
@@ -435,15 +473,32 @@ export default function ViewEditBook({
           </div>
           {/* edit button */}
           <div className='flex justify-end gap-2 w-full p-4 bg-primary'>
-            {isViewing && (
-              <button
-                className=' bg-secondary w-32 p-2 px-8 text-white rounded-full flex justify-center items-baseline'
-                onClick={() => {
-                  setIsEditing(true);
-                }}
-              >
-                Edit
-              </button>
+            {isViewing && !isDeleting && (
+              <>
+                <button
+                  className=' bg-danger w-32 p-2 px-8 text-white rounded-full flex justify-center items-baseline'
+                  type='button'
+                  onClick={() => {
+                    showConfirmModal({
+                      title: 'Delete Book',
+                      subtitle: 'Are you sure you want to delete this book?',
+                      onConfirm: () => {
+                        onDeleteBook();
+                      }
+                    });
+                  }}
+                >
+                  Delete
+                </button>
+                <button
+                  className=' bg-secondary w-32 p-2 px-8 text-white rounded-full flex justify-center items-baseline'
+                  onClick={() => {
+                    setIsEditing(true);
+                  }}
+                >
+                  Edit
+                </button>
+              </>
             )}
             {isEditing && !isUpdating && (
               <>
@@ -466,6 +521,12 @@ export default function ViewEditBook({
               <div className='bg-secondary w-fit p-2 px-4 text-white rounded-full flex gap-2 font-medium opacity-80'>
                 <SpinningLoadingSvg className='h-6 w-6 text-white' />
                 Updating...
+              </div>
+            )}
+            {isDeleting && (
+              <div className='bg-danger w-fit p-2 px-4 text-white rounded-full flex gap-2 font-medium opacity-80'>
+                <SpinningLoadingSvg className='h-6 w-6 text-white' />
+                Deleting...
               </div>
             )}
           </div>

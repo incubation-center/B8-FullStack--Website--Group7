@@ -146,6 +146,10 @@ export const getBookByIdAtom = selectorFamily<Book | null, string>({
 
       let book = null;
 
+      console.log('====================================');
+      console.log('books length', books.length);
+      console.log('===================================');
+
       // all books data is not fetched yet
       books.forEach((b) => {
         if (b.id == bookId) {
