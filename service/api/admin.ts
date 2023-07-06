@@ -1,8 +1,8 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios';
 
-import { API_ENDPOINT } from "../../utils/enum";
-import createAxiosInstance from "../axios";
-import { Book, BookRequest, RequestCount } from "@/types";
+import { API_ENDPOINT } from '../../utils/enum';
+import createAxiosInstance from '../axios';
+import { Book, BookRequest, RequestCount } from '@/types';
 
 const axiosClient: AxiosInstance = createAxiosInstance();
 
@@ -50,9 +50,9 @@ export async function getAllRequestAdmin(): Promise<BookRequest[]> {
     return data;
   } catch (error) {
     // throw error;
-    console.log("====================================");
+    console.log('====================================');
     console.log(error);
-    console.log("====================================");
+    console.log('====================================');
     return [];
   }
 }
@@ -63,7 +63,7 @@ export async function approveIncomingRequest(id: string) {
       API_ENDPOINT.ADMIN.APPROVE_INCOMING_REQUEST(id)
     );
 
-    if (response.status !== 200) throw new Error("Something went wrong");
+    if (response.status !== 200) throw new Error('Something went wrong');
 
     const { data: request } = response;
 
@@ -86,9 +86,9 @@ export async function approveIncomingRequest(id: string) {
     return request;
   } catch (error) {
     // throw error;
-    console.log("====================================");
+    console.log('====================================');
     console.log(error);
-    console.log("====================================");
+    console.log('====================================');
     throw error;
   }
 }
@@ -98,11 +98,11 @@ export async function rejectIncomingRequest(id: string, reason: string) {
     const response = await axiosClient.patch(
       API_ENDPOINT.ADMIN.REJECT_INCOMING_REQUEST(id),
       {
-        reason,
+        reason
       }
     );
 
-    if (response.status !== 200) throw new Error("Something went wrong");
+    if (response.status !== 200) throw new Error('Something went wrong');
 
     const { data: request } = response;
 
@@ -125,9 +125,9 @@ export async function rejectIncomingRequest(id: string, reason: string) {
     return request;
   } catch (error) {
     // throw error;
-    console.log("====================================");
+    console.log('====================================');
     console.log(error);
-    console.log("====================================");
+    console.log('====================================');
     throw error;
   }
 }
@@ -136,15 +136,15 @@ export async function receiveBook(id: string) {
   try {
     const res = await axiosClient.patch(API_ENDPOINT.ADMIN.RECEIVE_BOOK(id));
 
-    if (res.status !== 200) throw new Error("Something went wrong");
+    if (res.status !== 200) throw new Error('Something went wrong');
 
     const { data } = res;
 
     return data;
   } catch (error) {
-    console.log("====================================");
+    console.log('====================================');
     console.log(error);
-    console.log("====================================");
+    console.log('====================================');
     throw error;
   }
 }
@@ -154,15 +154,15 @@ export async function createBook(formData: Book): Promise<Book> {
   try {
     const res = await axiosClient.post(API_ENDPOINT.BOOK.CREATE_BOOK, formData);
 
-    if (res.status !== 200) throw new Error("Something went wrong");
+    if (res.status !== 200) throw new Error('Something went wrong');
 
     const { data } = res;
 
     return data;
   } catch (error) {
-    console.log("====================================");
+    console.log('====================================');
     console.log(error);
-    console.log("====================================");
+    console.log('====================================');
     throw error;
   }
 }

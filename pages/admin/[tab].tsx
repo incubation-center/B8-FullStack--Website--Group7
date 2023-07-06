@@ -1,52 +1,37 @@
-import AdminLayout from "@/components/layout/AdminLayout";
-import { AdminTab } from "@/utils/enum";
-import { GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import AdminLayout from '@/components/layout/AdminLayout';
+import { AdminTab } from '@/utils/enum';
+import { GetServerSidePropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
-import { motion, AnimatePresence } from "framer-motion";
-// import DashboardTab from "@/components/admin/tab/Dashboard.tab";
-// import UploadTab from "@/components/admin/tab/Upload.tab";
-// import IncomingTab from "@/components/admin/tab/Incoming.tab";
-// import ActiveTab from "@/components/admin/tab/Active.tab";
-// import ArchivedTab from "@/components/admin/tab/Archived.tab";
-// import RenterTab from "@/components/admin/tab/Renter.tab";
-// import SettingTab from "@/components/admin/tab/Setting.tab";
-// import { getAllRequestAdmin } from "@/service/api/admin";
-import { Book, BookRequest } from "@/types";
-// import { useRecoilState } from "recoil";
-// import {
-//   AdminAllRequestAtom,
-//   isRefreshingRequestAtom,
-// } from "@/service/recoil/admin";
-// import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
-// import { useDebounce } from "@/utils/function";
-import { getAllBooks } from "@/service/api/book";
-import { AllBooksAtom } from "@/service/recoil";
+import { AnimatePresence } from 'framer-motion';
+import { Book } from '@/types';
+import { getAllBooks } from '@/service/api/book';
+import { AllBooksAtom } from '@/service/recoil';
 
 // import { AnimatePresence } from 'framer-motion';
-import DashboardTab from "@/components/admin/tab/Dashboard.tab";
-import UploadTab from "@/components/admin/tab/Upload.tab";
-import IncomingTab from "@/components/admin/tab/Incoming.tab";
-import ActiveTab from "@/components/admin/tab/Active.tab";
-import ArchivedTab from "@/components/admin/tab/Archived.tab";
-import RenterTab from "@/components/admin/tab/Renter.tab";
-import SettingTab from "@/components/admin/tab/Setting.tab";
-import { getAllRequestAdmin, getAllRequestCount } from "@/service/api/admin";
+import DashboardTab from '@/components/admin/tab/Dashboard.tab';
+import UploadTab from '@/components/admin/tab/Upload.tab';
+import IncomingTab from '@/components/admin/tab/Incoming.tab';
+import ActiveTab from '@/components/admin/tab/Active.tab';
+import ArchivedTab from '@/components/admin/tab/Archived.tab';
+import RenterTab from '@/components/admin/tab/Renter.tab';
+import SettingTab from '@/components/admin/tab/Setting.tab';
+import { getAllRequestAdmin, getAllRequestCount } from '@/service/api/admin';
 
-import { useRecoilState } from "recoil";
+import { useRecoilState } from 'recoil';
 import {
   AdminAllRequestAtom,
   AdminAllRequestCountAtom,
-  isRefreshingRequestAtom,
-} from "@/service/recoil/admin";
-import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
-import { useDebounce } from "@/utils/function";
+  isRefreshingRequestAtom
+} from '@/service/recoil/admin';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { useDebounce } from '@/utils/function';
 
-import BookTab from "@/components/admin/tab/Book.tab";
+import BookTab from '@/components/admin/tab/Book.tab';
 
 export default function AdminHomePage({
-  currentTab,
+  currentTab
 }: {
   currentTab: AdminTab;
 }) {
@@ -78,18 +63,18 @@ export default function AdminHomePage({
     try {
       const [requestsResult, countResult] = await Promise.allSettled([
         getAllRequestAdmin(),
-        getAllRequestCount(),
+        getAllRequestCount()
       ]);
-      if (requestsResult.status === "fulfilled") {
+      if (requestsResult.status === 'fulfilled') {
         setAllRequests(requestsResult.value);
       }
-      if (countResult.status === "fulfilled") {
+      if (countResult.status === 'fulfilled') {
         setAllRequestsCount(countResult.value);
       }
     } catch (err) {
-      console.log("====================================");
-      console.log("error", err);
-      console.log("====================================");
+      console.log('====================================');
+      console.log('error', err);
+      console.log('====================================');
     } finally {
       setIsFetched(true);
     }
@@ -109,18 +94,18 @@ export default function AdminHomePage({
     try {
       const [requestsResult, countResult] = await Promise.allSettled([
         getAllRequestAdmin(),
-        getAllRequestCount(),
+        getAllRequestCount()
       ]);
-      if (requestsResult.status === "fulfilled") {
+      if (requestsResult.status === 'fulfilled') {
         setAllRequests(requestsResult.value);
       }
-      if (countResult.status === "fulfilled") {
+      if (countResult.status === 'fulfilled') {
         setAllRequestsCount(countResult.value);
       }
     } catch (err) {
-      console.log("====================================");
-      console.log("error", err);
-      console.log("====================================");
+      console.log('====================================');
+      console.log('error', err);
+      console.log('====================================');
     } finally {
       setIsRefreshing(false);
     }
@@ -185,8 +170,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return {
       redirect: {
         destination: `/admin/${AdminTab.DASHBOARD}`,
-        permanent: false,
-      },
+        permanent: false
+      }
     };
   }
 
@@ -195,7 +180,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      currentTab: tab || AdminTab.DASHBOARD,
-    },
+      currentTab: tab || AdminTab.DASHBOARD
+    }
   };
 }

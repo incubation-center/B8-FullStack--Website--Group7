@@ -1,8 +1,8 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios';
 
-import { API_ENDPOINT } from "../../utils/enum";
-import createAxiosInstance from "../axios";
-import { Book } from "@/types";
+import { API_ENDPOINT } from '../../utils/enum';
+import createAxiosInstance from '../axios';
+import { Book } from '@/types';
 
 const axiosClient: AxiosInstance = createAxiosInstance();
 

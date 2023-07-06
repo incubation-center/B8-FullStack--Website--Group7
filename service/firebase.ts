@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { initializeApp, getApps } from 'firebase/app';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
@@ -17,7 +17,7 @@ const firebase =
 
 const storage = getStorage(firebase);
 
-const profileStorageRef = ref(storage, "user_profile");
+const profileStorageRef = ref(storage, 'user_profile');
 
 export async function uploadImage(file: File, id: string) {
   // const fileExtension = file.name.split('.').pop();
@@ -27,7 +27,7 @@ export async function uploadImage(file: File, id: string) {
 
   const renamedFile = new File([file], newFileNames, {
     type: file.type,
-    lastModified: file.lastModified,
+    lastModified: file.lastModified
   });
 
   const imageRef = ref(profileStorageRef, renamedFile.name);
@@ -55,7 +55,7 @@ export async function updateCoverImage(
 
   const renamedFile = new File([file], newFileNames, {
     type: file.type,
-    lastModified: file.lastModified,
+    lastModified: file.lastModified
   });
 
   const imageRef = ref(ref(storage, category), renamedFile.name);
@@ -74,7 +74,7 @@ export async function updateCoverImage(
 export async function uploadBookCover({
   id,
   file,
-  category,
+  category
 }: {
   id: any;
   file: File;
@@ -87,10 +87,10 @@ export async function uploadBookCover({
 
   const renamedFile = new File([file], newFileNames, {
     type: file.type,
-    lastModified: file.lastModified,
+    lastModified: file.lastModified
   });
 
-  let categoryRef = category.toLowerCase().replace(" ", "_");
+  let categoryRef = category.toLowerCase().replace(' ', '_');
 
   const coverRef = ref(storage, categoryRef);
 
