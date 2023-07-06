@@ -11,7 +11,11 @@ import { useEffect, useState } from "react";
 import { HomePageTab } from "@/utils/enum";
 import { getBookById } from "@/service/api/book";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { AuthAtom, isBookAlreadySaved } from "@/service/recoil";
+import {
+  AuthAtom,
+  getBookByIdAtom,
+  isBookAlreadySaved,
+} from "@/service/recoil";
 import NotLoggedInLayout from "@/components/layout/NotLoggedInLayout";
 import { getCookie } from "cookies-next";
 import { processUserToken } from "@/service/token";
@@ -22,12 +26,12 @@ import {
 import { AxiosError } from "axios";
 import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
 import SaveToFavSvg from "@/components/icon/SaveToFavSvg";
-import { AuthStore } from "@/types/auth";
 
-export default function BookDetail({ book }: { book: Book }) {
+export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
-  const isSaved = useRecoilValue(isBookAlreadySaved(book.id as string));
+  const book = useRecoilValue(getBookByIdAtom(bookId as string)) as Book;
+  const isSaved = useRecoilValue(isBookAlreadySaved(bookId as string));
 
   const [isSaving, setIsSaving] = useState(false);
 
@@ -236,11 +240,9 @@ export default function BookDetail({ book }: { book: Book }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
 
-  const book = await getBookById(id);
-
   return {
     props: {
-      book,
+      bookId: id,
     },
   };
 }

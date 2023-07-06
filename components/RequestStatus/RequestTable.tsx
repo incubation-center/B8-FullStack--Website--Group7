@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { BookRequest } from '@/types';
 
+import Image from 'next/image';
+
 export default function RequestTable({
   data,
   actions
@@ -42,13 +44,19 @@ export default function RequestTable({
             '
           >
             <td className='w-full flex flex-grow gap-2 items-center'>
-              <img
-                src={request.book.bookImg}
-                alt={request.book.title}
-                className='w-14 hidden md:block'
-              />
+              <div className='relative w-14 h-20 hidden md:block'>
+                <Image
+                  src={request.book.bookImg}
+                  alt={request.book.title}
+                  fill
+                  className='object-scale-down'
+                />
+              </div>
+
               <div className='whitespace-pre-wrap text-left'>
-                {request.book.title}
+                {request.book.title.length > 50
+                  ? request.book.title.slice(0, 50) + '...'
+                  : request.book.title}
               </div>
             </td>
 

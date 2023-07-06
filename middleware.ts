@@ -14,7 +14,9 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
 
   // get token from cookie
-  const accessToken = decodeToken(request.cookies.get('accessToken')?.value);
+  const accessToken = decodeToken(
+    request.cookies.get('accessToken')?.value ?? ''
+  );
 
   // condition
   const isAuthRoute = url.pathname.startsWith('/auth');
@@ -22,7 +24,11 @@ export async function middleware(request: NextRequest) {
 
   // if logged in, redirect to homepage page
   if (isAuthRoute) {
-    const tokenValidation = await isTokenValid((accessToken as Token).value);
+    if (accessToken === null) return;
+
+    const tokenValidation = await isTokenValid(
+      (accessToken as Token).value ?? ''
+    );
 
     if (tokenValidation) {
       return NextResponse.redirect(new URL('/', request.nextUrl).href);

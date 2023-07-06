@@ -21,6 +21,7 @@ export const BookCategory = {
 export enum AdminTab {
   DASHBOARD = "dashboard",
   UPLOAD = "upload",
+  BOOKS = "books",
   INCOMING_REQUEST = "incoming-request",
   ACTIVE_REQUEST = "active-request",
   ARCHIVED_REQUEST = "archived-request",
@@ -42,16 +43,18 @@ export const API_ENDPOINT = {
   AUTH: {
     LOGIN: "/auth/login",
     REGISTER: "/auth/register",
-    FORGOT_PASSWORD: "/auth/forgot-password",
-    RESET_PASSWORD: "/auth/reset-password",
     VALIDATE_TOKEN: (id: string) => "/auth/validate-token/" + id,
     REFRESH_TOKEN: "/auth/refresh-token/",
+    VALIDATE_RESET_PASSWORD_TOKEN: (token: string) =>
+      "/user/validate/reset-password-token/?resetPwdToken=" + token,
   },
   USER: {
     INFO: (id: string) => "/user/" + id,
     CHANGE_PASSWORD: (id: string) => `/user/${id}/password`,
     BOOK_TO_FAVORITES: (id: string, bookId: string) =>
       `/user/${id}/favorites/${bookId}`,
+    FORGOT_PASSWORD: (email: string) => "/user/forgot-password?email=" + email,
+    RESET_PASSWORD: "/user/forgot-password/update",
   },
   BOOK: {
     GET_ALL_BOOKS: "/book",
@@ -62,10 +65,11 @@ export const API_ENDPOINT = {
     UPDATE_BOOK_BY_ID: (id: string) => "/book/" + id,
   },
   REQUEST: {
-    GET_ALL_REQUEST: (userId: string) => "/request?userId=" + userId,
+    GET_ALL_REQUEST: (userId: string) => "/request/user?userId=" + userId,
     CREATE_REQUEST: "/request",
   },
   ADMIN: {
+    GET_ALL_REQUEST_COUNT: "/request/count",
     GET_ALL_REQUEST: "/request",
     APPROVE_INCOMING_REQUEST: (id: string) => "/request/" + id + "/accept",
     REJECT_INCOMING_REQUEST: (id: string) => "/request/" + id + "/reject",

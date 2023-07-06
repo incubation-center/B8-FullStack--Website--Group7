@@ -5,6 +5,26 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
+// import DashboardTab from "@/components/admin/tab/Dashboard.tab";
+// import UploadTab from "@/components/admin/tab/Upload.tab";
+// import IncomingTab from "@/components/admin/tab/Incoming.tab";
+// import ActiveTab from "@/components/admin/tab/Active.tab";
+// import ArchivedTab from "@/components/admin/tab/Archived.tab";
+// import RenterTab from "@/components/admin/tab/Renter.tab";
+// import SettingTab from "@/components/admin/tab/Setting.tab";
+// import { getAllRequestAdmin } from "@/service/api/admin";
+import { Book, BookRequest } from "@/types";
+// import { useRecoilState } from "recoil";
+// import {
+//   AdminAllRequestAtom,
+//   isRefreshingRequestAtom,
+// } from "@/service/recoil/admin";
+// import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
+// import { useDebounce } from "@/utils/function";
+import { getAllBooks } from "@/service/api/book";
+import { AllBooksAtom } from "@/service/recoil";
+
+// import { AnimatePresence } from 'framer-motion';
 import DashboardTab from "@/components/admin/tab/Dashboard.tab";
 import UploadTab from "@/components/admin/tab/Upload.tab";
 import IncomingTab from "@/components/admin/tab/Incoming.tab";
@@ -12,29 +32,30 @@ import ActiveTab from "@/components/admin/tab/Active.tab";
 import ArchivedTab from "@/components/admin/tab/Archived.tab";
 import RenterTab from "@/components/admin/tab/Renter.tab";
 import SettingTab from "@/components/admin/tab/Setting.tab";
-import { getAllRequestAdmin } from "@/service/api/admin";
-import { Book, BookRequest } from "@/types";
+import { getAllRequestAdmin, getAllRequestCount } from "@/service/api/admin";
+
 import { useRecoilState } from "recoil";
 import {
   AdminAllRequestAtom,
+  AdminAllRequestCountAtom,
   isRefreshingRequestAtom,
 } from "@/service/recoil/admin";
 import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
 import { useDebounce } from "@/utils/function";
-import { getAllBooks } from "@/service/api/book";
-import { AllBooksAtom } from "@/service/recoil";
+
+import BookTab from "@/components/admin/tab/Book.tab";
 
 export default function AdminHomePage({
   currentTab,
 }: {
   currentTab: AdminTab;
 }) {
-  const [allRequests, setAllRequests] = useRecoilState(AdminAllRequestAtom);
-  const [_, setAllBooks] = useRecoilState(AllBooksAtom);
   const [isFetched, setIsFetched] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useRecoilState(
-    isRefreshingRequestAtom
-  );
+
+  const [_, setAllRequests] = useRecoilState(AdminAllRequestAtom);
+  const [__, setAllRequestsCount] = useRecoilState(AdminAllRequestCountAtom);
+  const [___, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
+  const [____, setAllBooks] = useRecoilState(AllBooksAtom);
 
   // initialize
   const router = useRouter();
@@ -53,33 +74,56 @@ export default function AdminHomePage({
   }, [router.query.tab, setTab]);
   // end: handling page routing
 
+  const initializeData = async () => {
+    try {
+      const [requestsResult, countResult] = await Promise.allSettled([
+        getAllRequestAdmin(),
+        getAllRequestCount(),
+      ]);
+      if (requestsResult.status === "fulfilled") {
+        setAllRequests(requestsResult.value);
+      }
+      if (countResult.status === "fulfilled") {
+        setAllRequestsCount(countResult.value);
+      }
+    } catch (err) {
+      console.log("====================================");
+      console.log("error", err);
+      console.log("====================================");
+    } finally {
+      setIsFetched(true);
+    }
+  };
+
   // initialize tab state
   useEffect(() => {
     setTab(currentTab);
 
-    // update all requests
-    getAllRequestAdmin()
-      .then((requests: BookRequest[]) => {
-        setAllRequests(requests);
-        console.log("====================================");
-        console.log("all requests", requests);
-        console.log("====================================");
-      })
-      .finally(() => {
-        setIsFetched(true);
-      });
+    initializeData();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleRefreshRequest = useDebounce(() => {
+  const handleRefreshRequest = useDebounce(async () => {
     setIsRefreshing(true);
-    getAllRequestAdmin()
-      .then((requests: BookRequest[]) => {
-        setAllRequests(requests);
-      })
-      .finally(() => {
-        setIsRefreshing(false);
-      });
+    try {
+      const [requestsResult, countResult] = await Promise.allSettled([
+        getAllRequestAdmin(),
+        getAllRequestCount(),
+      ]);
+      if (requestsResult.status === "fulfilled") {
+        setAllRequests(requestsResult.value);
+      }
+      if (countResult.status === "fulfilled") {
+        setAllRequestsCount(countResult.value);
+      }
+    } catch (err) {
+      console.log("====================================");
+      console.log("error", err);
+      console.log("====================================");
+    } finally {
+      setIsRefreshing(false);
+    }
   }, 100);
 
   const handleRefreshBooks = useDebounce(() => {
@@ -112,6 +156,7 @@ export default function AdminHomePage({
           {tab === AdminTab.UPLOAD && (
             <UploadTab handleRefreshRequest={handleRefreshBooks} />
           )}
+          {tab === AdminTab.BOOKS && <BookTab />}
           {tab === AdminTab.INCOMING_REQUEST && (
             <IncomingTab handleRefreshRequest={handleRefreshRequest} />
           )}

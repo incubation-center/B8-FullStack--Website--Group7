@@ -1,6 +1,8 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
+
 import { BookRequest } from '@/types';
 import { AdminTab } from '@/utils/enum';
 
@@ -22,6 +24,10 @@ export default function RequestTable({
   actions,
   useIn
 }: RequestTableProps) {
+  console.log('====================================');
+  console.log('data', data);
+  console.log('====================================');
+
   return (
     <table className='w-full '>
       <thead>
@@ -55,11 +61,19 @@ export default function RequestTable({
           >
             <td className=''>
               <div className='flex flex-grow gap-2 items-center'>
-                <img
+                {/* <img
                   src={request.book.bookImg}
                   alt={request.book.title}
                   className='w-14'
-                />
+                /> */}
+                <div className='relative w-14 h-20 hidden md:block'>
+                  <Image
+                    src={request.book.bookImg}
+                    alt={request.book.title}
+                    fill
+                    className='object-scale-down'
+                  />
+                </div>
                 <div className='whitespace-pre-wrap text-center'>
                   {request.book.title}
                 </div>
