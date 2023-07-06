@@ -127,7 +127,7 @@ export default function AdminHomePage({
       {!isFetched && (
         <div className='w-full flex-1 flex gap-4 justify-center items-center'>
           <div className='text-center text-primary font-medium'>
-            Fetching requests
+            Fetching the data
           </div>
           <SpinningLoadingSvg className='w-8 h-8 text-primary' />
         </div>

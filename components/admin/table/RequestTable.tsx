@@ -71,7 +71,7 @@ export default function RequestTable({
                     src={request.book.bookImg}
                     alt={request.book.title}
                     fill
-                    className='object-scale-down'
+                    className='object-contain'
                   />
                 </div>
                 <div className='whitespace-pre-wrap text-left'>
