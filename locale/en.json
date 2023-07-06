@@ -138,7 +138,14 @@
 
         "Sign-up-btn": "Sign Up",
         "already-got-account": "Already have an account?",
-        "login-btn": "Login"
+        "login-btn": "Login",
+
+        "error-tap": {
+            "error": "Error",
+            "error-occur-text": "An error occurred while registering your account",
+
+            "close-btn": "Close"
+        }
     },
 
     "book-tap": {
@@ -293,8 +300,34 @@
         "p-not-authorized": "You are not authorized to access this page",
 
         "go-back-to-home-btn": "Go back to home"
-    }
+    },
 
+    "forgot-password-tap": {
+        "forgot-pass-text": "Forgot Your Password",
+        "forgot-pass-p": "Please enter your email to reset your password",
+
+        "email-placeholder": "email",
+        "email-required": "Email is required",
+
+        "send-btn": "Send",
+        "go-back-to-login": "Go back to login",
+
+        "email-sent-tap": {
+            "email-sent": "Email sent!!!",
+            "check-email": "Check your email to reset your password",
+
+            "close-btn": "Close"
+        }
+
+    },
+
+    "expired-tap": {
+        "link-expired": "Link Expired",
+        "expired-tap-p": "The link you used to reset your password has expired.Please request a new link from the forgot password page.",
+
+        "back-to-forgot-pass-btn": "Back to Forgot password"
+
+    }
 
 
 }
