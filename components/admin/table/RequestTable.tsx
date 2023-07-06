@@ -74,19 +74,25 @@ export default function RequestTable({
                     className='object-scale-down'
                   />
                 </div>
-                <div className='whitespace-pre-wrap text-center'>
-                  {request.book.title}
+                <div className='whitespace-pre-wrap text-left'>
+                  {request.book.title.length > 50
+                    ? request.book.title.slice(0, 50) + '...'
+                    : request.book.title}
                 </div>
               </div>
             </td>
             <td>{request.borrower.username}</td>
 
             {useIn === AdminTab.INCOMING_REQUEST && (
-              <td>{request.dateOfRequest.toLocaleString()}</td>
+              <td>
+                {request.dateOfRequest
+                  .toLocaleString()
+                  .replace(/:\d{2}\s/, ' ')}
+              </td>
             )}
 
             {useIn === AdminTab.ACTIVE_REQUEST && (
-              <td>{request.dateOfReturn!.toLocaleString()}</td>
+              <td>{request.dateOfReturn!.toLocaleDateString()}</td>
             )}
 
             {useIn === AdminTab.ARCHIVED_REQUEST && (
