@@ -95,30 +95,50 @@
     },
 
     "login-tab": {
-        "h1-login-tap": "សូមស្វាគមន៍មកកាន់បណ្ណាល័យឌីជីថល",
-        "p-details-login-tap": "សូមបញ្ចូលព័ត៌មានលម្អិតរបស់អ្នក",
-        "a-login-tap": "ភ្លេចពាក្យសម្ងាត់​?",
-        "p-NoAccount": "មិនទាន់មានគណនី",
+        "email":"អ៊ីមែល",
+        "password":"ពាក្យសម្ងាត់",
 
-        "login-email": "អ៊ី​ម៉េ​ល",
-        "login-email-fill": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
-        "login-password": "ពាក្យសម្ងាត់",
-        "login-password-fill": "សូម​បញ្ចូល​ពាក្យ​សម្ងាត់​របស់​អ្នក"
+        "welcome-text": "សូមស្វាគមន៍មកកាន់បណ្ណាល័យឌីជីថល",
+        "p-details-login-tab": "សូមបញ្ចូលព័ត៌មានលម្អិតរបស់អ្នក",
+        "forget-password": "ភ្លេចពាក្យសម្ងាត់?",
+        "no-account-text": "មិនទាន់មានគណនី",
+        "sign-up": "បង្កើតគណនី",
+        "email-placeholder": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+        "password-placeholder": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+        "email-required-alert": "ត្រូវការបញ្ចូលអ៊ីម៉េល",
+        "password-required-alert": "ត្រូវការបញ្ចូលពាក្យ​សម្ងាត់​",
+
+        "invalid-credential-modal": {
+            "invalid-credential-text": "ព័ត៌មានលម្អិតមិន​ត្រឹមត្រូវ!!",
+            "try-again-text": "សូម​ព្យាយាម​ម្តង​ទៀត",
+            "close-btn": "បិទ"
+        }
     },
 
     "sign-up-tab": {
-        "h1-sign-up-tap": "បង្កើត​គណនី",
-        "p-HaveAccount": "មានគណនីរួចហើយ?",
-
-        "username": "ឈ្មោះ​​",
-        "username-fill": "បញ្ចូលឈ្មោះរបស់អ្នក។",
-        "email-address": "អ៊ី​ម៉េ​ល",
+        "username": "ឈ្មោះ",
+        "email": "អ៊ីមែល",
         "password": "ពាក្យសម្ងាត់",
-        "password-fill": "​បញ្ចូល​ពាក្យ​សម្ងាត់​របស់​អ្នក",
-        "confirm-password": "បញ្ជាក់ពាក្យសម្ងាត់",
-        "confirm-password-fill": "បញ្ជាក់ពាក្យសម្ងាត់របស់អ្នក",
-        "phone-number": "លេខទូរសព្ទ",
-        "phone-number-fill": "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក"
+        "cfm-password": "បញ្ជាក់ពាក្យសម្ងាត់",
+        "phone": "លេខទូរសព្ទ",
+
+        "username-placeholder": "សូមបញ្ចូលពាក្យឈ្មោះរបស់អ្នក",
+        "email-placeholder": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+        "password-placeholder": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+        "cfm-password-placeholder": "បញ្ជាក់ពាក្យសម្ងាត់របស់អ្នក",
+        "phone-placeholder": "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក",
+
+        "email-required-alert": "ត្រូវការបញ្ចូលអ៊ីម៉េល",
+        "user-required-alert": "ត្រូវការបញ្ចូលឈ្មោះ",
+        "password-required-alert": "ត្រូវការបញ្ចូលពាក្យ​សម្ងាត់​",
+        "cfm-password-required-alert": "ត្រូវការបញ្ជាក់កើពាក្យ​សម្ងាត់​",
+        "phone-required-alert": "ត្រូវការបញ្ចូលលេខទូរសព្ទ",
+        "invalid-password-alert": "ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងតិច ៨​ តួអក្សរ",
+        "password-not-matched": "បញ្ជាក់ពាក្យសម្ងាត់មិនត្រូវគ្នា",
+
+        "Sign-up-btn": "បង្កើតគណនី",
+        "already-got-account": "មានគណនីរួចហើយ?",
+        "login-btn": "ចូលគណនី"
     },
 
     "book-tap": {
@@ -127,7 +147,7 @@
         "book-description": "ការពិពណ៌នាសៀវភៅ",
 
         "borrow-btn": "ខ្ចី",
-        "goback-btn": "ត្រឡប់​ក្រោយ",
+        "go-back-btn": "ត្រឡប់​ក្រោយ",
         "save-btn": "រក្សាទុក"
     },
 
@@ -178,6 +198,16 @@
             "description": "ការពិពណ៌នា",
 
             "upload-book-btn": "ផ្ទុកឡើងសៀវភៅ"
+        },
+
+        "books-tap": {
+            "books": "សៀវភៅ",
+            "books-h1-education": "ការអប់រំ",
+            "books-h1-business": "អាជីវកម្ម",
+            "books-h1-history": "ប្រវត្តិសាស្ត្រ",
+            "books-h1-drama": "រឿងកំសត់",
+            "books-h1-fantasy": "រឿងយុទ្ធសីល",
+            "books-h1-self-development": "ការអភិវឌ្ឍន៍ខ្លួន"
         },
 
         "incoming-request-tap": {
@@ -255,6 +285,14 @@
             "change-btn": "ផ្លាស់ប្តូរ",
             "view-btn": "មើល"
         }
+    },
+
+    "unauthorized-page": {
+        "401": "401",
+        "unauthorized": "គ្មានការអនុញ្ញាត",
+        "p-not-authorized": "អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យចូលប្រើទំព័រនេះទេ",
+
+        "go-back-to-home-btn": "ត្រឡប់​ទៅទំព័រដើម"
     }
 
 }

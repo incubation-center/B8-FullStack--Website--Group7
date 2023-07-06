@@ -95,30 +95,50 @@
     },
 
     "login-tab": {
-        "h1-login-tap": "Welcome to Digital Library",
-        "p-details-login-tap": "Please enter your details",
-        "a-login-tap": "Forgot password?",
-        "p-NoAccount": "Don't have an account?",
+        "email":"Email Address",
+        "password":"Password",
 
-        "login-email": "Email Address",
-        "login-email-fill": "Please enter your email",
-        "login-password": "Password",
-        "login-password-fill": "Please enter your password"
+        "welcome-text": "Welcome to Digital Library",
+        "p-details-login-tab": "Please enter your details",
+        "forget-password": "Forgot password?",
+        "no-account-text": "Don't have an account?",
+        "sign-up": "Sign Up",
+        "email-placeholder": "Please enter your email",
+        "password-placeholder": "Please enter your password",
+        "email-required-alert": "Email is required",
+        "password-required-alert": "Password is required",
+
+        "invalid-credential-modal": {
+            "invalid-credential-text": "Invalid Credentials!!",
+            "try-again-text": "Please try again",
+            "close-btn": "Close"
+        }
     },
 
     "sign-up-tab": {
-        "h1-sign-up-tap": "Create an account",
-        "p-HaveAccount": "Already have an account?",
-
         "username": "Username",
-        "username-fill": "Enter your username",
-        "email-address": "Email address",
+        "email": "Email Address",
         "password": "Password",
-        "password-fill": "Enter your password",
-        "confirm-password": "Confirm Password",
-        "confirm-password-fill": "Confirm your password",
-        "phone-number": "Phone Number",
-        "phone-number-fill": "Enter your phone number"
+        "cfm-password": "Confirm Password",
+        "phone": "Phone Number",
+
+        "username-placeholder": "Please enter your username",
+        "email-placeholder": "Please enter your email address",
+        "password-placeholder": "Please enter your password",
+        "cfm-password-placeholder": "Please enter your username",
+        "phone-placeholder": "Please enter your username",
+
+        "email-required-alert": "Email is required",
+        "user-required-alert": "Username is required",
+        "password-required-alert": "Password is required",
+        "cfm-password-required-alert": "Confirm Password is required",
+        "phone-required-alert": "Phone number is required",
+        "invalid-password-alert": "Password must be at least 8 characters long",
+        "password-not-matched": "Confirm password do not match",
+
+        "Sign-up-btn": "Sign Up",
+        "already-got-account": "Already have an account?",
+        "login-btn": "Login"
     },
 
     "book-tap": {
@@ -127,7 +147,7 @@
         "book-description": "Book description",
 
         "borrow-btn": "Borrow",
-        "goback-btn": "Go Back",
+        "go-back-btn": "Go Back",
         "save-btn": "Save"
     },
 
@@ -178,6 +198,16 @@
             "description": "Description",
 
             "upload-book-btn": "Upload book"
+        },
+
+        "books-tap": {
+            "books": "Books",
+            "books-h1-education": "Education",
+            "books-h1-business": "Business",
+            "books-h1-history": "History",
+            "books-h1-drama": "Drama",
+            "books-h1-fantasy": "Fantasy",
+            "books-h1-self-development": "Self Development"
         },
 
         "incoming-request-tap": {
@@ -255,6 +285,16 @@
             "change-btn": "Change",
             "view-btn": "View"
         }
+    },
+
+    "unauthorized-page": {
+        "401": "401",
+        "unauthorized": "Unauthorized",
+        "p-not-authorized": "You are not authorized to access this page",
+
+        "go-back-to-home-btn": "Go back to home"
     }
+
+
 
 }
