@@ -3,7 +3,9 @@ import Image from 'next/image';
 
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import { useRecoilValue } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
+import { AuthAtom, filteredSavedBooksAtom } from '@/service/recoil';
+
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function SavedTab({
   onClickExplore
@@ -11,6 +13,8 @@ export default function SavedTab({
   onClickExplore: () => void;
 }) {
   const authStore = useRecoilValue(AuthAtom);
+  const favBooks = useRecoilValue(filteredSavedBooksAtom);
+
   const router = useRouter();
 
   const handleBookClick = (id: string) => {
@@ -33,7 +37,7 @@ export default function SavedTab({
             Saved
           </h1>
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
-            {authStore.user.favoriteBooks.length === 0 && (
+            {favBooks.length === 0 && (
               <div className='h-full w-full flex flex-col justify-center items-center'>
                 <h1 className='text-center text-primary font-medium'>
                   You have no saved books
@@ -49,42 +53,44 @@ export default function SavedTab({
                 </button>
               </div>
             )}
-            {authStore.user.favoriteBooks.map((book, index) => (
-              <div key={book.id!} className='flex flex-col space-y-4'>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                {/* <img
-                  className='w-fit h-[200px] object-cover cursor-pointer'
-                  src={book.bookImg}
-                  alt={book.title}
-                  draggable={false}
-                  onClick={() => handleBookClick(book.id!)}
-                /> */}
-                <div className='relative h-[250px] w-[200px] '>
-                  <Image
-                    className='w-full h-full object-bottom object-contain'
-                    src={book.bookImg}
-                    alt={book.title}
-                    draggable={false}
-                    fill
-                    style={{
-                      height: '100%',
-                      width: '100%'
-                    }}
-                    onClick={() => handleBookClick(book.id!)}
-                  />
-                </div>
+            <AnimatePresence>
+              {favBooks.map((book, index) => (
+                <motion.div
+                  layout
+                  animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+                  exit={{ opacity: [1, 0], scale: [1, 0.5] }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  key={book.id!}
+                  className='flex flex-col space-y-4'
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <div className='relative h-[250px] w-[200px] '>
+                    <Image
+                      className='w-full h-full object-bottom object-contain'
+                      src={book.bookImg}
+                      alt={book.title}
+                      draggable={false}
+                      fill
+                      style={{
+                        height: '100%',
+                        width: '100%'
+                      }}
+                      onClick={() => handleBookClick(book.id!)}
+                    />
+                  </div>
 
-                <button
-                  className='
+                  <button
+                    className='
                           bg-secondary text-white font-light
                           rounded-lg py-1 px-2 w-40 mx-auto 
                         '
-                  onClick={() => handleBookClick(book.id!)}
-                >
-                  View
-                </button>
-              </div>
-            ))}
+                    onClick={() => handleBookClick(book.id!)}
+                  >
+                    View
+                  </button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       )}

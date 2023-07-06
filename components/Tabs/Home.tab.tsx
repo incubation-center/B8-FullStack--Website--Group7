@@ -2,12 +2,18 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { BookData } from '@/dummydata';
 import { BookCategory } from '@/utils/enum';
 
-import { AllBooksAtom, homePageCategoryAtom } from '@/service/recoil';
+import {
+  AllBooksAtom,
+  filteredBooksAtom,
+  homePageCategoryAtom
+} from '@/service/recoil';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
 import { Book } from '@/types';
@@ -23,8 +29,8 @@ export default function HomeTab({
   const router = useRouter();
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
+  const filterBooks = useRecoilValue(filteredBooksAtom);
   const [isFetchingBooks, setIsFetchingBooks] = useState(false);
-  const [fetchedBookError, setFetchedBookError] = useState(false);
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
@@ -131,7 +137,7 @@ export default function HomeTab({
 
   return (
     <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
-      {!isUseInAdminPage && (
+      {!filterBooks && !isUseInAdminPage && (
         <div
           id='category-section'
           className='
@@ -179,27 +185,35 @@ export default function HomeTab({
           </>
         )}
 
+        {filterBooks && (
+          <FilteredBooksList
+            books={filterBooks}
+            handleBookClick={handleBookClick}
+          />
+        )}
+
         {/* loop over category */}
-        {Object.keys(BookCategory).map((key, index) => {
-          const category = BookCategory[key as keyof typeof BookCategory];
+        {!filterBooks &&
+          Object.keys(BookCategory).map((key, index) => {
+            const category = BookCategory[key as keyof typeof BookCategory];
 
-          const books = allBooks.filter(
-            (book) => book.category.trim() === category.trim()
-          );
+            const books = allBooks.filter(
+              (book) => book.category.trim() === category.trim()
+            );
 
-          if (books.length === 0) return null;
+            if (books.length === 0) return null;
 
-          return (
-            <BookSection
-              key={key}
-              categoryKey={key}
-              books={books}
-              category={category}
-              handleBookClick={handleBookClick}
-              handleVisibleOnScreen={handleVisibleOnScreen}
-            />
-          );
-        })}
+            return (
+              <BookSection
+                key={key}
+                categoryKey={key}
+                books={books}
+                category={category}
+                handleBookClick={handleBookClick}
+                handleVisibleOnScreen={handleVisibleOnScreen}
+              />
+            );
+          })}
 
         {/* <div className='h-[300px]'></div> */}
       </div>
@@ -298,9 +312,13 @@ function BookSection({
       >
         <div className='flex flex-row shrink-0 space-x-[35px] '>
           {books.map((book, index) => (
-            <div key={book.id} className='flex flex-col space-y-4'>
+            <motion.div
+              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              key={book.id}
+              className='flex flex-col space-y-4'
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-
               <div className='relative h-[200px] w-[150px] mx-auto'>
                 <Image
                   className='w-full h-full object-bottom  object-contain'
@@ -326,7 +344,7 @@ function BookSection({
               >
                 View
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -353,6 +371,62 @@ function BookSectionSkeleton() {
         <div className='bg-primary w-full h-40 rounded-lg '></div>
       </div>
       <div className='bg-primary w-full h-2 rounded-lg '></div>
+    </div>
+  );
+}
+
+function FilteredBooksList({
+  books,
+  handleBookClick
+}: {
+  books: Book[];
+  handleBookClick: (book: Book) => void;
+}) {
+  return (
+    <div className='w-full h-full py-4 space-y-8'>
+      <h1 className='font-medium text-lg text-primary'>Search result:</h1>
+      <div className='flex flex-row flex-wrap shrink-0 justify-center gap-4'>
+        <AnimatePresence>
+          {books.map((book, index) => (
+            <motion.div
+              layout
+              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+              exit={{ opacity: [1, 0], scale: [1, 0.5] }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              key={book.id}
+              className='flex flex-col space-y-4'
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+
+              <div className='relative h-[200px] w-[150px] mx-auto'>
+                <Image
+                  className='w-full h-full object-bottom  object-contain'
+                  src={book.bookImg}
+                  alt={book.title}
+                  draggable={false}
+                  fill
+                  style={{
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
+                  onClick={() => handleBookClick(book)}
+                />
+              </div>
+
+              <button
+                className='
+                bg-secondary text-white font-light
+                rounded-lg py-1 px-2 w-32 mx-auto
+              '
+                onClick={() => handleBookClick(book)}
+              >
+                View
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

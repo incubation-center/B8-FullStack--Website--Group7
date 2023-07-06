@@ -3,6 +3,8 @@ import { BookRequest } from '@/types';
 
 import Image from 'next/image';
 
+import { motion } from 'framer-motion';
+
 export default function RequestTable({
   data,
   actions
@@ -33,7 +35,8 @@ export default function RequestTable({
       </thead>
       <tbody>
         {data.map((request) => (
-          <tr
+          <motion.tr
+            layout
             key={request.requestId}
             className='
               border-b-2 border-primary
@@ -43,13 +46,13 @@ export default function RequestTable({
               [&>td]:whitespace-nowrap
             '
           >
-            <td className='w-full flex flex-grow gap-2 items-center'>
+            <td className='w-full flex flex-grow gap-2 items-center justify-start'>
               <div className='relative w-14 h-20 hidden md:block'>
                 <Image
                   src={request.book.bookImg}
                   alt={request.book.title}
                   fill
-                  className='object-scale-down'
+                  className='object-scale-down object-left'
                 />
               </div>
 
@@ -111,7 +114,7 @@ export default function RequestTable({
                 </button>
               ))}
             </td>
-          </tr>
+          </motion.tr>
         ))}
       </tbody>
     </table>
