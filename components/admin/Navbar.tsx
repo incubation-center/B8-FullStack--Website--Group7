@@ -18,25 +18,28 @@ export default function Navbar({
         return 'translate-y-0';
       case AdminTab.UPLOAD:
         return 'translate-y-12';
-      case AdminTab.INCOMING_REQUEST:
+      case AdminTab.BOOKS:
         return 'translate-y-24';
-      case AdminTab.ACTIVE_REQUEST:
+      case AdminTab.INCOMING_REQUEST:
         return 'translate-y-[9rem]';
-      case AdminTab.ARCHIVED_REQUEST:
+      case AdminTab.ACTIVE_REQUEST:
         return 'translate-y-[12rem]';
-      case AdminTab.RENTER:
+      case AdminTab.ARCHIVED_REQUEST:
         return 'translate-y-[15rem]';
-      case AdminTab.SETTING:
+      case AdminTab.RENTER:
         return 'translate-y-[18rem]';
+      case AdminTab.SETTING:
+        return 'translate-y-[21rem]';
     }
   };
 
   return (
     <div
       className='
-        h-full w-[250px] min-w-[250px] flex flex-col
+        w-[300px]
+        h-full flex flex-col
         bg-primary
-        p-4 z-10
+        p-2 z-10
       '
     >
       {/* Logo */}
@@ -51,7 +54,7 @@ export default function Navbar({
       </div>
 
       {/* nav button */}
-      <div className='relative'>
+      <div className='relative px-2'>
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
           iconPath='/icon/admin-sidebar/dashboard.svg'
@@ -64,6 +67,13 @@ export default function Navbar({
           iconPath='/icon/admin-sidebar/upload.svg'
           isCurrentTab={currentTab === AdminTab.UPLOAD}
           onClick={() => handlePageRouting(AdminTab.UPLOAD)}
+        />
+
+        <NavbarBtn
+          title={formatEnumValue(AdminTab.BOOKS)}
+          iconPath='/icon/admin-sidebar/book_admin.svg'
+          isCurrentTab={currentTab === AdminTab.BOOKS}
+          onClick={() => handlePageRouting(AdminTab.BOOKS)}
         />
 
         <NavbarBtn
@@ -105,7 +115,7 @@ export default function Navbar({
         <div
           className={`
           ${handleTranslate()} transition-all duration-300
-          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-xl
+          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full
           `}
           style={{ zIndex: -1 }}
         ></div>
@@ -142,8 +152,8 @@ function NavbarBtn({
 }) {
   return (
     <div
-      className={`flex items-center justify-start cursor-pointer rounded-xl 
-      ${isCurrentTab ? 'text-secondary ' : 'text-secondary'}
+      className={`flex items-center justify-start cursor-pointer rounded-full 
+      ${isCurrentTab ? 'text-primary ' : 'text-secondary'}
       transition-all duration-300
       whitespace-nowrap 
       p-1 px-2

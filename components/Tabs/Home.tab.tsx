@@ -2,28 +2,49 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { BookData } from '@/dummydata';
 import { BookCategory } from '@/utils/enum';
 
-import { AllBooksAtom, homePageCategoryAtom } from '@/service/recoil';
+import {
+  AllBooksAtom,
+  filteredBooksAtom,
+  homePageCategoryAtom
+} from '@/service/recoil';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
 
-export default function HomeTab() {
+export default function HomeTab({
+  isUseInAdminPage = false,
+  onClickViewInAdminPage
+}: {
+  isUseInAdminPage?: boolean;
+  onClickViewInAdminPage?: (book: Book) => void;
+}) {
   const router = useRouter();
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
+  const filterBooks = useRecoilValue(filteredBooksAtom);
   const [isFetchingBooks, setIsFetchingBooks] = useState(false);
 
   // handle onScroll listener
   const scrollingRef = useRef(null);
 
-  const handleBookClick = (id: string) => {
-    router.push(`/book/${id}`);
+  const handleBookClick = (book: Book) => {
+    if (!isUseInAdminPage) {
+      router.push(`/book/${book.id}`);
+      return;
+    }
+
+    // if use in admin page
+    if (onClickViewInAdminPage) {
+      onClickViewInAdminPage(book);
+    }
   };
 
   const handleScrollToCategoryNav = (categoryKey: string, timeout: number) => {
@@ -49,11 +70,13 @@ export default function HomeTab() {
     (categoryKey: string, category: string) => {
       setCurrentCategory(category);
 
-      router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
-        shallow: true
-      });
-
       handleScrollToCategoryNav(categoryKey, 800);
+
+      if (!isUseInAdminPage) {
+        router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
+          shallow: true
+        });
+      }
     },
     100
   );
@@ -87,16 +110,23 @@ export default function HomeTab() {
       setCurrentCategory(category);
     } else {
       setCurrentCategory(BookCategory.EDUCATION);
-      updateRoute(BookCategory.EDUCATION);
+
+      if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
     }
 
     // setBooks(books);
     if (allBooks.length === 0) {
       setIsFetchingBooks(true);
-      getAllBooks().then((books) => {
-        setAllBooks(books);
-        setIsFetchingBooks(false);
-      });
+      getAllBooks()
+        .then((books) => {
+          setAllBooks(books);
+          setIsFetchingBooks(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAllBooks(BookData);
+          setIsFetchingBooks(false);
+        });
     }
 
     return () => {
@@ -106,40 +136,42 @@ export default function HomeTab() {
   }, []);
 
   return (
-    <div className='px-4'>
-      <div
-        id='category-section'
-        className='
+    <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
+      {!filterBooks && !isUseInAdminPage && (
+        <div
+          id='category-section'
+          className='
           category-section
-          w-full overflow-x-auto flex flex-row  bg-alt-secondary 
+          w-full overflow-x-auto flex flex-row bg-inherit
           sticky top-0 z-10 py-4
         '
-      >
-        <div className='w-full flex flex-nowrap h-[40px]  items-center'>
-          {Object.keys(BookCategory).map((category: any) => {
-            const key = category as keyof typeof BookCategory;
-            const value = BookCategory[key];
+        >
+          <div className='w-full flex flex-nowrap h-[40px]  items-center'>
+            {Object.keys(BookCategory).map((category: any) => {
+              const key = category as keyof typeof BookCategory;
+              const value = BookCategory[key];
 
-            const isCurrentCategory = currentCategory === value;
+              const isCurrentCategory = currentCategory === value;
 
-            const iconPath = `/icon/book-category/${BookCategory[
-              category as keyof typeof BookCategory
-            ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
+              const iconPath = `/icon/book-category/${BookCategory[
+                category as keyof typeof BookCategory
+              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
 
-            return (
-              <CategoryButton
-                key={category}
-                category={category}
-                value={value}
-                iconPath={iconPath}
-                isCurrentCategory={isCurrentCategory}
-                handleCategory={() => handleCategory(key, value)}
-                disabled={isFetchingBooks || allBooks.length === 0}
-              />
-            );
-          })}
+              return (
+                <CategoryButton
+                  key={category}
+                  category={category}
+                  value={value}
+                  iconPath={iconPath}
+                  isCurrentCategory={isCurrentCategory}
+                  handleCategory={() => handleCategory(key, value)}
+                  disabled={isFetchingBooks || allBooks.length === 0}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
 
       <div
         ref={scrollingRef}
@@ -153,27 +185,35 @@ export default function HomeTab() {
           </>
         )}
 
+        {filterBooks && (
+          <FilteredBooksList
+            books={filterBooks}
+            handleBookClick={handleBookClick}
+          />
+        )}
+
         {/* loop over category */}
-        {Object.keys(BookCategory).map((key, index) => {
-          const category = BookCategory[key as keyof typeof BookCategory];
+        {!filterBooks &&
+          Object.keys(BookCategory).map((key, index) => {
+            const category = BookCategory[key as keyof typeof BookCategory];
 
-          const books = allBooks.filter(
-            (book) => book.category.trim() === category.trim()
-          );
+            const books = allBooks.filter(
+              (book) => book.category.trim() === category.trim()
+            );
 
-          if (books.length === 0) return null;
+            if (books.length === 0) return null;
 
-          return (
-            <BookSection
-              key={key}
-              categoryKey={key}
-              books={books}
-              category={category}
-              handleBookClick={handleBookClick}
-              handleVisibleOnScreen={handleVisibleOnScreen}
-            />
-          );
-        })}
+            return (
+              <BookSection
+                key={key}
+                categoryKey={key}
+                books={books}
+                category={category}
+                handleBookClick={handleBookClick}
+                handleVisibleOnScreen={handleVisibleOnScreen}
+              />
+            );
+          })}
 
         {/* <div className='h-[300px]'></div> */}
       </div>
@@ -232,7 +272,7 @@ function BookSection({
   categoryKey: string;
   category: string;
   books: Book[];
-  handleBookClick: (id: string) => void;
+  handleBookClick: (book: Book) => void;
   handleVisibleOnScreen: (categoryKey: string, category: string) => void;
 }) {
   const ref = useRef<any>(null);
@@ -272,26 +312,39 @@ function BookSection({
       >
         <div className='flex flex-row shrink-0 space-x-[35px] '>
           {books.map((book, index) => (
-            <div key={book.id} className='flex flex-col space-y-4'>
+            <motion.div
+              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              key={book.id}
+              className='flex flex-col space-y-4'
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className='w-fit h-[200px] object-cover cursor-pointer'
-                src={book.bookImg}
-                alt={book.title}
-                draggable={false}
-                onClick={() => handleBookClick(book.id!)}
-              />
+              <div className='relative h-[200px] w-[150px] mx-auto'>
+                <Image
+                  className='w-full h-full object-bottom  object-contain'
+                  src={book.bookImg}
+                  alt={book.title}
+                  draggable={false}
+                  fill
+                  style={{
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
+                  onClick={() => handleBookClick(book)}
+                />
+              </div>
 
               <button
                 className='
                 bg-secondary text-white font-light
-                rounded-lg py-1 px-2
+                rounded-lg py-1 px-2 w-40 mx-auto
               '
-                onClick={() => handleBookClick(book.id!)}
+                onClick={() => handleBookClick(book)}
               >
                 View
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -318,6 +371,62 @@ function BookSectionSkeleton() {
         <div className='bg-primary w-full h-40 rounded-lg '></div>
       </div>
       <div className='bg-primary w-full h-2 rounded-lg '></div>
+    </div>
+  );
+}
+
+function FilteredBooksList({
+  books,
+  handleBookClick
+}: {
+  books: Book[];
+  handleBookClick: (book: Book) => void;
+}) {
+  return (
+    <div className='w-full h-full py-4 space-y-8'>
+      <h1 className='font-medium text-lg text-primary'>Search result:</h1>
+      <div className='flex flex-row flex-wrap shrink-0 justify-center gap-4'>
+        <AnimatePresence>
+          {books.map((book, index) => (
+            <motion.div
+              layout
+              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+              exit={{ opacity: [1, 0], scale: [1, 0.5] }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              key={book.id}
+              className='flex flex-col space-y-4'
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+
+              <div className='relative h-[200px] w-[150px] mx-auto'>
+                <Image
+                  className='w-full h-full object-bottom  object-contain'
+                  src={book.bookImg}
+                  alt={book.title}
+                  draggable={false}
+                  fill
+                  style={{
+                    height: '100%',
+                    width: '100%'
+                  }}
+                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
+                  onClick={() => handleBookClick(book)}
+                />
+              </div>
+
+              <button
+                className='
+                bg-secondary text-white font-light
+                rounded-lg py-1 px-2 w-32 mx-auto
+              '
+                onClick={() => handleBookClick(book)}
+              >
+                View
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

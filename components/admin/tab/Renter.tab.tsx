@@ -20,7 +20,7 @@ export default function RenterTab({
   const { toggle, ModalWrapper } = useModal();
 
   return (
-    <AdminTabLayout title='Renter' handleRefreshRequest={handleRefreshRequest}>
+    <AdminTabLayout title='Renter' handleRefresh={handleRefreshRequest}>
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>

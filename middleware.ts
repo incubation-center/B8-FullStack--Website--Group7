@@ -13,16 +13,30 @@ export async function middleware(request: NextRequest) {
   // url
   const url = request.nextUrl.clone();
 
-  // get token from cookie
-  const accessToken = decodeToken(request.cookies.get('accessToken')?.value);
-
   // condition
+  const isPublicRoute = url.pathname === '/';
+  const isBookRouter = url.pathname.startsWith('/book');
   const isAuthRoute = url.pathname.startsWith('/auth');
   const isAdminRoute = url.pathname.startsWith('/admin');
 
+  // if public route, do nothing
+  if (isPublicRoute) return;
+
+  // if book route, do nothing
+  if (isBookRouter) return;
+
+  // get token from cookie
+  const accessToken = decodeToken(
+    request.cookies.get('accessToken')?.value ?? ''
+  );
+
   // if logged in, redirect to homepage page
   if (isAuthRoute) {
-    const tokenValidation = await isTokenValid((accessToken as Token).value);
+    if (accessToken === null) return;
+
+    const tokenValidation = await isTokenValid(
+      (accessToken as Token).value ?? ''
+    );
 
     if (tokenValidation) {
       return NextResponse.redirect(new URL('/', request.nextUrl).href);

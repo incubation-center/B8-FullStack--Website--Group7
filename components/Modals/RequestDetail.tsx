@@ -60,6 +60,11 @@ export default function RequestDetail({
                     {request.borrower.email}
                   </div>
 
+                  <div>Phone number:</div>
+                  <div className=' font-bold col-span-3 md:col-span-2'>
+                    {request.borrower.phoneNumber}
+                  </div>
+
                   <div>Duration:</div>
                   <div className=' font-bold col-span-3 md:col-span-2'>
                     {request.requestDuration} days

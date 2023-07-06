@@ -23,11 +23,11 @@ export default function SideBar({
       case HomePageTab.HOME:
         return 'translate-y-0';
       case HomePageTab.SAVED:
-        return 'translate-y-14';
+        return 'translate-y-12';
       case HomePageTab.REQUEST_STATUS:
-        return 'translate-y-28';
+        return 'translate-y-24';
       case HomePageTab.PROFILE:
-        return 'translate-y-[10.5rem]';
+        return 'translate-y-[9rem]';
     }
   };
 
@@ -42,12 +42,12 @@ export default function SideBar({
       {/* logo */}
       {isMobile && (
         <div className='flex justify-center items-center mb-10'>
-          <img src='/bootcamp-logo.png' alt='logo' className='w-full h-fit' />
+          <img src='/bootcamp-logo.png' alt='logo' className='w-full h-auto' />
         </div>
       )}
 
       <div className='relative'>
-        <div className='z-10'>
+        <div className='z-10 px-2'>
           <NavbarBtn
             title='Home'
             iconPath='/icon/sidenav/home.svg'
@@ -81,7 +81,7 @@ export default function SideBar({
         {/* slide active button */}
         <div
           className={`
-            z-0 w-full h-14 rounded-xl bg-white
+            z-0 w-full h-12 rounded-full bg-white
             absolute top-0 right-0
             transition-all duration-300
             transform ${handleTranslate()}
@@ -141,7 +141,7 @@ function NavbarBtn({
       ${isCurrentTab ? ' text-primary' : 'text-[#D0B49F]'}
       p-2 px-4
       transition-all 
-      h-14 z-10
+      h-12 z-10
       `}
       onClick={onClick}
     >

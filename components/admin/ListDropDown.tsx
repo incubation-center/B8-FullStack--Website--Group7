@@ -7,12 +7,14 @@ export default function CustomListDropDown({
   options,
   selectedOption,
   setSelectedOption,
-  label
+  label,
+  disabled = false
 }: {
   options: { value: string; label: string }[];
   selectedOption: { value: string; label: string };
   setSelectedOption: (value: { value: string; label: string }) => void;
   label: string;
+  disabled?: boolean;
 }) {
   return (
     <div className='grid gap-4 grid-cols-4'>
@@ -29,6 +31,7 @@ export default function CustomListDropDown({
         value={options}
         onChange={(value) => setSelectedOption(value as any)}
         className='col-span-3 relative'
+        disabled={disabled}
       >
         <Listbox.Button
           className='

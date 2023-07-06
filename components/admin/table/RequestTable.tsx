@@ -1,6 +1,8 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
+
 import { BookRequest } from '@/types';
 import { AdminTab } from '@/utils/enum';
 
@@ -22,6 +24,10 @@ export default function RequestTable({
   actions,
   useIn
 }: RequestTableProps) {
+  console.log('====================================');
+  console.log('data', data);
+  console.log('====================================');
+
   return (
     <table className='w-full '>
       <thead>
@@ -55,24 +61,38 @@ export default function RequestTable({
           >
             <td className=''>
               <div className='flex flex-grow gap-2 items-center'>
-                <img
+                {/* <img
                   src={request.book.bookImg}
                   alt={request.book.title}
                   className='w-14'
-                />
-                <div className='whitespace-pre-wrap text-center'>
-                  {request.book.title}
+                /> */}
+                <div className='relative w-14 h-20 hidden md:block'>
+                  <Image
+                    src={request.book.bookImg}
+                    alt={request.book.title}
+                    fill
+                    className='object-contain'
+                  />
+                </div>
+                <div className='whitespace-pre-wrap text-left'>
+                  {request.book.title.length > 50
+                    ? request.book.title.slice(0, 50) + '...'
+                    : request.book.title}
                 </div>
               </div>
             </td>
             <td>{request.borrower.username}</td>
 
             {useIn === AdminTab.INCOMING_REQUEST && (
-              <td>{request.dateOfRequest.toLocaleString()}</td>
+              <td>
+                {request.dateOfRequest
+                  .toLocaleString()
+                  .replace(/:\d{2}\s/, ' ')}
+              </td>
             )}
 
             {useIn === AdminTab.ACTIVE_REQUEST && (
-              <td>{request.dateOfReturn!.toLocaleString()}</td>
+              <td>{request.dateOfReturn!.toLocaleDateString()}</td>
             )}
 
             {useIn === AdminTab.ARCHIVED_REQUEST && (
