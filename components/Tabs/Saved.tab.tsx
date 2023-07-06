@@ -1,14 +1,14 @@
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { useRouter } from "next/router";
+import Image from "next/image";
 
-import NotLoggedInLayout from '../layout/NotLoggedInLayout';
-import { useRecoilValue } from 'recoil';
-import { AuthAtom, filteredSavedBooksAtom } from '@/service/recoil';
+import NotLoggedInLayout from "../layout/NotLoggedInLayout";
+import { useRecoilValue } from "recoil";
+import { AuthAtom, filteredSavedBooksAtom } from "@/service/recoil";
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function SavedTab({
-  onClickExplore
+  onClickExplore,
 }: {
   onClickExplore: () => void;
 }) {
@@ -34,7 +34,7 @@ export default function SavedTab({
               pt-2 md:pt-4
             '
           >
-            Saved
+            Book Saved
           </h1>
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
             {favBooks.length === 0 && (
@@ -59,7 +59,7 @@ export default function SavedTab({
                   layout
                   animate={{ opacity: [0, 1], scale: [0.5, 1] }}
                   exit={{ opacity: [1, 0], scale: [1, 0.5] }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                   key={book.id!}
                   className='flex flex-col space-y-4'
                 >
@@ -72,8 +72,8 @@ export default function SavedTab({
                       draggable={false}
                       fill
                       style={{
-                        height: '100%',
-                        width: '100%'
+                        height: "100%",
+                        width: "100%",
                       }}
                       onClick={() => handleBookClick(book.id!)}
                     />

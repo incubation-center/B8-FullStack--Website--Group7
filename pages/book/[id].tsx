@@ -1,29 +1,29 @@
-import { GetServerSidePropsContext } from 'next';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from "next";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-import { Book, User } from '@/types';
+import { Book, User } from "@/types";
 
-import useModal from '@/components/Modals/useModal';
-import BorrowBook from '@/components/Modals/BorrowBook';
-import useAlertModal, { AlertType } from '@/components/Modals/Alert';
-import { useEffect, useState } from 'react';
-import { HomePageTab } from '@/utils/enum';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import useModal from "@/components/Modals/useModal";
+import BorrowBook from "@/components/Modals/BorrowBook";
+import useAlertModal, { AlertType } from "@/components/Modals/Alert";
+import { useEffect, useState } from "react";
+import { HomePageTab } from "@/utils/enum";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   AuthAtom,
   getBookByIdAtom,
-  isBookAlreadySaved
-} from '@/service/recoil';
-import { getCookie } from 'cookies-next';
-import { processUserToken } from '@/service/token';
+  isBookAlreadySaved,
+} from "@/service/recoil";
+import { getCookie } from "cookies-next";
+import { processUserToken } from "@/service/token";
 import {
   removeBookFromFavorites,
-  saveBookToFavorites
-} from '@/service/api/user';
-import { AxiosError } from 'axios';
-import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
-import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
+  saveBookToFavorites,
+} from "@/service/api/user";
+import { AxiosError } from "axios";
+import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
+import SaveToFavSvg from "@/components/icon/SaveToFavSvg";
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
   const { showAlert, AlertModal } = useAlertModal();
 
   const getAuthObj = async () => {
-    const token = getCookie('accessToken');
+    const token = getCookie("accessToken");
     const authObj = await processUserToken(token);
 
     setAuthStore(authObj);
@@ -66,26 +66,26 @@ export default function BookDetail({ bookId }: { bookId: string }) {
         authStore.user.userId as string,
         book.id
       );
-      if (res.status !== 200) throw new Error('Save failed');
+      if (res.status !== 200) throw new Error("Save failed");
 
       await getAuthObj(); // update user's fav list
 
       showAlert({
-        title: 'Save success',
+        title: "Save success",
         subtitle: res.data,
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
-      let message = 'An unknown error occurred';
+      let message = "An unknown error occurred";
       if (err instanceof AxiosError) {
         message = err.response?.data.error;
       }
 
       close();
       showAlert({
-        title: 'Save failed',
+        title: "Save failed",
         subtitle: message,
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
       });
     } finally {
       setIsSaving(false);
@@ -101,26 +101,26 @@ export default function BookDetail({ bookId }: { bookId: string }) {
         authStore.user.userId as string,
         book.id
       );
-      if (res.status !== 200) throw new Error('Remove failed');
+      if (res.status !== 200) throw new Error("Remove failed");
 
       await getAuthObj(); // update user's fav list
 
       showAlert({
-        title: 'Remove success',
+        title: "Remove success",
         subtitle: res.data,
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
-      let message = 'An unknown error occurred';
+      let message = "An unknown error occurred";
       if (err instanceof AxiosError) {
         message = err.response?.data.error;
       }
 
       close();
       showAlert({
-        title: 'Remove failed',
+        title: "Remove failed",
         subtitle: message,
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
       });
     } finally {
       setIsSaving(false);
@@ -174,10 +174,10 @@ export default function BookDetail({ bookId }: { bookId: string }) {
               <div className='space-y-[10px] text-alt-secondary font-light'>
                 <h1 className='font-bold text-2xl'>{book.title}</h1>
 
-                <h2>Author: {book.author}</h2>
-                <h2>Genre: {book.category}</h2>
+                <h2 className='text-lg'>Author: {book.author}</h2>
+                <h2 className='text-lg'>Genre: {book.category}</h2>
 
-                <h2 className='font-bold'>Book Description</h2>
+                <h2 className='font-bold text-xl'>Book Description</h2>
               </div>
 
               {authStore.isFetched && (
@@ -190,8 +190,8 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                       overflow-hidden
                       ${
                         isSaving
-                          ? 'cursor-not-allowed shadow-inner shadow-primary'
-                          : 'cursor-pointer hover:shadow-inner hover:shadow-primary'
+                          ? "cursor-not-allowed shadow-inner shadow-primary"
+                          : "cursor-pointer hover:shadow-inner hover:shadow-primary"
                       }
                       transition-all duration-300
                     `}
@@ -209,7 +209,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   </button>
                   {!isSaving && (
                     <div className='w-full text-center text-alt-secondary text-sm mt-1'>
-                      {isSaved ? 'Remove' : 'Save'}
+                      {isSaved ? "Remove" : "Save"}
                     </div>
                   )}
                 </div>
@@ -223,7 +223,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
             {authStore.isFetched && (
               <button
                 onClick={() => open()}
-                className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
+                className='bg-secondary text-white text-lg font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
               >
                 Borrow
               </button>
@@ -240,7 +240,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      bookId: id
-    }
+      bookId: id,
+    },
   };
 }

@@ -1,28 +1,28 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Listbox } from '@headlessui/react';
-import { motion } from 'framer-motion';
+import { Listbox } from "@headlessui/react";
+import { motion } from "framer-motion";
 
-import { Book, User } from '@/types';
-import { AlertType, AlertModalTextType } from './Alert';
-import { useRecoilState } from 'recoil';
-import { isMakingRequestAtom } from '@/service/recoil';
-import NotLoggedInLayout from '../layout/NotLoggedInLayout';
-import { AxiosError } from 'axios';
-import { createRequest } from '@/service/api/request';
-import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import { Book, User } from "@/types";
+import { AlertType, AlertModalTextType } from "./Alert";
+import { useRecoilState } from "recoil";
+import { isMakingRequestAtom } from "@/service/recoil";
+import NotLoggedInLayout from "../layout/NotLoggedInLayout";
+import { AxiosError } from "axios";
+import { createRequest } from "@/service/api/request";
+import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
 
 const durations = [
-  { value: 7, label: '1 week' },
-  { value: 14, label: '2 weeks' },
-  { value: 21, label: '3 weeks' }
+  { value: 7, label: "1 week" },
+  { value: 14, label: "2 weeks" },
+  { value: 21, label: "3 weeks" },
 ];
 
 export default function BorrowBook({
   user,
   book,
   close,
-  showAlert
+  showAlert,
 }: {
   user: User;
   book: Book;
@@ -42,32 +42,32 @@ export default function BorrowBook({
       const request = {
         userId: user.userId,
         bookId: book.id,
-        requestDuration: selectedDuration.value
+        requestDuration: selectedDuration.value,
       };
 
       const res = await createRequest(request);
 
-      console.log('====================================');
+      console.log("====================================");
       console.log(res);
-      console.log('====================================');
+      console.log("====================================");
 
       close();
 
       showAlert({
-        title: 'You successfully requesting!',
+        title: "You successfully requesting!",
         subtitle:
-          'Please wait for confirmation form Admin!\nStay Tune! Thank you!',
-        type: AlertType.SUCCESS
+          "Please wait for confirmation form Admin!\nStay Tune! Thank you!",
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log('====================================');
+        console.log("====================================");
         console.log(err);
-        console.log('====================================');
+        console.log("====================================");
         showAlert({
-          title: 'Request failed',
-          subtitle: 'somethings went wrong, please try again later!',
-          type: AlertType.ERROR
+          title: "Request failed",
+          subtitle: "somethings went wrong, please try again later!",
+          type: AlertType.ERROR,
         });
       }
     } finally {
@@ -79,10 +79,10 @@ export default function BorrowBook({
   return (
     <motion.div
       animate={{
-        height: 'auto'
+        height: "auto",
       }}
       transition={{
-        duration: 0.5
+        duration: 0.5,
       }}
       className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
     >
@@ -95,7 +95,7 @@ export default function BorrowBook({
             <div>
               <label
                 htmlFor='bookTitle'
-                className='ml-4 font-medium text-primary'
+                className='ml-4 font-medium text-primary text-lg'
               >
                 Book title
               </label>
@@ -115,7 +115,9 @@ export default function BorrowBook({
             </div>
 
             <div>
-              <h1 className='ml-4 font-medium text-primary '>Duration</h1>
+              <h1 className='ml-4 font-medium text-primary text-lg'>
+                Duration
+              </h1>
               <Listbox
                 disabled={isRequestingBook}
                 value={selectedDuration}
@@ -153,7 +155,7 @@ export default function BorrowBook({
                       key={selectedDuration.label}
                       initial={{ height: 0 }}
                       animate={{
-                        height: 'auto'
+                        height: "auto",
                       }}
                       exit={{ height: 0 }}
                     >
@@ -176,8 +178,8 @@ export default function BorrowBook({
                               w-6 h-auto
                               ${
                                 selectedDuration.value === duration.value
-                                  ? 'block'
-                                  : 'invisible'
+                                  ? "block"
+                                  : "invisible"
                               }
                             `}
                           />
@@ -198,7 +200,7 @@ export default function BorrowBook({
               <button
                 onClick={close}
                 className='
-                bg-danger rounded-lg text-white py-2 px-4 w-full md:w-40
+                bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
               '
               >
                 Cancel
@@ -207,8 +209,8 @@ export default function BorrowBook({
             {/* submit button */}
             <button
               className={`
-                bg-primary rounded-lg text-white py-2 px-4 w-full md:w-40
-                ${isRequestingBook && 'cursor-not-allowed'}
+                bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
+                ${isRequestingBook && "cursor-not-allowed"}
               `}
               onClick={handleBorrowBook}
               disabled={isRequestingBook}

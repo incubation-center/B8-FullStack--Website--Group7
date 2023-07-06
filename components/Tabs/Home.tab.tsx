@@ -1,27 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
-import { BookData } from '@/dummydata';
-import { BookCategory } from '@/utils/enum';
+import { BookData } from "@/dummydata";
+import { BookCategory } from "@/utils/enum";
 
 import {
   AllBooksAtom,
   filteredBooksAtom,
-  homePageCategoryAtom
-} from '@/service/recoil';
+  homePageCategoryAtom,
+} from "@/service/recoil";
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { useEffect, useRef, useState } from 'react';
-import { useDebounce, useOnScreen } from '@/utils/function';
-import { Book } from '@/types';
-import { getAllBooks } from '@/service/api/book';
+import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect, useRef, useState } from "react";
+import { useDebounce, useOnScreen } from "@/utils/function";
+import { Book } from "@/types";
+import { getAllBooks } from "@/service/api/book";
 
 export default function HomeTab({
   isUseInAdminPage = false,
-  onClickViewInAdminPage
+  onClickViewInAdminPage,
 }: {
   isUseInAdminPage?: boolean;
   onClickViewInAdminPage?: (book: Book) => void;
@@ -49,14 +49,14 @@ export default function HomeTab({
 
   const handleScrollToCategoryNav = (categoryKey: string, timeout: number) => {
     // scroll to id
-    const element = document.getElementById(categoryKey.toLowerCase() + '-nav');
+    const element = document.getElementById(categoryKey.toLowerCase() + "-nav");
 
     if (element) {
       setTimeout(() => {
         element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
         });
       }, timeout);
     }
@@ -74,7 +74,7 @@ export default function HomeTab({
 
       if (!isUseInAdminPage) {
         router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
-          shallow: true
+          shallow: true,
         });
       }
     },
@@ -95,13 +95,13 @@ export default function HomeTab({
 
   const updateRoute = useDebounce((category: any) => {
     router.replace(`/?tab=home#${category.toLowerCase()}`, undefined, {
-      shallow: true
+      shallow: true,
     });
   }, 300);
 
   useEffect(() => {
     // get category from url
-    const categoryKey = router.asPath.split('#')[1];
+    const categoryKey = router.asPath.split("#")[1];
 
     if (categoryKey) {
       const category =
@@ -136,7 +136,7 @@ export default function HomeTab({
   }, []);
 
   return (
-    <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
+    <div className={`${isUseInAdminPage ? "" : "px-4"} bg-inherit`}>
       {!filterBooks && !isUseInAdminPage && (
         <div
           id='category-section'
@@ -146,7 +146,7 @@ export default function HomeTab({
           sticky top-0 z-10 py-4
         '
         >
-          <div className='w-full flex flex-nowrap h-[40px]  items-center'>
+          <div className='w-full flex flex-nowrap h-[40px] items-center'>
             {Object.keys(BookCategory).map((category: any) => {
               const key = category as keyof typeof BookCategory;
               const value = BookCategory[key];
@@ -155,7 +155,7 @@ export default function HomeTab({
 
               const iconPath = `/icon/book-category/${BookCategory[
                 category as keyof typeof BookCategory
-              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
+              ].toLowerCase()}${isCurrentCategory ? "-active" : ""}.svg`;
 
               return (
                 <CategoryButton
@@ -227,7 +227,7 @@ function CategoryButton({
   iconPath,
   isCurrentCategory,
   handleCategory,
-  disabled
+  disabled,
 }: {
   category: string;
   value: string;
@@ -238,7 +238,7 @@ function CategoryButton({
 }) {
   return (
     <button
-      id={category.toLowerCase() + '-nav'}
+      id={category.toLowerCase() + "-nav"}
       key={category}
       className={`
         flex w-fit items-center justify-center space-x-2 cursor-pointer
@@ -248,8 +248,8 @@ function CategoryButton({
         mr-8 select-none
         ${
           isCurrentCategory
-            ? 'bg-primary p-1 px-8 rounded-lg text-white'
-            : 'bg-transparent text-primary '
+            ? "bg-primary p-1 px-8 rounded-lg text-white"
+            : "bg-transparent text-primary "
         }
 
       `}
@@ -267,7 +267,7 @@ function BookSection({
   category,
   books,
   handleBookClick,
-  handleVisibleOnScreen
+  handleVisibleOnScreen,
 }: {
   categoryKey: string;
   category: string;
@@ -293,10 +293,10 @@ function BookSection({
         id={categoryKey.toLowerCase()}
         className='invisible h-2 w-full absolute -top-[4.5rem] '
       >
-        element to scroll to{' '}
+        element to scroll to{" "}
       </div>
       {/* title */}
-      <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 whitespace-nowrap'>
+      <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap'>
         {category}
       </h1>
 
@@ -314,7 +314,7 @@ function BookSection({
           {books.map((book, index) => (
             <motion.div
               animate={{ opacity: [0, 1], scale: [0.5, 1] }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               key={book.id}
               className='flex flex-col space-y-4'
             >
@@ -327,8 +327,8 @@ function BookSection({
                   draggable={false}
                   fill
                   style={{
-                    height: '100%',
-                    width: '100%'
+                    height: "100%",
+                    width: "100%",
                   }}
                   sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
                   onClick={() => handleBookClick(book)}
@@ -337,7 +337,7 @@ function BookSection({
 
               <button
                 className='
-                bg-secondary text-white font-light
+                bg-secondary text-white font-light text-lg
                 rounded-lg py-1 px-2 w-40 mx-auto
               '
                 onClick={() => handleBookClick(book)}
@@ -377,7 +377,7 @@ function BookSectionSkeleton() {
 
 function FilteredBooksList({
   books,
-  handleBookClick
+  handleBookClick,
 }: {
   books: Book[];
   handleBookClick: (book: Book) => void;
@@ -392,7 +392,7 @@ function FilteredBooksList({
               layout
               animate={{ opacity: [0, 1], scale: [0.5, 1] }}
               exit={{ opacity: [1, 0], scale: [1, 0.5] }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               key={book.id}
               className='flex flex-col space-y-4'
             >
@@ -406,8 +406,8 @@ function FilteredBooksList({
                   draggable={false}
                   fill
                   style={{
-                    height: '100%',
-                    width: '100%'
+                    height: "100%",
+                    width: "100%",
                   }}
                   sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
                   onClick={() => handleBookClick(book)}

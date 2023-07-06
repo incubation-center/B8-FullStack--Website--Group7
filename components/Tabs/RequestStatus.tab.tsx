@@ -1,26 +1,26 @@
 // import DataTable from 'react-data-table-component';
 // convert above to dynamic import
 
-import { RequestData } from '@/dummydata';
-import { BookRequest } from '@/types';
-import RequestTable from '../RequestStatus/RequestTable';
-import NotLoggedInLayout from '../layout/NotLoggedInLayout';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { useEffect, useState } from 'react';
-import { getAllRequest } from '@/service/api/request';
+import { RequestData } from "@/dummydata";
+import { BookRequest } from "@/types";
+import RequestTable from "../RequestStatus/RequestTable";
+import NotLoggedInLayout from "../layout/NotLoggedInLayout";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { useEffect, useState } from "react";
+import { getAllRequest } from "@/service/api/request";
 import {
   AuthAtom,
   UserRequestAtom,
-  filteredUserRequestAtom
-} from '@/service/recoil';
-import useModal from '../Modals/useModal';
-import RequestDetail from '../Modals/RequestDetail';
-import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
-import { useDebounce } from '@/utils/function';
-import { motion } from 'framer-motion';
+  filteredUserRequestAtom,
+} from "@/service/recoil";
+import useModal from "../Modals/useModal";
+import RequestDetail from "../Modals/RequestDetail";
+import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
+import { useDebounce } from "@/utils/function";
+import { motion } from "framer-motion";
 
 export default function RequestStatusTab({
-  onClickExplore
+  onClickExplore,
 }: {
   onClickExplore: () => void;
 }) {
@@ -90,7 +90,7 @@ export default function RequestStatusTab({
 
           {isFetched && filteredRequest.length === 0 && (
             <div className='w-full flex-1 flex flex-col justify-center items-center'>
-              <h1 className='text-center text-primary font-medium'>
+              <h1 className='text-center text-primary font-medium text-lg'>
                 You have no request
               </h1>
               <button
@@ -100,7 +100,7 @@ export default function RequestStatusTab({
              '
                 onClick={onClickExplore}
               >
-                explore books
+                Explore books
               </button>
             </div>
           )}
@@ -121,13 +121,13 @@ export default function RequestStatusTab({
                   data={filteredRequest}
                   actions={[
                     {
-                      label: 'View',
+                      label: "View",
                       onClick: (request: BookRequest) => {
                         setViewRequest(request);
                         toggle();
                       },
-                      bgColor: 'bg-primary text-white'
-                    }
+                      bgColor: "bg-primary text-white",
+                    },
                   ]}
                 />
               </motion.div>

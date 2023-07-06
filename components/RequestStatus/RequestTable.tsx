@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { BookRequest } from '@/types';
+import { BookRequest } from "@/types";
 
-import Image from 'next/image';
+import Image from "next/image";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function RequestTable({
   data,
-  actions
+  actions,
 }: {
   data: BookRequest[];
   actions?: {
@@ -23,13 +23,13 @@ export default function RequestTable({
           className='
             border-b-2 border-primary 
             font-bold text-base md:text-lg text-primary 
-            [&>td]:py-4 w-full
-            [&<td]:w-fit [&<td]:whitespace-nowrap
+            [&>td]:py-4 w-full 
+            [&<td]:w-fit [&<td]:whitespace-nowrap text-center
           '
         >
-          <td className='w-full'>Book</td>
-          <td className='hidden lg:table-cell'>Date</td>
-          <td className='hidden md:table-cell'>Status</td>
+          <td className='w-full text-xl text-left pl-2'>Book</td>
+          <td className='hidden lg:table-cell text-xl'>Date</td>
+          <td className='hidden md:table-cell text-xl'>Status</td>
           <td>Actions</td>
         </tr>
       </thead>
@@ -58,7 +58,7 @@ export default function RequestTable({
 
               <div className='whitespace-pre-wrap text-left'>
                 {request.book.title.length > 50
-                  ? request.book.title.slice(0, 50) + '...'
+                  ? request.book.title.slice(0, 50) + "..."
                   : request.book.title}
               </div>
             </td>
@@ -68,7 +68,7 @@ export default function RequestTable({
             </td>
 
             <td className='hidden md:table-cell'>
-              {request.status === 'PENDING' ? (
+              {request.status === "PENDING" ? (
                 <div
                   className={`
                     rounded-full 
@@ -87,11 +87,11 @@ export default function RequestTable({
                     px-2 py-1 text-xs 
                     md:text-sm md:px-4 md:py-2
                     font-bold text-white w-fit
-                    ${request.isApproved ? 'bg-success' : 'bg-danger'}
+                    ${request.isApproved ? "bg-success" : "bg-danger"}
                   `}
                 >
-                  {request.isApproved && 'Approved'}
-                  {!request.isApproved && 'Rejected'}
+                  {request.isApproved && "Approved"}
+                  {!request.isApproved && "Rejected"}
                 </div>
               )}
             </td>

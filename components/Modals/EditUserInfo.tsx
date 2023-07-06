@@ -1,15 +1,15 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler } from "react-hook-form";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
-import { AlertType, AlertModalTextType } from './Alert';
-import { User } from '@/types';
-import CustomInput from '../login/CustomInput';
-import { updateUserInfo } from '@/service/api/user';
-import { useState } from 'react';
-import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
-import { useRecoilState } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
+import { AlertType, AlertModalTextType } from "./Alert";
+import { User } from "@/types";
+import CustomInput from "../login/CustomInput";
+import { updateUserInfo } from "@/service/api/user";
+import { useState } from "react";
+import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
+import { useRecoilState } from "recoil";
+import { AuthAtom } from "@/service/recoil";
 
 interface EditUserInfoInputs {
   username: string;
@@ -20,7 +20,7 @@ interface EditUserInfoInputs {
 export default function EditUserInfo({
   userInfo,
   close,
-  showAlert
+  showAlert,
 }: {
   userInfo: User;
   close: () => void;
@@ -32,7 +32,7 @@ export default function EditUserInfo({
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<EditUserInfoInputs>();
 
   const onSubmit: SubmitHandler<EditUserInfoInputs> = async (data) => {
@@ -42,19 +42,19 @@ export default function EditUserInfo({
 
       setAuthStore({
         ...authStore,
-        user: res.data
+        user: res.data,
       });
 
       close();
       showAlert({
-        title: 'Your Information have been updated!',
-        subtitle: 'Thank you!',
-        type: AlertType.SUCCESS
+        title: "Your Information have been updated!",
+        subtitle: "Thank you!",
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
-      console.log('====================================');
+      console.log("====================================");
       console.log(err);
-      console.log('====================================');
+      console.log("====================================");
       setIsUpdating(false);
     }
   };
@@ -69,10 +69,10 @@ export default function EditUserInfo({
       <form onSubmit={handleSubmit(onSubmit)}>
         <motion.div
           animate={{
-            height: 'auto'
+            height: "auto",
           }}
           transition={{
-            duration: 0.5
+            duration: 0.5,
           }}
           className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
         >
@@ -87,11 +87,11 @@ export default function EditUserInfo({
               name='username'
               type='text'
               defaultValue={userInfo.username}
-              register={register('username', {
-                required: 'Username cannot be empty'
+              register={register("username", {
+                required: "Username cannot be empty",
               })}
               error={errors.username}
-              labelClassName='text-primary ml-4 font-medium'
+              labelClassName='text-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
 
@@ -100,11 +100,11 @@ export default function EditUserInfo({
               name='email'
               type='email'
               defaultValue={userInfo.email}
-              register={register('email', {
-                required: 'Email cannot be empty'
+              register={register("email", {
+                required: "Email cannot be empty",
               })}
               error={errors.email}
-              labelClassName='text-primary ml-4 font-medium'
+              labelClassName='text-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
 
@@ -113,11 +113,11 @@ export default function EditUserInfo({
               name='phoneNumber'
               type='tel'
               defaultValue={userInfo.phoneNumber}
-              register={register('phoneNumber', {
-                required: 'Phone Number cannot be empty'
+              register={register("phoneNumber", {
+                required: "Phone Number cannot be empty",
               })}
               error={errors.phoneNumber}
-              labelClassName='text-primary ml-4 font-medium'
+              labelClassName='text-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
           </div>
@@ -140,7 +140,7 @@ export default function EditUserInfo({
             <button
               className={`
             bg-primary rounded-full text-white py-2 px-4 w-full 
-            ${!isUpdating ? 'md:w-40' : 'md:w-80 bg-opacity-80'}
+            ${!isUpdating ? "md:w-40" : "md:w-80 bg-opacity-80"}
          `}
               type='submit'
               disabled={isUpdating}

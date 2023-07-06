@@ -1,28 +1,28 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
-import useModal from '@/components/Modals/useModal';
-import EditUserInfo from '../Modals/EditUserInfo';
+import useModal from "@/components/Modals/useModal";
+import EditUserInfo from "../Modals/EditUserInfo";
 
-import useAlertModal from '@/components/Modals/Alert';
-import ProfileUploadSvg from '../icon/ProfileUploadSvg';
+import useAlertModal from "@/components/Modals/Alert";
+import ProfileUploadSvg from "../icon/ProfileUploadSvg";
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
-import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
-import ChangePassword from '../Modals/ChangePassword';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
-import { User } from '@/types';
-import NotLoggedInLayout from '../layout/NotLoggedInLayout';
-import { handleFallBackProfileImage } from '@/utils/function';
-import { deleteCookie } from 'cookies-next';
-import { uploadImage } from '@/service/firebase';
-import { updateUserInfo } from '@/service/api/user';
-import useConfirmModal from '../Modals/useCofirm';
-import { HomePageTab } from '@/utils/enum';
+import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
+import ChangePassword from "../Modals/ChangePassword";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { AuthAtom } from "@/service/recoil";
+import { User } from "@/types";
+import NotLoggedInLayout from "../layout/NotLoggedInLayout";
+import { handleFallBackProfileImage } from "@/utils/function";
+import { deleteCookie } from "cookies-next";
+import { uploadImage } from "@/service/firebase";
+import { updateUserInfo } from "@/service/api/user";
+import useConfirmModal from "../Modals/useCofirm";
+import { HomePageTab } from "@/utils/enum";
 
 interface ProfileUploadInputs {}
 
@@ -46,7 +46,7 @@ export default function ProfileTab() {
   const handleCancelImage = () => {
     setImage(null);
     setIsUpdatingImage(false);
-    imageRef.current && (imageRef.current.value = '');
+    imageRef.current && (imageRef.current.value = "");
   };
 
   const handleSaveImage = async () => {
@@ -61,7 +61,7 @@ export default function ProfileTab() {
       if (res) {
         // update user image
         const result = await updateUserInfo(authStore.user?.userId as string, {
-          profileImg: res
+          profileImg: res,
         });
 
         if (result) {
@@ -69,8 +69,8 @@ export default function ProfileTab() {
             ...authStore,
             user: {
               ...(authStore.user as User),
-              profileImg: res
-            }
+              profileImg: res,
+            },
           });
         }
       }
@@ -81,19 +81,19 @@ export default function ProfileTab() {
     setIsUpdatingImage(false);
     setIsUploadingImage(false);
     setImage(null);
-    imageRef.current && (imageRef.current.value = '');
+    imageRef.current && (imageRef.current.value = "");
   };
 
   // handle logout
   const handleLogout = () => {
-    deleteCookie('accessToken');
-    deleteCookie('refreshToken');
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
 
     setAuthStore({
       user: null,
       isAdmin: false,
       isLoggedIn: false,
-      isFetched: true
+      isFetched: true,
     });
 
     window.location.href = `/?tab=${HomePageTab.HOME}`;
@@ -105,13 +105,13 @@ export default function ProfileTab() {
   const {
     toggle: toggleInformationModal,
     close: closeInformationModal,
-    ModalWrapper: EditInformationWrapper
+    ModalWrapper: EditInformationWrapper,
   } = useModal();
 
   const {
     toggle: toggleChangePasswordModal,
     close: closeChangePasswordModal,
-    ModalWrapper: ChangePasswordModalWrapper
+    ModalWrapper: ChangePasswordModalWrapper,
   } = useModal();
 
   return (
@@ -138,7 +138,7 @@ export default function ProfileTab() {
           </ChangePasswordModalWrapper>
 
           <motion.div
-            animate={{ height: 'auto' }}
+            animate={{ height: "auto" }}
             className='w-full h-full overflow-y-scroll lg:w-3/5 mx-auto'
           >
             {/* user image profile */}
@@ -185,7 +185,7 @@ export default function ProfileTab() {
                 <label htmlFor='profileImg'>
                   <ProfileUploadSvg
                     className={`absolute bottom-0 right-0 w-10 h-10 bg-white fill-primary rounded-full p-2 ${
-                      isUploadingImage ? 'cursor-not-allowed' : 'cursor-pointer'
+                      isUploadingImage ? "cursor-not-allowed" : "cursor-pointer"
                     }`}
                     color='var(--icon-color)'
                   />
@@ -205,7 +205,7 @@ export default function ProfileTab() {
                   <motion.button
                     onClick={handleSaveImage}
                     className={`
-                ${isUploadingImage ? 'w-64' : 'w-28'} 
+                ${isUploadingImage ? "w-64" : "w-28"} 
                 bg-primary text-white px-4 py-2 rounded-lg
                   transition-all duration-300
                  `}
@@ -219,7 +219,7 @@ export default function ProfileTab() {
                       ) : (
                         <motion.div
                           animate={{
-                            y: [1, 0]
+                            y: [1, 0],
                           }}
                           exit={{ opacity: 0 }}
                           className='flex gap-2 items-center justify-center'
@@ -248,16 +248,16 @@ export default function ProfileTab() {
                   col-span-2 w-full
                 '
                   >
-                    <div className='font-extrabold'>Username</div>
-                    <div>{authStore.user.username}</div>
+                    <div className='font-extrabold text-xl'>Username</div>
+                    <div className='mt-2'>{authStore.user.username}</div>
                   </div>
                   <div className=' text-primary text-lg flex-1   '>
-                    <div className=' font-extrabold'>Phone Number</div>
-                    <div>{authStore.user.phoneNumber}</div>
+                    <div className=' font-extrabold text-xl'>Phone Number</div>
+                    <div className='mt-2'>{authStore.user.phoneNumber}</div>
                   </div>
-                  <div className=' text-primary text-start text-lg  flex-1  '>
+                  <div className=' text-primary text-start text-xl  flex-1  '>
                     <div className=' font-extrabold'>Email</div>
-                    <div>{authStore.user.email}</div>
+                    <div className='mt-2'>{authStore.user.email}</div>
                   </div>
                 </div>
 
@@ -288,7 +288,7 @@ export default function ProfileTab() {
                  flex-1 w-full
                 '
                 >
-                  <div className='font-extrabold'>Password</div>
+                  <div className='font-extrabold text-xl'>Password</div>
                 </div>
 
                 <button
@@ -309,11 +309,11 @@ export default function ProfileTab() {
               <button
                 onClick={() => {
                   showConfirmModal({
-                    title: 'Logout',
-                    subtitle: 'Are you sure you want to logout?',
+                    title: "Logout",
+                    subtitle: "Are you sure you want to logout?",
                     onConfirm: () => {
                       handleLogout();
-                    }
+                    },
                   });
                 }}
                 className='
