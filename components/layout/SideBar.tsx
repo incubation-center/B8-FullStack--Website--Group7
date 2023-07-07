@@ -10,8 +10,11 @@ import HomeSvg from '../icon/side-nav/Home';
 import SavedSvg from '../icon/side-nav/Saved';
 import RequestStatusSvg from '../icon/side-nav/RequestStatus';
 import ProfileSvg from '../icon/side-nav/Profile';
+import { useRouter } from 'next/router';
+import LocaleSwitching from '../LocaleSwitching';
+import { useTranslation } from 'next-i18next';
 
-export default function SideBar({
+function SideBar({
   currentTab,
   handlePageRouting,
   isMobile = false
@@ -89,13 +92,17 @@ export default function SideBar({
         ></div>
       </div>
 
-      {/* admin */}
       <div className='flex-1'></div>
+
+      {/* switching locale */}
+      <LocaleSwitching />
+
+      {/* admin */}
       {!authStore.isLoggedIn && (
         <Link
           href='/auth'
           className='
-              px-4 py-2 rounded-xl
+              px-4 py-2 rounded-full
               bg-alt-secondary text-primary font-medium
               transition-colors
               box-border border-2 border-alt-secondary hover:border-action
@@ -110,7 +117,7 @@ export default function SideBar({
           href='/admin'
           className='
             w-full bg-action text-primary font-bold
-            rounded-xl p-2 px-4
+            rounded-full p-2 px-4
             flex items-center justify-center cursor-pointer 
             hover:shadow-xl
           '
@@ -121,6 +128,8 @@ export default function SideBar({
     </div>
   );
 }
+
+export default SideBar;
 
 function NavbarBtn({
   title,

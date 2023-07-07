@@ -123,7 +123,6 @@ export default function UserLoginForm() {
               w-full px-4 py-2 mt-6 rounded-full
               bg-secondary text-white text-xl tracking-wide 
               focus:outline-none
-              font-poppins
               ${isLoggingIn && 'cursor-not-allowed bg-opacity-50'}
             `}
               disabled={isLoggingIn}

@@ -4,8 +4,11 @@ import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 
 import { appWithTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 function App({ Component, pageProps }: AppProps) {
+  const { locale } = useRouter();
+
   return (
     <>
       <Head>
@@ -16,7 +19,12 @@ function App({ Component, pageProps }: AppProps) {
           href='/icon/bookshelf-favicon.png'
         />
       </Head>
-      <div className='flex-1 flex flex-grow h-full w-screen overflow-clip'>
+      <div
+        className={`
+          flex-1 flex flex-grow h-full w-screen overflow-clip 
+          ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
+        `}
+      >
         <div className='flex flex-1'>
           <RecoilRoot>
             <Component {...pageProps} />

@@ -182,15 +182,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let tab = context.query.tab as string;
 
   // check is tab in AdminTab enum
-  if (!Object.values(AdminTab).includes(tab as AdminTab)) {
-    // if not, redirect to dashboard
-    return {
-      redirect: {
-        destination: `/admin/${AdminTab.DASHBOARD}`,
-        permanent: false
-      }
-    };
-  }
+  // if (!Object.values(AdminTab).includes(tab as AdminTab)) {
+  //   // if not, redirect to dashboard
+  //   return {
+  //     redirect: {
+  //       destination: `/admin/${AdminTab.DASHBOARD}`,
+  //       permanent: false
+  //     }
+  //   };
+  // }
 
   // const token = context.req.cookies.accessToken;
   // const requests = await getAllRequestAdmin(token);

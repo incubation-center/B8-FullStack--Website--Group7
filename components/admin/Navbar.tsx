@@ -136,7 +136,7 @@ export default function Navbar({
         href='/'
         className='
           w-full bg-action text-primary font-bold
-          rounded-xl p-2 px-4
+          rounded-full p-2 px-4
           flex items-center justify-center cursor-pointer 
           hover:shadow-xl
         '
