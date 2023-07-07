@@ -26,7 +26,7 @@ export default function UserSearchBar({
     } else if (currentTab === HomePageTab.SAVED) {
       setPlaceholder('Title, Author, Category');
     } else if (currentTab === HomePageTab.REQUEST_STATUS) {
-      setPlaceholder('Title, Author, Category');
+      setPlaceholder('Title, Author, Category, Status');
     } else if (currentTab === HomePageTab.PROFILE) {
       setPlaceholder('');
       setIsShow(false);
