@@ -87,24 +87,6 @@ export default function Home({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useUpdateDataInterval(() => {
-    Promise.allSettled([
-      getAllBooks(),
-      getAllRequest(authStore.user?.userId as string)
-    ])
-      .then(([booksRes, requestsRes]) => {
-        if (booksRes.status === 'fulfilled') {
-          setAllBooks(booksRes.value);
-        }
-        if (requestsRes.status === 'fulfilled') {
-          setUserRequests(requestsRes.value);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, 1);
-
   return (
     <div className='h-full w-full bg-primary'>
       {!isFetched && (
