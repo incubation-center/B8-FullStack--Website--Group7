@@ -44,12 +44,6 @@ export default function BookDetail({ bookId }: { bookId: string }) {
 
   const { showAlert, AlertModal } = useAlertModal();
 
-  useEffect(() => {
-    console.log('====================================');
-    console.log(book);
-    console.log('====================================');
-  }, [book]);
-
   const getAuthObj = async () => {
     const token = getCookie('accessToken');
     const authObj = await processUserToken(token);
@@ -72,7 +66,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       try {
         book = (await getBookById(bookId)) || null;
       } catch (err) {
-        console.log(err);
+        console.error(err);
         book = null;
       }
     }
@@ -213,6 +207,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                 <h1 className='ml-8 text-alt-secondary'>Go Back</h1>
               </div>
             </div>
+
             <div className='grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
               {/* book cover */}
               <div className='flex justify-center items-start mb-10 md:mb-0'>

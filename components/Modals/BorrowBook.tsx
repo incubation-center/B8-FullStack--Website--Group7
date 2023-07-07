@@ -47,10 +47,6 @@ export default function BorrowBook({
 
       const res = await createRequest(request);
 
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
-
       close();
 
       showAlert({
@@ -61,12 +57,12 @@ export default function BorrowBook({
       });
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log('====================================');
-        console.log(err);
-        console.log('====================================');
+        close();
         showAlert({
           title: 'Request failed',
-          subtitle: 'somethings went wrong, please try again later!',
+          subtitle:
+            err.response?.data.error ||
+            'somethings went wrong, please try again later!',
           type: AlertType.ERROR
         });
       }

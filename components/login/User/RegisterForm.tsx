@@ -1,5 +1,6 @@
 import { UserRegisterInputs } from '@/types/auth';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { AxiosError } from 'axios';
 
 import CustomInput from '../CustomInput';
 import PasswordInput from '../PasswordInput';
@@ -44,12 +45,13 @@ export default function UserRegisterForm({}) {
       setCookie('accessToken', accessToken);
       setCookie('refreshToken', refreshToken);
     } catch (errors) {
-      console.log('====================================');
-      console.log(errors);
-      console.log('====================================');
+      let message;
+      if (errors instanceof AxiosError) {
+        message = errors.response?.data.error || 'An unknown error occurred';
+      }
       showAlert({
-        title: 'Error',
-        subtitle: 'An error occurred while registering your account',
+        title: message,
+        subtitle: 'Please try again',
         type: AlertType.ERROR
       });
     }

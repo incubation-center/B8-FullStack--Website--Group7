@@ -142,7 +142,7 @@ export default function ViewEditBook({
       setIsUpdating(false);
       let message = 'Something went wrong';
       if (error instanceof AxiosError) {
-        message = error.response?.data.message || message;
+        message = error.response?.data.error || message;
       }
       showAlert({
         title: 'Error',
@@ -197,7 +197,6 @@ export default function ViewEditBook({
 
     try {
       await deleteBookById(book.id as string);
-
       setIsDeleting(false);
       showAlert({
         title: 'Success',
@@ -215,7 +214,7 @@ export default function ViewEditBook({
       setIsDeleting(false);
       let message = 'Something went wrong';
       if (error instanceof AxiosError) {
-        message = error.response?.data.message || message;
+        message = error.response?.data.error || message;
       }
       showAlert({
         title: 'Error',
