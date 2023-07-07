@@ -49,7 +49,7 @@ export default function HomeLayout({
           </button>
         </div>
 
-        <UserSearchBar currentTab={currentTab} />
+        <UserSearchBar currentTab={currentTab} initialAnimation />
 
         <div>
           {!authStore.isLoggedIn && (

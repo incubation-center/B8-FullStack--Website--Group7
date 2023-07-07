@@ -8,9 +8,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import SearchSvg from './icon/Search';
 
 export default function UserSearchBar({
-  currentTab
+  currentTab,
+  initialAnimation = false
 }: {
   currentTab: HomePageTab;
+  initialAnimation?: boolean;
 }) {
   const [searchText, setSearchText] = useRecoilState(searchKeywordAtom);
   const [isShow, setIsShow] = useState(false);
@@ -37,7 +39,7 @@ export default function UserSearchBar({
     <AnimatePresence>
       {isShow && (
         <motion.div
-          initial={{ y: -100 }}
+          initial={initialAnimation && { y: -100 }}
           animate={{ y: 0 }}
           exit={{ y: -100 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
