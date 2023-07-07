@@ -10,6 +10,7 @@ import FantasySvg from '../icon/book-category/Fantasy';
 import HistorySvg from '../icon/book-category/History';
 import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
 import { BookCategory } from '@/utils/enum';
+import ExpandSvg from '../icon/ExpandSvg';
 
 export default function CustomListDropDown({
   options,
@@ -41,77 +42,83 @@ export default function CustomListDropDown({
         className='col-span-3 relative'
         disabled={disabled}
       >
-        <Listbox.Button
-          className='
-                w-full
-                bg-transparent
-                border-b border-primary
-                flex items-center justify-between p-1
-              '
-        >
-          <div className='flex items-center gap-2'>
-            <span>
-              <CategoryIcon category={selectedOption.value} />
-            </span>
-            <span className='text-primary'>{selectedOption.label}</span>
-          </div>
-          <img
-            src='/icon/expand.png'
-            alt='expand'
-            className='w-6 h-auto -mr-2'
-          />
-        </Listbox.Button>
+        {({ open }) => (
+          <>
+            <Listbox.Button
+              className='
+               w-full
+               bg-transparent
+               border-b border-primary
+               flex items-center justify-between p-1
+             '
+            >
+              <div className='flex items-center gap-2'>
+                <span>
+                  <CategoryIcon category={selectedOption.value} />
+                </span>
+                <span className='text-primary'>{selectedOption.label}</span>
+              </div>
 
-        <Transition
-          as={Fragment}
-          leave='transition ease-in duration-100'
-          leaveFrom='opacity-100'
-          leaveTo='opacity-0'
-          enter='transition ease-out duration-100'
-          enterFrom='opacity-0 scale-95'
-          enterTo='opacity-100'
-        >
-          <Listbox.Options
-            className='
-                  absolute top-12 left-0
-                  bg-white 
-                  shadow-2xl
-                  rounded-xl
-                  z-10
-                  overflow-clip
-                '
-          >
-            {options.map((category) => (
-              <Listbox.Option
-                key={category.value}
-                value={category}
-                className={({ active }) =>
-                  `${active ? ' bg-primary bg-opacity-10' : ''}
-                      text-primary cursor-pointer select-none relative py-2 px-4 pl-2
-                      hover:bg-primary hover:bg-opacity-30
-                        overflow-clip
-                        
-                      `
-                }
+              <ExpandSvg
+                className='w-6 h-auto -mr-2 stroke-primary'
+                isExpanded={open}
+              />
+            </Listbox.Button>
+
+            <Transition
+              as={Fragment}
+              leave='transition ease-in duration-100'
+              leaveFrom='opacity-100'
+              leaveTo='opacity-0'
+              enter='transition ease-out duration-100'
+              enterFrom='opacity-0 scale-95'
+              enterTo='opacity-100'
+            >
+              <Listbox.Options
+                className='
+                 absolute top-12 left-0
+                 bg-white 
+                 shadow-2xl
+                 rounded-xl
+                 z-10
+                 overflow-clip
+               '
               >
-                <div className='flex items-center gap-2'>
-                  <img
-                    src='/icon/selected.png'
-                    alt='check'
-                    className={`w-6 h-6 ${
-                      selectedOption.value === category.value
-                        ? 'block'
-                        : 'invisible'
-                    }`}
-                  />
+                {options.map((category) => (
+                  <Listbox.Option
+                    key={category.value}
+                    value={category}
+                    className={({ active }) =>
+                      `${active ? ' bg-primary bg-opacity-10' : ''}
+                     text-primary cursor-pointer select-none relative py-2 px-4 pl-2
+                     hover:bg-primary hover:bg-opacity-30
+                       overflow-clip
+                       
+                     `
+                    }
+                  >
+                    <div className='flex items-center gap-2'>
+                      <img
+                        src='/icon/selected.png'
+                        alt='check'
+                        className={`w-6 h-6 ${
+                          selectedOption.value === category.value
+                            ? 'block'
+                            : 'invisible'
+                        }`}
+                      />
 
-                  <CategoryIcon category={category.value} />
-                  <span className={` block truncate`}>{category.label}</span>
-                </div>
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Transition>
+                      <CategoryIcon category={category.value} />
+                      <span className={` block truncate`}>
+                        {category.label}
+                      </span>
+                    </div>
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </>
+        )}
       </Listbox>
     </div>
   );
