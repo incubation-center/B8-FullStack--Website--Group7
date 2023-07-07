@@ -21,6 +21,8 @@ import { handleFallBackProfileImage } from '@/utils/function';
 import { deleteCookie } from 'cookies-next';
 import { uploadImage } from '@/service/firebase';
 import { updateUserInfo } from '@/service/api/user';
+import useConfirmModal from '../Modals/useCofirm';
+import { HomePageTab } from '@/utils/enum';
 
 interface ProfileUploadInputs {}
 
@@ -85,6 +87,7 @@ export default function ProfileTab() {
   // handle logout
   const handleLogout = () => {
     deleteCookie('accessToken');
+    deleteCookie('refreshToken');
 
     setAuthStore({
       user: null,
@@ -92,9 +95,12 @@ export default function ProfileTab() {
       isLoggedIn: false,
       isFetched: true
     });
+
+    window.location.href = `/?tab=${HomePageTab.HOME}`;
   };
 
   const { showAlert, AlertModal } = useAlertModal();
+  const { ConfirmModal, showConfirmModal } = useConfirmModal();
 
   const {
     toggle: toggleInformationModal,
@@ -113,6 +119,7 @@ export default function ProfileTab() {
       {authStore.user && (
         <div className='p-4'>
           <AlertModal />
+          <ConfirmModal />
 
           <EditInformationWrapper>
             <EditUserInfo
@@ -300,7 +307,15 @@ export default function ProfileTab() {
 
             <div className='w-full text-right'>
               <button
-                onClick={() => handleLogout()}
+                onClick={() => {
+                  showConfirmModal({
+                    title: 'Logout',
+                    subtitle: 'Are you sure you want to logout?',
+                    onConfirm: () => {
+                      handleLogout();
+                    }
+                  });
+                }}
                 className='
                 bg-danger text-white font-light rounded-lg py-2 px-7 
                 w-full md:w-fit

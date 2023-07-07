@@ -4,6 +4,15 @@ import Image from 'next/image';
 import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
 import Link from 'next/link';
+import { HTMLAttributes } from 'react';
+import DahboardSvg from '../icon/admin-sidebar/DashboardSvg';
+import UploadSvg from '../icon/admin-sidebar/UploadSvg';
+import BooksSvg from '../icon/admin-sidebar/BooksSvg';
+import IncomingSvg from '../icon/admin-sidebar/IncomingSvg';
+import ActiveSvg from '../icon/admin-sidebar/ActiveSvg';
+import ArchivedSvg from '../icon/admin-sidebar/ArchivedSvg';
+import RenterSvg from '../icon/admin-sidebar/RenterSvg';
+import SettingSvg from '../icon/admin-sidebar/SettingSvg';
 
 export default function Navbar({
   currentTab,
@@ -18,25 +27,28 @@ export default function Navbar({
         return 'translate-y-0';
       case AdminTab.UPLOAD:
         return 'translate-y-12';
-      case AdminTab.INCOMING_REQUEST:
+      case AdminTab.BOOKS:
         return 'translate-y-24';
-      case AdminTab.ACTIVE_REQUEST:
+      case AdminTab.INCOMING_REQUEST:
         return 'translate-y-[9rem]';
-      case AdminTab.ARCHIVED_REQUEST:
+      case AdminTab.ACTIVE_REQUEST:
         return 'translate-y-[12rem]';
-      case AdminTab.RENTER:
+      case AdminTab.ARCHIVED_REQUEST:
         return 'translate-y-[15rem]';
-      case AdminTab.SETTING:
+      case AdminTab.RENTER:
         return 'translate-y-[18rem]';
+      case AdminTab.SETTING:
+        return 'translate-y-[21rem]';
     }
   };
 
   return (
     <div
       className='
-        h-full w-[250px] min-w-[250px] flex flex-col
+        w-[300px]
+        h-full flex flex-col
         bg-primary
-        p-4 z-10
+        p-2 z-10
       '
     >
       {/* Logo */}
@@ -51,52 +63,59 @@ export default function Navbar({
       </div>
 
       {/* nav button */}
-      <div className='relative'>
+      <div className='relative px-2'>
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
-          iconPath='/icon/admin-sidebar/dashboard.svg'
+          tab={AdminTab.DASHBOARD}
           isCurrentTab={currentTab === AdminTab.DASHBOARD}
           onClick={() => handlePageRouting(AdminTab.DASHBOARD)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.UPLOAD)}
-          iconPath='/icon/admin-sidebar/upload.svg'
+          tab={AdminTab.UPLOAD}
           isCurrentTab={currentTab === AdminTab.UPLOAD}
           onClick={() => handlePageRouting(AdminTab.UPLOAD)}
         />
 
         <NavbarBtn
+          title={formatEnumValue(AdminTab.BOOKS)}
+          tab={AdminTab.BOOKS}
+          isCurrentTab={currentTab === AdminTab.BOOKS}
+          onClick={() => handlePageRouting(AdminTab.BOOKS)}
+        />
+
+        <NavbarBtn
           title={formatEnumValue(AdminTab.INCOMING_REQUEST)}
-          iconPath='/icon/admin-sidebar/incoming.svg'
+          tab={AdminTab.INCOMING_REQUEST}
           isCurrentTab={currentTab === AdminTab.INCOMING_REQUEST}
           onClick={() => handlePageRouting(AdminTab.INCOMING_REQUEST)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.ACTIVE_REQUEST)}
-          iconPath='/icon/admin-sidebar/active.svg'
+          tab={AdminTab.ACTIVE_REQUEST}
           isCurrentTab={currentTab === AdminTab.ACTIVE_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ACTIVE_REQUEST)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.ARCHIVED_REQUEST)}
-          iconPath='/icon/admin-sidebar/archived.svg'
+          tab={AdminTab.ARCHIVED_REQUEST}
           isCurrentTab={currentTab === AdminTab.ARCHIVED_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.RENTER)}
-          iconPath='/icon/admin-sidebar/renter.svg'
+          tab={AdminTab.RENTER}
           isCurrentTab={currentTab === AdminTab.RENTER}
           onClick={() => handlePageRouting(AdminTab.RENTER)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.SETTING)}
-          iconPath='/icon/admin-sidebar/setting.svg'
+          tab={AdminTab.SETTING}
           isCurrentTab={currentTab === AdminTab.SETTING}
           onClick={() => handlePageRouting(AdminTab.SETTING)}
         />
@@ -105,7 +124,7 @@ export default function Navbar({
         <div
           className={`
           ${handleTranslate()} transition-all duration-300
-          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-xl
+          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full
           `}
           style={{ zIndex: -1 }}
         ></div>
@@ -130,20 +149,19 @@ export default function Navbar({
 
 function NavbarBtn({
   title,
-  iconPath,
-
+  tab,
   isCurrentTab,
   onClick
 }: {
   title: string;
-  iconPath: string;
+  tab: AdminTab;
   isCurrentTab?: boolean;
   onClick: () => void;
 }) {
   return (
     <div
-      className={`flex items-center justify-start cursor-pointer rounded-xl 
-      ${isCurrentTab ? 'text-secondary ' : 'text-secondary'}
+      className={`flex items-center justify-start cursor-pointer rounded-full 
+      ${isCurrentTab ? 'text-primary ' : 'text-secondary'}
       transition-all duration-300
       whitespace-nowrap 
       p-1 px-2
@@ -152,13 +170,104 @@ function NavbarBtn({
       `}
       onClick={onClick}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={iconPath}
-        alt={title}
-        className='transition-all duration-300 w-6'
-      />
+      <NavbarIcon tab={tab} isCurrent={isCurrentTab as boolean} />
       <div className='ml-[12px] font-bold'>{title}</div>
     </div>
   );
+}
+
+function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
+  switch (tab) {
+    case AdminTab.DASHBOARD:
+      return (
+        <DahboardSvg
+          className={`h-6 w-fit ${
+            isCurrent
+              ? 'fill-primary stroke-primary delay-300'
+              : 'fill-secondary stroke-secondary'
+          }
+          transition-all 
+          `}
+        />
+      );
+    case AdminTab.UPLOAD:
+      return (
+        <UploadSvg
+          className={`h-6 w-fit ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+          transition-all  
+          
+          `}
+        />
+      );
+    case AdminTab.BOOKS:
+      return (
+        <BooksSvg
+          className={`h-6 w-fit ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+            transition-all   
+          `}
+        />
+      );
+    case AdminTab.INCOMING_REQUEST:
+      return (
+        <IncomingSvg
+          className={`h-6 w-fit ${
+            isCurrent
+              ? 'fill-primary stroke-primary delay-300'
+              : 'fill-secondary stroke-secondary'
+          }
+          transition-all 
+
+          `}
+        />
+      );
+    case AdminTab.ACTIVE_REQUEST:
+      return (
+        <ActiveSvg
+          className={`h-6 w-fit ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.ARCHIVED_REQUEST:
+      return (
+        <ArchivedSvg
+          className={`h-6 w-fit ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.RENTER:
+      return (
+        <RenterSvg
+          className={`h-6 w-fit ${
+            isCurrent
+              ? 'fill-primary stroke-primary delay-300'
+              : 'fill-secondary stroke-secondary'
+          }
+        transition-all 
+      `}
+        />
+      );
+
+    case AdminTab.SETTING:
+      return (
+        <SettingSvg
+          className={`h-6 w-fit ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+        transition-all 
+      `}
+        />
+      );
+  }
+
+  return null;
 }

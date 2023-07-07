@@ -15,16 +15,16 @@ export default function App({ Component, pageProps }: AppProps) {
           rel='icon'
           type='image/x-icon'
           href='/icon/bookshelf-favicon.png'
-        ></link>
+        />
       </Head>
-      <div className='flex flex-grow h-screen w-screen overflow-clip'>
+      <div className='flex-1 flex flex-grow h-full w-screen overflow-clip'>
         <div className='flex flex-1'>
           <RecoilRoot>
             <Component {...pageProps} />
           </RecoilRoot>
         </div>
 
-        <div id='modal-root' className='z-[9999]'></div>
+        <div id='modal-root' className='z-[9999999]'></div>
       </div>
     </>
   );

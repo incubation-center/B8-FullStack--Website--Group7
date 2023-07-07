@@ -9,10 +9,13 @@ import BorrowBook from '@/components/Modals/BorrowBook';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { useEffect, useState } from 'react';
 import { HomePageTab } from '@/utils/enum';
-import { getBookById } from '@/service/api/book';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { AuthAtom, isBookAlreadySaved } from '@/service/recoil';
-import NotLoggedInLayout from '@/components/layout/NotLoggedInLayout';
+import {
+  AllBooksAtom,
+  AuthAtom,
+  getBookByIdAtom,
+  isBookAlreadySaved
+} from '@/service/recoil';
 import { getCookie } from 'cookies-next';
 import { processUserToken } from '@/service/token';
 import {
@@ -22,12 +25,19 @@ import {
 import { AxiosError } from 'axios';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
-import { AuthStore } from '@/types/auth';
 
-export default function BookDetail({ book }: { book: Book }) {
+import { BookData } from '@/dummydata';
+import { getBookById } from '@/service/api/book';
+import Link from 'next/link';
+import BackArrowSvg from '@/components/icon/BackArrow';
+
+export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
-  const isSaved = useRecoilValue(isBookAlreadySaved(book.id as string));
+  const allBooks = useRecoilValue(AllBooksAtom);
+  const [book, setBook] = useState<Book | undefined | null>();
+
+  const isSaved = useRecoilValue(isBookAlreadySaved(bookId as string));
 
   const [isSaving, setIsSaving] = useState(false);
 
@@ -42,7 +52,32 @@ export default function BookDetail({ book }: { book: Book }) {
     setAuthStore(authObj);
   };
 
+  const getBook = async () => {
+    let book;
+
+    // all books data is not fetched yet
+    allBooks.forEach((b) => {
+      if (b.id == bookId) {
+        book = b;
+        return;
+      }
+    });
+
+    if (!book) {
+      try {
+        book = (await getBookById(bookId)) || null;
+      } catch (err) {
+        console.error(err);
+        book = null;
+      }
+    }
+
+    setBook(book);
+  };
+
   useEffect(() => {
+    getBook();
+
     router.prefetch(`/?tab=${HomePageTab.HOME}`);
 
     if (authStore.isFetched === false) getAuthObj();
@@ -51,6 +86,8 @@ export default function BookDetail({ book }: { book: Book }) {
   }, []);
 
   const handleSaveToFav = async () => {
+    if (!book) return;
+
     if (!authStore.isLoggedIn) {
       open();
       return;
@@ -91,6 +128,7 @@ export default function BookDetail({ book }: { book: Book }) {
   };
 
   const handleRemoveFromFav = async () => {
+    if (!book) return;
     setIsSaving(true);
     try {
       if (!authStore.user || !book.id) return;
@@ -125,63 +163,74 @@ export default function BookDetail({ book }: { book: Book }) {
     }
   };
 
+  // book is fetched
   return (
     <>
-      {/* modals  */}
-      <AlertModal />
+      {/* book not found */}
+      {book === null && <BookNotFound />}
 
-      <ModalWrapper>
-        <BorrowBook
-          close={close}
-          book={book}
-          user={authStore.user as User}
-          showAlert={showAlert}
-        />
-      </ModalWrapper>
+      {/* fetching */}
+      {book === undefined && <FetchingBook />}
 
-      <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>
-        {/* back home */}
-        <div className='p-8 flex justify-start'>
-          <div
-            className='flex cursor-pointer select-none'
-            onClick={() => router.back()}
-          >
-            <Image
-              src='/icon/back-arrow.svg'
-              alt='back'
-              width={14}
-              height={14}
+      {/* book initialized */}
+      {book && (
+        <>
+          {/* modals  */}
+          <AlertModal />
+
+          <ModalWrapper>
+            <BorrowBook
+              close={close}
+              book={book}
+              user={authStore.user as User}
+              showAlert={showAlert}
             />
-            <h1 className='ml-8 text-alt-secondary'>Go Back</h1>
-          </div>
-        </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
-          {/* book cover */}
-          <div className='flex justify-center items-start mb-10 md:mb-0'>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={book.bookImg}
-              alt={book.title}
-              className='aspect-auto max-h-[400px] object-scale-down'
-            />
-          </div>
+          </ModalWrapper>
 
-          {/* description */}
-          <div className='md:col-span-2 relative'>
-            <div className='w-full flex justify-between items-start gap-2'>
-              <div className='space-y-[10px] text-alt-secondary font-light'>
-                <h1 className='font-bold text-2xl'>{book.title}</h1>
+          <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>
+            {/* back home */}
+            <div className='p-6 flex justify-start '>
+              <div
+                className='
+                  flex cursor-pointer select-none 
+                  hover:bg-alt-secondary hover:bg-opacity-20
+                  transition duration-300 ease-in-out
+                  p-2 px-4 rounded-full
+                '
+                onClick={() => router.back()}
+              >
+                <BackArrowSvg className='w-6 h-6 fill-alt-secondary' />
+                <h1 className='ml-8 text-alt-secondary'>Go Back</h1>
+              </div>
+            </div>
 
-                <h2>Author: {book.author}</h2>
-                <h2>Genre: {book.category}</h2>
-
-                <h2 className='font-bold'>Book Description</h2>
+            <div className='grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
+              {/* book cover */}
+              <div className='flex justify-center items-start mb-10 md:mb-0'>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={book.bookImg}
+                  alt={book.title}
+                  className='aspect-auto max-h-[400px] w-full object-contain'
+                />
               </div>
 
-              {authStore.isFetched && (
-                <div className='w-20'>
-                  <button
-                    className={`
+              {/* description */}
+              <div className='md:col-span-2 relative'>
+                <div className='w-full flex justify-between items-start gap-2'>
+                  <div className='space-y-[10px] text-alt-secondary font-light'>
+                    <h1 className='font-bold text-2xl'>{book.title}</h1>
+
+                    <h2>Author: {book.author}</h2>
+                    <h2>Genre: {book.category}</h2>
+
+                    <h2 className='font-bold'>Book Description</h2>
+                  </div>
+
+                  {authStore.isFetched && (
+                    <div className='w-20'>
+                      <button
+                        className={`
                      bg-white w-12 h-12 
                       flex justify-center items-center
                       rounded-full mx-auto
@@ -193,42 +242,52 @@ export default function BookDetail({ book }: { book: Book }) {
                       }
                       transition-all duration-300
                     `}
-                    disabled={isSaving}
-                    onClick={isSaved ? handleRemoveFromFav : handleSaveToFav}
-                  >
-                    {isSaving ? (
-                      <SpinningLoadingSvg className='w-6 h-6 text-primary' />
-                    ) : (
-                      <SaveToFavSvg
-                        className='w-6 h-6 fill-primary'
-                        saved={isSaved}
-                      />
-                    )}
-                  </button>
-                  {!isSaving && (
-                    <div className='w-full text-center text-alt-secondary text-sm mt-1'>
-                      {isSaved ? 'Remove' : 'Save'}
+                        disabled={isSaving}
+                        onClick={
+                          isSaved ? handleRemoveFromFav : handleSaveToFav
+                        }
+                      >
+                        {isSaving ? (
+                          <SpinningLoadingSvg className='w-6 h-6 text-primary' />
+                        ) : (
+                          <SaveToFavSvg
+                            className='w-6 h-6 fill-primary'
+                            saved={isSaved}
+                          />
+                        )}
+                      </button>
+                      {!isSaving && (
+                        <div className='w-full text-center text-alt-secondary text-sm mt-1'>
+                          {isSaved ? 'Remove' : 'Save'}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
+
+                <p className='mt-[10px] text-alt-secondary font-light'>
+                  {book.description}
+                </p>
+
+                {book.description.length <= 0 && (
+                  <div className='text-alt-secondary text-opacity-70'>
+                    No description provided
+                  </div>
+                )}
+
+                {authStore.isFetched && (
+                  <button
+                    onClick={() => open()}
+                    className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
+                  >
+                    Borrow
+                  </button>
+                )}
+              </div>
             </div>
-
-            <p className='mt-[10px] text-alt-secondary font-light'>
-              {book.description}
-            </p>
-
-            {authStore.isFetched && (
-              <button
-                onClick={() => open()}
-                className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
-              >
-                Borrow
-              </button>
-            )}
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 }
@@ -236,11 +295,43 @@ export default function BookDetail({ book }: { book: Book }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
 
-  const book = await getBookById(id);
-
   return {
     props: {
-      book
+      bookId: id
     }
   };
 }
+
+const BookNotFound = () => {
+  return (
+    <div className='min-h-screen w-full flex flex-col space-y-6 justify-center items-center bg-primary text-center'>
+      <div>
+        <h1
+          className='
+                text-4xl text-alt-secondary font-bold
+            '
+        >
+          401
+        </h1>
+        <h1 className='text-lg text-alt-secondary'>Book not found</h1>
+      </div>
+
+      <Link href={`/?tab=${HomePageTab.HOME}`}>
+        <span className='bg-alt-secondary px-4 py-2 rounded-full text-primary font-medium'>
+          Back to Homepage
+        </span>
+      </Link>
+    </div>
+  );
+};
+
+const FetchingBook = () => {
+  return (
+    <div className='w-full flex-1 flex gap-4 justify-center items-center bg-primary'>
+      <div className='text-center text-alt-secondary font-medium'>
+        Fetching book
+      </div>
+      <SpinningLoadingSvg className='w-8 h-8 text-alt-secondary' />
+    </div>
+  );
+};

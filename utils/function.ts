@@ -54,3 +54,12 @@ export function useDebounce(callback: Function, delay: number) {
   }, [callback, delay]);
   return debounceCallback;
 }
+
+export function useUpdateDataInterval(callback: Function, minute: number) {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      callback();
+    }, minute * 60 * 1000);
+    return () => clearInterval(timer);
+  }, [callback, minute]);
+}

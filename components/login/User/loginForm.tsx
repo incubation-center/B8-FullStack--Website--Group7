@@ -15,6 +15,7 @@ import { AxiosError } from 'axios';
 import { processUserToken } from '@/service/token';
 import { useRecoilState } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
+import Link from 'next/link';
 
 export default function UserLoginForm() {
   const [_, setAuthStore] = useRecoilState(AuthAtom);
@@ -24,10 +25,6 @@ export default function UserLoginForm() {
   const router = useRouter();
 
   const { showAlert, AlertModal } = useAlertModal();
-
-  // useEffect(() => {
-  //   localStorage.setItem('rememberMe', rememberMe.toString());
-  // }, [rememberMe]);
 
   const {
     register,
@@ -48,20 +45,21 @@ export default function UserLoginForm() {
       const data = await res.data;
 
       const accessToken = data['access_token'];
+      const refreshToken = data['refresh-token'];
 
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
+      setCookie('refreshToken', refreshToken);
 
       const authObj = await processUserToken(accessToken);
       setAuthStore(authObj);
 
       router.reload();
     } catch (errors) {
-      let message = 'An unknown error occurred';
+      let message;
       if (errors instanceof AxiosError) {
-        message = errors.response?.data.error;
+        message = errors.response?.data.error || 'An unknown error occurred';
       }
-      close();
       showAlert({
         title: message,
         subtitle: 'Please try again',
@@ -110,28 +108,12 @@ export default function UserLoginForm() {
           />
           {/* remember me and forgot password */}
           <div className='flex flex-wrap gap-4 justify-end items-center w-full px-4 whitespace-nowrap'>
-            {/* <div className='flex items-center'>
-              <input
-                type='checkbox'
-                className='
-                  w-4 h-4 text-blue-600 
-                  bg-gray-100 border-gray-300 rounded 
-                  dark:ring-offset-gray-800
-                  focus:ring-2 dark:bg-gray-700 dark:border-gray-600
-                '
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
-              />
-              <label
-                htmlFor='remember'
-                className=' text-sm text-alt-secondary ml-4 font-medium'
-              >
-                Remember me
-              </label>
-            </div> */}
-            <a href='#' className=' text-sm text-alt-secondary font-medium'>
+            <Link
+              href='/forgot-password'
+              className=' text-sm text-alt-secondary font-medium'
+            >
               Forgot password?
-            </a>
+            </Link>
           </div>
           {/* submit button */}
           <div>
