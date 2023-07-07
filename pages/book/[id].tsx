@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
-import Image from 'next/image';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 
 import { Book, User } from '@/types';
@@ -10,12 +10,7 @@ import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { useEffect, useState } from 'react';
 import { HomePageTab } from '@/utils/enum';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  AllBooksAtom,
-  AuthAtom,
-  getBookByIdAtom,
-  isBookAlreadySaved
-} from '@/service/recoil';
+import { AllBooksAtom, AuthAtom, isBookAlreadySaved } from '@/service/recoil';
 import { getCookie } from 'cookies-next';
 import { processUserToken } from '@/service/token';
 import {
@@ -26,10 +21,11 @@ import { AxiosError } from 'axios';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
 
-import { BookData } from '@/dummydata';
 import { getBookById } from '@/service/api/book';
 import Link from 'next/link';
 import BackArrowSvg from '@/components/icon/BackArrow';
+
+import { useTranslation } from 'next-i18next';
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
@@ -295,14 +291,19 @@ export default function BookDetail({ bookId }: { bookId: string }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      bookId: id
+      bookId: id,
+      ...(await serverSideTranslations(locale, ['common']))
     }
   };
 }
 
 const BookNotFound = () => {
+  const { t } = useTranslation('common');
+
   return (
     <div className='min-h-screen w-full flex flex-col space-y-6 justify-center items-center bg-primary text-center'>
       <div>
@@ -313,6 +314,7 @@ const BookNotFound = () => {
         >
           401
         </h1>
+        <h1>{t('title')}</h1>
         <h1 className='text-lg text-alt-secondary'>Book not found</h1>
       </div>
 

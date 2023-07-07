@@ -1,12 +1,11 @@
-import { processUserToken } from '@/service/token';
 import '@/styles/globals.css';
-import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
-export default function App({ Component, pageProps }: AppProps) {
+import { appWithTranslation } from 'next-i18next';
+
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -29,3 +28,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+export default appWithTranslation(App);
