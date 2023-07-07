@@ -11,8 +11,11 @@ import useModal from '@/components/Modals/useModal';
 import { BookRequest, RequestStatus } from '@/types';
 import RequestDetail from '@/components/Modals/RequestDetail';
 
-import { useRecoilValue } from 'recoil';
-import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  AdminAllRequestAtom,
+  isRefreshingRequestAtom
+} from '@/service/recoil/admin';
 import useConfirmModal from '@/components/Modals/useCofirm';
 import { receiveBook } from '@/service/api/admin';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
@@ -23,6 +26,8 @@ export default function ActiveTab({
   handleRefreshRequest: () => void;
 }) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
+
+  const [_, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
@@ -44,7 +49,8 @@ export default function ActiveTab({
       showAlert({
         title: 'Error',
         subtitle: 'Something went wrong. Please try again later.',
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
+        onModalClose: () => handleRefreshRequest()
       });
     }
   };
@@ -83,7 +89,10 @@ export default function ActiveTab({
                 showConfirmModal({
                   title: 'Receive Book',
                   subtitle: 'Are you sure you want to receive this book?',
-                  onConfirm: () => handleReceiveBook(request)
+                  onConfirm: () => {
+                    setIsRefreshing(true);
+                    handleReceiveBook(request);
+                  }
                 });
               }
             }
