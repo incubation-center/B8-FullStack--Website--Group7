@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { BookRequest } from '@/types';
+import { Book, BookRequest, RequestStatus } from '@/types';
 
 import Image from 'next/image';
 
 import { motion } from 'framer-motion';
+import StatusLabel from './StatusLabel';
 
 export default function RequestTable({
   data,
@@ -69,32 +70,7 @@ export default function RequestTable({
             </td>
 
             <td className='hidden md:table-cell'>
-              {request.status === 'PENDING' ? (
-                <div
-                  className={`
-                    rounded-full 
-                    px-2 py-1 text-xs 
-                    md:text-sm md:px-4 md:py-2
-                    font-bold text-white w-fit
-                    bg-secondary
-                  `}
-                >
-                  Pending
-                </div>
-              ) : (
-                <div
-                  className={`
-                    rounded-full 
-                    px-2 py-1 text-xs 
-                    md:text-sm md:px-4 md:py-2
-                    font-bold text-white w-fit
-                    ${request.isApproved ? 'bg-success' : 'bg-danger'}
-                  `}
-                >
-                  {request.isApproved && 'Approved'}
-                  {!request.isApproved && 'Rejected'}
-                </div>
-              )}
+              <StatusLabel request={request} />
             </td>
 
             <td>
