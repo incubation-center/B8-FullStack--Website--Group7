@@ -3,6 +3,14 @@ import { Listbox, Transition } from '@headlessui/react';
 import RequiredIcon from '../login/RequiredIcon';
 import { Fragment } from 'react';
 
+import EducationSvg from '../icon/book-category/Education';
+import BusinessSvg from '../icon/book-category/Business';
+import DramaSvg from '../icon/book-category/Drama';
+import FantasySvg from '../icon/book-category/Fantasy';
+import HistorySvg from '../icon/book-category/History';
+import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
+import { BookCategory } from '@/utils/enum';
+
 export default function CustomListDropDown({
   options,
   selectedOption,
@@ -41,13 +49,9 @@ export default function CustomListDropDown({
                 flex items-center justify-between p-1
               '
         >
-          <div className='flex gap-2'>
+          <div className='flex items-center gap-2'>
             <span>
-              <img
-                src={`/icon/book-category/${selectedOption.value.toLowerCase()}.svg`}
-                alt='book'
-                className='w-6 h-6'
-              />
+              <CategoryIcon category={selectedOption.value} />
             </span>
             <span className='text-primary'>{selectedOption.label}</span>
           </div>
@@ -86,10 +90,11 @@ export default function CustomListDropDown({
                       text-primary cursor-pointer select-none relative py-2 px-4 pl-2
                       hover:bg-primary hover:bg-opacity-30
                         overflow-clip
+                        
                       `
                 }
               >
-                <div className='flex gap-2'>
+                <div className='flex items-center gap-2'>
                   <img
                     src='/icon/selected.png'
                     alt='check'
@@ -99,13 +104,8 @@ export default function CustomListDropDown({
                         : 'invisible'
                     }`}
                   />
-                  <span>
-                    <img
-                      src={`/icon/book-category/${category.value.toLowerCase()}.svg`}
-                      alt='book'
-                      className='w-6 h-6'
-                    />
-                  </span>
+
+                  <CategoryIcon category={category.value} />
                   <span className={` block truncate`}>{category.label}</span>
                 </div>
               </Listbox.Option>
@@ -115,4 +115,25 @@ export default function CustomListDropDown({
       </Listbox>
     </div>
   );
+}
+
+function CategoryIcon({ category }: { category: string }) {
+  switch (category) {
+    case BookCategory.EDUCATION:
+      return <EducationSvg className='h-4 w-fit fill-primary' />;
+    case BookCategory.BUSINESS:
+      return <BusinessSvg className='h-4 w-fit fill-primary stroke-primary' />;
+    case BookCategory.DRAMA:
+      return <DramaSvg className='h-4 w-fit fill-primary' />;
+    case BookCategory.FANTASY:
+      return <FantasySvg className='h-4 w-fit fill-primary' />;
+    case BookCategory.HISTORY:
+      return <HistorySvg className='h-4 w-fit fill-primary stroke-primary' />;
+    case BookCategory.SELF_DEVELOPMENT:
+      return (
+        <SelfDevelopmentSvg className='h-4 w-fit fill-primary stroke-primary' />
+      );
+  }
+
+  return null;
 }

@@ -52,28 +52,24 @@ export default function DashboardTab({
       >
         <RequestDataShow
           title='Total Incoming'
-          // icon='/icon/admin-sidebar/incoming-admin.svg'
           tab={AdminTab.INCOMING_REQUEST}
           value={requestCount.PENDING}
         />
 
         <RequestDataShow
           title='Total Active'
-          // icon='/icon/admin-sidebar/active-admin.svg'
           tab={AdminTab.ACTIVE_REQUEST}
           value={requestCount.ACCEPTED}
         />
 
         <RequestDataShow
           title='Total Renter'
-          // icon='/icon/admin-sidebar/renter.svg'
           tab={AdminTab.RENTER}
           value={requestCount.RENTER}
         />
 
         <RequestDataShow
           title='Total Archived'
-          // icon='/icon/admin-sidebar/archived-admin.svg'
           tab={AdminTab.ARCHIVED_REQUEST}
           value={requestCount.ARCHIVED}
         />

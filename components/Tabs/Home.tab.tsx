@@ -159,10 +159,6 @@ export default function HomeTab({
 
               const isCurrentCategory = currentCategory === value;
 
-              const iconPath = `/icon/book-category/${BookCategory[
-                category as keyof typeof BookCategory
-              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
-
               return (
                 <CategoryButton
                   key={category}
