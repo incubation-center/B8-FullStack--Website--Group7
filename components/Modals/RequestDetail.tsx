@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { BookRequest } from '@/types';
+import StatusLabel from '../RequestStatus/StatusLabel';
 
 export default function RequestDetail({
   request
@@ -49,7 +50,7 @@ export default function RequestDetail({
                 Request
               </p>
               <div className='pl-4 '>
-                <div className='md:grid grid-cols-3 gap-x-2 items-center'>
+                <div className='md:grid grid-cols-3 gap-x-2 gap-y-1 items-center'>
                   <div>Name:</div>
                   <div className=' font-bold col-span-3 md:col-span-2'>
                     {request.borrower.username}
@@ -71,25 +72,9 @@ export default function RequestDetail({
                   </div>
 
                   <div>Request status:</div>
-                  {request.status === 'PENDING' ? (
-                    <div
-                      className={`
-                         font-bold col-span-3 md:col-span-2 
-                        
-                      `}
-                    >
-                      Pending
-                    </div>
-                  ) : (
-                    <div
-                      className={`
-                         font-bold col-span-3 md:col-span-2 
-                        ${request.isApproved ? 'text-success' : 'text-danger'}
-                      `}
-                    >
-                      {request.isApproved ? 'Approved' : 'Rejected'}
-                    </div>
-                  )}
+                  <div className='w-full col-span-3 md:col-span-2'>
+                    <StatusLabel request={request} />
+                  </div>
 
                   <div>Request date:</div>
                   <div className=' font-bold col-span-3 md:col-span-2'>

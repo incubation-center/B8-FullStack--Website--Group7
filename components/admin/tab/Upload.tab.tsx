@@ -12,6 +12,7 @@ import { AxiosError } from 'axios';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { uploadBookCover } from '@/service/firebase';
 import { updateBookById } from '@/service/api/book';
+import UploadSvg from '@/components/icon/admin-sidebar/UploadSvg';
 
 interface BookUploadInputs extends Book {}
 
@@ -178,11 +179,7 @@ export default function UploadTab({
 
                     '
                     >
-                      <img
-                        src='/icon/admin-sidebar/upload.svg'
-                        alt='upload icon'
-                        className='w-12 h-12'
-                      />
+                      <UploadSvg className='w-12 h-12 fill-primary' />
                       <p className='text-primary'>Upload Your Image</p>
                     </div>
                   </label>

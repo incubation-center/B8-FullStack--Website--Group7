@@ -29,6 +29,7 @@ import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
 import { BookData } from '@/dummydata';
 import { getBookById } from '@/service/api/book';
 import Link from 'next/link';
+import BackArrowSvg from '@/components/icon/BackArrow';
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
@@ -43,12 +44,6 @@ export default function BookDetail({ bookId }: { bookId: string }) {
   const { open, close, ModalWrapper } = useModal();
 
   const { showAlert, AlertModal } = useAlertModal();
-
-  useEffect(() => {
-    console.log('====================================');
-    console.log(book);
-    console.log('====================================');
-  }, [book]);
 
   const getAuthObj = async () => {
     const token = getCookie('accessToken');
@@ -72,7 +67,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       try {
         book = (await getBookById(bookId)) || null;
       } catch (err) {
-        console.log(err);
+        console.error(err);
         book = null;
       }
     }
@@ -204,15 +199,11 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                 '
                 onClick={() => router.back()}
               >
-                <Image
-                  src='/icon/back-arrow.svg'
-                  alt='back'
-                  width={14}
-                  height={14}
-                />
+                <BackArrowSvg className='w-6 h-6 fill-alt-secondary' />
                 <h1 className='ml-8 text-alt-secondary'>Go Back</h1>
               </div>
             </div>
+
             <div className='grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
               {/* book cover */}
               <div className='flex justify-center items-start mb-10 md:mb-0'>

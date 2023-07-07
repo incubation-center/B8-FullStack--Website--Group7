@@ -18,6 +18,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
+import EducationSvg from '../icon/book-category/Education';
+import BusinessSvg from '../icon/book-category/Business';
+import DramaSvg from '../icon/book-category/Drama';
+import FantasySvg from '../icon/book-category/Fantasy';
+import HistorySvg from '../icon/book-category/History';
+import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
 
 export default function HomeTab({
   isUseInAdminPage = false,
@@ -153,20 +159,20 @@ export default function HomeTab({
 
               const isCurrentCategory = currentCategory === value;
 
-              const iconPath = `/icon/book-category/${BookCategory[
-                category as keyof typeof BookCategory
-              ].toLowerCase()}${isCurrentCategory ? '-active' : ''}.svg`;
-
               return (
                 <CategoryButton
                   key={category}
                   category={category}
                   value={value}
-                  iconPath={iconPath}
                   isCurrentCategory={isCurrentCategory}
                   handleCategory={() => handleCategory(key, value)}
                   disabled={isFetchingBooks || allBooks.length === 0}
-                />
+                >
+                  <CategoryIcon
+                    category={value}
+                    isCurrentCategory={isCurrentCategory}
+                  />
+                </CategoryButton>
               );
             })}
           </div>
@@ -221,17 +227,86 @@ export default function HomeTab({
   );
 }
 
+function CategoryIcon({
+  category,
+  isCurrentCategory
+}: {
+  category: string;
+  isCurrentCategory: boolean;
+}) {
+  switch (category) {
+    case BookCategory.EDUCATION:
+      return (
+        <EducationSvg
+          className={`h-4 w-fit ${
+            isCurrentCategory ? 'fill-white ' : 'fill-primary '
+          }`}
+        />
+      );
+    case BookCategory.BUSINESS:
+      return (
+        <BusinessSvg
+          className={`h-4 w-fit ${
+            isCurrentCategory
+              ? 'fill-white stroke-white'
+              : 'fill-primary stroke-primary'
+          }`}
+        />
+      );
+    case BookCategory.DRAMA:
+      return (
+        <DramaSvg
+          className={`h-4 w-fit ${
+            isCurrentCategory ? 'fill-white ' : 'fill-primary '
+          }`}
+        />
+      );
+    case BookCategory.FANTASY:
+      return (
+        <FantasySvg
+          className={`h-4 w-fit ${
+            isCurrentCategory ? 'fill-white' : 'fill-primary'
+          }`}
+        />
+      );
+    case BookCategory.HISTORY:
+      return (
+        <HistorySvg
+          className={`h-4 w-fit ${
+            isCurrentCategory
+              ? 'fill-white stroke-white'
+              : 'fill-primary stroke-primary'
+          }`}
+        />
+      );
+    case BookCategory.SELF_DEVELOPMENT:
+      return (
+        <SelfDevelopmentSvg
+          className={`h-4 w-fit ${
+            isCurrentCategory
+              ? 'fill-white stroke-white'
+              : 'fill-primary stroke-primary'
+          }`}
+        />
+      );
+  }
+
+  return null;
+}
+
 function CategoryButton({
   category,
   value,
-  iconPath,
+  // iconPath,
+  children,
   isCurrentCategory,
   handleCategory,
   disabled
 }: {
   category: string;
   value: string;
-  iconPath: string;
+  // iconPath: string;
+  children: React.ReactNode;
   isCurrentCategory: boolean;
   handleCategory: () => void;
   disabled?: boolean;
@@ -256,7 +331,8 @@ function CategoryButton({
       onClick={handleCategory}
       disabled={disabled}
     >
-      <img src={iconPath} alt={value} className='h-4 w-fit inline-block' />
+      {/* <img src={iconPath} alt={value} className='h-4 w-fit inline-block' /> */}
+      {children}
       <span>{value}</span>
     </button>
   );

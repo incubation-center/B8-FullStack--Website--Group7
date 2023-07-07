@@ -142,7 +142,7 @@ const useAlertModal = () => {
                       className='
                         px-10 py-2 mt-8 rounded-full
                         text-primary font-bold
-                        focus:outline outline-2 outline-black  outline-offset-2
+                        hover:bg-primary hover:bg-opacity-20
                       '
                       onClick={close}
                     >

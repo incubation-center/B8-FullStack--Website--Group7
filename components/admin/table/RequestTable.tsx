@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 import { BookRequest } from '@/types';
 import { AdminTab } from '@/utils/enum';
+import { useRecoilValue } from 'recoil';
+import { isRefreshingRequestAtom } from '@/service/recoil/admin';
 
 interface RequestTableProps {
   data: BookRequest[];
@@ -24,9 +26,7 @@ export default function RequestTable({
   actions,
   useIn
 }: RequestTableProps) {
-  console.log('====================================');
-  console.log('data', data);
-  console.log('====================================');
+  const isRefreshing = useRecoilValue(isRefreshingRequestAtom);
 
   return (
     <table className='w-full '>
@@ -117,9 +117,17 @@ export default function RequestTable({
                     rounded-full px-4 py-2 
                     text-sm text-primary font-bold m-1
                     ${action.bgColor}
-                    hover:bg-opacity-80
+                    ${
+                      !isRefreshing
+                        ? 'hover:opacity-80'
+                        : 'cursor-not-allowed opacity-60'
+                    }
+
                   `}
-                  onClick={() => action.onClick(request)}
+                  onClick={() => {
+                    action.onClick(request);
+                  }}
+                  disabled={isRefreshing}
                 >
                   {action.label}
                 </button>

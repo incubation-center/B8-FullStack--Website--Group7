@@ -13,11 +13,18 @@ import Profile from '@/components/Tabs/Profile.tab';
 import { processUserToken } from '@/service/token';
 
 import { useRecoilState } from 'recoil';
-import { AllBooksAtom, AuthAtom, homePageTabAtom } from '@/service/recoil';
+import {
+  AllBooksAtom,
+  AuthAtom,
+  UserRequestAtom,
+  homePageTabAtom
+} from '@/service/recoil';
 import { AuthStore } from '@/types/auth';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { useUpdateDataInterval } from '@/utils/function';
+import { getAllRequest } from '@/service/api/request';
 
 export default function Home({
   currentTab,
@@ -29,6 +36,9 @@ export default function Home({
   // atoms
   const [_, setAuthObj] = useRecoilState(AuthAtom);
   const [__, setCurrentTab] = useRecoilState(homePageTabAtom);
+  const [___, setAllBooks] = useRecoilState(AllBooksAtom);
+  const [____, setUserRequests] = useRecoilState(UserRequestAtom);
+
   const [tab, setTab] = useState(currentTab);
 
   // initialize
@@ -70,9 +80,6 @@ export default function Home({
     updateTab(currentTab);
     setAuthObj(authStore);
 
-    console.log('====================================');
-    console.log('authStore', authStore);
-    console.log('====================================');
     setIsFetched(true);
 
     // prefetching
