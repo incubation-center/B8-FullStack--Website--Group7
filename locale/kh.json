@@ -2,7 +2,7 @@
 {
     "homepage": {
         "sidebar": {
-            "home": "ទំំព័រដើម",
+            "home": "ទំព័រដើម",
             "save": "រក្សាទុក",
             "request": "ការស្នើរសុំ",
             "profile": "គណនី",
@@ -37,8 +37,8 @@
     },
 
     "request-tab": {
-        "h1-request-status": "ស្ថានភាពស្នើសុំ",
-        "no-request-text": "អ្នកគ្មានសំណើទេ",
+        "h1-request-status": "ស្ថានភាពស្នើរសុំ",
+        "no-request-text": "អ្នកគ្មានសំណើរទេ",
         "explore-books-btn": "ស្វែងរកសៀវភៅ",
 
         "book": "ឈ្មោះសៀវភៅ",
@@ -55,7 +55,7 @@
     "profile-tab": {
         "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
         "username": "ឈ្មោះ",
-        "phone number": "លេខទូរសព្ទ",
+        "phone number": "លេខទូរស័ព្ទ",
         "email": "អ៊ីមែល",
 
         "privacy-set": "ការកំណត់​ ឯកជនភាព",
@@ -71,7 +71,7 @@
         "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
         "username": "ឈ្មោះ",
         "email": "អ៊ីមែល",
-        "phone-number": "លេខទូរសព្ទ",
+        "phone-number": "លេខទូរស័ព្ទ",
 
         "cancel-btn": "បោះបង់",
         "save-btn": "រក្សាទុក"
@@ -183,9 +183,9 @@
             "dashboard": "ផ្ទាំងគ្រប់គ្រង",
             "upload": "ផ្ទុកឡើង",
             "books":"សៀវភៅ",
-            "incoming-request": "សំណើចូល",
-            "active-request": "សំណើសកម្ម",
-            "archived-request": "សំណើដែលបានទុក",
+            "incoming-request": "សំណើរចូល",
+            "active-request": "សំណើរសកម្ម",
+            "archived-request": "សំណើរដែលបានទុក",
             "renter": "អ្នកជួល",
             "settings": "ការកំណត់",
 
@@ -194,9 +194,9 @@
 
         "dashboard-tap": {
             "dashboard": "ផ្ទាំងគ្រប់គ្រង",
-            "total-incoming": "សំណើចូលសរុប",
-            "total-active": "សំណើសកម្ម​សរុប",
-            "total-archived": "សំណើដែលបានទុកសរុប",
+            "total-incoming": "សំណើរចូលសរុប",
+            "total-active": "សំណើរសកម្ម​សរុប",
+            "total-archived": "សំណើរដែលបានទុកសរុប",
 
             "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
 
@@ -269,20 +269,20 @@
     },
 
         "incoming-request-tap": {
-            "incoming-request":"សំណើចូល",
-            "no-request": "គ្មានសំណើ",
+            "incoming-request":"សំណើរចូល",
+            "no-request": "គ្មានសំណើរ",
 
             "book": "សៀវភៅ",
             "username":"ឈ្មោះ",
-            "request-date": "កាលបរិច្ឆេទស្នើសំុ",
+            "request-date": "កាលបរិច្ឆេទស្នើរសុំ",
             "actions": "សកម្មភាព",
 
             "approve-btn": "យល់ព្រម",
             "reject-btn": "បដិសេដ",
 
             "approve-request-tap": {
-                "approve-request": "យល់ព្រម​សំណើ",
-                "p-approve-request-tap": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើនេះទេ?",
+                "approve-request": "យល់ព្រម​សំណើរ",
+                "p-approve-request-tap": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើរនេះទេ?",
 
                 "no-btn": "ទេ",
                 "yes-btn": "យល់ព្រម"
@@ -290,7 +290,7 @@
 
             "reject-request-tap": {
                 "reject-request": "បដិសេដសំណើរ",
-                "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើនេះទេ?",
+                "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើរនេះទេ?",
 
                 "reject-reason": "ហេតុផលបដិសេដ",
                 "reject-reason-fill": "សូមបញ្ចូលហេតុផលរបស់អ្នក",
@@ -301,8 +301,8 @@
         },
 
         "active-request-tap": {
-            "active-request": "សំណើសកម្ម",
-            "no-request": "គ្មានសំណើ",
+            "active-request": "សំណើរសកម្ម",
+            "no-request": "គ្មានសំណើរ",
 
             "book": "សៀវភៅ",
             "username": "ឈ្មោះ",
@@ -313,8 +313,8 @@
         },
 
         "archived-request-tap": {
-            "archived-request":"សំណើដែលបានទុក",
-            "no-request": "គ្មានសំណើ",
+            "archived-request":"សំណើរដែលបានទុក",
+            "no-request": "គ្មានសំណើរ",
 
             "book": "សៀវភៅ",
             "username":"ឈ្មោះ",
@@ -401,7 +401,7 @@
 
     "expired-tap": {
         "link-expired": "តំណផុតកំណត់",
-        "expired-tap-p": "តំណដែលអ្នកបានប្រើដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញបានផុតកំណត់ហើយ។​ សូមស្នើសុំតំណថ្មីពីទំព័រភ្លេចពាក្យសម្ងាត់។",
+        "expired-tap-p": "តំណដែលអ្នកបានប្រើដើម្បីកំណត់ពាក្យសម្ងាត់របស់អ្នកឡើងវិញបានផុតកំណត់ហើយ។​ សូមស្នើរសុំតំណថ្មីពីទំព័រភ្លេចពាក្យសម្ងាត់។",
 
         "back-to-forgot-pass-btn": "ត្រឡប់ទៅ ភ្លេចពាក្យសម្ងាត់"
 
