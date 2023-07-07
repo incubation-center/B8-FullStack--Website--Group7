@@ -11,6 +11,7 @@ import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import { AxiosError } from 'axios';
 import { createRequest } from '@/service/api/request';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import ExpandSvg from '../icon/ExpandSvg';
 
 const durations = [
   { value: 7, label: '1 week' },
@@ -47,10 +48,6 @@ export default function BorrowBook({
 
       const res = await createRequest(request);
 
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
-
       close();
 
       showAlert({
@@ -61,12 +58,12 @@ export default function BorrowBook({
       });
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log('====================================');
-        console.log(err);
-        console.log('====================================');
+        close();
         showAlert({
           title: 'Request failed',
-          subtitle: 'somethings went wrong, please try again later!',
+          subtitle:
+            err.response?.data.error ||
+            'somethings went wrong, please try again later!',
           type: AlertType.ERROR
         });
       }
@@ -121,58 +118,63 @@ export default function BorrowBook({
                 value={selectedDuration}
                 onChange={setSelectedDuration}
               >
-                <Listbox.Button
-                  className='
+                {({ open }) => (
+                  <>
+                    <Listbox.Button
+                      className='
                     w-full px-4 py-2 mt-2 rounded-full
                     bg-white
                     placeholder-[#9D9C9C] 
                     focus:outline-none text-left
                     flex justify-between items-center
                   '
-                >
-                  <h1>{selectedDuration.label}</h1>
+                    >
+                      <h1>{selectedDuration.label}</h1>
 
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src='/icon/expand.png'
-                    alt='expand'
-                    className='w-6 h-auto -mr-2'
-                  />
-                </Listbox.Button>
+                      <ExpandSvg
+                        className='w-6 h-auto -mr-2 stroke-primary'
+                        isExpanded={open}
+                      />
+                    </Listbox.Button>
 
-                <motion.div layout>
-                  <Listbox.Options
-                    className='
-                      w-full mt-2 rounded-2xl overflow-clip
-                      bg-white
-                      placeholder-[#9D9C9C] 
-                      focus:outline-none
-                    '
-                  >
                     <motion.div
-                      key={selectedDuration.label}
-                      initial={{ height: 0 }}
+                      layout
                       animate={{
                         height: 'auto'
                       }}
-                      exit={{ height: 0 }}
                     >
-                      {durations.map((duration) => (
-                        <Listbox.Option
-                          className={`
+                      <Listbox.Options
+                        className='
+                          w-full mt-2 rounded-2xl overflow-clip
+                          bg-white
+                          placeholder-[#9D9C9C] 
+                          focus:outline-none
+                        '
+                      >
+                        <motion.div
+                          key={selectedDuration.label}
+                          initial={{ height: 0 }}
+                          animate={{
+                            height: 'auto'
+                          }}
+                          exit={{ height: 0 }}
+                        >
+                          {durations.map((duration) => (
+                            <Listbox.Option
+                              className={`
                             w-full px-2 py-2 cursor-pointer
                             hover:bg-secondary hover:text-white
                             focus:bg-secondary focus:text-white
                             flex space-x-2
                           `}
-                          key={duration.label}
-                          value={duration}
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src='/icon/selected.png'
-                            alt='selected'
-                            className={`
+                              key={duration.label}
+                              value={duration}
+                            >
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src='/icon/selected.png'
+                                alt='selected'
+                                className={`
                               w-6 h-auto
                               ${
                                 selectedDuration.value === duration.value
@@ -180,13 +182,15 @@ export default function BorrowBook({
                                   : 'invisible'
                               }
                             `}
-                          />
-                          <h1>{duration.label}</h1>
-                        </Listbox.Option>
-                      ))}
+                              />
+                              <h1>{duration.label}</h1>
+                            </Listbox.Option>
+                          ))}
+                        </motion.div>
+                      </Listbox.Options>
                     </motion.div>
-                  </Listbox.Options>
-                </motion.div>
+                  </>
+                )}
               </Listbox>
             </div>
           </div>
