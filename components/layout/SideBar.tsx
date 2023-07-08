@@ -14,6 +14,7 @@ import ProfileSvg from '../icon/side-nav/Profile';
 import LocaleSwitching from '../LocaleSwitching';
 import { useTranslation } from 'next-i18next';
 import { useLocale } from '@/utils/function';
+import { useRouter } from 'next/router';
 
 function SideBar({
   currentTab,
@@ -25,6 +26,7 @@ function SideBar({
   isMobile?: boolean;
 }) {
   const authStore = useRecoilValue(AuthAtom);
+  const router = useRouter();
   const { t } = useTranslation('homepage');
 
   const handleTranslate = () => {
@@ -110,6 +112,7 @@ function SideBar({
               box-border border-2 border-alt-secondary hover:border-action
               whitespace-nowrap md:hidden
             '
+          locale={router.locale}
         >
           Log In
         </Link>
@@ -123,6 +126,7 @@ function SideBar({
             flex items-center justify-center cursor-pointer 
             hover:shadow-xl
           '
+          locale={router.locale}
         >
           Admin
         </Link>

@@ -3,12 +3,14 @@ import LanguageSvg from './icon/locale/LanguageSvg';
 import { Listbox } from '@headlessui/react';
 
 import Image from 'next/image';
+import { setCookie } from 'cookies-next';
 
 export default function LocaleSwitching() {
   const router = useRouter();
   const { locales, locale, push, pathname, asPath, reload, events } = router;
 
   const handleSwitchLocale = (locale: string) => {
+    setCookie('NEXT_LOCALE', locale);
     push(pathname, asPath, { locale: locale, shallow: false });
   };
 

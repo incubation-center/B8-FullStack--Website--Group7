@@ -45,7 +45,7 @@ export default function HomeTab({
 
   const handleBookClick = (book: Book) => {
     if (!isUseInAdminPage) {
-      router.push(`/book/${book.id}`);
+      router.push(`/book/${book.id}`, undefined, { locale: router.locale });
       return;
     }
 

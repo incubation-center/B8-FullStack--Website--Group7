@@ -89,7 +89,7 @@ export default function ResetPassword({
         subtitle: 'Your password has been reset',
         type: AlertType.SUCCESS,
         onModalClose: () => {
-          router.push('/auth');
+          router.push('/auth', undefined, { locale: router.locale });
         }
       });
     } catch (err) {

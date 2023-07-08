@@ -1,5 +1,6 @@
 import { AuthAtom } from '@/service/recoil';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
 export default function NotLoggedInLayout({
@@ -7,6 +8,8 @@ export default function NotLoggedInLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
   const authStore = useRecoilValue(AuthAtom);
 
   if (authStore.isLoggedIn) {
@@ -30,6 +33,7 @@ export default function NotLoggedInLayout({
             text-lg font-medium mt-4
           '
         href={'/auth'}
+        locale={router.locale}
       >
         Login
       </Link>

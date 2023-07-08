@@ -4,10 +4,12 @@ import CustomInput from '@/components/login/CustomInput';
 import { AuthForgotPassword } from '@/service/api/auth';
 import { AxiosError } from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 export default function ForgotPassword() {
+  const router = useRouter();
   const [sendingEmail, setSendingEmail] = useState(false);
 
   const { AlertModal, showAlert } = useAlertModal();
@@ -107,7 +109,7 @@ export default function ForgotPassword() {
               </button>
             </form>
 
-            <Link href='/auth'>
+            <Link href='/auth' locale={router.locale}>
               <span className='text-alt-secondary'>Go back to Login</span>
             </Link>
           </div>

@@ -26,6 +26,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   const authStore = useRecoilValue(AuthAtom);
+  const router = useRouter();
 
   const [isShowSideBar, setIsShowSideBar] = useState(false);
 
@@ -62,6 +63,7 @@ export default function HomeLayout({
               box-border border-2 border-alt-secondary hover:border-action
               whitespace-nowrap hidden md:block
             '
+              locale={router.locale}
             >
               Log In
             </Link>

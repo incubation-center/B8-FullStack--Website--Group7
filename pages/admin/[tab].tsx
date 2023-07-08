@@ -52,7 +52,10 @@ export default function AdminHomePage({
   const [tab, setTab] = useState(currentTab);
 
   const handlePageRouting = (tab: AdminTab) => {
-    router.push(`/admin/${tab}`, undefined, { shallow: true });
+    router.push(`/admin/${tab}`, undefined, {
+      shallow: true,
+      locale: router.locale
+    });
   };
   useEffect(() => {
     const tab = router.query.tab;

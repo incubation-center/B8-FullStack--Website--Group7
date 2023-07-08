@@ -1,7 +1,10 @@
 import LinkExpiredSvg from '@/components/icon/LinkExpiredSvg';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function LinkExpired() {
+  const router = useRouter();
+
   return (
     <div
       className='
@@ -20,7 +23,7 @@ export default function LinkExpired() {
         Please request a new link from the forgot password page.
       </p>
       <div>
-        <Link href='/forgot-password'>
+        <Link href='/forgot-password' locale={router.locale}>
           <span className='bg-alt-secondary px-4 py-2 rounded-full text-primary font-medium'>
             Back to Forgot password
           </span>

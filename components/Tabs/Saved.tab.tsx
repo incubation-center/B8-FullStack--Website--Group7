@@ -18,7 +18,7 @@ export default function SavedTab({
   const router = useRouter();
 
   const handleBookClick = (id: string) => {
-    router.push(`/book/${id}`);
+    router.push(`/book/${id}`, undefined, { locale: router.locale });
   };
 
   return (

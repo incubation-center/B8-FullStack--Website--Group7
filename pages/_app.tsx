@@ -5,9 +5,15 @@ import { RecoilRoot } from 'recoil';
 
 import { appWithTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { setCookie } from 'cookies-next';
 
 function App({ Component, pageProps }: AppProps) {
   const { locale } = useRouter();
+
+  // useEffect(() => {
+  //   setCookie('NEXT_LOCALE', locale);
+  // }, [locale]);
 
   return (
     <>

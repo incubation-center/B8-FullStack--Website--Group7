@@ -52,13 +52,18 @@ export default function Home({
         undefined,
         {
           shallow: true,
-          scroll: false
+          scroll: false,
+          locale: router.locale
         }
       );
       return;
     }
 
-    router.push(`/?tab=${tab}`, undefined, { shallow: true, scroll: false });
+    router.push(`/?tab=${tab}`, undefined, {
+      shallow: true,
+      scroll: false,
+      locale: router.locale
+    });
   };
   useEffect(() => {
     const tab = router.query.tab;

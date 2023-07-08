@@ -304,6 +304,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 const BookNotFound = () => {
   const { t } = useTranslation('common');
 
+  const router = useRouter();
+
   return (
     <div className='min-h-screen w-full flex flex-col space-y-6 justify-center items-center bg-primary text-center'>
       <div>
@@ -318,7 +320,7 @@ const BookNotFound = () => {
         <h1 className='text-lg text-alt-secondary'>Book not found</h1>
       </div>
 
-      <Link href={`/?tab=${HomePageTab.HOME}`}>
+      <Link href={`/?tab=${HomePageTab.HOME}`} locale={router.locale}>
         <span className='bg-alt-secondary px-4 py-2 rounded-full text-primary font-medium'>
           Back to Homepage
         </span>

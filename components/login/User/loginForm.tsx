@@ -111,6 +111,7 @@ export default function UserLoginForm() {
             <Link
               href='/forgot-password'
               className=' text-sm text-alt-secondary font-medium'
+              locale={router.locale}
             >
               Forgot password?
             </Link>
