@@ -167,7 +167,7 @@ function NavbarBtn({
     >
       <Icon
         className={`
-        h-6 w-fit z-10 ${
+        h-6 w-6 z-10 ${
           isCurrentTab ? 'fill-primary delay-400' : 'fill-alt-secondary'
         }
         transition-all

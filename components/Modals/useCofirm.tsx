@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -65,6 +66,8 @@ export default function useConfirmModal() {
   function ConfirmModal() {
     const ref = useRef<Element | null>(null);
     const [mounted, setMounted] = useState(false);
+
+    const { t } = useTranslation('common');
 
     useEffect(() => {
       ref.current = document.querySelector<HTMLElement>('#modal-root');
@@ -134,7 +137,7 @@ export default function useConfirmModal() {
                       '
                       onClick={close}
                     >
-                      No
+                      {t('modal.no-btn')}
                     </button>
                     <button
                       className='
@@ -147,7 +150,7 @@ export default function useConfirmModal() {
                         onConfirm();
                       }}
                     >
-                      Yes
+                      {t('modal.yes-btn')}
                     </button>
                   </div>
                 </motion.div>

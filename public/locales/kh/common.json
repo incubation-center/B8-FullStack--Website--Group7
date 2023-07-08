@@ -32,6 +32,13 @@
   },
 
   "modal": {
-    "close-btn": "បិទ"
+    "close-btn": "បិទ",
+    "no-btn": "ទេ",
+    "yes-btn": "បាទ/ចាស"
+  },
+
+  "not-logged-in": {
+    "not-logged-in text": "អ្នកមិនទាន់បានចូលគណនីនៅឡើយទេ!",
+    "login-btn": "ចូលគណនី"
   }
 }

@@ -320,8 +320,8 @@ export default function ProfileTab() {
               <button
                 onClick={() => {
                   showConfirmModal({
-                    title: 'Logout',
-                    subtitle: 'Are you sure you want to logout?',
+                    title: t('logout-modal.logout'),
+                    subtitle: t('logout-modal.logout-text'),
                     onConfirm: () => {
                       handleLogout();
                     }

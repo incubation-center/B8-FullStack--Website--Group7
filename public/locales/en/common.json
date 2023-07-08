@@ -33,6 +33,13 @@
   },
 
   "modal": {
-    "close-btn": "Close"
+    "close-btn": "Close",
+    "no-btn": "No",
+    "yes-btn": "Yes"
+  },
+
+  "not-logged-in": {
+    "not-logged-in text": "You are not logged in",
+    "login-btn": "Login"
   }
 }
