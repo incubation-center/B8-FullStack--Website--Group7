@@ -282,7 +282,7 @@
 
   "expired-tap": {
     "link-expired": "Link Expired",
-    "expired-tap-p": "The link you used to reset your password has expired.Please request a new link from the forgot password page.",
+    "expired-tap-p": "The link you used to reset your password has expired.\nPlease request a new link from the forgot password page.",
 
     "back-to-forgot-pass-btn": "Back to Forgot password"
   }
