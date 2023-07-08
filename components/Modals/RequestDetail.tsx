@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { BookRequest } from '@/types';
 import StatusLabel from '../RequestStatus/StatusLabel';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function RequestDetail({
   request

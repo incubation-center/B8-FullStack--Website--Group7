@@ -65,18 +65,20 @@
     "logout-btn": "Logout"
   },
 
-  "edit-tap": {
+  "edit-modal": {
     "personal-info": "Personal Information",
     "username": "Username",
     "email": "Email",
     "phone-number": "Phone Number",
 
     "cancel-btn": "Cancel",
-    "save-btn": "save"
+    "save-btn": "save",
+    "updating-info": "Updating your information"
   },
 
-  "change-pass-tap": {
-    "password": "Password",
+  "change-password-modal": {
+    "label": "Change Password",
+    "password": "Current Password",
     "password-placeholder": "Enter your current password",
     "new-password": "New Password",
     "new-password-placeholder": "new password",
@@ -85,16 +87,17 @@
 
     "cancel-btn": "Cancel",
     "save-btn": "save",
-
-    "information-update": {
-      "info-update-text": "Your Information have been updated!",
-      "thank-you": "Thanks you!",
-
-      "close-btn": "Close"
-    }
+    "updating-password": "Updating your password"
   },
 
-  "logout-tap": {
+  "information-update": {
+    "info-update-text": "Your Information have been updated!",
+    "thank-you": "Thanks you!",
+
+    "close-btn": "Close"
+  },
+
+  "logout-modal": {
     "logout": "Logout",
     "logout-text": "Are you sure you want to logout?",
 

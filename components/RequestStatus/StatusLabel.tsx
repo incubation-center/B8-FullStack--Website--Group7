@@ -1,6 +1,6 @@
 import { BookRequest, RequestStatus } from '@/types';
 import { useLocale } from '@/utils/function';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function StatusLabel({ request }: { request: BookRequest }) {
   const { t } = useTranslation('common');

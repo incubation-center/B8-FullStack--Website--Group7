@@ -4,8 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 const useAlertModal = () => {
+  const { t } = useTranslation('common');
   const [isShowing, setIsShowing] = useState(false);
   const [{ title, subtitle, type, isClosable, onModalClose }, setModalText] =
     useState<AlertModalTextType>({
@@ -146,7 +148,7 @@ const useAlertModal = () => {
                       '
                       onClick={close}
                     >
-                      Close
+                      {t('modal.close-btn')}
                     </button>
                   )}
                 </motion.div>

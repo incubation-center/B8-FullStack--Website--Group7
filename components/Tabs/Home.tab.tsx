@@ -24,7 +24,7 @@ import DramaSvg from '../icon/book-category/Drama';
 import FantasySvg from '../icon/book-category/Fantasy';
 import HistorySvg from '../icon/book-category/History';
 import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function HomeTab({
   isUseInAdminPage = false,

@@ -65,18 +65,20 @@
     "logout-btn": "ចាកចេញ"
   },
 
-  "edit-tap": {
+  "edit-modal": {
     "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
     "username": "ឈ្មោះ",
     "email": "អ៊ីមែល",
     "phone-number": "លេខទូរស័ព្ទ",
 
     "cancel-btn": "បោះបង់",
-    "save-btn": "រក្សាទុក"
+    "save-btn": "រក្សាទុក",
+    "updating-info": "កំពុងធ្វើបច្ចុប្បន្នភាពព័ត៌មានផ្ទាល់ខ្លួន"
   },
 
-  "change-pass-tap": {
-    "password": "ពាក្យសម្ងាត់",
+  "change-password-modal": {
+    "label": "ផ្លាស់ផ្ដូរពាក្យសម្ងាត់",
+    "password": "ពាក្យសម្ងាត់ចាស់",
     "password-placeholder": "បញ្ចូលពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នក",
     "new-password": "ពាក្យសម្ងាត់​ថ្មី",
     "new-password-placeholder": "ពាក្យសម្ងាត់​ថ្មី",
@@ -85,16 +87,17 @@
 
     "cancel-btn": "បោះបង់",
     "save-btn": "រក្សាទុក",
-
-    "information-update": {
-      "info-update-text": "ព័ត៌មានរបស់អ្នកត្រូវបានធ្វើបច្ចុប្បន្នភាព!",
-      "thank-you": "សូមអរគុណ!",
-
-      "close-btn": "បិទ"
-    }
+    "updating-password": "កំពុងធ្វើបច្ចុប្បន្នភាពពាក្យសម្ងាត់"
   },
 
-  "logout-tap": {
+  "information-update": {
+    "info-update-text": "ព័ត៌មានរបស់អ្នកត្រូវបានធ្វើបច្ចុប្បន្នភាព!",
+    "thank-you": "សូមអរគុណ!",
+
+    "close-btn": "បិទ"
+  },
+
+  "logout-modal": {
     "logout": "ចាកចេញ",
     "logout-text": "តើអ្នកប្រាកដថាអ្នកចង់ចេញពីគណនី",
 

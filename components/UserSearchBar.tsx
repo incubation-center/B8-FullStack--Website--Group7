@@ -6,7 +6,7 @@ import { HomePageTab } from '@/utils/enum';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SearchSvg from './icon/Search';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function UserSearchBar({
   currentTab,

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 import StatusLabel from './StatusLabel';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useLocale } from '@/utils/function';
 
 export default function RequestTable({

@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { handleFallBackProfileImage } from '@/utils/function';
 import { AnimatePresence, motion } from 'framer-motion';
 import UserSearchBar from '../UserSearchBar';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 export default function HomeLayout({
   currentTab,
