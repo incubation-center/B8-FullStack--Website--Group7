@@ -5,6 +5,6 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'kh']
   },
-  ns: ['common', 'homepage', 'book-detail'],
+  ns: ['common', 'homepage', 'book-detail', 'forgot-password'],
   reloadOnPrerender: process.env.NODE_ENV === 'development'
 };
