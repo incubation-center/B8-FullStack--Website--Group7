@@ -37,14 +37,18 @@
     "no-request-text": "You have no request",
     "explore-books-btn": "explore books",
 
-    "book": "Book",
-    "date": "Date",
-    "status": "Status",
-    "action": "Action",
+    "fetching-request": "Fetching your request",
+    "no-request": "You have no request",
+    "explore-books": "Explore Books",
+    "updating-request": "Updating your request",
 
-    "pending": "Pending",
-    "approved": "Approved",
-    "rejected": "Rejected"
+    "table": {
+      "book": "Book",
+      "date": "Date",
+      "status": "Status",
+      "action": "Action",
+      "view-btn": "View"
+    }
   },
 
   "profile-tab": {

@@ -48,6 +48,7 @@ function SideBar({
         w-[250px] h-full px-[16px] 
         ${isMobile ? 'flex bg-primary py-10 z-50' : 'hidden md:flex'}
          flex-col
+         space-y-4
       `}
     >
       {/* logo */}
@@ -114,7 +115,7 @@ function SideBar({
             '
           locale={router.locale}
         >
-          Log In
+          {t('homepage-tab.sidebar.login-btn', 'Login')}
         </Link>
       )}
       {authStore.isAdmin && (
@@ -128,7 +129,7 @@ function SideBar({
           '
           locale={router.locale}
         >
-          Admin
+          {t('homepage-tab.sidebar.admin-btn', 'Admin')}
         </Link>
       )}
     </div>

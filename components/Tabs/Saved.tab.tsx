@@ -6,12 +6,15 @@ import { useRecoilValue } from 'recoil';
 import { AuthAtom, filteredSavedBooksAtom } from '@/service/recoil';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export default function SavedTab({
   onClickExplore
 }: {
   onClickExplore: () => void;
 }) {
+  const { t } = useTranslation('homepage');
+
   const authStore = useRecoilValue(AuthAtom);
   const favBooks = useRecoilValue(filteredSavedBooksAtom);
 
@@ -34,13 +37,13 @@ export default function SavedTab({
               pt-2 md:pt-4
             '
           >
-            Saved
+            {t('save-tab.h1-save', 'Saved')}
           </h1>
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
             {favBooks.length === 0 && (
               <div className='h-full w-full flex flex-col justify-center items-center'>
                 <h1 className='text-center text-primary font-medium'>
-                  You have no saved books
+                  {t('save-tab.no-save-text', 'You have no saved books')}
                 </h1>
                 <button
                   className='
@@ -49,7 +52,7 @@ export default function SavedTab({
                   '
                   onClick={onClickExplore}
                 >
-                  explore books
+                  {t('save-tab.explore-books-btn', 'explore books')}
                 </button>
               </div>
             )}

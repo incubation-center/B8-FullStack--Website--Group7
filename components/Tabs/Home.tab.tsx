@@ -189,7 +189,7 @@ export default function HomeTab({
 
       <div
         ref={scrollingRef}
-        className='overflow-y-scroll overflow-x-hidden w-full scroll-smooth'
+        className='overflow-y-scroll overflow-x-hidden w-full scroll-smooth space-y-4'
       >
         {isFetchingBooks && (
           // fetching books skeleton
@@ -330,14 +330,14 @@ function CategoryButton({
       id={category.toLowerCase() + '-nav'}
       key={category}
       className={`
-        flex w-fit items-center justify-center space-x-2 cursor-pointer
+        flex w-fit max-w-md items-center justify-center space-x-2 cursor-pointer
         transition-all duration-300
         whitespace-nowrap 
         text-lg
         mr-8 select-none
         ${
           isCurrentCategory
-            ? 'bg-primary p-1 px-8 rounded-lg text-white'
+            ? 'bg-primary p-1 px-8 rounded-full text-white'
             : 'bg-transparent text-primary '
         }
 
@@ -432,7 +432,7 @@ function BookSection({
               <button
                 className='
                 bg-secondary text-white font-light
-                rounded-lg py-1 px-2 w-40 mx-auto
+                rounded-full py-1 px-2 w-32 mx-auto
               '
                 onClick={() => handleBookClick(book)}
               >

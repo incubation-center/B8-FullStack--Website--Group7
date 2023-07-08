@@ -6,6 +6,7 @@ import { HomePageTab } from '@/utils/enum';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SearchSvg from './icon/Search';
+import { useTranslation } from 'react-i18next';
 
 export default function UserSearchBar({
   currentTab,
@@ -14,6 +15,8 @@ export default function UserSearchBar({
   currentTab: HomePageTab;
   initialAnimation?: boolean;
 }) {
+  const { t } = useTranslation('common');
+
   const [searchText, setSearchText] = useRecoilState(searchKeywordAtom);
   const [isShow, setIsShow] = useState(false);
   const [placeholder, setPlaceholder] = useState(
@@ -24,16 +27,20 @@ export default function UserSearchBar({
     setSearchText('');
     setIsShow(true);
     if (currentTab === HomePageTab.HOME) {
-      setPlaceholder('Title, Author');
+      setPlaceholder(t('search-placeholder.home-tab', 'Title, Author'));
     } else if (currentTab === HomePageTab.SAVED) {
-      setPlaceholder('Title, Author, Category');
+      setPlaceholder(
+        t('search-placeholder.saved-tab', 'Title, Author, Category')
+      );
     } else if (currentTab === HomePageTab.REQUEST_STATUS) {
-      setPlaceholder('Title, Author, Category, Status');
+      setPlaceholder(
+        t('search-placeholder.request-tab', 'Title, Author, Category')
+      );
     } else if (currentTab === HomePageTab.PROFILE) {
       setPlaceholder('');
       setIsShow(false);
     }
-  }, [currentTab, setSearchText]);
+  }, [currentTab, setSearchText, t]);
 
   return (
     <AnimatePresence>

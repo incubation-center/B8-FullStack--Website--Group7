@@ -31,6 +31,7 @@ import { useDebounce } from '@/utils/function';
 import BookTab from '@/components/admin/tab/Book.tab';
 import { AxiosError } from 'axios';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function AdminHomePage({
   currentTab
@@ -198,9 +199,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // const token = context.req.cookies.accessToken;
   // const requests = await getAllRequestAdmin(token);
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      currentTab: tab || AdminTab.DASHBOARD
+      currentTab: tab || AdminTab.DASHBOARD,
+      ...(await serverSideTranslations(locale))
     }
   };
 }

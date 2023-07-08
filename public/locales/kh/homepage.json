@@ -33,18 +33,22 @@
   },
 
   "request-tab": {
-    "h1-request-status": "ស្ថានភាពស្នើរសុំ",
+    "h1-request-status": "ស្ថានភាពការខ្ចីសៀវភៅ",
     "no-request-text": "អ្នកគ្មានសំណើរទេ",
     "explore-books-btn": "ស្វែងរកសៀវភៅ",
 
-    "book": "ឈ្មោះសៀវភៅ",
-    "date": "កាលបរិច្ឆេទ",
-    "status": "ស្ថានភាព",
-    "action": "សកម្មភាព",
+    "fetching-request": "កំពុងទាញយក​​ព័ត៌មាន",
+    "no-request": "មិនមានសំណើរខ្ចី",
+    "explore-books": "ស្វែងរកសៀវភៅ",
+    "updating-request": "កំពុងធ្វើបច្ចុប្បន្នភាពសំណើរខ្ចី",
 
-    "pending": "កំពុងរង់ចាំ",
-    "approved": "យល់ព្រម",
-    "rejected": "បដិសេដ"
+    "table": {
+      "book": "ឈ្មោះសៀវភៅ",
+      "date": "កាលបរិច្ឆេទខ្ចី",
+      "status": "ស្ថានភាព",
+      "action": "សកម្មភាព",
+      "view-btn": "មើល"
+    }
   },
 
   "profile-tab": {

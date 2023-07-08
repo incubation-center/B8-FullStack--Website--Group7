@@ -15,7 +15,7 @@ export default function LocaleSwitching() {
   };
 
   return (
-    <div className='py-4 w-full '>
+    <div className=' w-full '>
       <div className='w-full flex-1 flex flex-row justify-start items-center relative bg-alt-secondary bg-opacity-10 p-2 rounded-full'>
         <Listbox
           as='div'
