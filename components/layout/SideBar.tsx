@@ -10,9 +10,10 @@ import HomeSvg from '../icon/side-nav/Home';
 import SavedSvg from '../icon/side-nav/Saved';
 import RequestStatusSvg from '../icon/side-nav/RequestStatus';
 import ProfileSvg from '../icon/side-nav/Profile';
-import { useRouter } from 'next/router';
+
 import LocaleSwitching from '../LocaleSwitching';
 import { useTranslation } from 'next-i18next';
+import { useLocale } from '@/utils/function';
 
 function SideBar({
   currentTab,
@@ -24,6 +25,7 @@ function SideBar({
   isMobile?: boolean;
 }) {
   const authStore = useRecoilValue(AuthAtom);
+  const { t } = useTranslation('homepage');
 
   const handleTranslate = () => {
     switch (currentTab) {
@@ -56,25 +58,25 @@ function SideBar({
       <div className='relative'>
         <div className='z-10 px-2'>
           <NavbarBtn
-            title='Home'
+            title={t('homepage-tab.sidebar.home', 'Home')}
             Icon={HomeSvg}
             isCurrentTab={currentTab === HomePageTab.HOME}
             onClick={() => handlePageRouting(HomePageTab.HOME)}
           />
           <NavbarBtn
-            title='Saved'
+            title={t('homepage-tab.sidebar.save', 'Saved')}
             Icon={SavedSvg}
             isCurrentTab={currentTab === HomePageTab.SAVED}
             onClick={() => handlePageRouting(HomePageTab.SAVED)}
           />
           <NavbarBtn
-            title='Request'
+            title={t('homepage-tab.sidebar.request', 'Request Status')}
             Icon={RequestStatusSvg}
             isCurrentTab={currentTab === HomePageTab.REQUEST_STATUS}
             onClick={() => handlePageRouting(HomePageTab.REQUEST_STATUS)}
           />
           <NavbarBtn
-            title='Profile'
+            title={t('homepage-tab.sidebar.profile', 'Profile')}
             Icon={ProfileSvg}
             isCurrentTab={currentTab === HomePageTab.PROFILE}
             onClick={() => handlePageRouting(HomePageTab.PROFILE)}
@@ -146,13 +148,15 @@ function NavbarBtn({
   }) => JSX.Element;
   onClick: () => void;
 }) {
+  const { isKhmer } = useLocale();
+
   return (
     <div
       className={`flex items-center justify-start cursor-pointer rounded-xl 
       ${isCurrentTab ? 'text-primary delay-400' : 'text-alt-secondary'}
       p-2 px-4
       transition-all 
-      h-12 z-10
+      h-12 z-10 
       `}
       onClick={onClick}
     >
@@ -164,7 +168,13 @@ function NavbarBtn({
         transition-all
         `}
       />
-      <div className='ml-[12px] font-bold z-10'>{title}</div>
+      <div
+        className={`ml-[12px] ${
+          isKhmer ? 'font-medium' : 'font-bold'
+        } z-10 align-baseline`}
+      >
+        {title}
+      </div>
     </div>
   );
 }

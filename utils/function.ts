@@ -1,5 +1,6 @@
 'use client';
 import { User } from '@/types';
+import { useRouter } from 'next/router';
 import { RefObject, useEffect, useMemo, useState } from 'react';
 
 export const formatEnumValue = (value: string) => {
@@ -62,4 +63,14 @@ export function useUpdateDataInterval(callback: Function, minute: number) {
     }, minute * 60 * 1000);
     return () => clearInterval(timer);
   }, [callback, minute]);
+}
+
+export function useLocale() {
+  const { locale } = useRouter();
+
+  const isKhmer = useMemo(() => {
+    return locale === 'kh';
+  }, [locale]);
+
+  return { isKhmer };
 }

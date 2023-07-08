@@ -48,8 +48,9 @@ export default function LocaleSwitching() {
             className='
               absolute bottom-full left-0 mb-2
               w-full
-              bg-white bg-opacity-10 rounded-3xl shadow-lg 
+              bg-alt-secondary bg-opacity-10 rounded-3xl shadow-sm
               flex  flex-col gap-2 items-start text-alt-secondary
+              overflow-hidden
             '
           >
             {(locales as string[]).map((locale) => (
@@ -58,7 +59,7 @@ export default function LocaleSwitching() {
                 value={locale}
                 className={`
                   w-full p-2 px-4 font-medium
-                  hover:bg-primary hover:bg-opacity-30 flex gap-2 items-center 
+                  hover:bg-white hover:bg-opacity-10 flex gap-2 items-center 
                   ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
                   select-none cursor-pointer
                 `}

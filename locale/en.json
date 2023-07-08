@@ -1,413 +1,299 @@
-
 {
-    "homepage": {
-        "sidebar": {
-            "home": "Home",
-            "save": "Saved",
-            "request": "Request",
-            "profile": "Profile",
+  "not-logged-in": {
+    "not-logged-in text": "You are not logged in"
+  },
 
-            "admin-btn": "Admin",
-            "login-btn": "Login",
-            "view-btn": "View"
+  "login-tab": {
+    "email": "Email Address",
+    "password": "Password",
 
-        },
+    "welcome-text": "Welcome to Digital Library",
+    "p-details-login-tab": "Please enter your details",
+    "forget-password": "Forgot password?",
+    "no-account-text": "Don't have an account?",
+    "sign-up": "Sign Up",
+    "email-placeholder": "Please enter your email",
+    "password-placeholder": "Please enter your password",
+    "email-required-alert": "Email is required",
+    "password-required-alert": "Password is required",
 
-        "category": {
-            "education": "Education",
-            "business": "Business",
-            "history": "History",
-            "drama": "Drama",
-            "fantasy": "Fantasy",
-            "development": "Self Development"
-        },
+    "invalid-credential-modal": {
+      "invalid-credential-text": "Invalid Credentials!!",
+      "try-again-text": "Please try again",
+      "close-btn": "Close"
+    }
+  },
 
-        "search-box": {
-            "box-text": "Search name of the book"
-        }
+  "sign-up-tab": {
+    "username": "Username",
+    "email": "Email Address",
+    "password": "Password",
+    "cfm-password": "Confirm Password",
+    "phone": "Phone Number",
 
+    "username-placeholder": "Please enter your username",
+    "email-placeholder": "Please enter your email address",
+    "password-placeholder": "Please enter your password",
+    "cfm-password-placeholder": "Please enter your username",
+    "phone-placeholder": "Please enter your username",
+
+    "email-required-alert": "Email is required",
+    "user-required-alert": "Username is required",
+    "password-required-alert": "Password is required",
+    "cfm-password-required-alert": "Confirm Password is required",
+    "phone-required-alert": "Phone number is required",
+    "invalid-password-alert": "Password must be at least 8 characters long",
+    "password-not-matched": "Confirm password do not match",
+
+    "Sign-up-btn": "Sign Up",
+    "already-got-account": "Already have an account?",
+    "login-btn": "Login",
+
+    "error-tap": {
+      "error": "Error",
+      "error-occur-text": "An error occurred while registering your account",
+
+      "close-btn": "Close"
+    }
+  },
+
+  "book-tap": {
+    "author": "Author",
+    "genre": "Genre",
+    "book-description": "Book description",
+
+    "borrow-btn": "Borrow",
+    "go-back-btn": "Go Back",
+    "save-btn": "Save"
+  },
+
+  "btn": {
+    "sing-up-btn": "Sign Up",
+    "login-btn": "Login"
+  },
+
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "upload": "Upload",
+      "books": "Books",
+      "incoming-request": "Incoming Request",
+      "active-request": "Active Request",
+      "archived-request": "Archived Request",
+      "renter": "Renter",
+      "settings": "Setting",
+
+      "back-to-home-btn": "Back to Home"
     },
 
-    "save-tab": {
-        "h1-save": "Save",
-        "no-save-text": "You have no saved books",
+    "dashboard-tap": {
+      "dashboard": "Dashboard",
+      "total-incoming": "Total Incoming",
+      "total-active": "Total Active",
+      "total-archived": "Total Archived",
 
-        "explore-books-btn": "explore books"
+      "no-renter-found": "No renter found",
 
+      "recent-renter": "Recent Renter",
+      "name": "Name",
+      "email": "Email",
+      "approval-date": "Approval date",
+      "return-date": "Return date",
+      "actions": "Actions",
+
+      "refresh-btn": "Refresh",
+      "view-btn": "View"
     },
 
-    "request-tab": {
-        "h1-request-status": "Request Status",
-        "no-request-text": "You have no request",
-        "explore-books-btn": "explore books",
+    "upload-tap": {
+      "book-upload": "Book Upload",
+      "book-cover": "Book cover",
+      "upload-img": "Upload Your Image",
 
-        "book": "Book",
-        "date": "Date",
-        "status": "Status",
-        "action": "Action",
+      "book-title": "Book Title",
+      "author": "Author",
+      "category": "Category",
+      "description": "Description",
 
-        "pending": "Pending",
-        "approved": "Approved",
-        "rejected": "Rejected"
-
+      "upload-book-btn": "Upload book"
     },
 
-    "profile-tab": {
-        "personal-info": "Personal Information",
-        "username": "Username",
-        "phone number": "Phone Number",
-        "email": "Email",
+    "books-tap": {
+      "books": "Books",
+      "books-h1-education": "Education",
+      "books-h1-business": "Business",
+      "books-h1-history": "History",
+      "books-h1-drama": "Drama",
+      "books-h1-fantasy": "Fantasy",
+      "books-h1-self-development": "Self Development",
 
-        "privacy-set": "Privacy Setting",
-        "password": "Password",
-
-        "edit-btn": "Edit",
-        "changePass-btn": "Change Password",
-        "logout-btn": "Logout"
-
-    },
-
-    "Edit-tap": {
-        "personal-info": "Personal Information",
-        "username": "Username",
-        "email": "Email",
-        "phone-number": "Phone Number",
-
-        "cancel-btn": "Cancel",
-        "save-btn": "save"
-    },
-
-    "change-pass-tap": {
-        "password": "Password",
-        "password-placeholder": "Enter your current password",
-        "new-password": "New Password",
-        "new-password-placeholder": "new password",
-        "confirm-password": "Confirm Password",
-        "confirm-password-placeholder": "Confirm new password",
-
-        "cancel-btn": "Cancel",
-        "save-btn": "save",
-
-        "information-update": {
-            "info-update-text": "Your Information have been updated!",
-            "thank-you": "Thanks you!",
-
-            "close-btn": "Close"
-        }
-    },
-
-    "logout-tap": {
-        "logout": "Logout",
-        "logout-text": "Are you sure you want to logout?",
-
-        "no-btn": "No",
-        "yes-btn": "Yes"
-    },
-
-    "not-logged-in": {
-        "not-logged-in text": "You are not logged in"
-    },
-
-    "login-tab": {
-        "email":"Email Address",
-        "password":"Password",
-
-        "welcome-text": "Welcome to Digital Library",
-        "p-details-login-tab": "Please enter your details",
-        "forget-password": "Forgot password?",
-        "no-account-text": "Don't have an account?",
-        "sign-up": "Sign Up",
-        "email-placeholder": "Please enter your email",
-        "password-placeholder": "Please enter your password",
-        "email-required-alert": "Email is required",
-        "password-required-alert": "Password is required",
-
-        "invalid-credential-modal": {
-            "invalid-credential-text": "Invalid Credentials!!",
-            "try-again-text": "Please try again",
-            "close-btn": "Close"
-        }
-    },
-
-    "sign-up-tab": {
-        "username": "Username",
-        "email": "Email Address",
-        "password": "Password",
-        "cfm-password": "Confirm Password",
-        "phone": "Phone Number",
-
-        "username-placeholder": "Please enter your username",
-        "email-placeholder": "Please enter your email address",
-        "password-placeholder": "Please enter your password",
-        "cfm-password-placeholder": "Please enter your username",
-        "phone-placeholder": "Please enter your username",
-
-        "email-required-alert": "Email is required",
-        "user-required-alert": "Username is required",
-        "password-required-alert": "Password is required",
-        "cfm-password-required-alert": "Confirm Password is required",
-        "phone-required-alert": "Phone number is required",
-        "invalid-password-alert": "Password must be at least 8 characters long",
-        "password-not-matched": "Confirm password do not match",
-
-        "Sign-up-btn": "Sign Up",
-        "already-got-account": "Already have an account?",
-        "login-btn": "Login",
-
-        "error-tap": {
-            "error": "Error",
-            "error-occur-text": "An error occurred while registering your account",
-
-            "close-btn": "Close"
-        }
-    },
-
-    "book-tap": {
+      "books-view-tap": {
         "author": "Author",
         "genre": "Genre",
         "book-description": "Book description",
 
-        "borrow-btn": "Borrow",
-        "go-back-btn": "Go Back",
-        "save-btn": "Save"
-    },
-
-    "btn": {
-        "sing-up-btn": "Sign Up",
-        "login-btn": "Login"
-    },
-
-
-    "admin": {
-        "sidebar": {
-            "dashboard": "Dashboard",
-            "upload": "Upload",
-            "books": "Books",
-            "incoming-request": "Incoming Request",
-            "active-request": "Active Request",
-            "archived-request": "Archived Request",
-            "renter": "Renter",
-            "settings": "Setting",
-
-            "back-to-home-btn": "Back to Home"
-        },
-
-        "dashboard-tap": {
-            "dashboard": "Dashboard",
-            "total-incoming": "Total Incoming",
-            "total-active": "Total Active",
-            "total-archived": "Total Archived",
-
-            "no-renter-found": "No renter found",
-
-            "recent-renter": "Recent Renter",
-            "name": "Name",
-            "email": "Email",
-            "approval-date": "Approval date",
-            "return-date": "Return date",
-            "actions": "Actions",
-
-            "refresh-btn": "Refresh",
-            "view-btn": "View"
-        },
-
-        "upload-tap": {
-            "book-upload": "Book Upload",
-            "book-cover": "Book cover",
-            "upload-img": "Upload Your Image",
-
-            "book-title": "Book Title",
-            "author": "Author",
-            "category": "Category",
-            "description": "Description",
-
-            "upload-book-btn": "Upload book"
-        },
-
-        "books-tap": {
-            "books": "Books",
-            "books-h1-education": "Education",
-            "books-h1-business": "Business",
-            "books-h1-history": "History",
-            "books-h1-drama": "Drama",
-            "books-h1-fantasy": "Fantasy",
-            "books-h1-self-development": "Self Development",
-
-            "books-view-tap": {
-                "author": "Author",
-                "genre": "Genre",
-                "book-description":"Book description",
-
-                "delete-btn": "Delete",
-                "edit-btn": "Edit",
-                "save-btn": "Save",
-                "cancel-btn": "Cancel",
-
-                "success-tap": {
-                    "success": "Success",
-                    "book-update-text": "Book updated successfully",
-
-                    "close-btn": "Close"
-                }
-            },
-
-            "delete-book-tap": {
-                "delete-book": "Delete Book",
-                "delete-book-text": "Are you sure you want to delete this book?",
-
-                "yes-btn": "Yes",
-                "no-btn": "No",
-
-                "success-tap": {
-                    "success":"Success",
-                    "book-delete-text": "Book deleted successfully",
-
-                    "close-btn":"Close"
-                }
-            }
-
-        },
-
-        "incoming-request-tap": {
-            "incoming-request":"Incoming Request",
-            "no-request": "No request",
-
-            "book": "Book",
-            "username":"Username",
-            "request-date": "Request date",
-            "actions": "Actions",
-
-            "approve-btn": "Approve",
-            "reject-btn": "Reject",
-
-            "approve-request-tap": {
-                "approve-request": "Approve Request",
-                "p-approve-request-tap": "Are you sure you want to approve this request?",
-
-                "no-btn": "No",
-                "yes-btn": "Yes"
-            },
-
-            "reject-request-tap": {
-                "reject-request": "Reject Request",
-                "p-reject-request": "Are you sure you want to reject this request?",
-
-                "reject-reason": "Reject reasons",
-                "reject-reason-fill": "Please input your reason",
-
-                "no-btn": "No",
-                "yes-btn": "Yes"
-            }
-        },
-
-        "active-request-tap": {
-            "active-request": "Active Request",
-            "no-request": "No request",
-
-            "book": "Book",
-            "username": "Username",
-            "to-be-returned-date": "To be returned date",
-            "actions": "Actions",
-
-            "receive-btn": "Receive"
-        },
-
-        "archived-request-tap": {
-            "archived-request":"Archived Request",
-            "no-request": "No request",
-
-            "book": "Book",
-            "username":"Username",
-            "status": "Status",
-            "actions": "Actions",
-
-            "approved": "Approved",
-            "rejected": "Rejected"
-        },
-
-        "renter-tap": {
-            "renter": "Renter",
-            "no-renter-found": "No renter found",
-            
-            "name": "Name",
-            "email": "Email",
-            "approval-date": "Approval date",
-            "return-date": "Return date",
-            "actions": "Actions"
-        },
-
-        "setting-tap": {
-            "setting": "Setting",
-            "general-setting": "General Setting",
-            "system-name": "System Name",
-
-            "security-policy": "Security & Policy",
-            "password":"Password",
-            "password-placeholder": "The admin able to change the system credentials",
-            "activity-log": "Activity log",
-            "activity-log-placeholder": "The admin able to see the login activity in the system",
-
-            "change-btn": "Change",
-            "view-btn": "View"
-        }
-    },
-
-    "unauthorized-page": {
-        "401": "401",
-        "unauthorized": "Unauthorized",
-        "p-not-authorized": "You are not authorized to access this page",
-
-        "go-back-to-home-btn": "Go back to home"
-    },
-
-    "forgot-password-tap": {
-        "forgot-pass-text": "Forgot Your Password",
-        "forgot-pass-p": "Please enter your email to reset your password",
-
-        "email-placeholder": "email",
-        "email-required": "Email is required",
-
-        "send-btn": "Send",
-        "go-back-to-login": "Go back to login",
-
-        "email-sent-tap": {
-            "email-sent": "Email sent!!!",
-            "check-email": "Check your email to reset your password",
-
-            "close-btn": "Close"
-        }
-
-    },
-
-    "reset-password-tap": {
-        "reset-password-text": "Reset Your Password",
-        "enter-new-pass": "Please enter new password",
-
-        "password": "Password",
-        "conf-pass": "Confirm Password",
-        "password-placeholder": "Enter your new password",
-        "conf-pass-placeholder": "Confirm your new password",
-
-        "reset-pass-btn": "Reset Password",
+        "delete-btn": "Delete",
+        "edit-btn": "Edit",
+        "save-btn": "Save",
+        "cancel-btn": "Cancel",
 
         "success-tap": {
-            "success": "Success",
-            "pass-been-reset": "Your password has been reset",
+          "success": "Success",
+          "book-update-text": "Book updated successfully",
 
-            "close-btn": "Close"
+          "close-btn": "Close"
         }
+      },
 
+      "delete-book-tap": {
+        "delete-book": "Delete Book",
+        "delete-book-text": "Are you sure you want to delete this book?",
+
+        "yes-btn": "Yes",
+        "no-btn": "No",
+
+        "success-tap": {
+          "success": "Success",
+          "book-delete-text": "Book deleted successfully",
+
+          "close-btn": "Close"
+        }
+      }
     },
 
-    "expired-tap": {
-        "link-expired": "Link Expired",
-        "expired-tap-p": "The link you used to reset your password has expired.Please request a new link from the forgot password page.",
+    "incoming-request-tap": {
+      "incoming-request": "Incoming Request",
+      "no-request": "No request",
 
-        "back-to-forgot-pass-btn": "Back to Forgot password"
+      "book": "Book",
+      "username": "Username",
+      "request-date": "Request date",
+      "actions": "Actions",
 
+      "approve-btn": "Approve",
+      "reject-btn": "Reject",
+
+      "approve-request-tap": {
+        "approve-request": "Approve Request",
+        "p-approve-request-tap": "Are you sure you want to approve this request?",
+
+        "no-btn": "No",
+        "yes-btn": "Yes"
+      },
+
+      "reject-request-tap": {
+        "reject-request": "Reject Request",
+        "p-reject-request": "Are you sure you want to reject this request?",
+
+        "reject-reason": "Reject reasons",
+        "reject-reason-fill": "Please input your reason",
+
+        "no-btn": "No",
+        "yes-btn": "Yes"
+      }
+    },
+
+    "active-request-tap": {
+      "active-request": "Active Request",
+      "no-request": "No request",
+
+      "book": "Book",
+      "username": "Username",
+      "to-be-returned-date": "To be returned date",
+      "actions": "Actions",
+
+      "receive-btn": "Receive"
+    },
+
+    "archived-request-tap": {
+      "archived-request": "Archived Request",
+      "no-request": "No request",
+
+      "book": "Book",
+      "username": "Username",
+      "status": "Status",
+      "actions": "Actions",
+
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+
+    "renter-tap": {
+      "renter": "Renter",
+      "no-renter-found": "No renter found",
+
+      "name": "Name",
+      "email": "Email",
+      "approval-date": "Approval date",
+      "return-date": "Return date",
+      "actions": "Actions"
+    },
+
+    "setting-tap": {
+      "setting": "Setting",
+      "general-setting": "General Setting",
+      "system-name": "System Name",
+
+      "security-policy": "Security & Policy",
+      "password": "Password",
+      "password-placeholder": "The admin able to change the system credentials",
+      "activity-log": "Activity log",
+      "activity-log-placeholder": "The admin able to see the login activity in the system",
+
+      "change-btn": "Change",
+      "view-btn": "View"
     }
+  },
 
+  "unauthorized-page": {
+    "401": "401",
+    "unauthorized": "Unauthorized",
+    "p-not-authorized": "You are not authorized to access this page",
 
+    "go-back-to-home-btn": "Go back to home"
+  },
+
+  "forgot-password-tap": {
+    "forgot-pass-text": "Forgot Your Password",
+    "forgot-pass-p": "Please enter your email to reset your password",
+
+    "email-placeholder": "email",
+    "email-required": "Email is required",
+
+    "send-btn": "Send",
+    "go-back-to-login": "Go back to login",
+
+    "email-sent-tap": {
+      "email-sent": "Email sent!!!",
+      "check-email": "Check your email to reset your password",
+
+      "close-btn": "Close"
+    }
+  },
+
+  "reset-password-tap": {
+    "reset-password-text": "Reset Your Password",
+    "enter-new-pass": "Please enter new password",
+
+    "password": "Password",
+    "conf-pass": "Confirm Password",
+    "password-placeholder": "Enter your new password",
+    "conf-pass-placeholder": "Confirm your new password",
+
+    "reset-pass-btn": "Reset Password",
+
+    "success-tap": {
+      "success": "Success",
+      "pass-been-reset": "Your password has been reset",
+
+      "close-btn": "Close"
+    }
+  },
+
+  "expired-tap": {
+    "link-expired": "Link Expired",
+    "expired-tap-p": "The link you used to reset your password has expired.Please request a new link from the forgot password page.",
+
+    "back-to-forgot-pass-btn": "Back to Forgot password"
+  }
 }
-
-
