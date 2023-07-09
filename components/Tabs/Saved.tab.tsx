@@ -34,7 +34,7 @@ export default function SavedTab({
               pt-2 md:pt-4
             '
           >
-            Book Saved
+            Saved Book
           </h1>
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
             {favBooks.length === 0 && (

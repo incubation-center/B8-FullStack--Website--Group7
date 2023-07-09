@@ -296,7 +296,7 @@ function BookSection({
         element to scroll to{" "}
       </div>
       {/* title */}
-      <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap'>
+      <h1 className='w-1/3 text-2xl md:text-4xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap'>
         {category}
       </h1>
 
@@ -337,7 +337,7 @@ function BookSection({
 
               <button
                 className='
-                bg-secondary text-white font-light text-lg
+                bg-secondary text-white font-light text-small md:text-xl
                 rounded-lg py-1 px-2 w-40 mx-auto
               '
                 onClick={() => handleBookClick(book)}

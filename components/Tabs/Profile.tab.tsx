@@ -237,7 +237,7 @@ export default function ProfileTab() {
 
             {/* personal information */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
+              <h1 className='font-extrabold text-primary text-start text-2xl md:text-2xl'>
                 Personal Information
               </h1>
               <div className='w-full my-5 p-5 h-fit flex flex-col justify-center items-end bg-[#EBEBEB] rounded-xl relative'>
@@ -248,16 +248,28 @@ export default function ProfileTab() {
                   col-span-2 w-full
                 '
                   >
-                    <div className='font-extrabold text-xl'>Username</div>
-                    <div className='mt-2'>{authStore.user.username}</div>
+                    <div className='font-extrabold text-lg md:text-xl '>
+                      Username
+                    </div>
+                    <div className='mt-2 text-lg md:text-lg'>
+                      {authStore.user.username}
+                    </div>
                   </div>
                   <div className=' text-primary text-lg flex-1   '>
-                    <div className=' font-extrabold text-xl'>Phone Number</div>
-                    <div className='mt-2'>{authStore.user.phoneNumber}</div>
+                    <div className=' font-extrabold text-lg md:text-lg'>
+                      Phone Number
+                    </div>
+                    <div className='mt-2 text-lg md:text-lg'>
+                      {authStore.user.phoneNumber}
+                    </div>
                   </div>
                   <div className=' text-primary text-start text-xl  flex-1  '>
-                    <div className=' font-extrabold'>Email</div>
-                    <div className='mt-2'>{authStore.user.email}</div>
+                    <div className=' font-extrabold text-lg md:text-lg'>
+                      Email
+                    </div>
+                    <div className='mt-2 text-lg md:text-lg'>
+                      {authStore.user.email}
+                    </div>
                   </div>
                 </div>
 
@@ -278,7 +290,7 @@ export default function ProfileTab() {
 
             {/* Privacy setting */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
+              <h1 className='font-extrabold text-primary text-start text-2xl md:text-2xl'>
                 Privacy Setting
               </h1>
               <div className='w-full my-5 p-5 h-fit flex justify-between items-center flex-wrap bg-[#EBEBEB] rounded-xl  '>
@@ -288,7 +300,9 @@ export default function ProfileTab() {
                  flex-1 w-full
                 '
                 >
-                  <div className='font-extrabold text-xl'>Password</div>
+                  <div className='font-extrabold text-lg md:text-lg'>
+                    Password
+                  </div>
                 </div>
 
                 <button
