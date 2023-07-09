@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { UserLoginInputs } from "@/types/auth";
