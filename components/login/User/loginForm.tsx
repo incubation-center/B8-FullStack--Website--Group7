@@ -74,6 +74,11 @@ export default function UserLoginForm() {
       <AlertModal />
 
       <div className='space-y-8 text-center flex flex-col items-center'>
+        <img
+          src='/bootcamp-logo.png'
+          alt='logo'
+          className='w-[250px]  h-auto object-scale-down  hidden md:block'
+        />
         <h1 className='text-4xl font-extrabold text-alt-secondary'>
           Welcome to KJEY BOOK
         </h1>
