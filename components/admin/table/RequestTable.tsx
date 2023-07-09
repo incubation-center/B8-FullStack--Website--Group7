@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
+import Image from "next/image";
 
-import { BookRequest } from '@/types';
-import { AdminTab } from '@/utils/enum';
+import { BookRequest } from "@/types";
+import { AdminTab } from "@/utils/enum";
 
 interface RequestTableProps {
   data: BookRequest[];
@@ -22,11 +22,11 @@ interface RequestTableProps {
 export default function RequestTable({
   data,
   actions,
-  useIn
+  useIn,
 }: RequestTableProps) {
-  console.log('====================================');
-  console.log('data', data);
-  console.log('====================================');
+  console.log("====================================");
+  console.log("data", data);
+  console.log("====================================");
 
   return (
     <table className='w-full '>
@@ -53,7 +53,7 @@ export default function RequestTable({
             key={request.requestId}
             className='
               border-b-2 border-primary
-              text-primary text-xl
+              text-primary text-lg
               w-full
               [&>td]:p-2
               [&>td]:whitespace-pre-wrap
@@ -94,11 +94,11 @@ export default function RequestTable({
                 <div
                   className={`
                     rounded-full px-4 py-2 text-sm font-bold text-white w-fit
-                    ${request.isApproved ? 'bg-success' : 'bg-danger'}
+                    ${request.isApproved ? "bg-success" : "bg-danger"}
                   `}
                 >
-                  {request.isApproved && 'Approved'}
-                  {!request.isApproved && 'Rejected'}
+                  {request.isApproved && "Approved"}
+                  {!request.isApproved && "Rejected"}
                 </div>
               </td>
             )}

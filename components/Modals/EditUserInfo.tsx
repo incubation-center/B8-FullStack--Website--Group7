@@ -117,7 +117,7 @@ export default function EditUserInfo({
                 required: "Phone Number cannot be empty",
               })}
               error={errors.phoneNumber}
-              labelClassName='text-primary ml-4 font-medium text-lg'
+              labelClassName='text-primary ml-4 font-medium '
               disabled={isUpdating}
             />
           </div>
