@@ -10,7 +10,9 @@ module.exports = {
     'homepage',
     'book-detail',
     'forgot-password',
-    'reset-password'
+    'reset-password',
+    'login',
+    'signup'
   ],
   reloadOnPrerender: process.env.NODE_ENV === 'development'
 };

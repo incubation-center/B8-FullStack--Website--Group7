@@ -41,5 +41,16 @@
   "not-logged-in": {
     "not-logged-in text": "You are not logged in",
     "login-btn": "Login"
+  },
+
+  "auth": {
+    "no-account-text": "Don't have an account?",
+
+    "Sign-up-btn": "Sign Up",
+    "already-got-account": "Already have an account?",
+
+    "login-btn": "Login",
+    "sign-up": "Sign Up",
+    "logging-in": "Logging In"
   }
 }

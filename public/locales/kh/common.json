@@ -40,5 +40,14 @@
   "not-logged-in": {
     "not-logged-in text": "អ្នកមិនទាន់បានចូលគណនីនៅឡើយទេ!",
     "login-btn": "ចូលគណនី"
+  },
+
+  "auth": {
+    "no-account-text": "មិនទាន់មានគណនី?",
+    "Sign-up-btn": "បង្កើតគណនី",
+    "already-got-account": "មានគណនីរួចហើយ?",
+    "login-btn": "ចូលគណនី",
+    "sign-up": "បង្កើតគណនី",
+    "logging-in": "កំពុងចូលគណនី"
   }
 }
