@@ -11,12 +11,8 @@ import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import { AxiosError } from 'axios';
 import { createRequest } from '@/service/api/request';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
-
-const durations = [
-  { value: 7, label: '1 week' },
-  { value: 14, label: '2 weeks' },
-  { value: 21, label: '3 weeks' }
-];
+import ExpandSvg from '../icon/ExpandSvg';
+import { useTranslation } from 'next-i18next';
 
 export default function BorrowBook({
   user,
@@ -29,6 +25,13 @@ export default function BorrowBook({
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
+  const { t } = useTranslation('book-detail');
+
+  const durations = [
+    { value: 7, label: t('modal.borrow.duration-list.1-week') },
+    { value: 14, label: t('modal.borrow.duration-list.2-weeks') },
+    { value: 21, label: t('modal.borrow.duration-list.3-weeks') }
+  ];
   const [selectedDuration, setSelectedDuration] = useState(durations[0]);
   // const [isMakingRequest, setIsMakingRequest] =
   //   useRecoilState(isMakingRequestAtom);
@@ -47,26 +50,20 @@ export default function BorrowBook({
 
       const res = await createRequest(request);
 
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
-
       close();
 
       showAlert({
-        title: 'You successfully requesting!',
-        subtitle:
-          'Please wait for confirmation form Admin!\nStay Tune! Thank you!',
+        title: t('modal.borrow-success.title'),
+        subtitle: t('modal.borrow-success.subtitle'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.log('====================================');
-        console.log(err);
-        console.log('====================================');
+        close();
         showAlert({
-          title: 'Request failed',
-          subtitle: 'somethings went wrong, please try again later!',
+          title: t('modal.borrow-error.title'),
+          subtitle:
+            err.response?.data.error || t('modal.borrow-error.subtitle'),
           type: AlertType.ERROR
         });
       }
@@ -88,16 +85,18 @@ export default function BorrowBook({
     >
       <NotLoggedInLayout>
         <>
-          <h1 className='text-2xl font-bold text-primary'>Book Rental Form</h1>
+          <h1 className='text-2xl font-bold text-primary'>
+            {t('modal.borrow.label')}
+          </h1>
 
           {/* book details */}
           <div className='w-full text-left space-y-4'>
             <div>
               <label
                 htmlFor='bookTitle'
-                className='ml-4 font-medium text-primary'
+                className='ml-4 font-medium text-primary text-lg'
               >
-                Book title
+                {t('modal.borrow.book-title')}
               </label>
               <input
                 id='bookTitle'
@@ -115,64 +114,66 @@ export default function BorrowBook({
             </div>
 
             <div>
-              <h1 className='ml-4 font-medium text-primary '>Duration</h1>
+              <h1 className='ml-4 font-medium text-primary text-lg'>
+                {t('modal.borrow.book-duration')}
+              </h1>
               <Listbox
                 disabled={isRequestingBook}
                 value={selectedDuration}
                 onChange={setSelectedDuration}
               >
-                <Listbox.Button
-                  className='
+                {({ open }) => (
+                  <>
+                    <Listbox.Button
+                      className='
                     w-full px-4 py-2 mt-2 rounded-full
                     bg-white
                     placeholder-[#9D9C9C] 
                     focus:outline-none text-left
                     flex justify-between items-center
                   '
-                >
-                  <h1>{selectedDuration.label}</h1>
+                    >
+                      <h1>{selectedDuration.label}</h1>
 
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src='/icon/expand.png'
-                    alt='expand'
-                    className='w-6 h-auto -mr-2'
-                  />
-                </Listbox.Button>
+                      <ExpandSvg
+                        className='w-6 h-auto -mr-2 stroke-primary'
+                        isExpanded={open}
+                      />
+                    </Listbox.Button>
 
-                <motion.div layout>
-                  <Listbox.Options
-                    className='
+                    <motion.div layout>
+                      <Listbox.Options
+                        className='
                       w-full mt-2 rounded-2xl overflow-clip
                       bg-white
                       placeholder-[#9D9C9C] 
                       focus:outline-none
                     '
-                  >
-                    <motion.div
-                      key={selectedDuration.label}
-                      initial={{ height: 0 }}
-                      animate={{
-                        height: 'auto'
-                      }}
-                      exit={{ height: 0 }}
-                    >
-                      {durations.map((duration) => (
-                        <Listbox.Option
-                          className={`
+                      >
+                        <motion.div
+                          key={selectedDuration.label}
+                          initial={{ height: 0 }}
+                          animate={{
+                            height: 'auto'
+                          }}
+                          exit={{ height: 0 }}
+                        >
+                          {durations.map((duration) => (
+                            <Listbox.Option
+                              className={`
                             w-full px-2 py-2 cursor-pointer
                             hover:bg-secondary hover:text-white
                             focus:bg-secondary focus:text-white
                             flex space-x-2
                           `}
-                          key={duration.label}
-                          value={duration}
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src='/icon/selected.png'
-                            alt='selected'
-                            className={`
+                              key={duration.label}
+                              value={duration}
+                            >
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src='/icon/selected.png'
+                                alt='selected'
+                                className={`
                               w-6 h-auto
                               ${
                                 selectedDuration.value === duration.value
@@ -180,13 +181,15 @@ export default function BorrowBook({
                                   : 'invisible'
                               }
                             `}
-                          />
-                          <h1>{duration.label}</h1>
-                        </Listbox.Option>
-                      ))}
+                              />
+                              <h1>{duration.label}</h1>
+                            </Listbox.Option>
+                          ))}
+                        </motion.div>
+                      </Listbox.Options>
                     </motion.div>
-                  </Listbox.Options>
-                </motion.div>
+                  </>
+                )}
               </Listbox>
             </div>
           </div>
@@ -198,16 +201,16 @@ export default function BorrowBook({
               <button
                 onClick={close}
                 className='
-                bg-danger rounded-lg text-white py-2 px-4 w-full md:w-40
+                bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
               '
               >
-                Cancel
+                {t('btns.cancel-btn')}
               </button>
             )}
             {/* submit button */}
             <button
               className={`
-                bg-primary rounded-lg text-white py-2 px-4 w-full md:w-40
+                bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
                 ${isRequestingBook && 'cursor-not-allowed'}
               `}
               onClick={handleBorrowBook}
@@ -215,11 +218,11 @@ export default function BorrowBook({
             >
               {isRequestingBook ? (
                 <div className='flex justify-center items-center gap-2'>
-                  <h1>Sending request</h1>
+                  <h1>{t('btns.sending-request-btn')}</h1>
                   <SpinningLoadingSvg className='w-6 h-6 ' />
                 </div>
               ) : (
-                <span>Borrow</span>
+                <span> {t('btns.borrow-btn')}</span>
               )}
             </button>
           </div>

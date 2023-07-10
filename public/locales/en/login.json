@@ -1,0 +1,23 @@
+{
+  "welcome-text": "Welcome to Kjey Book",
+  "p-details-login-tab": "Please enter your details",
+
+  "email": "Email Address",
+  "password": "Password",
+
+  "forget-password": "Forgot password?",
+
+  "email-placeholder": "Please enter your email",
+  "password-placeholder": "Please enter your password",
+  "email-required-alert": "Email is required",
+  "password-required-alert": "Password is required",
+
+  "login-btn": "Login",
+  "logging-in-btn": "Logging in...",
+
+  "invalid-credential-modal": {
+    "invalid-credential-text": "Invalid Credentials!!",
+    "try-again-text": "Please try again",
+    "close-btn": "Close"
+  }
+}

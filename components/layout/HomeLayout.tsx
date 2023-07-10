@@ -4,15 +4,18 @@ import Image from 'next/image';
 import {
   AuthAtom,
   homePageCategoryAtom,
-  homePageSearchAtom
+  searchKeywordAtom
 } from '@/service/recoil';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { useState } from 'react';
 import SideBar from './SideBar';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { handleFallBackProfileImage } from '@/utils/function';
+import { AnimatePresence, motion } from 'framer-motion';
+import UserSearchBar from '../UserSearchBar';
+import { useTranslation } from 'next-i18next';
 
 export default function HomeLayout({
   currentTab,
@@ -23,20 +26,21 @@ export default function HomeLayout({
   handlePageRouting: (tab: HomePageTab) => void;
   children: React.ReactNode;
 }) {
-  const [authStore, setAuthStore] = useRecoilState(AuthAtom);
-  const [searchText, setSearchText] = useRecoilState(homePageSearchAtom);
+  const authStore = useRecoilValue(AuthAtom);
+  const router = useRouter();
+  const { t } = useTranslation('homepage');
 
   const [isShowSideBar, setIsShowSideBar] = useState(false);
 
   return (
     <div className='w-full h-full overflow-clip flex flex-col relative'>
       {/* search bar row */}
-      <div className=' w-full h-[100px] gap-2 flex justify-between items-center py-4 px-4 '>
-        <div className='h-full flex justify-center items-center mx-4'>
+      <div className='w-full h-[80px] gap-2 flex justify-between items-center py-4 px-4 '>
+        <div className='h-full max-w-[120px] flex justify-center items-center mx-4'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
-            className='w-full  h-full object-scale-down  hidden md:block'
+            className='w-full h-full object-scale-down  hidden md:block'
           />
 
           <button onClick={() => setIsShowSideBar(!isShowSideBar)}>
@@ -48,30 +52,7 @@ export default function HomeLayout({
           </button>
         </div>
 
-        <div
-          className='
-            w-full max-w-[500px]  mx-auto
-            flex justify-center items-center
-           bg-action 
-            p-2 px-4 rounded-xl space-x-6
-            box-border border-2 focus-within:border-primary
-            transition-colors
-         '
-        >
-          <Image src='/icon/search.svg' alt='search' width={20} height={20} />
-
-          <input
-            type='text'
-            className='
-              w-full bg-transparent ml-2 pt-[1px]
-              focus:outline-none
-              placeholder-gray-400
-            '
-            placeholder='Search name of the book'
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-        </div>
+        <UserSearchBar currentTab={currentTab} initialAnimation />
 
         <div>
           {!authStore.isLoggedIn && (
@@ -84,20 +65,33 @@ export default function HomeLayout({
               box-border border-2 border-alt-secondary hover:border-action
               whitespace-nowrap hidden md:block
             '
+              locale={router.locale}
             >
-              Log In
+              {t('homepage-tab.sidebar.login-btn', 'Login')}
             </Link>
           )}
 
-          {authStore.isLoggedIn &&
-            authStore.user &&
-            currentTab !== HomePageTab.PROFILE && (
-              <img
-                src={handleFallBackProfileImage(authStore.user)}
-                alt='profile'
-                className='w-12 h-12 rounded-full object-cover hidden md:block'
-              />
-            )}
+          <AnimatePresence mode='popLayout'>
+            {authStore.isLoggedIn &&
+              (authStore.user && currentTab !== HomePageTab.PROFILE ? (
+                <motion.div
+                  key='profile'
+                  initial={{ x: 100 }}
+                  animate={{ x: 0 }}
+                  exit={{ x: 100 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => handlePageRouting(HomePageTab.PROFILE)}
+                >
+                  <img
+                    src={handleFallBackProfileImage(authStore.user)}
+                    alt='profile'
+                    className='w-12 h-12 rounded-full object-cover hidden md:block'
+                  />
+                </motion.div>
+              ) : (
+                <div className='h-12 w-12'></div>
+              ))}
+          </AnimatePresence>
         </div>
       </div>
 
@@ -145,8 +139,8 @@ export default function HomeLayout({
         {/* tab component */}
         <div
           className='
-            w-full bg-background 
-            rounded-2xl mr-4 ml-4 md:ml-0 
+            w-full  bg-alt-secondary 
+            rounded-3xl mr-4 ml-4 md:ml-0 
             overflow-scroll scroll-smooth
             relative
           '

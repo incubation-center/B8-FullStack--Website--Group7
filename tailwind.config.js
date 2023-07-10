@@ -36,7 +36,8 @@ module.exports = {
         }
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif']
+        poppins: ['Poppins', 'sans-serif'],
+        kantumruy: ['Kantumruy Pro', 'sans-serif']
       }
     }
   },

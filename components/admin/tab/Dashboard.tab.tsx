@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
@@ -9,19 +9,34 @@ import RenterTable from '../table/RenterTable';
 
 import useModal from '@/components/Modals/useModal';
 import RequestDetail from '@/components/Modals/RequestDetail';
-import { BookRequest } from '@/types';
+import { BookRequest, RequestStatus } from '@/types';
 
 import { useRecoilValue } from 'recoil';
-import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import {
+  AdminAllRequestAtom,
+  AdminAllRequestCountAtom
+} from '@/service/recoil/admin';
+import IncomingSvg from '@/components/icon/admin-sidebar/IncomingSvg';
+import ActiveSvg from '@/components/icon/admin-sidebar/ActiveSvg';
+import ArchivedSvg from '@/components/icon/admin-sidebar/ArchivedSvg';
+import RenterSvg from '@/components/icon/admin-sidebar/RenterSvg';
 
-export default function DashboardTab({}) {
+export default function DashboardTab({
+  handleRefreshRequest
+}: {
+  handleRefreshRequest: () => void;
+}) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
+  const requestCount = useRecoilValue(AdminAllRequestCountAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
   return (
-    <AdminTabLayout title={formatEnumValue(AdminTab.DASHBOARD)}>
+    <AdminTabLayout
+      title={formatEnumValue(AdminTab.DASHBOARD)}
+      handleRefresh={handleRefreshRequest}
+    >
       <ModalWrapper>
         <RequestDetail request={viewRequest} />
       </ModalWrapper>
@@ -30,50 +45,45 @@ export default function DashboardTab({}) {
       <div
         className='
           gap-4
-          lg:grid grid-cols-3 
+          lg:grid grid-cols-4 
           flex flex-wrap
           w-full max-w-[1000px] mx-auto
         '
       >
         <RequestDataShow
           title='Total Incoming'
-          icon='/icon/admin-sidebar/incoming-admin.svg'
-          value={{
-            total: 52,
-            today: 11,
-            yesterday: 19
-          }}
+          tab={AdminTab.INCOMING_REQUEST}
+          value={requestCount.PENDING}
         />
 
         <RequestDataShow
           title='Total Active'
-          icon='/icon/admin-sidebar/active-admin.svg'
-          value={{
-            total: 52,
-            today: 11,
-            yesterday: 19
-          }}
+          tab={AdminTab.ACTIVE_REQUEST}
+          value={requestCount.ACCEPTED}
+        />
+
+        <RequestDataShow
+          title='Total Renter'
+          tab={AdminTab.RENTER}
+          value={requestCount.RENTER}
         />
 
         <RequestDataShow
           title='Total Archived'
-          icon='/icon/admin-sidebar/archived-admin.svg'
-          value={{
-            total: 52,
-            today: 11,
-            yesterday: 19
-          }}
+          tab={AdminTab.ARCHIVED_REQUEST}
+          value={requestCount.ARCHIVED}
         />
       </div>
 
       {/* Recent Renter*/}
-      <div className='w-full mt-4'>
-        <h1 className='text-primary text-xl font-bold'>Recent renter</h1>
+      <div className='w-full mt-5'>
+        <h1 className='text-primary text-2xl font-bold mb-5'>Recent renter</h1>
 
         <RenterTable
           data={requestData
             .filter(
-              (request) => request.isApproved && request.status === 'ACHIEVED'
+              (request) =>
+                request.isApproved && request.status === RequestStatus.ACHIEVED
             )
             .slice(0, 5)}
           actions={[
@@ -94,11 +104,11 @@ export default function DashboardTab({}) {
 
 const RequestDataShow = ({
   title,
-  icon,
+  tab,
   value
 }: {
   title: string;
-  icon: string;
+  tab: AdminTab;
   value: {
     total: number;
     today: number;
@@ -111,7 +121,8 @@ const RequestDataShow = ({
       <div className='flex flex-1 h-full items-center justify-between py-4 mb-2 border-b-2'>
         <h1 className='text-5xl text-primary font-extrabold'>{value.total}</h1>
 
-        <img src={icon} alt={title} className='h-6 md:h-8 lg:h-10' />
+        {/* <img src={icon} alt={title} className='h-6 md:h-8 lg:h-10' /> */}
+        <NavbarIcon tab={tab} />
       </div>
       <div className='flex justify-between text-primary'>
         <div>Today {value.today}</div>
@@ -120,3 +131,43 @@ const RequestDataShow = ({
     </div>
   );
 };
+
+function NavbarIcon({ tab }: { tab: AdminTab }) {
+  switch (tab) {
+    case AdminTab.INCOMING_REQUEST:
+      return (
+        <IncomingSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          transition-all 
+
+          `}
+        />
+      );
+    case AdminTab.ACTIVE_REQUEST:
+      return (
+        <ActiveSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.ARCHIVED_REQUEST:
+      return (
+        <ArchivedSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.RENTER:
+      return (
+        <RenterSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary stroke-primary delay-300
+        transition-all 
+      `}
+        />
+      );
+  }
+
+  return null;
+}

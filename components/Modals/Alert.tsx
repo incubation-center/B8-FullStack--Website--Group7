@@ -4,8 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 const useAlertModal = () => {
+  const { t } = useTranslation('common');
   const [isShowing, setIsShowing] = useState(false);
   const [{ title, subtitle, type, isClosable, onModalClose }, setModalText] =
     useState<AlertModalTextType>({
@@ -129,10 +131,10 @@ const useAlertModal = () => {
                   />
 
                   <div>
-                    <h1 className='font-bold text-xl lg:text-2xl text-primary'>
+                    <h1 className='font-bold text-xl lg:text-2xl text-primary mt-2'>
                       {title}
                     </h1>
-                    <p className='font-medium text-primary whitespace-pre-line'>
+                    <p className='font-medium text-primary whitespace-pre-line mt-2'>
                       {subtitle}
                     </p>
                   </div>
@@ -142,11 +144,11 @@ const useAlertModal = () => {
                       className='
                         px-10 py-2 mt-8 rounded-full
                         text-primary font-bold
-                        focus:outline outline-2 outline-black  outline-offset-2
+                        hover:bg-primary hover:bg-opacity-20
                       '
                       onClick={close}
                     >
-                      Close
+                      {t('modal.close-btn')}
                     </button>
                   )}
                 </motion.div>

@@ -1,4 +1,4 @@
-import { Book, BookRequest, User } from './types';
+import { Book, BookRequest, RequestStatus, User } from './types';
 
 const BookData: Book[] = [
   {
@@ -7,7 +7,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Fantasy',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -18,7 +18,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Education',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -29,7 +29,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Business',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -40,7 +40,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Drama',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -51,7 +51,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'History',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -62,7 +62,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Fantasy',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -73,7 +73,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Fantasy',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -84,7 +84,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Fantasy',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -95,7 +95,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Self Development',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -106,7 +106,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Fantasy',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -117,7 +117,7 @@ const BookData: Book[] = [
     author: 'J.R.R. Tolkien',
     category: 'Fantasy',
     bookImg:
-      'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS-fn9CGygsbOL481n9R6Zm7EHIH7ivZX3p7_ldUArstsRsFn_W',
+      'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
     maximumRequestPeriod: 14
@@ -140,7 +140,7 @@ const RequestData: BookRequest[] = [
     requestId: '1',
     borrower: SampleUser,
     book: BookData[0],
-    status: 'PENDING',
+    status: RequestStatus.PENDING,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -152,7 +152,7 @@ const RequestData: BookRequest[] = [
     requestId: '2',
     borrower: SampleUser,
     book: BookData[1],
-    status: 'PENDING',
+    status: RequestStatus.PENDING,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -164,7 +164,7 @@ const RequestData: BookRequest[] = [
     requestId: '3',
     borrower: SampleUser,
     book: BookData[2],
-    status: 'APPROVED',
+    status: RequestStatus.ACCEPTED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -176,7 +176,7 @@ const RequestData: BookRequest[] = [
     requestId: '4',
     borrower: SampleUser,
     book: BookData[3],
-    status: 'APPROVED',
+    status: RequestStatus.ACCEPTED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -188,7 +188,7 @@ const RequestData: BookRequest[] = [
     requestId: '5',
     borrower: SampleUser,
     book: BookData[4],
-    status: 'APPROVED',
+    status: RequestStatus.ACCEPTED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,
@@ -200,7 +200,7 @@ const RequestData: BookRequest[] = [
     requestId: '6',
     borrower: SampleUser,
     book: BookData[5],
-    status: 'ACHIEVED',
+    status: RequestStatus.ACHIEVED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: true,
@@ -212,7 +212,7 @@ const RequestData: BookRequest[] = [
     requestId: '7',
     borrower: SampleUser,
     book: BookData[6],
-    status: 'ACHIEVED',
+    status: RequestStatus.ACHIEVED,
     requestDuration: 14,
     dateOfRequest: new Date(),
     isApproved: false,

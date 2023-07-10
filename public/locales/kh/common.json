@@ -1,0 +1,61 @@
+{
+  "search-placeholder": {
+    "home-tab": "ចំណងជើង, អ្នក​និពន្ធ",
+    "saved-tab": "ចំណងជើង​, អ្នក​និពន្ធ​, ប្រភេទសៀវភៅ",
+    "request-tab": "ចំណងជើង​, អ្នក​និពន្ធ​, ប្រភេទសៀវភៅ"
+  },
+  "request-status": {
+    "pending": "កំពុងរង់ចាំ",
+    "active": "កំពុងខ្ចី",
+    "approved": "បានខ្ចី",
+    "rejected": "បដិសេដ"
+  },
+
+  "request-detail": {
+    "book": {
+      "label": "សៀវភៅ",
+      "author": "អ្នកនិពន្ធ",
+      "category": "ប្រភេទសៀវភៅ"
+    },
+    "request": {
+      "label": "ការស្នើសុំសៀវភៅ",
+      "name": "ឈ្មោះ",
+      "email": "អ៊ីម៉ែល",
+      "phone-number": "លេខទូរស័ព្ទ",
+      "duration": "រយៈពេលខ្ចី",
+      "request-status": "ស្ថានភាពការខ្ចី",
+      "request-date": "កាលបរិច្ឆេទស្នើសុំសៀវភៅ",
+      "approved-date": "កាលបរិច្ឆេទបានអនុម័ត",
+      "to-be-returned-on": "ថ្ងៃដែលត្រូវសងសៀវភៅមកវិញ",
+      "returned-date": "កាលបរិច្ឆេទសៀវភៅត្រូវបានសង"
+    }
+  },
+
+  "modal": {
+    "close-btn": "បិទ",
+    "no-btn": "ទេ",
+    "yes-btn": "បាទ/ចាស"
+  },
+
+  "not-logged-in": {
+    "not-logged-in text": "អ្នកមិនទាន់បានចូលគណនីនៅឡើយទេ!",
+    "login-btn": "ចូលគណនី"
+  },
+
+  "auth": {
+    "no-account-text": "មិនទាន់មានគណនី?",
+    "Sign-up-btn": "បង្កើតគណនី",
+    "already-got-account": "មានគណនីរួចហើយ?",
+    "login-btn": "ចូលគណនី",
+    "sign-up": "បង្កើតគណនី",
+    "logging-in": "កំពុងចូលគណនី"
+  },
+
+  "unauthorized-page": {
+    "401": "401",
+    "unauthorized": "គ្មានការអនុញ្ញាត",
+    "p-not-authorized": "អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យចូលប្រើទំព័រនេះទេ",
+
+    "go-back-to-home-btn": "ត្រឡប់​ទៅទំព័រដើម"
+  }
+}

@@ -8,6 +8,7 @@ import { changePassword } from '@/service/api/user';
 import { useState } from 'react';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 import { AxiosError } from 'axios';
+import { useTranslation } from 'next-i18next';
 
 interface ChangePasswordInputs {
   currentPassword: string;
@@ -24,6 +25,7 @@ export default function ChangePassword({
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
+  const { t } = useTranslation('homepage');
   const [isUpdating, setIsUpdating] = useState(false);
 
   const {
@@ -45,8 +47,8 @@ export default function ChangePassword({
 
       close();
       showAlert({
-        title: 'Your Information have been updated!',
-        subtitle: 'Thank you!',
+        title: t('information-update.info-update-text'),
+        subtitle: t('information-update.thank-you'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
@@ -76,7 +78,9 @@ export default function ChangePassword({
         }}
         className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
       >
-        <h1 className='text-2xl font-bold text-primary'>change Password</h1>
+        <h1 className='text-2xl font-bold text-primary'>
+          {t('change-password-modal.label')}
+        </h1>
 
         <div className='w-full text-left space-y-4'>
           <PasswordInput
@@ -85,9 +89,9 @@ export default function ChangePassword({
             })}
             error={errors.currentPassword}
             name='currentPassword'
-            placeholder='Enter your current password'
-            label='Password'
-            labelClassName='text-primary ml-4 font-medium'
+            placeholder={t('change-password-modal.password-placeholder')}
+            label={t('change-password-modal.password')}
+            labelClassName='text-primary ml-4 font-medium text-lg'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
           />
 
@@ -106,9 +110,9 @@ export default function ChangePassword({
             })}
             error={errors.newPassword}
             name='newPassword'
-            placeholder='new password'
-            label='New Password'
-            labelClassName='text-primary ml-4 font-medium'
+            placeholder={t('change-password-modal.new-password-placeholder')}
+            label={t('change-password-modal.new-password')}
+            labelClassName='text-primary ml-4 font-medium text-lg'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
           />
 
@@ -123,9 +127,11 @@ export default function ChangePassword({
             })}
             error={errors.confirmPassword}
             name='confirmPassword'
-            placeholder='Confirm new password'
-            label='Confirm Password'
-            labelClassName='text-primary ml-4 font-medium'
+            placeholder={t(
+              'change-password-modal.confirm-password-placeholder'
+            )}
+            label={t('change-password-modal.confirm-password')}
+            labelClassName='text-primary ml-4 font-medium text-lg'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center '
           />
         </div>
@@ -140,7 +146,7 @@ export default function ChangePassword({
               bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
             '
             >
-              Cancel
+              {t('change-password-modal.cancel-btn')}
             </button>
           )}
 
@@ -154,11 +160,13 @@ export default function ChangePassword({
             disabled={isUpdating}
           >
             {!isUpdating ? (
-              <div>save</div>
+              <div>
+                <span>{t('change-password-modal.save-btn')}</span>
+              </div>
             ) : (
               <div className='flex justify-center items-center'>
                 <SpinningLoadingSvg className='inline-block w-6 h-6 ml-2' />
-                <span>Updating your password</span>
+                <span>{t('change-password-modal.updating-password')}</span>
               </div>
             )}
           </button>

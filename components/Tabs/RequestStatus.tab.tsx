@@ -5,41 +5,63 @@ import { RequestData } from '@/dummydata';
 import { BookRequest } from '@/types';
 import RequestTable from '../RequestStatus/RequestTable';
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import { getAllRequest } from '@/service/api/request';
-import { AuthAtom } from '@/service/recoil';
+import {
+  AuthAtom,
+  UserRequestAtom,
+  filteredUserRequestAtom
+} from '@/service/recoil';
 import useModal from '../Modals/useModal';
 import RequestDetail from '../Modals/RequestDetail';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 import { useDebounce } from '@/utils/function';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 export default function RequestStatusTab({
   onClickExplore
 }: {
   onClickExplore: () => void;
 }) {
+  const { t } = useTranslation('homepage');
+
   const authStore = useRecoilValue(AuthAtom);
-  const [isFetched, setIsFetched] = useState(false);
-  const [requests, setRequests] = useState<BookRequest[]>([]);
+  const [userRequests, setUserRequests] = useRecoilState(UserRequestAtom);
+  const filteredRequest = useRecoilValue(filteredUserRequestAtom);
+  const [isFetched, setIsFetched] = useState(userRequests !== undefined);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
 
   const fetchRequest = useDebounce(async () => {
-    getAllRequest(authStore.user?.userId as string).then((res) => {
-      setRequests(res);
+    try {
+      const res = await getAllRequest(authStore.user?.userId as string);
+      setUserRequests(res);
       setIsFetched(true);
-    });
+      setIsRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsFetched(true);
+      setIsRefreshing(false);
+    }
   }, 100);
 
   useEffect(() => {
-    setIsFetched(false);
     if (authStore.user) {
-      fetchRequest();
+      if (userRequests === undefined) {
+        fetchRequest();
+      }
+      if (userRequests !== undefined) {
+        setIsRefreshing(true);
+        fetchRequest();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authStore.user]);
+  }, []);
 
   return (
     <>
@@ -51,28 +73,28 @@ export default function RequestStatusTab({
         <div className='w-full h-full flex flex-col overflow-y-scroll p-4'>
           <h1
             className='
-          font-bold text-primary text-center
-          text-2xl md:text-4xl
-          pb-4 md:pb-8 
-          pt-2 md:pt-4 
-        '
+              font-bold text-primary text-center
+              text-2xl md:text-4xl
+              pb-4 md:pb-8 
+              pt-2 md:pt-4 
+            '
           >
-            Request Status
+            {t('request-tab.h1-request-status')}
           </h1>
 
           {!isFetched && (
             <div className='w-full flex-1 flex gap-4 justify-center items-center'>
               <div className='text-center text-primary font-medium'>
-                Fetching your request
+                {t('request-tab.fetching-request', 'Fetching your request')}
               </div>
               <SpinningLoadingSvg className='w-8 h-8 text-primary' />
             </div>
           )}
 
-          {isFetched && requests.length === 0 && (
+          {isFetched && filteredRequest.length === 0 && (
             <div className='w-full flex-1 flex flex-col justify-center items-center'>
-              <h1 className='text-center text-primary font-medium'>
-                You have no request
+              <h1 className='text-center text-primary font-medium text-lg'>
+                {t('request-tab.no-request', 'You have no request')}
               </h1>
               <button
                 className='
@@ -81,26 +103,38 @@ export default function RequestStatusTab({
              '
                 onClick={onClickExplore}
               >
-                explore books
+                {t('request-tab.explore-books', 'Explore books')}
               </button>
             </div>
           )}
 
           {/* table */}
-          {isFetched && (
-            <RequestTable
-              data={requests}
-              actions={[
-                {
-                  label: 'View',
-                  onClick: (request: BookRequest) => {
-                    setViewRequest(request);
-                    toggle();
-                  },
-                  bgColor: 'bg-primary text-white'
-                }
-              ]}
-            />
+          {isFetched && filteredRequest.length !== 0 && (
+            <>
+              {isRefreshing && (
+                <div className='w-full h-fit flex gap-4 justify-start items-center'>
+                  <SpinningLoadingSvg className='w-8 h-8 text-primary' />
+                  <div className='text-center text-primary font-medium'>
+                    {t('request-tab.updating-request', 'Updating your request')}
+                  </div>
+                </div>
+              )}
+              <motion.div layout>
+                <RequestTable
+                  data={filteredRequest}
+                  actions={[
+                    {
+                      label: t('request-tab.table.view-btn', 'View'),
+                      onClick: (request: BookRequest) => {
+                        setViewRequest(request);
+                        toggle();
+                      },
+                      bgColor: 'bg-primary text-white'
+                    }
+                  ]}
+                />
+              </motion.div>
+            </>
           )}
         </div>
       </NotLoggedInLayout>

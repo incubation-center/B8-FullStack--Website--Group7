@@ -1,13 +1,18 @@
-import { processUserToken } from '@/service/token';
 import '@/styles/globals.css';
 import { ThemeProvider } from 'next-themes';
 import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
-export default function App({ Component, pageProps }: AppProps) {
+import { appWithTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { setCookie } from 'cookies-next';
+
+function App({ Component, pageProps }: AppProps) {
+  const { locale } = useRouter();
+
   return (
     <>
       <Head>
@@ -16,9 +21,14 @@ export default function App({ Component, pageProps }: AppProps) {
           rel='icon'
           type='image/x-icon'
           href='/icon/bookshelf-favicon.png'
-        ></link>
+        />
       </Head>
-      <div className='flex-1 flex flex-grow h-full w-screen overflow-clip'>
+      <div
+        className={`
+          flex-1 flex flex-grow h-full w-screen overflow-clip 
+          ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
+        `}
+      >
         <div className='flex flex-1'>
           <RecoilRoot>
             <ThemeProvider
@@ -31,8 +41,10 @@ export default function App({ Component, pageProps }: AppProps) {
           </RecoilRoot>
         </div>
 
-        <div id='modal-root' className='z-[9999]'></div>
+        <div id='modal-root' className='z-[9999999]'></div>
       </div>
     </>
   );
 }
+
+export default appWithTranslation(App);
