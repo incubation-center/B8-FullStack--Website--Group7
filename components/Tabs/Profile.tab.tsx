@@ -259,10 +259,12 @@ export default function ProfileTab() {
                     </div>
                   </div>
                   <div className=' text-primary text-lg flex-1   '>
-                    <div className=' font-extrabold text-lg'>
+                    <div className=' font-extrabold  text-lg'>
                       {t('profile-tab.phone number')}
                     </div>
-                    <div>{authStore.user.phoneNumber}</div>
+                    <div className='mt-2 text-lg'>
+                      {authStore.user.phoneNumber}
+                    </div>
                   </div>
                   <div className=' text-primary text-start text-xl  flex-1  '>
                     <div className=' font-extrabold text-lg md:text-lg'>

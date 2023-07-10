@@ -5,7 +5,7 @@ import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
 import Link from 'next/link';
 import { HTMLAttributes } from 'react';
-import DahboardSvg from '../icon/admin-sidebar/DashboardSvg';
+import DashboardSvg from '../icon/admin-sidebar/DashboardSvg';
 import UploadSvg from '../icon/admin-sidebar/UploadSvg';
 import BooksSvg from '../icon/admin-sidebar/BooksSvg';
 import IncomingSvg from '../icon/admin-sidebar/IncomingSvg';
@@ -184,7 +184,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
   switch (tab) {
     case AdminTab.DASHBOARD:
       return (
-        <DahboardSvg
+        <DashboardSvg
           className={`h-6 w-6 ${
             isCurrent
               ? 'fill-primary stroke-primary delay-300'

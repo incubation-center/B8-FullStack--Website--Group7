@@ -19,7 +19,7 @@ export default function StatusLabel({ request }: { request: BookRequest }) {
             bg-secondary
           `}
         >
-          {t('request.status.pending', 'Pending')}
+          {t('request-status.pending', 'Pending')}
         </div>
       )}
       {request.status === RequestStatus.ACCEPTED && (
