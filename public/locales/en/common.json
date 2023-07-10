@@ -1,0 +1,64 @@
+{
+  "search-placeholder": {
+    "home-tab": "Title, Author",
+    "saved-tab": "Title, Author, Category",
+    "request-tab": "Title, Author, Category"
+  },
+
+  "request-status": {
+    "pending": "Pending",
+    "active": "Active",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+
+  "request-detail": {
+    "book": {
+      "label": "Book",
+      "author": "Author",
+      "category": "Category"
+    },
+    "request": {
+      "label": "Request",
+      "name": "Name",
+      "email": "Email",
+      "phone-number": "Phone number",
+      "duration": "Duration",
+      "request-status": "Request status",
+      "request-date": "Request date",
+      "approved-date": "Approved date",
+      "to-be-returned-on": "To be returned on",
+      "returned-date": "Returned date"
+    }
+  },
+
+  "modal": {
+    "close-btn": "Close",
+    "no-btn": "No",
+    "yes-btn": "Yes"
+  },
+
+  "not-logged-in": {
+    "not-logged-in text": "You are not logged in",
+    "login-btn": "Login"
+  },
+
+  "auth": {
+    "no-account-text": "Don't have an account?",
+
+    "Sign-up-btn": "Sign Up",
+    "already-got-account": "Already have an account?",
+
+    "login-btn": "Login",
+    "sign-up": "Sign Up",
+    "logging-in": "Logging In"
+  },
+
+  "unauthorized-page": {
+    "401": "401",
+    "unauthorized": "Unauthorized",
+    "p-not-authorized": "You are not authorized to access this page",
+
+    "go-back-to-home-btn": "Go back to home"
+  }
+}

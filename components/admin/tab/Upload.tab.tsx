@@ -1,17 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import AdminTabLayout from "@/components/layout/AdminTabLayout";
-import RequiredIcon from "@/components/login/RequiredIcon";
-import { Book } from "@/types";
-import { BookCategory } from "@/utils/enum";
-import { useState, Fragment, useEffect, useRef } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import CustomListDropDown from "../ListDropDown";
-import SpinningLoadingSvg from "@/components/icon/SpinningLoadingSvg";
-import { createBook } from "@/service/api/admin";
-import { AxiosError } from "axios";
-import useAlertModal, { AlertType } from "@/components/Modals/Alert";
-import { uploadBookCover } from "@/service/firebase";
-import { updateBookById } from "@/service/api/book";
+import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import RequiredIcon from '@/components/login/RequiredIcon';
+import { Book } from '@/types';
+import { BookCategory } from '@/utils/enum';
+import { useState, Fragment, useEffect, useRef } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import CustomListDropDown from '../ListDropDown';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { createBook } from '@/service/api/admin';
+import { AxiosError } from 'axios';
+import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { uploadBookCover } from '@/service/firebase';
+import { updateBookById } from '@/service/api/book';
+import UploadSvg from '@/components/icon/admin-sidebar/UploadSvg';
 
 interface BookUploadInputs extends Book {}
 
@@ -23,12 +24,12 @@ const CategoryOptions = [
   { value: BookCategory.FANTASY, label: BookCategory.FANTASY },
   {
     value: BookCategory.SELF_DEVELOPMENT,
-    label: BookCategory.SELF_DEVELOPMENT,
-  },
+    label: BookCategory.SELF_DEVELOPMENT
+  }
 ];
 
 export default function UploadTab({
-  handleRefreshRequest,
+  handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
@@ -52,7 +53,7 @@ export default function UploadTab({
     handleSubmit,
     setError,
     reset,
-    formState: { errors },
+    formState: { errors }
   } = useForm<BookUploadInputs>();
 
   const onSubmit: SubmitHandler<BookUploadInputs> = async (data) => {
@@ -63,8 +64,8 @@ export default function UploadTab({
       // gather formData
       const bookData = {
         ...data,
-        bookImg: "",
-        category: selectedCategory.value,
+        bookImg: '',
+        category: selectedCategory.value
       };
 
       // create book => api
@@ -74,33 +75,33 @@ export default function UploadTab({
       const imageData = {
         id: res.id,
         file: image as File,
-        category: res.category,
+        category: res.category
       };
 
       const bookImgUrl = await uploadBookCover(imageData);
 
       // update book data with cover url
       const updatedBook = await updateBookById(res.id as any, {
-        bookImg: bookImgUrl,
+        bookImg: bookImgUrl
       });
 
       // clear form
       reset();
       setImage(undefined);
-      if (imageRef.current) imageRef.current.value = "";
+      if (imageRef.current) imageRef.current.value = '';
 
       showAlert({
-        title: "Uploaded!",
-        subtitle: "Book has been uploaded",
+        title: 'Uploaded!',
+        subtitle: 'Book has been uploaded',
         type: AlertType.SUCCESS,
-        onModalClose: () => handleRefreshRequest(),
+        onModalClose: () => handleRefreshRequest()
       });
     } catch (err) {
       if (err instanceof AxiosError) {
         showAlert({
-          title: "Error",
-          subtitle: err.response?.data.error || "An unknown error has occurred",
-          type: AlertType.ERROR,
+          title: 'Error',
+          subtitle: err.response?.data.error || 'An unknown error has occurred',
+          type: AlertType.ERROR
         });
       }
     } finally {
@@ -111,16 +112,16 @@ export default function UploadTab({
   useEffect(() => {
     if (image) {
       // remove error message if image is selected
-      setError("bookImg", {
-        type: "manual",
-        message: "",
+      setError('bookImg', {
+        type: 'manual',
+        message: ''
       });
       return;
     } else if (image === null) {
       // reset input value if image is removed
-      setError("bookImg", {
-        type: "custom",
-        message: "Book cover is required",
+      setError('bookImg', {
+        type: 'custom',
+        message: 'Book cover is required'
       });
       return;
     }
@@ -156,7 +157,7 @@ export default function UploadTab({
                       onClick={() => {
                         setImage(null);
                         if (imageRef.current) {
-                          imageRef.current.value = "";
+                          imageRef.current.value = '';
                         }
                       }}
                       className='absolute top-2 right-2'
@@ -178,11 +179,7 @@ export default function UploadTab({
 
                     '
                     >
-                      <img
-                        src='/icon/admin-sidebar/upload.svg'
-                        alt='upload icon'
-                        className='w-12 h-12'
-                      />
+                      <UploadSvg className='w-12 h-12 fill-primary' />
                       <p className='text-primary'>Upload Your Image</p>
                     </div>
                   </label>
@@ -197,22 +194,22 @@ export default function UploadTab({
                   Book cover
                 </h1>
                 <input
-                  {...register("bookImg", {
+                  {...register('bookImg', {
                     validate: (value) => {
-                      if (!image) return "Book cover is required";
+                      if (!image) return 'Book cover is required';
 
                       const validTypes = [
-                        "image/jpeg",
-                        "image/png",
-                        "image/jpg",
+                        'image/jpeg',
+                        'image/png',
+                        'image/jpg'
                       ];
 
                       if (!validTypes.includes(image.type)) {
-                        return "Only JPEG, PNG, JPG are valid.";
+                        return 'Only JPEG, PNG, JPG are valid.';
                       }
 
                       return true;
-                    },
+                    }
                   })}
                   ref={imageRef}
                   name='bookImg'
@@ -254,7 +251,7 @@ export default function UploadTab({
                 w-full bg-transparent
                 border-b border-primary
               '
-                    {...register("title", { required: "Title is required" })}
+                    {...register('title', { required: 'Title is required' })}
                   />
                 </div>
 
@@ -281,7 +278,7 @@ export default function UploadTab({
                     w-full bg-transparent
                     border-b border-primary
                   '
-                    {...register("author", { required: "Author is required" })}
+                    {...register('author', { required: 'Author is required' })}
                     disabled={isUpdating}
                   />
                 </div>
@@ -314,7 +311,7 @@ export default function UploadTab({
                     w-full bg-transparent
                     border-b border-primary
                   '
-                    {...register("description")}
+                    {...register('description')}
                     disabled={isUpdating}
                   />
                 </div>

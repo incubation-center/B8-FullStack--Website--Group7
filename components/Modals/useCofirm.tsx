@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export interface ConfirmModal {
   title: string;
@@ -16,10 +17,10 @@ export default function useConfirmModal() {
 
   const [{ title, subtitle, isClosable, onConfirm }, initModal] =
     useState<ConfirmModal>({
-      title: "",
-      subtitle: "",
+      title: '',
+      subtitle: '',
       isClosable: true,
-      onConfirm: () => {},
+      onConfirm: () => {}
     });
 
   // close modal
@@ -35,7 +36,7 @@ export default function useConfirmModal() {
   function showConfirmModal(props: ConfirmModal) {
     initModal({
       ...props,
-      isClosable: props.isClosable ? props.isClosable : true,
+      isClosable: props.isClosable ? props.isClosable : true
     });
 
     open();
@@ -46,18 +47,18 @@ export default function useConfirmModal() {
     hidden: {
       opacity: 0,
       y: -100,
-      scale: 0,
+      scale: 0
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
+      scale: 1
     },
     exit: {
       opacity: 0,
       y: -100,
-      scale: 0,
-    },
+      scale: 0
+    }
   };
 
   // modal component
@@ -66,8 +67,10 @@ export default function useConfirmModal() {
     const ref = useRef<Element | null>(null);
     const [mounted, setMounted] = useState(false);
 
+    const { t } = useTranslation('common');
+
     useEffect(() => {
-      ref.current = document.querySelector<HTMLElement>("#modal-root");
+      ref.current = document.querySelector<HTMLElement>('#modal-root');
       setMounted(true);
     }, []);
 
@@ -84,7 +87,7 @@ export default function useConfirmModal() {
               >
                 <div
                   className={`absolute h-screen w-screen bg-black bg-opacity-40 z-[99999] ${
-                    isClosable && "cursor-pointer"
+                    isClosable && 'cursor-pointer'
                   }`}
                   onClick={isClosable ? close : undefined}
                 />
@@ -103,9 +106,9 @@ export default function useConfirmModal() {
                   animate='visible'
                   exit='exit'
                   transition={{
-                    type: "spring",
+                    type: 'spring',
                     damping: 20,
-                    stiffness: 200,
+                    stiffness: 200
                   }}
                 >
                   {/* <Image
@@ -134,7 +137,7 @@ export default function useConfirmModal() {
                       '
                       onClick={close}
                     >
-                      No
+                      {t('modal.no-btn')}
                     </button>
                     <button
                       className='
@@ -147,7 +150,7 @@ export default function useConfirmModal() {
                         onConfirm();
                       }}
                     >
-                      Yes
+                      {t('modal.yes-btn')}
                     </button>
                   </div>
                 </motion.div>
@@ -161,6 +164,6 @@ export default function useConfirmModal() {
 
   return {
     ConfirmModal,
-    showConfirmModal,
+    showConfirmModal
   };
 }

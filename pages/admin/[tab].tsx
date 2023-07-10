@@ -29,6 +29,9 @@ import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import { useDebounce } from '@/utils/function';
 
 import BookTab from '@/components/admin/tab/Book.tab';
+import { AxiosError } from 'axios';
+import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function AdminHomePage({
   currentTab
@@ -44,12 +47,16 @@ export default function AdminHomePage({
 
   // initialize
   const router = useRouter();
+  const { AlertModal, showAlert } = useAlertModal();
 
   // handling page routing
   const [tab, setTab] = useState(currentTab);
 
   const handlePageRouting = (tab: AdminTab) => {
-    router.push(`/admin/${tab}`, undefined, { shallow: true });
+    router.push(`/admin/${tab}`, undefined, {
+      shallow: true,
+      locale: router.locale
+    });
   };
   useEffect(() => {
     const tab = router.query.tab;
@@ -106,6 +113,16 @@ export default function AdminHomePage({
       console.log('====================================');
       console.log('error', err);
       console.log('====================================');
+      if (err instanceof AxiosError) {
+        showAlert({
+          title: 'Error',
+          subtitle:
+            err.response?.data.error ||
+            'Something went wrong. Please try again later.',
+          type: AlertType.ERROR,
+          onModalClose: () => handleRefreshRequest()
+        });
+      }
     } finally {
       setIsRefreshing(false);
     }
@@ -123,41 +140,45 @@ export default function AdminHomePage({
   }, 100);
 
   return (
-    <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
-      {!isFetched && (
-        <div className='w-full flex-1 flex gap-4 justify-center items-center'>
-          <div className='text-center text-primary font-medium'>
-            Fetching requests
-          </div>
-          <SpinningLoadingSvg className='w-8 h-8 text-primary' />
-        </div>
-      )}
+    <>
+      <AlertModal />
 
-      {isFetched && (
-        <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
-          {tab === AdminTab.DASHBOARD && (
-            <DashboardTab handleRefreshRequest={handleRefreshRequest} />
-          )}
-          {tab === AdminTab.UPLOAD && (
-            <UploadTab handleRefreshRequest={handleRefreshBooks} />
-          )}
-          {tab === AdminTab.BOOKS && <BookTab />}
-          {tab === AdminTab.INCOMING_REQUEST && (
-            <IncomingTab handleRefreshRequest={handleRefreshRequest} />
-          )}
-          {tab === AdminTab.ACTIVE_REQUEST && (
-            <ActiveTab handleRefreshRequest={handleRefreshRequest} />
-          )}
-          {tab === AdminTab.ARCHIVED_REQUEST && (
-            <ArchivedTab handleRefreshRequest={handleRefreshRequest} />
-          )}
-          {tab === AdminTab.RENTER && (
-            <RenterTab handleRefreshRequest={handleRefreshRequest} />
-          )}
-          {tab === AdminTab.SETTING && <SettingTab />}
-        </AnimatePresence>
-      )}
-    </AdminLayout>
+      <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
+        {!isFetched && (
+          <div className='w-full flex-1 flex gap-4 justify-center items-center'>
+            <div className='text-center text-primary font-medium'>
+              Fetching the data
+            </div>
+            <SpinningLoadingSvg className='w-8 h-8 text-primary' />
+          </div>
+        )}
+
+        {isFetched && (
+          <AnimatePresence mode='sync' initial={false} presenceAffectsLayout>
+            {tab === AdminTab.DASHBOARD && (
+              <DashboardTab handleRefreshRequest={handleRefreshRequest} />
+            )}
+            {tab === AdminTab.UPLOAD && (
+              <UploadTab handleRefreshRequest={handleRefreshBooks} />
+            )}
+            {tab === AdminTab.BOOKS && <BookTab />}
+            {tab === AdminTab.INCOMING_REQUEST && (
+              <IncomingTab handleRefreshRequest={handleRefreshRequest} />
+            )}
+            {tab === AdminTab.ACTIVE_REQUEST && (
+              <ActiveTab handleRefreshRequest={handleRefreshRequest} />
+            )}
+            {tab === AdminTab.ARCHIVED_REQUEST && (
+              <ArchivedTab handleRefreshRequest={handleRefreshRequest} />
+            )}
+            {tab === AdminTab.RENTER && (
+              <RenterTab handleRefreshRequest={handleRefreshRequest} />
+            )}
+            {tab === AdminTab.SETTING && <SettingTab />}
+          </AnimatePresence>
+        )}
+      </AdminLayout>
+    </>
   );
 }
 
@@ -165,22 +186,25 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let tab = context.query.tab as string;
 
   // check is tab in AdminTab enum
-  if (!Object.values(AdminTab).includes(tab as AdminTab)) {
-    // if not, redirect to dashboard
-    return {
-      redirect: {
-        destination: `/admin/${AdminTab.DASHBOARD}`,
-        permanent: false
-      }
-    };
-  }
+  // if (!Object.values(AdminTab).includes(tab as AdminTab)) {
+  //   // if not, redirect to dashboard
+  //   return {
+  //     redirect: {
+  //       destination: `/admin/${AdminTab.DASHBOARD}`,
+  //       permanent: false
+  //     }
+  //   };
+  // }
 
   // const token = context.req.cookies.accessToken;
   // const requests = await getAllRequestAdmin(token);
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      currentTab: tab || AdminTab.DASHBOARD
+      currentTab: tab || AdminTab.DASHBOARD,
+      ...(await serverSideTranslations(locale))
     }
   };
 }

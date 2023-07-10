@@ -1,24 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-import AdminTabLayout from "@/components/layout/AdminTabLayout";
-import { AdminTab } from "@/utils/enum";
-import { formatEnumValue } from "@/utils/function";
-import RenterTable from "../table/RenterTable";
+import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import { AdminTab } from '@/utils/enum';
+import { formatEnumValue } from '@/utils/function';
+import RenterTable from '../table/RenterTable';
 
-import useModal from "@/components/Modals/useModal";
-import RequestDetail from "@/components/Modals/RequestDetail";
-import { BookRequest, RequestStatus } from "@/types";
+import useModal from '@/components/Modals/useModal';
+import RequestDetail from '@/components/Modals/RequestDetail';
+import { BookRequest, RequestStatus } from '@/types';
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue } from 'recoil';
 import {
   AdminAllRequestAtom,
-  AdminAllRequestCountAtom,
-} from "@/service/recoil/admin";
+  AdminAllRequestCountAtom
+} from '@/service/recoil/admin';
+import IncomingSvg from '@/components/icon/admin-sidebar/IncomingSvg';
+import ActiveSvg from '@/components/icon/admin-sidebar/ActiveSvg';
+import ArchivedSvg from '@/components/icon/admin-sidebar/ArchivedSvg';
+import RenterSvg from '@/components/icon/admin-sidebar/RenterSvg';
 
 export default function DashboardTab({
-  handleRefreshRequest,
+  handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
@@ -48,25 +52,25 @@ export default function DashboardTab({
       >
         <RequestDataShow
           title='Total Incoming'
-          icon='/icon/admin-sidebar/incoming-admin.svg'
+          tab={AdminTab.INCOMING_REQUEST}
           value={requestCount.PENDING}
         />
 
         <RequestDataShow
           title='Total Active'
-          icon='/icon/admin-sidebar/active-admin.svg'
+          tab={AdminTab.ACTIVE_REQUEST}
           value={requestCount.ACCEPTED}
         />
 
         <RequestDataShow
           title='Total Renter'
-          icon='/icon/admin-sidebar/renter.svg'
+          tab={AdminTab.RENTER}
           value={requestCount.RENTER}
         />
 
         <RequestDataShow
           title='Total Archived'
-          icon='/icon/admin-sidebar/archived-admin.svg'
+          tab={AdminTab.ARCHIVED_REQUEST}
           value={requestCount.ARCHIVED}
         />
       </div>
@@ -84,13 +88,13 @@ export default function DashboardTab({
             .slice(0, 5)}
           actions={[
             {
-              label: "View",
+              label: 'View',
               onClick: (request) => {
                 setViewRequest(request);
                 toggle();
               },
-              bgColor: "bg-alt-secondary",
-            },
+              bgColor: 'bg-alt-secondary'
+            }
           ]}
         />
       </div>
@@ -100,11 +104,11 @@ export default function DashboardTab({
 
 const RequestDataShow = ({
   title,
-  icon,
-  value,
+  tab,
+  value
 }: {
   title: string;
-  icon: string;
+  tab: AdminTab;
   value: {
     total: number;
     today: number;
@@ -117,7 +121,8 @@ const RequestDataShow = ({
       <div className='flex flex-1 h-full items-center justify-between py-4 mb-2 border-b-2'>
         <h1 className='text-5xl text-primary font-extrabold'>{value.total}</h1>
 
-        <img src={icon} alt={title} className='h-6 md:h-8 lg:h-10' />
+        {/* <img src={icon} alt={title} className='h-6 md:h-8 lg:h-10' /> */}
+        <NavbarIcon tab={tab} />
       </div>
       <div className='flex justify-between text-primary'>
         <div>Today {value.today}</div>
@@ -126,3 +131,43 @@ const RequestDataShow = ({
     </div>
   );
 };
+
+function NavbarIcon({ tab }: { tab: AdminTab }) {
+  switch (tab) {
+    case AdminTab.INCOMING_REQUEST:
+      return (
+        <IncomingSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          transition-all 
+
+          `}
+        />
+      );
+    case AdminTab.ACTIVE_REQUEST:
+      return (
+        <ActiveSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.ARCHIVED_REQUEST:
+      return (
+        <ArchivedSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.RENTER:
+      return (
+        <RenterSvg
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary stroke-primary delay-300
+        transition-all 
+      `}
+        />
+      );
+  }
+
+  return null;
+}

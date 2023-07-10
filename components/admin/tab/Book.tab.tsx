@@ -1,14 +1,16 @@
-import HomeTab from "@/components/Tabs/Home.tab";
-import AdminTabLayout from "@/components/layout/AdminTabLayout";
-import { getAllBooks } from "@/service/api/book";
-import { AllBooksAtom } from "@/service/recoil";
-import { isRefreshingRequestAtom } from "@/service/recoil/admin";
-import { Book } from "@/types";
-import { useDebounce } from "@/utils/function";
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import ViewEditBook from "../ViewEditBook";
-import { AnimatePresence } from "framer-motion";
+import HomeTab from '@/components/Tabs/Home.tab';
+import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import { getAllBooks } from '@/service/api/book';
+import { AllBooksAtom } from '@/service/recoil';
+import { isRefreshingRequestAtom } from '@/service/recoil/admin';
+import { Book } from '@/types';
+import { useDebounce } from '@/utils/function';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import ViewEditBook from '../ViewEditBook';
+import { AnimatePresence } from 'framer-motion';
+import UserSearchBar from '@/components/UserSearchBar';
+import { HomePageTab } from '@/utils/enum';
 
 export default function BookTab() {
   const [_, setAllBooks] = useRecoilState(AllBooksAtom);
@@ -26,14 +28,17 @@ export default function BookTab() {
         setAllBooks(res);
       }
     } catch (err) {
-      console.error("error", err);
+      console.error('error', err);
     } finally {
       setIsRefreshing(false);
     }
   }, 100);
 
   return (
-    <AdminTabLayout title='Book Lists' handleRefresh={handleRefreshBook}>
+    <AdminTabLayout title='Books Lists' handleRefresh={handleRefreshBook}>
+      <div className='w-full flex justify-start mb-4 '>
+        <UserSearchBar currentTab={HomePageTab.HOME} />
+      </div>
       {/* tab element */}
       <HomeTab
         isUseInAdminPage

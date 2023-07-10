@@ -1,4 +1,4 @@
-import { Book, BookRequest } from '@/types';
+import { Book, BookRequest, RequestStatus } from '@/types';
 import { AuthStore } from '@/types/auth';
 import { BookCategory, HomePageTab } from '@/utils/enum';
 import { atom, selector, selectorFamily } from 'recoil';
@@ -46,8 +46,29 @@ export const filteredUserRequestAtom = selector<BookRequest[]>({
     const options = {
       includeScore: true,
       useExtendedSearch: true,
-      threshold: 0.5,
-      keys: ['book.title', 'book.author', 'book.category']
+      threshold: 0.8,
+      keys: [
+        'book.title',
+        'book.author',
+        'book.category',
+
+        {
+          name: 'status',
+          getFn: (obj: BookRequest) => {
+            if (obj.status === RequestStatus.PENDING) return 'pending';
+
+            if (obj.status === RequestStatus.ACCEPTED) return 'active';
+
+            if (obj.status === RequestStatus.ACHIEVED && !obj.isApproved)
+              return 'rejected';
+
+            if (obj.status === RequestStatus.ACHIEVED && obj.isApproved)
+              return 'approved';
+
+            return '';
+          }
+        }
+      ]
     };
 
     const fuse = new Fuse(requests, options);
@@ -145,6 +166,10 @@ export const getBookByIdAtom = selectorFamily<Book | null, string>({
       const books = get(AllBooksAtom);
 
       let book = null;
+
+      console.log('====================================');
+      console.log('books length', books.length);
+      console.log('===================================');
 
       // all books data is not fetched yet
       books.forEach((b) => {

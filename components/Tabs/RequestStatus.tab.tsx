@@ -1,29 +1,32 @@
 // import DataTable from 'react-data-table-component';
 // convert above to dynamic import
 
-import { RequestData } from "@/dummydata";
-import { BookRequest } from "@/types";
-import RequestTable from "../RequestStatus/RequestTable";
-import NotLoggedInLayout from "../layout/NotLoggedInLayout";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { useEffect, useState } from "react";
-import { getAllRequest } from "@/service/api/request";
+import { RequestData } from '@/dummydata';
+import { BookRequest } from '@/types';
+import RequestTable from '../RequestStatus/RequestTable';
+import NotLoggedInLayout from '../layout/NotLoggedInLayout';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+import { getAllRequest } from '@/service/api/request';
 import {
   AuthAtom,
   UserRequestAtom,
-  filteredUserRequestAtom,
-} from "@/service/recoil";
-import useModal from "../Modals/useModal";
-import RequestDetail from "../Modals/RequestDetail";
-import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
-import { useDebounce } from "@/utils/function";
-import { motion } from "framer-motion";
+  filteredUserRequestAtom
+} from '@/service/recoil';
+import useModal from '../Modals/useModal';
+import RequestDetail from '../Modals/RequestDetail';
+import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import { useDebounce } from '@/utils/function';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 export default function RequestStatusTab({
-  onClickExplore,
+  onClickExplore
 }: {
   onClickExplore: () => void;
 }) {
+  const { t } = useTranslation('homepage');
+
   const authStore = useRecoilValue(AuthAtom);
   const [userRequests, setUserRequests] = useRecoilState(UserRequestAtom);
   const filteredRequest = useRecoilValue(filteredUserRequestAtom);
@@ -76,13 +79,13 @@ export default function RequestStatusTab({
               pt-2 md:pt-4 
             '
           >
-            Request Status
+            {t('request-tab.h1-request-status')}
           </h1>
 
           {!isFetched && (
             <div className='w-full flex-1 flex gap-4 justify-center items-center'>
               <div className='text-center text-primary font-medium'>
-                Fetching your request
+                {t('request-tab.fetching-request', 'Fetching your request')}
               </div>
               <SpinningLoadingSvg className='w-8 h-8 text-primary' />
             </div>
@@ -91,7 +94,7 @@ export default function RequestStatusTab({
           {isFetched && filteredRequest.length === 0 && (
             <div className='w-full flex-1 flex flex-col justify-center items-center'>
               <h1 className='text-center text-primary font-medium text-lg'>
-                You have no request
+                {t('request-tab.no-request', 'You have no request')}
               </h1>
               <button
                 className='
@@ -100,7 +103,7 @@ export default function RequestStatusTab({
              '
                 onClick={onClickExplore}
               >
-                Explore books
+                {t('request-tab.explore-books', 'Explore books')}
               </button>
             </div>
           )}
@@ -112,7 +115,7 @@ export default function RequestStatusTab({
                 <div className='w-full h-fit flex gap-4 justify-start items-center'>
                   <SpinningLoadingSvg className='w-8 h-8 text-primary' />
                   <div className='text-center text-primary font-medium'>
-                    Updating your request
+                    {t('request-tab.updating-request', 'Updating your request')}
                   </div>
                 </div>
               )}
@@ -121,13 +124,13 @@ export default function RequestStatusTab({
                   data={filteredRequest}
                   actions={[
                     {
-                      label: "View",
+                      label: t('request-tab.table.view-btn', 'View'),
                       onClick: (request: BookRequest) => {
                         setViewRequest(request);
                         toggle();
                       },
-                      bgColor: "bg-primary text-white",
-                    },
+                      bgColor: 'bg-primary text-white'
+                    }
                   ]}
                 />
               </motion.div>

@@ -1,10 +1,12 @@
-"use client";
+'use client';
 
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
+import Image from 'next/image';
 
-import { BookRequest } from "@/types";
-import { AdminTab } from "@/utils/enum";
+import { BookRequest } from '@/types';
+import { AdminTab } from '@/utils/enum';
+import { useRecoilValue } from 'recoil';
+import { isRefreshingRequestAtom } from '@/service/recoil/admin';
 
 interface RequestTableProps {
   data: BookRequest[];
@@ -22,11 +24,9 @@ interface RequestTableProps {
 export default function RequestTable({
   data,
   actions,
-  useIn,
+  useIn
 }: RequestTableProps) {
-  console.log("====================================");
-  console.log("data", data);
-  console.log("====================================");
+  const isRefreshing = useRecoilValue(isRefreshingRequestAtom);
 
   return (
     <table className='w-full '>
@@ -71,22 +71,28 @@ export default function RequestTable({
                     src={request.book.bookImg}
                     alt={request.book.title}
                     fill
-                    className='object-scale-down'
+                    className='object-contain'
                   />
                 </div>
-                <div className='whitespace-pre-wrap text-center'>
-                  {request.book.title}
+                <div className='whitespace-pre-wrap text-left'>
+                  {request.book.title.length > 50
+                    ? request.book.title.slice(0, 50) + '...'
+                    : request.book.title}
                 </div>
               </div>
             </td>
             <td>{request.borrower.username}</td>
 
             {useIn === AdminTab.INCOMING_REQUEST && (
-              <td>{request.dateOfRequest.toLocaleString()}</td>
+              <td>
+                {request.dateOfRequest
+                  .toLocaleString()
+                  .replace(/:\d{2}\s/, ' ')}
+              </td>
             )}
 
             {useIn === AdminTab.ACTIVE_REQUEST && (
-              <td>{request.dateOfReturn!.toLocaleString()}</td>
+              <td>{request.dateOfReturn!.toLocaleDateString()}</td>
             )}
 
             {useIn === AdminTab.ARCHIVED_REQUEST && (
@@ -94,11 +100,11 @@ export default function RequestTable({
                 <div
                   className={`
                     rounded-full px-4 py-2 text-sm font-bold text-white w-fit
-                    ${request.isApproved ? "bg-success" : "bg-danger"}
+                    ${request.isApproved ? 'bg-success' : 'bg-danger'}
                   `}
                 >
-                  {request.isApproved && "Approved"}
-                  {!request.isApproved && "Rejected"}
+                  {request.isApproved && 'Approved'}
+                  {!request.isApproved && 'Rejected'}
                 </div>
               </td>
             )}
@@ -111,9 +117,17 @@ export default function RequestTable({
                     rounded-full px-4 py-2 
                     text-sm text-primary font-bold m-1
                     ${action.bgColor}
-                    hover:bg-opacity-80
+                    ${
+                      !isRefreshing
+                        ? 'hover:opacity-80'
+                        : 'cursor-not-allowed opacity-60'
+                    }
+
                   `}
-                  onClick={() => action.onClick(request)}
+                  onClick={() => {
+                    action.onClick(request);
+                  }}
+                  disabled={isRefreshing}
                 >
                   {action.label}
                 </button>

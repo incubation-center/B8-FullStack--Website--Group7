@@ -5,12 +5,18 @@ import { searchKeywordAtom } from '@/service/recoil';
 import { HomePageTab } from '@/utils/enum';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import SearchSvg from './icon/Search';
+import { useTranslation } from 'next-i18next';
 
 export default function UserSearchBar({
-  currentTab
+  currentTab,
+  initialAnimation = false
 }: {
   currentTab: HomePageTab;
+  initialAnimation?: boolean;
 }) {
+  const { t } = useTranslation('common');
+
   const [searchText, setSearchText] = useRecoilState(searchKeywordAtom);
   const [isShow, setIsShow] = useState(false);
   const [placeholder, setPlaceholder] = useState(
@@ -21,35 +27,40 @@ export default function UserSearchBar({
     setSearchText('');
     setIsShow(true);
     if (currentTab === HomePageTab.HOME) {
-      setPlaceholder('Title, Author');
+      setPlaceholder(t('search-placeholder.home-tab', 'Title, Author'));
     } else if (currentTab === HomePageTab.SAVED) {
-      setPlaceholder('Title, Author, Category');
+      setPlaceholder(
+        t('search-placeholder.saved-tab', 'Title, Author, Category')
+      );
     } else if (currentTab === HomePageTab.REQUEST_STATUS) {
-      setPlaceholder('Title, Author, Category');
+      setPlaceholder(
+        t('search-placeholder.request-tab', 'Title, Author, Category')
+      );
     } else if (currentTab === HomePageTab.PROFILE) {
       setPlaceholder('');
       setIsShow(false);
     }
-  }, [currentTab, setSearchText]);
+  }, [currentTab, setSearchText, t]);
 
   return (
     <AnimatePresence>
       {isShow && (
         <motion.div
-          initial={{ y: -100 }}
+          initial={initialAnimation && { y: -100 }}
           animate={{ y: 0 }}
           exit={{ y: -100 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
           className='
-            w-full max-w-[500px] xl:max-w-[700px]  mx-auto
+            w-full max-w-[500px] xl:max-w-[700px] w-inherit
             flex justify-center items-center
-          bg-action 
+          bg-white 
             p-2 px-4 rounded-xl space-x-6
-            box-border border-2 focus-within:border-primary
+            box-border border-2 border-primary border-opacity-60 focus-within:border-opacity-100
             transition-colors
+            group
           '
         >
-          <Image src='/icon/search.svg' alt='search' width={20} height={20} />
+          <SearchSvg className='h-6 w-6 fill-primary opacity-60 group-focus-within:opacity-100 transition-all duration-300' />
 
           <input
             type='text'

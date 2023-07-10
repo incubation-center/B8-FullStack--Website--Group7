@@ -1,33 +1,36 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 
-import useModal from "@/components/Modals/useModal";
-import EditUserInfo from "../Modals/EditUserInfo";
+import useModal from '@/components/Modals/useModal';
+import EditUserInfo from '../Modals/EditUserInfo';
 
-import useAlertModal from "@/components/Modals/Alert";
-import ProfileUploadSvg from "../icon/ProfileUploadSvg";
+import useAlertModal from '@/components/Modals/Alert';
+import ProfileUploadSvg from '../icon/ProfileUploadSvg';
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
 
-import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
-import ChangePassword from "../Modals/ChangePassword";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { AuthAtom } from "@/service/recoil";
-import { User } from "@/types";
-import NotLoggedInLayout from "../layout/NotLoggedInLayout";
-import { handleFallBackProfileImage } from "@/utils/function";
-import { deleteCookie } from "cookies-next";
-import { uploadImage } from "@/service/firebase";
-import { updateUserInfo } from "@/service/api/user";
-import useConfirmModal from "../Modals/useCofirm";
-import { HomePageTab } from "@/utils/enum";
+import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import ChangePassword from '../Modals/ChangePassword';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
+import { User } from '@/types';
+import NotLoggedInLayout from '../layout/NotLoggedInLayout';
+import { handleFallBackProfileImage } from '@/utils/function';
+import { deleteCookie } from 'cookies-next';
+import { uploadImage } from '@/service/firebase';
+import { updateUserInfo } from '@/service/api/user';
+import useConfirmModal from '../Modals/useCofirm';
+import { HomePageTab } from '@/utils/enum';
+import { useTranslation } from 'next-i18next';
 
 interface ProfileUploadInputs {}
 
 export default function ProfileTab() {
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
+
+  const { t } = useTranslation('homepage');
 
   // handle image upload
   const [image, setImage] = useState<File | null | undefined>();
@@ -46,7 +49,7 @@ export default function ProfileTab() {
   const handleCancelImage = () => {
     setImage(null);
     setIsUpdatingImage(false);
-    imageRef.current && (imageRef.current.value = "");
+    imageRef.current && (imageRef.current.value = '');
   };
 
   const handleSaveImage = async () => {
@@ -61,7 +64,7 @@ export default function ProfileTab() {
       if (res) {
         // update user image
         const result = await updateUserInfo(authStore.user?.userId as string, {
-          profileImg: res,
+          profileImg: res
         });
 
         if (result) {
@@ -69,8 +72,8 @@ export default function ProfileTab() {
             ...authStore,
             user: {
               ...(authStore.user as User),
-              profileImg: res,
-            },
+              profileImg: res
+            }
           });
         }
       }
@@ -81,19 +84,19 @@ export default function ProfileTab() {
     setIsUpdatingImage(false);
     setIsUploadingImage(false);
     setImage(null);
-    imageRef.current && (imageRef.current.value = "");
+    imageRef.current && (imageRef.current.value = '');
   };
 
   // handle logout
   const handleLogout = () => {
-    deleteCookie("accessToken");
-    deleteCookie("refreshToken");
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
 
     setAuthStore({
       user: null,
       isAdmin: false,
       isLoggedIn: false,
-      isFetched: true,
+      isFetched: true
     });
 
     window.location.href = `/?tab=${HomePageTab.HOME}`;
@@ -105,13 +108,13 @@ export default function ProfileTab() {
   const {
     toggle: toggleInformationModal,
     close: closeInformationModal,
-    ModalWrapper: EditInformationWrapper,
+    ModalWrapper: EditInformationWrapper
   } = useModal();
 
   const {
     toggle: toggleChangePasswordModal,
     close: closeChangePasswordModal,
-    ModalWrapper: ChangePasswordModalWrapper,
+    ModalWrapper: ChangePasswordModalWrapper
   } = useModal();
 
   return (
@@ -138,7 +141,7 @@ export default function ProfileTab() {
           </ChangePasswordModalWrapper>
 
           <motion.div
-            animate={{ height: "auto" }}
+            animate={{ height: 'auto' }}
             className='w-full h-full overflow-y-scroll lg:w-3/5 mx-auto'
           >
             {/* user image profile */}
@@ -185,7 +188,7 @@ export default function ProfileTab() {
                 <label htmlFor='profileImg'>
                   <ProfileUploadSvg
                     className={`absolute bottom-0 right-0 w-10 h-10 bg-white fill-primary rounded-full p-2 ${
-                      isUploadingImage ? "cursor-not-allowed" : "cursor-pointer"
+                      isUploadingImage ? 'cursor-not-allowed' : 'cursor-pointer'
                     }`}
                     color='var(--icon-color)'
                   />
@@ -205,7 +208,7 @@ export default function ProfileTab() {
                   <motion.button
                     onClick={handleSaveImage}
                     className={`
-                ${isUploadingImage ? "w-64" : "w-28"} 
+                ${isUploadingImage ? 'w-64' : 'w-28'} 
                 bg-primary text-white px-4 py-2 rounded-lg
                   transition-all duration-300
                  `}
@@ -219,7 +222,7 @@ export default function ProfileTab() {
                       ) : (
                         <motion.div
                           animate={{
-                            y: [1, 0],
+                            y: [1, 0]
                           }}
                           exit={{ opacity: 0 }}
                           className='flex gap-2 items-center justify-center'
@@ -237,35 +240,33 @@ export default function ProfileTab() {
 
             {/* personal information */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-2xl md:text-2xl'>
-                Personal Information
+              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
+                {t('profile-tab.personal-info')}
               </h1>
               <div className='w-full my-5 p-5 h-fit flex flex-col justify-center items-end bg-[#EBEBEB] rounded-xl relative'>
                 <div className='w-full flex flex-grow flex-wrap gap-4'>
                   <div
                     className=' 
-                text-primary text-start text-lg 
-                  col-span-2 w-full
-                '
+                    text-primary text-start text-lg 
+                      col-span-2 w-full
+                    '
                   >
-                    <div className='font-extrabold text-lg md:text-xl '>
-                      Username
+                    <div className='font-extrabold'>
+                      {t('profile-tab.username')}
                     </div>
-                    <div className='mt-2 text-lg md:text-lg'>
+                    <div className='mt-2 text-lg'>
                       {authStore.user.username}
                     </div>
                   </div>
                   <div className=' text-primary text-lg flex-1   '>
-                    <div className=' font-extrabold text-lg md:text-lg'>
-                      Phone Number
+                    <div className=' font-extrabold text-lg'>
+                      {t('profile-tab.phone number')}
                     </div>
-                    <div className='mt-2 text-lg md:text-lg'>
-                      {authStore.user.phoneNumber}
-                    </div>
+                    <div>{authStore.user.phoneNumber}</div>
                   </div>
                   <div className=' text-primary text-start text-xl  flex-1  '>
                     <div className=' font-extrabold text-lg md:text-lg'>
-                      Email
+                      {t('profile-tab.email')}
                     </div>
                     <div className='mt-2 text-lg md:text-lg'>
                       {authStore.user.email}
@@ -276,22 +277,22 @@ export default function ProfileTab() {
                 <button
                   onClick={() => toggleInformationModal()}
                   className='
-                bg-secondary text-white font-light rounded-lg py-1 px-7 
-                transition-colors duration-300 box-border border-2 border-secondary hover:border-white
-                md:absolute md:top-5 md:right-5
-                mt-5 md:mt-0 w-full md:w-fit
-              
-              '
+                    bg-secondary text-white font-light rounded-lg py-1 px-7 
+                    transition-colors duration-300 box-border border-2 border-secondary hover:border-white
+                    md:absolute md:top-5 md:right-5
+                    mt-5 md:mt-0 w-full md:w-fit
+                  
+                  '
                 >
-                  Edit
+                  {t('profile-tab.edit-btn')}
                 </button>
               </div>
             </div>
 
             {/* Privacy setting */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-2xl md:text-2xl'>
-                Privacy Setting
+              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
+                {t('profile-tab.privacy-set')}
               </h1>
               <div className='w-full my-5 p-5 h-fit flex justify-between items-center flex-wrap bg-[#EBEBEB] rounded-xl  '>
                 <div
@@ -300,8 +301,8 @@ export default function ProfileTab() {
                  flex-1 w-full
                 '
                 >
-                  <div className='font-extrabold text-lg md:text-lg'>
-                    Password
+                  <div className='font-extrabold text-lg'>
+                    {t('profile-tab.password')}
                   </div>
                 </div>
 
@@ -314,7 +315,7 @@ export default function ProfileTab() {
                 mt-2 md:mt-0
               '
                 >
-                  Change Password
+                  {t('profile-tab.changePass-btn')}
                 </button>
               </div>
             </div>
@@ -323,11 +324,11 @@ export default function ProfileTab() {
               <button
                 onClick={() => {
                   showConfirmModal({
-                    title: "Logout",
-                    subtitle: "Are you sure you want to logout?",
+                    title: t('logout-modal.logout'),
+                    subtitle: t('logout-modal.logout-text'),
                     onConfirm: () => {
                       handleLogout();
-                    },
+                    }
                   });
                 }}
                 className='
@@ -338,7 +339,7 @@ export default function ProfileTab() {
                 transition-colors duration-300
               '
               >
-                Logout
+                {t('profile-tab.logout-btn')}
               </button>
             </div>
           </motion.div>

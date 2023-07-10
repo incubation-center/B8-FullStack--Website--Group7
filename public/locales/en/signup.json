@@ -1,0 +1,33 @@
+{
+  "title": "Create an account",
+
+  "username": "Username",
+  "email": "Email Address",
+  "password": "Password",
+  "cfm-password": "Confirm Password",
+  "phone": "Phone Number",
+
+  "username-placeholder": "Please enter your username",
+  "email-placeholder": "Please enter your email address",
+  "password-placeholder": "Please enter your password",
+  "cfm-password-placeholder": "Please enter your username",
+  "phone-placeholder": "Please enter your username",
+
+  "email-required-alert": "Email is required",
+  "user-required-alert": "Username is required",
+  "password-required-alert": "Password is required",
+  "cfm-password-required-alert": "Confirm Password is required",
+  "phone-required-alert": "Phone number is required",
+  "invalid-password-alert": "Password must be at least 8 characters long",
+  "password-not-matched": "Confirm password do not match",
+  "invalid-phone-alert": "Phone number must be at least 9 characters long",
+
+  "sign-up": "Sign Up",
+  "signing-up-btn": "Signing Up",
+
+  "error-tap": {
+    "error": "Error",
+    "error-occur-text": "An error occurred while registering your account",
+    "try-again": "Please try again later"
+  }
+}

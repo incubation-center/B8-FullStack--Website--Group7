@@ -11,8 +11,11 @@ import { useState } from 'react';
 import { BookRequest, RequestStatus } from '@/types';
 import { AdminTab } from '@/utils/enum';
 
-import { useRecoilValue } from 'recoil';
-import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  AdminAllRequestAtom,
+  isRefreshingRequestAtom
+} from '@/service/recoil/admin';
 import useConfirmModal from '@/components/Modals/useCofirm';
 import useConfirmRejectModal from '@/components/Modals/useReject';
 import {
@@ -20,6 +23,7 @@ import {
   rejectIncomingRequest
 } from '@/service/api/admin';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { AxiosError } from 'axios';
 
 export default function IncomingTab({
   handleRefreshRequest
@@ -27,6 +31,8 @@ export default function IncomingTab({
   handleRefreshRequest: () => void;
 }) {
   const requestData = useRecoilValue(AdminAllRequestAtom);
+
+  const [_, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
   const { toggle, ModalWrapper } = useModal();
@@ -47,11 +53,16 @@ export default function IncomingTab({
       });
     } catch (err) {
       console.log(err);
-      showAlert({
-        title: 'Error',
-        subtitle: 'Something went wrong. Please try again later.',
-        type: AlertType.ERROR
-      });
+      if (err instanceof AxiosError) {
+        showAlert({
+          title: 'Error',
+          subtitle:
+            err.response?.data.error ||
+            'Something went wrong. Please try again later.',
+          type: AlertType.ERROR,
+          onModalClose: () => handleRefreshRequest()
+        });
+      }
     }
   };
 
@@ -67,11 +78,16 @@ export default function IncomingTab({
       });
     } catch (err) {
       console.log(err);
-      showAlert({
-        title: 'Error',
-        subtitle: 'Something went wrong. Please try again later.',
-        type: AlertType.ERROR
-      });
+      if (err instanceof AxiosError) {
+        showAlert({
+          title: 'Error',
+          subtitle:
+            err.response?.data.error ||
+            'Something went wrong. Please try again later.',
+          type: AlertType.ERROR,
+          onModalClose: () => handleRefreshRequest()
+        });
+      }
     }
   };
 
@@ -110,7 +126,10 @@ export default function IncomingTab({
                 showConfirmModal({
                   title: 'Approve Request',
                   subtitle: 'Are you sure you want to approve this request?',
-                  onConfirm: () => handleApproveRequest(request)
+                  onConfirm: () => {
+                    setIsRefreshing(true);
+                    handleApproveRequest(request);
+                  }
                 });
               }
             },
@@ -121,7 +140,10 @@ export default function IncomingTab({
                 showRejectModal({
                   title: 'Reject Request',
                   subtitle: 'Are you sure you want to reject this request?',
-                  onConfirm: (reason) => handleRejectRequest(reason, request)
+                  onConfirm: (reason) => {
+                    setIsRefreshing(true);
+                    handleRejectRequest(reason, request);
+                  }
                 });
               }
             }

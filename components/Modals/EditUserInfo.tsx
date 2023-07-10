@@ -1,15 +1,16 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-import { AlertType, AlertModalTextType } from "./Alert";
-import { User } from "@/types";
-import CustomInput from "../login/CustomInput";
-import { updateUserInfo } from "@/service/api/user";
-import { useState } from "react";
-import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
-import { useRecoilState } from "recoil";
-import { AuthAtom } from "@/service/recoil";
+import { AlertType, AlertModalTextType } from './Alert';
+import { User } from '@/types';
+import CustomInput from '../login/CustomInput';
+import { updateUserInfo } from '@/service/api/user';
+import { useState } from 'react';
+import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import { useRecoilState } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
+import { useTranslation } from 'next-i18next';
 
 interface EditUserInfoInputs {
   username: string;
@@ -20,19 +21,21 @@ interface EditUserInfoInputs {
 export default function EditUserInfo({
   userInfo,
   close,
-  showAlert,
+  showAlert
 }: {
   userInfo: User;
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
+  const { t } = useTranslation('homepage');
+
   const [isUpdating, setIsUpdating] = useState(false);
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<EditUserInfoInputs>();
 
   const onSubmit: SubmitHandler<EditUserInfoInputs> = async (data) => {
@@ -42,19 +45,19 @@ export default function EditUserInfo({
 
       setAuthStore({
         ...authStore,
-        user: res.data,
+        user: res.data
       });
 
       close();
       showAlert({
-        title: "Your Information have been updated!",
-        subtitle: "Thank you!",
-        type: AlertType.SUCCESS,
+        title: t('information-update.info-update-text'),
+        subtitle: t('information-update.thank-you'),
+        type: AlertType.SUCCESS
       });
     } catch (err) {
-      console.log("====================================");
+      console.log('====================================');
       console.log(err);
-      console.log("====================================");
+      console.log('====================================');
       setIsUpdating(false);
     }
   };
@@ -69,26 +72,26 @@ export default function EditUserInfo({
       <form onSubmit={handleSubmit(onSubmit)}>
         <motion.div
           animate={{
-            height: "auto",
+            height: 'auto'
           }}
           transition={{
-            duration: 0.5,
+            duration: 0.5
           }}
           className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
         >
           <h1 className='text-2xl font-bold text-primary'>
-            Personal Information
+            {t('edit-modal.personal-info')}
           </h1>
 
           {/* User Information */}
           <div className='w-full text-left space-y-4'>
             <CustomInput
-              label='Username'
+              label={t('edit-modal.username')}
               name='username'
               type='text'
               defaultValue={userInfo.username}
-              register={register("username", {
-                required: "Username cannot be empty",
+              register={register('username', {
+                required: 'Username cannot be empty'
               })}
               error={errors.username}
               labelClassName='text-primary ml-4 font-medium text-lg'
@@ -96,12 +99,12 @@ export default function EditUserInfo({
             />
 
             <CustomInput
-              label='Email'
+              label={t('edit-modal.email')}
               name='email'
               type='email'
               defaultValue={userInfo.email}
-              register={register("email", {
-                required: "Email cannot be empty",
+              register={register('email', {
+                required: 'Email cannot be empty'
               })}
               error={errors.email}
               labelClassName='text-primary ml-4 font-medium text-lg'
@@ -109,12 +112,12 @@ export default function EditUserInfo({
             />
 
             <CustomInput
-              label='Phone Number'
+              label={t('edit-modal.phone-number')}
               name='phoneNumber'
               type='tel'
               defaultValue={userInfo.phoneNumber}
-              register={register("phoneNumber", {
-                required: "Phone Number cannot be empty",
+              register={register('phoneNumber', {
+                required: 'Phone Number cannot be empty'
               })}
               error={errors.phoneNumber}
               labelClassName='text-primary ml-4 font-medium '
@@ -132,7 +135,7 @@ export default function EditUserInfo({
               bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
             '
               >
-                Cancel
+                {t('edit-modal.cancel-btn')}
               </button>
             )}
 
@@ -140,17 +143,17 @@ export default function EditUserInfo({
             <button
               className={`
             bg-primary rounded-full text-white py-2 px-4 w-full 
-            ${!isUpdating ? "md:w-40" : "md:w-80 bg-opacity-80"}
+            ${!isUpdating ? 'md:w-40' : 'md:w-80 bg-opacity-80'}
          `}
               type='submit'
               disabled={isUpdating}
             >
               {!isUpdating ? (
-                <div>save</div>
+                <div> {t('edit-modal.save-btn')}</div>
               ) : (
                 <div className='flex gap-2 justify-center items-center'>
                   <SpinningLoadingSvg className='inline-block w-6 h-6 mr-2' />
-                  <span>Updating your information</span>
+                  <span>{t('edit-modal.updating-info')}</span>
                 </div>
               )}
             </button>

@@ -1,19 +1,21 @@
-"use client";
-import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+'use client';
+import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 const useAlertModal = () => {
+  const { t } = useTranslation('common');
   const [isShowing, setIsShowing] = useState(false);
   const [{ title, subtitle, type, isClosable, onModalClose }, setModalText] =
     useState<AlertModalTextType>({
-      title: "",
-      subtitle: "",
+      title: '',
+      subtitle: '',
       type: null,
       isClosable: true,
-      onModalClose: () => {},
+      onModalClose: () => {}
     });
 
   // close modal
@@ -33,7 +35,7 @@ const useAlertModal = () => {
     subtitle,
     type,
     isClosable,
-    onModalClose,
+    onModalClose
   }: AlertModalTextType) {
     // set text
 
@@ -42,7 +44,7 @@ const useAlertModal = () => {
       subtitle,
       type,
       isClosable: isClosable !== undefined ? isClosable : true,
-      onModalClose: onModalClose ?? (() => {}),
+      onModalClose: onModalClose ?? (() => {})
     });
 
     open();
@@ -50,9 +52,9 @@ const useAlertModal = () => {
 
   // modal image variants
   const imagePath = {
-    success: "/icon/success.svg",
-    error: "/icon/fail.png",
-    warning: "/icon/stop-hand.png",
+    success: '/icon/success.svg',
+    error: '/icon/fail.png',
+    warning: '/icon/stop-hand.png'
   };
 
   // frame motion variants
@@ -60,18 +62,18 @@ const useAlertModal = () => {
     hidden: {
       opacity: 0,
       y: -100,
-      scale: 0,
+      scale: 0
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
+      scale: 1
     },
     exit: {
       opacity: 0,
       y: -100,
-      scale: 0,
-    },
+      scale: 0
+    }
   };
 
   // modal component
@@ -81,7 +83,7 @@ const useAlertModal = () => {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-      ref.current = document.querySelector<HTMLElement>("#modal-root");
+      ref.current = document.querySelector<HTMLElement>('#modal-root');
       setMounted(true);
     }, []);
 
@@ -115,13 +117,13 @@ const useAlertModal = () => {
                   animate='visible'
                   exit='exit'
                   transition={{
-                    type: "spring",
+                    type: 'spring',
                     damping: 20,
-                    stiffness: 200,
+                    stiffness: 200
                   }}
                 >
                   <Image
-                    src={imagePath[type ?? "success"]}
+                    src={imagePath[type ?? 'success']}
                     width={80}
                     height={80}
                     alt='successful icon'
@@ -142,11 +144,11 @@ const useAlertModal = () => {
                       className='
                         px-10 py-2 mt-8 rounded-full
                         text-primary font-bold
-                        focus:outline outline-2 outline-black  outline-offset-2
+                        hover:bg-primary hover:bg-opacity-20
                       '
                       onClick={close}
                     >
-                      Close
+                      {t('modal.close-btn')}
                     </button>
                   )}
                 </motion.div>
@@ -161,15 +163,15 @@ const useAlertModal = () => {
   return {
     AlertModal, // modal component
     showAlert, // alert service
-    onModalClose: close, // close modal
+    onModalClose: close // close modal
   };
 };
 
 // modal types
 export enum AlertType {
-  SUCCESS = "success",
-  ERROR = "error",
-  WARNING = "warning",
+  SUCCESS = 'success',
+  ERROR = 'error',
+  WARNING = 'warning'
 }
 
 export type AlertModalTextType = {

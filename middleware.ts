@@ -13,14 +13,24 @@ export async function middleware(request: NextRequest) {
   // url
   const url = request.nextUrl.clone();
 
+  // condition
+  const isPublicRoute = url.pathname === '/';
+  const isBookRouter = url.pathname.startsWith('/book');
+  const isAuthRoute = url.pathname.startsWith('/auth');
+  const isAdminRoute = url.pathname.startsWith('/admin');
+
+  // if public route, do nothing
+  if (isPublicRoute) return;
+
+  // if book route, do nothing
+  if (isBookRouter) return;
+
   // get token from cookie
   const accessToken = decodeToken(
     request.cookies.get('accessToken')?.value ?? ''
   );
 
-  // condition
-  const isAuthRoute = url.pathname.startsWith('/auth');
-  const isAdminRoute = url.pathname.startsWith('/admin');
+  const locale = request.cookies.get('NEXT_LOCALE')?.value ?? 'en';
 
   // if logged in, redirect to homepage page
   if (isAuthRoute) {
@@ -31,7 +41,7 @@ export async function middleware(request: NextRequest) {
     );
 
     if (tokenValidation) {
-      return NextResponse.redirect(new URL('/', request.nextUrl).href);
+      return NextResponse.redirect(new URL(`/${locale}`, request.nextUrl).href);
     }
 
     return;
@@ -39,7 +49,7 @@ export async function middleware(request: NextRequest) {
     // in case, user try to access admin route via url
     if (!accessToken) {
       return NextResponse.redirect(
-        new URL('/unauthorized-page', request.nextUrl).href
+        new URL(`/${locale}/unauthorized-page`, request.nextUrl).href
       );
     }
 
@@ -47,7 +57,7 @@ export async function middleware(request: NextRequest) {
     const adminValidation = isUserAdmin((accessToken as Token).value);
     if (!adminValidation) {
       return NextResponse.redirect(
-        new URL('/unauthorized-page', request.nextUrl).href
+        new URL(`/${locale}/unauthorized-page`, request.nextUrl).href
       );
     }
 

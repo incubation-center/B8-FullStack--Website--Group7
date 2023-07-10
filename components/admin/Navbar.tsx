@@ -4,6 +4,16 @@ import Image from 'next/image';
 import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
 import Link from 'next/link';
+import { HTMLAttributes } from 'react';
+import DahboardSvg from '../icon/admin-sidebar/DashboardSvg';
+import UploadSvg from '../icon/admin-sidebar/UploadSvg';
+import BooksSvg from '../icon/admin-sidebar/BooksSvg';
+import IncomingSvg from '../icon/admin-sidebar/IncomingSvg';
+import ActiveSvg from '../icon/admin-sidebar/ActiveSvg';
+import ArchivedSvg from '../icon/admin-sidebar/ArchivedSvg';
+import RenterSvg from '../icon/admin-sidebar/RenterSvg';
+import SettingSvg from '../icon/admin-sidebar/SettingSvg';
+import { useRouter } from 'next/router';
 
 export default function Navbar({
   currentTab,
@@ -12,6 +22,8 @@ export default function Navbar({
   currentTab: AdminTab;
   handlePageRouting: (tab: AdminTab) => void;
 }) {
+  const { locale } = useRouter();
+
   const handleTranslate = () => {
     switch (currentTab) {
       case AdminTab.DASHBOARD:
@@ -57,56 +69,56 @@ export default function Navbar({
       <div className='relative px-2'>
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
-          iconPath='/icon/admin-sidebar/dashboard.svg'
+          tab={AdminTab.DASHBOARD}
           isCurrentTab={currentTab === AdminTab.DASHBOARD}
           onClick={() => handlePageRouting(AdminTab.DASHBOARD)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.UPLOAD)}
-          iconPath='/icon/admin-sidebar/upload.svg'
+          tab={AdminTab.UPLOAD}
           isCurrentTab={currentTab === AdminTab.UPLOAD}
           onClick={() => handlePageRouting(AdminTab.UPLOAD)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.BOOKS)}
-          iconPath='/icon/admin-sidebar/book_admin.svg'
+          tab={AdminTab.BOOKS}
           isCurrentTab={currentTab === AdminTab.BOOKS}
           onClick={() => handlePageRouting(AdminTab.BOOKS)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.INCOMING_REQUEST)}
-          iconPath='/icon/admin-sidebar/incoming.svg'
+          tab={AdminTab.INCOMING_REQUEST}
           isCurrentTab={currentTab === AdminTab.INCOMING_REQUEST}
           onClick={() => handlePageRouting(AdminTab.INCOMING_REQUEST)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.ACTIVE_REQUEST)}
-          iconPath='/icon/admin-sidebar/active.svg'
+          tab={AdminTab.ACTIVE_REQUEST}
           isCurrentTab={currentTab === AdminTab.ACTIVE_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ACTIVE_REQUEST)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.ARCHIVED_REQUEST)}
-          iconPath='/icon/admin-sidebar/archived.svg'
+          tab={AdminTab.ARCHIVED_REQUEST}
           isCurrentTab={currentTab === AdminTab.ARCHIVED_REQUEST}
           onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.RENTER)}
-          iconPath='/icon/admin-sidebar/renter.svg'
+          tab={AdminTab.RENTER}
           isCurrentTab={currentTab === AdminTab.RENTER}
           onClick={() => handlePageRouting(AdminTab.RENTER)}
         />
 
         <NavbarBtn
           title={formatEnumValue(AdminTab.SETTING)}
-          iconPath='/icon/admin-sidebar/setting.svg'
+          tab={AdminTab.SETTING}
           isCurrentTab={currentTab === AdminTab.SETTING}
           onClick={() => handlePageRouting(AdminTab.SETTING)}
         />
@@ -127,10 +139,11 @@ export default function Navbar({
         href='/'
         className='
           w-full bg-action text-primary font-bold
-          rounded-xl p-2 px-4
+          rounded-full p-2 px-4
           flex items-center justify-center cursor-pointer 
           hover:shadow-xl
         '
+        locale={locale}
       >
         Back to Home
       </Link>
@@ -140,13 +153,12 @@ export default function Navbar({
 
 function NavbarBtn({
   title,
-  iconPath,
-
+  tab,
   isCurrentTab,
   onClick
 }: {
   title: string;
-  iconPath: string;
+  tab: AdminTab;
   isCurrentTab?: boolean;
   onClick: () => void;
 }) {
@@ -162,13 +174,104 @@ function NavbarBtn({
       `}
       onClick={onClick}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={iconPath}
-        alt={title}
-        className='transition-all duration-300 w-6'
-      />
+      <NavbarIcon tab={tab} isCurrent={isCurrentTab as boolean} />
       <div className='ml-[12px] font-bold'>{title}</div>
     </div>
   );
+}
+
+function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
+  switch (tab) {
+    case AdminTab.DASHBOARD:
+      return (
+        <DahboardSvg
+          className={`h-6 w-6 ${
+            isCurrent
+              ? 'fill-primary stroke-primary delay-300'
+              : 'fill-secondary stroke-secondary'
+          }
+          transition-all 
+          `}
+        />
+      );
+    case AdminTab.UPLOAD:
+      return (
+        <UploadSvg
+          className={`h-6 w-6 ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+          transition-all  
+          
+          `}
+        />
+      );
+    case AdminTab.BOOKS:
+      return (
+        <BooksSvg
+          className={`h-6 w-6 ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+            transition-all   
+          `}
+        />
+      );
+    case AdminTab.INCOMING_REQUEST:
+      return (
+        <IncomingSvg
+          className={`h-6 w-6 ${
+            isCurrent
+              ? 'fill-primary stroke-primary delay-300'
+              : 'fill-secondary stroke-secondary'
+          }
+          transition-all 
+
+          `}
+        />
+      );
+    case AdminTab.ACTIVE_REQUEST:
+      return (
+        <ActiveSvg
+          className={`h-6 w-6 ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.ARCHIVED_REQUEST:
+      return (
+        <ArchivedSvg
+          className={`h-6 w-6 ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+          transition-all 
+        `}
+        />
+      );
+    case AdminTab.RENTER:
+      return (
+        <RenterSvg
+          className={`h-6 w-6 ${
+            isCurrent
+              ? 'fill-primary stroke-primary delay-300'
+              : 'fill-secondary stroke-secondary'
+          }
+        transition-all 
+      `}
+        />
+      );
+
+    case AdminTab.SETTING:
+      return (
+        <SettingSvg
+          className={`h-6 w-6 ${
+            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+          }
+        transition-all 
+      `}
+        />
+      );
+  }
+
+  return null;
 }

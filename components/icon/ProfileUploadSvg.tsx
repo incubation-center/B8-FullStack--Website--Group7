@@ -10,6 +10,7 @@ export default function ProfileUploadSvg({
   return (
     <div className={className}>
       <svg
+        className={className}
         width='max-content'
         height='max-content'
         viewBox='0 0 18 16'
