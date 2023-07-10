@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import CustomInput from '../login/CustomInput';
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+import CustomInput from "../login/CustomInput";
 
 export interface ConfirmRejectModal {
   title: string;
@@ -21,10 +21,10 @@ export default function useConfirmRejectModal() {
   const [isShowing, setIsShowing] = useState(false);
   const [{ title, subtitle, isClosable, onConfirm }, initModal] =
     useState<ConfirmRejectModal>({
-      title: '',
-      subtitle: '',
+      title: "",
+      subtitle: "",
       isClosable: true,
-      onConfirm: (reason) => {}
+      onConfirm: (reason) => {},
     });
 
   // close modal
@@ -40,7 +40,7 @@ export default function useConfirmRejectModal() {
   function showRejectModal(props: ConfirmRejectModal) {
     initModal({
       ...props,
-      isClosable: props.isClosable ? props.isClosable : true
+      isClosable: props.isClosable ? props.isClosable : true,
     });
 
     open();
@@ -51,18 +51,18 @@ export default function useConfirmRejectModal() {
     hidden: {
       opacity: 0,
       y: -100,
-      scale: 0
+      scale: 0,
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1
+      scale: 1,
     },
     exit: {
       opacity: 0,
       y: -100,
-      scale: 0
-    }
+      scale: 0,
+    },
   };
 
   // modal component
@@ -72,14 +72,14 @@ export default function useConfirmRejectModal() {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-      ref.current = document.querySelector<HTMLElement>('#modal-root');
+      ref.current = document.querySelector<HTMLElement>("#modal-root");
       setMounted(true);
     }, []);
 
     const {
       register,
       handleSubmit,
-      formState: { errors }
+      formState: { errors },
     } = useForm<RejectInputs>();
 
     const onSubmit: SubmitHandler<RejectInputs> = async ({ reason }) => {
@@ -102,7 +102,7 @@ export default function useConfirmRejectModal() {
                 >
                   <div
                     className={`absolute h-screen w-screen bg-black bg-opacity-40 z-[99999] ${
-                      isClosable && 'cursor-pointer'
+                      isClosable && "cursor-pointer"
                     }`}
                     onClick={isClosable ? close : undefined}
                   />
@@ -121,16 +121,16 @@ export default function useConfirmRejectModal() {
                     animate='visible'
                     exit='exit'
                     transition={{
-                      type: 'spring',
+                      type: "spring",
                       damping: 20,
-                      stiffness: 200
+                      stiffness: 200,
                     }}
                   >
                     <div>
                       <h1 className='font-bold text-xl lg:text-2xl text-primary'>
                         {title}
                       </h1>
-                      <p className='font-medium text-primary whitespace-pre-line'>
+                      <p className='font-medium text-primary whitespace-pre-line mt-3'>
                         {subtitle}
                       </p>
                     </div>
@@ -141,10 +141,10 @@ export default function useConfirmRejectModal() {
                         required
                         name='reason'
                         type='textfield'
-                        labelClassName='text-primary font-medium'
+                        labelClassName='text-primary font-bold'
                         errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
-                        register={register('reason', {
-                          required: 'reject reason is required'
+                        register={register("reason", {
+                          required: "reject reason is required",
                         })}
                         error={errors.reason}
                         placeholder='Please input your reason'
@@ -185,6 +185,6 @@ export default function useConfirmRejectModal() {
 
   return {
     ConfirmRejectModal,
-    showRejectModal
+    showRejectModal,
   };
 }

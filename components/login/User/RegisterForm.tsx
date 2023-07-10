@@ -67,14 +67,16 @@ export default function UserRegisterForm({}) {
   return (
     <>
       <AlertModal />
-      <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center '>
-        <h1 className='text-4xl font-extrabold text-alt-secondary'>
+      <div className=' space-y-8 text-center flex flex-col items-center '>
+        <h1 className='text-2xl font-extrabold text-alt-secondary'>
           {t('title')}
         </h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-full space-y-4'
+          className='min-w-[300px] lg:min-w-[500px] space-y-1 lg:space-y-4
+          
+          '
           autoComplete='off'
         >
           <CustomInput
@@ -105,40 +107,42 @@ export default function UserRegisterForm({}) {
             disabled={isRegistering}
           />
 
-          <PasswordInput
-            register={register('password', {
-              required: t('password-required-alert'),
-              minLength: {
-                value: 8,
-                message: t('invalid-password-alert')
-              }
-            })}
-            error={errors.password}
-            name='password'
-            placeholder={t('password-placeholder')}
-            label={t('password')}
-            labelClassName='text-alt-secondary ml-4 font-medium'
-            errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
-            disabled={isRegistering}
-          />
-
-          <PasswordInput
-            register={register('confirmPassword', {
-              required: t('cfm-password-required-alert'),
-              validate: (val: string) => {
-                if (watch('password') != val) {
-                  return t('password-not-matched');
+          <div className='flex flex-col md:flex-row gap-2'>
+            <PasswordInput
+              register={register('password', {
+                required: t('password-required-alert'),
+                minLength: {
+                  value: 8,
+                  message: t('invalid-password-alert')
                 }
-              }
-            })}
-            error={errors.confirmPassword}
-            name='confirmPassword'
-            placeholder={t('cfm-password-placeholder')}
-            label={t('cfm-password')}
-            labelClassName='text-alt-secondary ml-4 font-medium'
-            errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
-            disabled={isRegistering}
-          />
+              })}
+              error={errors.password}
+              name='password'
+              placeholder={t('password-placeholder')}
+              label={t('password')}
+              labelClassName='text-alt-secondary ml-4 font-medium'
+              errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
+              disabled={isRegistering}
+            />
+
+            <PasswordInput
+              register={register('confirmPassword', {
+                required: t('cfm-password-required-alert'),
+                validate: (val: string) => {
+                  if (watch('password') != val) {
+                    return t('password-not-matched');
+                  }
+                }
+              })}
+              error={errors.confirmPassword}
+              name='confirmPassword'
+              placeholder={t('cfm-password-placeholder')}
+              label={t('cfm-password')}
+              labelClassName='text-alt-secondary ml-4 font-medium'
+              errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
+              disabled={isRegistering}
+            />
+          </div>
 
           <CustomInput
             register={register('phoneNumber', {

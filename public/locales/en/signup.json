@@ -1,5 +1,5 @@
 {
-  "title": "Create an account",
+  "title": "Create an Account",
 
   "username": "Username",
   "email": "Email Address",
@@ -10,7 +10,7 @@
   "username-placeholder": "Please enter your username",
   "email-placeholder": "Please enter your email address",
   "password-placeholder": "Please enter your password",
-  "cfm-password-placeholder": "Please enter your username",
+  "cfm-password-placeholder": "confirm your password",
   "phone-placeholder": "Please enter your username",
 
   "email-required-alert": "Email is required",

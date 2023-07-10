@@ -227,7 +227,7 @@ export default function UploadTab({
                 />
               </div>
 
-              <div className='w-full space-y-6 mt-4'>
+              <div className='w-full space-y-6 mt-4 text-lg'>
                 {/* book title */}
                 <div className='grid gap-4 grid-cols-4'>
                   <div>

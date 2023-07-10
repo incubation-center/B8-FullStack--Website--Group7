@@ -94,7 +94,7 @@ export default function BorrowBook({
             <div>
               <label
                 htmlFor='bookTitle'
-                className='ml-4 font-medium text-primary'
+                className='ml-4 font-medium text-primary text-lg'
               >
                 {t('modal.borrow.book-title')}
               </label>
@@ -114,7 +114,7 @@ export default function BorrowBook({
             </div>
 
             <div>
-              <h1 className='ml-4 font-medium text-primary '>
+              <h1 className='ml-4 font-medium text-primary text-lg'>
                 {t('modal.borrow.book-duration')}
               </h1>
               <Listbox
@@ -141,19 +141,14 @@ export default function BorrowBook({
                       />
                     </Listbox.Button>
 
-                    <motion.div
-                      layout
-                      animate={{
-                        height: 'auto'
-                      }}
-                    >
+                    <motion.div layout>
                       <Listbox.Options
                         className='
-                          w-full mt-2 rounded-2xl overflow-clip
-                          bg-white
-                          placeholder-[#9D9C9C] 
-                          focus:outline-none
-                        '
+                      w-full mt-2 rounded-2xl overflow-clip
+                      bg-white
+                      placeholder-[#9D9C9C] 
+                      focus:outline-none
+                    '
                       >
                         <motion.div
                           key={selectedDuration.label}
@@ -206,7 +201,7 @@ export default function BorrowBook({
               <button
                 onClick={close}
                 className='
-                bg-danger rounded-lg text-white py-2 px-4 w-full md:w-40
+                bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
               '
               >
                 {t('btns.cancel-btn')}
@@ -215,7 +210,7 @@ export default function BorrowBook({
             {/* submit button */}
             <button
               className={`
-                bg-primary rounded-lg text-white py-2 px-4 w-full md:w-1/3
+                bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
                 ${isRequestingBook && 'cursor-not-allowed'}
               `}
               onClick={handleBorrowBook}

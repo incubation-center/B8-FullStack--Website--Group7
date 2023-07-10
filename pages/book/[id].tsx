@@ -286,9 +286,9 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   <button
                     onClick={() => open()}
                     className={`
-                    bg-secondary text-white 
-                    ${isKhmer ? 'font-medium' : 'font-bold'} 
-                    py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10`}
+                      bg-secondary text-white 
+                      ${isKhmer ? 'font-medium' : 'font-bold'} 
+                      py-4 md:py-2 px-4 w-full md:w-40 rounded-full my-10`}
                   >
                     {t('btns.borrow-btn')}
                   </button>

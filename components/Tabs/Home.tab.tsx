@@ -107,41 +107,44 @@ export default function HomeTab({
     });
   }, 300);
 
-  useEffect(() => {
-    // get category from url
-    const categoryKey = router.asPath.split('#')[1];
+  useEffect(
+    useDebounce(() => {
+      // get category from url
+      const categoryKey = router.asPath.split('#')[1];
 
-    if (categoryKey) {
-      const category =
-        BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
+      if (categoryKey) {
+        const category =
+          BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
-      setCurrentCategory(category);
-    } else {
-      setCurrentCategory(BookCategory.EDUCATION);
+        setCurrentCategory(category);
+      } else {
+        setCurrentCategory(BookCategory.EDUCATION);
 
-      if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
-    }
+        if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
+      }
 
-    // setBooks(books);
-    if (allBooks.length === 0) {
-      setIsFetchingBooks(true);
-      getAllBooks()
-        .then((books) => {
-          setAllBooks(books);
-          setIsFetchingBooks(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setAllBooks(BookData);
-          setIsFetchingBooks(false);
-        });
-    }
+      // setBooks(books);
+      if (allBooks.length === 0) {
+        setIsFetchingBooks(true);
+        getAllBooks()
+          .then((books) => {
+            setAllBooks(books);
+            setIsFetchingBooks(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setAllBooks(BookData);
+            setIsFetchingBooks(false);
+          });
+      }
 
-    return () => {
-      setCurrentCategory(BookCategory.EDUCATION);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      return () => {
+        setCurrentCategory(BookCategory.EDUCATION);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, 100),
+    []
+  );
 
   return (
     <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
@@ -154,7 +157,7 @@ export default function HomeTab({
           sticky top-0 z-10 py-4
         '
         >
-          <div className='w-full flex flex-nowrap h-[40px]  items-center'>
+          <div className='w-full flex flex-nowrap h-[40px] items-center'>
             {Object.keys(BookCategory).map((category: any) => {
               const key = category as keyof typeof BookCategory;
               const value = BookCategory[key];
@@ -194,6 +197,8 @@ export default function HomeTab({
         {isFetchingBooks && (
           // fetching books skeleton
           <>
+            <BookSectionSkeleton />
+            <BookSectionSkeleton />
             <BookSectionSkeleton />
             <BookSectionSkeleton />
           </>
@@ -390,7 +395,7 @@ function BookSection({
         element to scroll to{' '}
       </div>
       {/* title */}
-      <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 whitespace-nowrap'>
+      <h1 className='w-1/3 text-xl md:text-2xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap'>
         {label}
       </h1>
 
@@ -431,7 +436,7 @@ function BookSection({
 
               <button
                 className='
-                bg-secondary text-white font-light
+                bg-secondary text-white font-light text-small text-base
                 rounded-full py-1 px-2 w-32 mx-auto
               '
                 onClick={() => handleBookClick(book)}

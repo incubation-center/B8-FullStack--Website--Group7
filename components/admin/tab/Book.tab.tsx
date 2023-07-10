@@ -35,7 +35,7 @@ export default function BookTab() {
   }, 100);
 
   return (
-    <AdminTabLayout title='Books' handleRefresh={handleRefreshBook}>
+    <AdminTabLayout title='Books Lists' handleRefresh={handleRefreshBook}>
       <div className='w-full flex justify-start mb-4 '>
         <UserSearchBar currentTab={HomePageTab.HOME} />
       </div>

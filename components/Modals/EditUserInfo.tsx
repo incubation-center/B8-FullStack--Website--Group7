@@ -94,7 +94,7 @@ export default function EditUserInfo({
                 required: 'Username cannot be empty'
               })}
               error={errors.username}
-              labelClassName='text-primary ml-4 font-medium'
+              labelClassName='text-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
 
@@ -107,7 +107,7 @@ export default function EditUserInfo({
                 required: 'Email cannot be empty'
               })}
               error={errors.email}
-              labelClassName='text-primary ml-4 font-medium'
+              labelClassName='text-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
 
@@ -120,7 +120,7 @@ export default function EditUserInfo({
                 required: 'Phone Number cannot be empty'
               })}
               error={errors.phoneNumber}
-              labelClassName='text-primary ml-4 font-medium'
+              labelClassName='text-primary ml-4 font-medium '
               disabled={isUpdating}
             />
           </div>

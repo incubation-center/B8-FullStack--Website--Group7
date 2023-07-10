@@ -1,8 +1,8 @@
-import { BookRequest } from '@/types';
+import { BookRequest } from "@/types";
 
 export default function RenterTable({
   data,
-  actions
+  actions,
 }: {
   data: BookRequest[];
   actions: {
@@ -24,8 +24,8 @@ export default function RenterTable({
         >
           <td className='w-1/5'>Name</td>
           <td className='w-2/5'>Email</td>
-          <td className='w-1/5'>Approval date</td>
-          <td className='w-1/5'>Return date</td>
+          <td className='w-1/5'>Approval Date</td>
+          <td className='w-1/5'>Return Date</td>
           <td className='w-fit'>Actions</td>
         </tr>
       </thead>

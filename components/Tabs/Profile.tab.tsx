@@ -254,19 +254,25 @@ export default function ProfileTab() {
                     <div className='font-extrabold'>
                       {t('profile-tab.username')}
                     </div>
-                    <div>{authStore.user.username}</div>
+                    <div className='mt-2 text-lg'>
+                      {authStore.user.username}
+                    </div>
                   </div>
                   <div className=' text-primary text-lg flex-1   '>
-                    <div className=' font-extrabold'>
+                    <div className=' font-extrabold  text-lg'>
                       {t('profile-tab.phone number')}
                     </div>
-                    <div>{authStore.user.phoneNumber}</div>
+                    <div className='mt-2 text-lg'>
+                      {authStore.user.phoneNumber}
+                    </div>
                   </div>
-                  <div className=' text-primary text-start text-lg  flex-1  '>
-                    <div className=' font-extrabold'>
+                  <div className=' text-primary text-start text-xl  flex-1  '>
+                    <div className=' font-extrabold text-lg md:text-lg'>
                       {t('profile-tab.email')}
                     </div>
-                    <div>{authStore.user.email}</div>
+                    <div className='mt-2 text-lg md:text-lg'>
+                      {authStore.user.email}
+                    </div>
                   </div>
                 </div>
 
@@ -297,7 +303,7 @@ export default function ProfileTab() {
                  flex-1 w-full
                 '
                 >
-                  <div className='font-extrabold'>
+                  <div className='font-extrabold text-lg'>
                     {t('profile-tab.password')}
                   </div>
                 </div>

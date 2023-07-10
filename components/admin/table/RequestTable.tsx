@@ -53,7 +53,7 @@ export default function RequestTable({
             key={request.requestId}
             className='
               border-b-2 border-primary
-              text-primary text-xl
+              text-primary text-lg
               w-full
               [&>td]:p-2
               [&>td]:whitespace-pre-wrap

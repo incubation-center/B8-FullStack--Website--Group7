@@ -29,10 +29,10 @@ export default function RequestTable({
         <tr
           className='
             border-b-2 border-primary 
-            font-bold text-base md:text-lg text-primary 
+            font-bold text-lg md:text-lg text-primary 
             text-center
-            [&>td]:py-4 w-full
-            [&<td]:w-fit 
+            [&>td]:py-4 w-full 
+            [&<td]:w-fit  text-center
           '
         >
           <td className='w-full text-left pl-2 whitespace-nowrap'>

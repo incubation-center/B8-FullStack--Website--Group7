@@ -93,7 +93,7 @@ export default function RequestStatusTab({
 
           {isFetched && filteredRequest.length === 0 && (
             <div className='w-full flex-1 flex flex-col justify-center items-center'>
-              <h1 className='text-center text-primary font-medium'>
+              <h1 className='text-center text-primary font-medium text-lg'>
                 {t('request-tab.no-request', 'You have no request')}
               </h1>
               <button

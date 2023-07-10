@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import AdminTabLayout from "@/components/layout/AdminTabLayout";
 
 export default function SettingTab() {
-  const [systemName, setSystemName] = useState('Kjey Book');
+  const [systemName, setSystemName] = useState("Kjey Book");
 
   return (
     <AdminTabLayout title='Setting'>
@@ -26,10 +26,10 @@ export default function SettingTab() {
           <SubSection
             title='Password'
             action={{
-              label: 'Change',
+              label: "Change",
               onClick: () => {
-                console.log('Change Password');
-              }
+                console.log("Change Password");
+              },
             }}
           >
             <div className='flex items-center space-x-2 text-primary text-opacity-70'>
@@ -40,10 +40,10 @@ export default function SettingTab() {
           <SubSection
             title='Activity log'
             action={{
-              label: 'View',
+              label: "View",
               onClick: () => {
-                console.log('View Activity Log');
-              }
+                console.log("View Activity Log");
+              },
             }}
           >
             <div className='flex items-center space-x-2 text-primary text-opacity-70'>
@@ -58,7 +58,7 @@ export default function SettingTab() {
 
 const Section = ({
   title,
-  children
+  children,
 }: {
   title: string;
   children: React.ReactNode;
@@ -74,7 +74,7 @@ const Section = ({
 const SubSection = ({
   title,
   action,
-  children
+  children,
 }: {
   title: string;
   action?: {

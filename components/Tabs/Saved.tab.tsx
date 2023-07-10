@@ -67,7 +67,7 @@ export default function SavedTab({
                   className='flex flex-col space-y-4'
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <div className='relative h-[250px] w-[200px] '>
+                  <div className='relative  h-[200px] w-[150px] '>
                     <Image
                       className='w-full h-full object-bottom object-contain'
                       src={book.bookImg}

@@ -131,10 +131,10 @@ const useAlertModal = () => {
                   />
 
                   <div>
-                    <h1 className='font-bold text-xl lg:text-2xl text-primary'>
+                    <h1 className='font-bold text-xl lg:text-2xl text-primary mt-2'>
                       {title}
                     </h1>
-                    <p className='font-medium text-primary whitespace-pre-line'>
+                    <p className='font-medium text-primary whitespace-pre-line mt-2'>
                       {subtitle}
                     </p>
                   </div>

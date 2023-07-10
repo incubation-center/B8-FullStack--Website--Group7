@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { UserLoginInputs } from '@/types/auth';
@@ -76,8 +77,8 @@ export default function UserLoginForm() {
     <>
       <AlertModal />
 
-      <div className='space-y-8 text-center flex flex-col items-center overflow-auto'>
-        <h1 className='text-4xl font-extrabold text-alt-secondary'>
+      <div className='space-y-4 text-center flex flex-col items-center overflow-auto'>
+        <h1 className='text-2xl font-extrabold text-alt-secondary'>
           {t('welcome-text')}
         </h1>
         <p className='text-alt-secondary'>{t('p-details-login-tab')}</p>
@@ -125,26 +126,25 @@ export default function UserLoginForm() {
             </Link>
           </div>
           {/* submit button */}
-          <div>
-            <button
-              type='submit'
-              className={`
+
+          <button
+            type='submit'
+            className={`
               w-full px-4 py-2 mt-6 rounded-full
               bg-secondary text-white text-xl tracking-wide 
               focus:outline-none
               ${isLoggingIn && 'cursor-not-allowed bg-opacity-50'}
             `}
-              disabled={isLoggingIn}
-            >
-              {!isLoggingIn && t('login-btn')}
-              {isLoggingIn && (
-                <div className='flex justify-center items-center'>
-                  <h1>{t('logging-in-btn')}</h1>
-                  <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
-                </div>
-              )}
-            </button>
-          </div>
+            disabled={isLoggingIn}
+          >
+            {!isLoggingIn && t('login-btn')}
+            {isLoggingIn && (
+              <div className='flex justify-center items-center'>
+                <h1>{t('logging-in-btn')}</h1>
+                <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
+              </div>
+            )}
+          </button>
         </form>
       </div>
     </>

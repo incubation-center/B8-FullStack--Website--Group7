@@ -123,7 +123,7 @@ export default function useConfirmModal() {
                     <h1 className='font-bold text-xl lg:text-2xl text-primary'>
                       {title}
                     </h1>
-                    <p className='font-medium text-primary whitespace-pre-line'>
+                    <p className='font-medium text-primary whitespace-pre-line mt-3'>
                       {subtitle}
                     </p>
                   </div>

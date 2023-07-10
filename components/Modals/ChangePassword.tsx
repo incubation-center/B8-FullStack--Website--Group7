@@ -91,7 +91,7 @@ export default function ChangePassword({
             name='currentPassword'
             placeholder={t('change-password-modal.password-placeholder')}
             label={t('change-password-modal.password')}
-            labelClassName='text-primary ml-4 font-medium'
+            labelClassName='text-primary ml-4 font-medium text-lg'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
           />
 
@@ -112,7 +112,7 @@ export default function ChangePassword({
             name='newPassword'
             placeholder={t('change-password-modal.new-password-placeholder')}
             label={t('change-password-modal.new-password')}
-            labelClassName='text-primary ml-4 font-medium'
+            labelClassName='text-primary ml-4 font-medium text-lg'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
           />
 
@@ -131,7 +131,7 @@ export default function ChangePassword({
               'change-password-modal.confirm-password-placeholder'
             )}
             label={t('change-password-modal.confirm-password')}
-            labelClassName='text-primary ml-4 font-medium'
+            labelClassName='text-primary ml-4 font-medium text-lg'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center '
           />
         </div>

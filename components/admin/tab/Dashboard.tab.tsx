@@ -76,8 +76,8 @@ export default function DashboardTab({
       </div>
 
       {/* Recent Renter*/}
-      <div className='w-full mt-4'>
-        <h1 className='text-primary text-xl font-bold'>Recent renter</h1>
+      <div className='w-full mt-5'>
+        <h1 className='text-primary text-2xl font-bold mb-5'>Recent renter</h1>
 
         <RenterTable
           data={requestData
