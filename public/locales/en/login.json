@@ -1,5 +1,5 @@
 {
-  "welcome-text": "Welcome to Kjey Book Library",
+  "welcome-text": "Welcome to Kjey Book",
   "p-details-login-tab": "Please enter your details",
 
   "email": "Email Address",
@@ -13,6 +13,7 @@
   "password-required-alert": "Password is required",
 
   "login-btn": "Login",
+  "logging-in-btn": "Logging in...",
 
   "invalid-credential-modal": {
     "invalid-credential-text": "Invalid Credentials!!",

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
@@ -24,19 +25,36 @@ export default function UserAuthentication({}) {
     <div
       className='
         h-full w-full bg-primary
-        grid grid-cols-1 md:grid-cols-2
-        p-4  
-        md:space-x-4
+        grid grid-cols-1 lg:grid-cols-2
+        p-4 md:space-x-4
         overflow-y-scroll
+
+        relative
       '
     >
       <div className='flex flex-col justify-center items-center'>
         <div
+          className='relative 
+          h-24 w-52
+          overflow-clip rounded-[20px]
+          hidden md:block lg:hidden
+         '
+        >
+          <Image
+            src='/bootcamp-logo.png'
+            alt='bookshelf'
+            fill
+            quality={100}
+            className='object-contain'
+            sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 100vw'
+            priority
+          />
+        </div>
+        <div
           className='
           flex flex-col justify-center items-center
-          h-fit w-fit
+          h-fit w-full
           overflow-y-scroll
-         
         '
         >
           {formState === 'login' && <UserLoginForm />}
@@ -79,26 +97,25 @@ export default function UserAuthentication({}) {
           </div>
         </div>
 
-        <div className='w-2/3 max-w-[300px] mt-4'>
+        <div className='w-2/3 max-w-[250px] mt-4 lg:absolute right-4 bottom-4'>
           <LocaleSwitching />
         </div>
       </div>
 
       {/* bookshelf image */}
-      <div className='hidden md:flex justify-center items-center'>
+      <div className='hidden lg:flex justify-center items-center'>
         <div
           className='relative 
           w-[350px] h-[450px]
-          lg:w-[500px] lg:h-[600px]
           overflow-clip rounded-[20px]
          '
         >
           <Image
-            src='/asset/library.png'
+            src='/bootcamp-logo.png'
             alt='bookshelf'
             fill
             quality={100}
-            className='object-cover'
+            className='object-contain'
             sizes='(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 100vw'
             priority
           />
