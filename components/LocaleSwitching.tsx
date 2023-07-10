@@ -78,7 +78,7 @@ export default function LocaleSwitching({
               className={`
               absolute ${selectModalPosition()} left-0 my-2
               w-full
-              bg-alt-secondary text-primary rounded-3xl shadow-sm
+              bg-alt-secondary text-t-primary rounded-3xl shadow-sm
               flex  flex-col gap-2 items-start
               overflow-hidden
             `}
