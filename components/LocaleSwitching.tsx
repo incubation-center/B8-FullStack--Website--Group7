@@ -1,11 +1,16 @@
 import { useRouter } from 'next/router';
 import LanguageSvg from './icon/locale/LanguageSvg';
-import { Listbox } from '@headlessui/react';
+import { Listbox, Transition } from '@headlessui/react';
 
 import Image from 'next/image';
 import { setCookie } from 'cookies-next';
+import { Fragment } from 'react';
 
-export default function LocaleSwitching() {
+export default function LocaleSwitching({
+  position = 'top'
+}: {
+  position?: 'bottom' | 'top';
+}) {
   const router = useRouter();
   const { locales, locale, push, pathname, asPath, reload, events } = router;
 
@@ -14,19 +19,33 @@ export default function LocaleSwitching() {
     push(pathname, asPath, { locale: locale, shallow: false });
   };
 
+  const selectModalPosition = () => {
+    switch (position) {
+      case 'bottom':
+        return 'top-full';
+      case 'top':
+        return 'bottom-full';
+      default:
+        return 'top-full';
+    }
+  };
+
   return (
-    <div className=' w-full '>
-      <div className='w-full flex-1 flex flex-row justify-start items-center relative bg-alt-secondary bg-opacity-10 p-2 rounded-full'>
+    <div className='w-full'>
+      <div className='w-full flex-1 flex flex-row justify-start items-center relative '>
         <Listbox
           as='div'
           value={locale}
           onChange={(value) => handleSwitchLocale(value)}
-          className='w-full'
+          className='w-full 
+          
+          '
         >
           <Listbox.Button
             className={`
-            text-alt-secondary font-medium flex items-center gap-1 w-full px-2 
-           
+            text-alt-secondary font-medium flex items-center gap-1 w-full px-4
+            hover:scale-95 transition-transform duration-300
+            bg-alt-secondary bg-opacity-10 p-2 rounded-full
             ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
             `}
           >
@@ -46,38 +65,48 @@ export default function LocaleSwitching() {
             </div>
           </Listbox.Button>
 
-          <Listbox.Options
-            className='
-              absolute bottom-full left-0 mb-2
-              w-full
-              bg-alt-secondary bg-opacity-10 rounded-3xl shadow-sm
-              flex  flex-col gap-2 items-start text-alt-secondary
-              overflow-hidden
-            '
+          <Transition
+            as={Fragment}
+            enter='transition ease-out duration-100'
+            enterFrom='transform opacity-0 scale-95'
+            enterTo='transform opacity-100 scale-100'
+            leave='transition ease-in duration-75'
+            leaveFrom='transform opacity-100 scale-100'
+            leaveTo='transform opacity-0 scale-95'
           >
-            {(locales as string[]).map((locale) => (
-              <Listbox.Option
-                key={locale}
-                value={locale}
-                className={`
+            <Listbox.Options
+              className={`
+              absolute ${selectModalPosition()} left-0 my-2
+              w-full
+              bg-alt-secondary text-primary rounded-3xl shadow-sm
+              flex  flex-col gap-2 items-start
+              overflow-hidden
+            `}
+            >
+              {(locales as string[]).map((locale) => (
+                <Listbox.Option
+                  key={locale}
+                  value={locale}
+                  className={`
                   w-full p-2 px-4 font-medium
-                  hover:bg-white hover:bg-opacity-10 flex gap-2 items-center 
+                  hover:bg-stone-900 hover:bg-opacity-10 flex gap-2 items-center 
                   ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
                   select-none cursor-pointer
                 `}
-              >
-                <div className='relative h-6 w-6'>
-                  <Image
-                    src={`/icon/${locale === 'en' ? 'english' : 'khmer'}.svg`}
-                    alt='locale'
-                    fill
-                    className='mr-2 object-contain'
-                  />
-                </div>
-                {locale === 'en' ? 'English' : 'ខ្មែរ'}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
+                >
+                  <div className='relative h-6 w-6'>
+                    <Image
+                      src={`/icon/${locale === 'en' ? 'english' : 'khmer'}.svg`}
+                      alt='locale'
+                      fill
+                      className='mr-2 object-contain'
+                    />
+                  </div>
+                  {locale === 'en' ? 'English' : 'ខ្មែរ'}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
         </Listbox>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import LocaleSwitching from '@/components/LocaleSwitching';
 import LinkExpiredSvg from '@/components/icon/LinkExpiredSvg';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -12,6 +13,7 @@ export default function LinkExpired() {
   return (
     <div
       className='
+        p-4
         bg-primary text-alt-secondary 
         w-full h-full flex flex-col justify-center items-center space-y-8
         text-center
@@ -28,6 +30,10 @@ export default function LinkExpired() {
             {t('expired-tab.back-to-forgot-pass-btn')}
           </span>
         </Link>
+      </div>
+
+      <div className='w-2/3 md:w-1/3 max-w-[300px]'>
+        <LocaleSwitching />
       </div>
     </div>
   );

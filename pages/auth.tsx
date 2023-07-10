@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import UserLoginForm from '@/components/login/User/loginForm';
 import UserRegisterForm from '@/components/login/User/RegisterForm';
+import LocaleSwitching from '@/components/LocaleSwitching';
 
 export default function UserAuthentication({}) {
   const [formState, setFormState] = useState<'login' | 'register'>('login');
@@ -17,7 +18,7 @@ export default function UserAuthentication({}) {
         overflow-y-scroll
       '
     >
-      <div className='flex justify-center items-center'>
+      <div className='flex flex-col justify-center items-center'>
         <div
           className='
           flex flex-col justify-center items-center
@@ -60,6 +61,10 @@ export default function UserAuthentication({}) {
               </div>
             )}
           </div>
+        </div>
+
+        <div className='w-2/3 max-w-[300px] mt-4'>
+          <LocaleSwitching />
         </div>
       </div>
 

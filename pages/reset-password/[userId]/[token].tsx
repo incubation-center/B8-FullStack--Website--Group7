@@ -1,3 +1,4 @@
+import LocaleSwitching from '@/components/LocaleSwitching';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import PasswordInput from '@/components/login/PasswordInput';
@@ -35,7 +36,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   } catch (err) {
     return {
       redirect: {
-        destination: `/${locale}/reset-password/expired`,
+        destination: `${
+          locale === 'en' ? '' : `/${locale}`
+        }/reset-password/expired`,
         permanent: true
       }
     };
