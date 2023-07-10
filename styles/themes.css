@@ -2,7 +2,7 @@
   --color-primary: 82 58 40;
   --color-secondary: 164 117 81;
   --color-alt-secondary: 208 180 159;
-  --color-background: 235 235 235;
+  --color-background: 208 180 159;
   --icon-color: 164 117 81;
   --icon-color-active: 82 58 40;
   --text-color-primary: 82 58 40;
@@ -10,9 +10,9 @@
 }
 
 [data-theme='muted-black'] {
-  --color-primary: 38 38 38;
+  --color-primary: 0 0 0;
   --color-secondary: 241 238 227;
-  --color-alt-secondary: 0 0 0;
+  --color-alt-secondary: 38 38;
   --color-background: 23 23 23;
   --icon-color: 164 117 81;
   --icon-color-active: 82 58 40;
@@ -22,6 +22,7 @@
 
 [data-theme='muted-blue'] {
   --color-primary: 78 141 153;
+
   --color-secondary: 0 0 0;
   --color-alt-secondary: 241 241 241;
   --color-background: 235 235 235;

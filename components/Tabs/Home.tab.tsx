@@ -18,12 +18,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
-import EducationSvg from '../icon/book-category/Education';
-import BusinessSvg from '../icon/book-category/Business';
-import DramaSvg from '../icon/book-category/Drama';
-import FantasySvg from '../icon/book-category/Fantasy';
-import HistorySvg from '../icon/book-category/History';
-import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
+import EducationSvg from '@/components/icon/book-category/Education';
+import BusinessSvg from '@/components/icon/book-category/Business';
+import DramaSvg from '@/components/icon/book-category/Drama';
+import FantasySvg from '@/components/icon/book-category/Fantasy';
+import HistorySvg from '@/components/icon/book-category/History';
+import SelfDevelopmentSvg from '@/components/icon/book-category/SelfDevelopment';
 import { useTranslation } from 'next-i18next';
 
 export default function HomeTab({
