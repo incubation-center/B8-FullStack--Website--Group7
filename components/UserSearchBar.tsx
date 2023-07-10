@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import { useRecoilState } from 'recoil';
-import { searchKeywordAtom } from '@/service/recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { AuthAtom, searchKeywordAtom } from '@/service/recoil';
 import { HomePageTab } from '@/utils/enum';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -17,8 +17,10 @@ export default function UserSearchBar({
 }) {
   const { t } = useTranslation('common');
 
+  const authStore = useRecoilValue(AuthAtom);
   const [searchText, setSearchText] = useRecoilState(searchKeywordAtom);
   const [isShow, setIsShow] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [placeholder, setPlaceholder] = useState(
     'Search book by Title, Author'
   );
@@ -28,17 +30,21 @@ export default function UserSearchBar({
     setIsShow(true);
     if (currentTab === HomePageTab.HOME) {
       setPlaceholder(t('search-placeholder.home-tab', 'Title, Author'));
+      setIsDisabled(false);
     } else if (currentTab === HomePageTab.SAVED) {
       setPlaceholder(
         t('search-placeholder.saved-tab', 'Title, Author, Category')
       );
+      setIsDisabled(!authStore.isLoggedIn);
     } else if (currentTab === HomePageTab.REQUEST_STATUS) {
       setPlaceholder(
-        t('search-placeholder.request-tab', 'Title, Author, Category')
+        t('search-placeholder.request-tab', 'Title, Author, Category, Status')
       );
+      setIsDisabled(!authStore.isLoggedIn);
     } else if (currentTab === HomePageTab.PROFILE) {
       setPlaceholder('');
       setIsShow(false);
+      setIsDisabled(!authStore.isLoggedIn);
     }
   }, [currentTab, setSearchText, t]);
 
@@ -54,7 +60,7 @@ export default function UserSearchBar({
             w-full max-w-[500px] xl:max-w-[700px] w-inherit
             flex justify-center items-center
           bg-white 
-            p-2 px-4 rounded-xl space-x-6
+            p-2 px-4 rounded-full space-x-6
             box-border border-2 border-primary border-opacity-60 focus-within:border-opacity-100
             transition-colors
             group
@@ -74,6 +80,7 @@ export default function UserSearchBar({
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
+            disabled={isDisabled}
           />
         </motion.div>
       )}
