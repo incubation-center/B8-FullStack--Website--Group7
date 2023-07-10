@@ -33,15 +33,15 @@ export default function ForgotPassword() {
     try {
       await AuthForgotPassword(email);
       showAlert({
-        title: 'Email sent!!!',
-        subtitle: 'Check your email to reset your password',
+        title: t('email-sent-modal.email-sent'),
+        subtitle: t('email-sent-modal.check-email'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
       if (err instanceof AxiosError) {
         showAlert({
-          title: 'Error',
-          subtitle: err.response?.data?.error || 'An unknown error occurred',
+          title: t('email-send-fail.email-send-fail'),
+          subtitle: err.response?.data?.error || t('email-send-fail.try-again'),
           type: AlertType.ERROR
         });
       }
@@ -80,7 +80,7 @@ export default function ForgotPassword() {
                 name='email'
                 type='email'
                 placeholder={t('email-placeholder')}
-                register={register('email', { required: 'Email is required' })}
+                register={register('email', { required: t('email-required') })}
                 error={errors.email}
                 labelClassName='hidden'
                 errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
