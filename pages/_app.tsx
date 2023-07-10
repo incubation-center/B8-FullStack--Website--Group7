@@ -1,12 +1,16 @@
-import { processUserToken } from '@/service/token';
 import '@/styles/globals.css';
-import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 import { RecoilRoot } from 'recoil';
 
-export default function App({ Component, pageProps }: AppProps) {
+import { appWithTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { setCookie } from 'cookies-next';
+
+function App({ Component, pageProps }: AppProps) {
+  const { locale } = useRouter();
+
   return (
     <>
       <Head>
@@ -17,7 +21,12 @@ export default function App({ Component, pageProps }: AppProps) {
           href='/icon/bookshelf-favicon.png'
         />
       </Head>
-      <div className='flex-1 flex flex-grow h-full w-screen overflow-clip'>
+      <div
+        className={`
+          flex-1 flex flex-grow h-full w-screen overflow-clip 
+          ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
+        `}
+      >
         <div className='flex flex-1'>
           <RecoilRoot>
             <Component {...pageProps} />
@@ -29,3 +38,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+export default appWithTranslation(App);

@@ -13,6 +13,7 @@ import ActiveSvg from '../icon/admin-sidebar/ActiveSvg';
 import ArchivedSvg from '../icon/admin-sidebar/ArchivedSvg';
 import RenterSvg from '../icon/admin-sidebar/RenterSvg';
 import SettingSvg from '../icon/admin-sidebar/SettingSvg';
+import { useRouter } from 'next/router';
 
 export default function Navbar({
   currentTab,
@@ -21,6 +22,8 @@ export default function Navbar({
   currentTab: AdminTab;
   handlePageRouting: (tab: AdminTab) => void;
 }) {
+  const { locale } = useRouter();
+
   const handleTranslate = () => {
     switch (currentTab) {
       case AdminTab.DASHBOARD:
@@ -136,10 +139,11 @@ export default function Navbar({
         href='/'
         className='
           w-full bg-action text-primary font-bold
-          rounded-xl p-2 px-4
+          rounded-full p-2 px-4
           flex items-center justify-center cursor-pointer 
           hover:shadow-xl
         '
+        locale={locale}
       >
         Back to Home
       </Link>

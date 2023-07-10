@@ -1,0 +1,107 @@
+{
+  "homepage-tab": {
+    "sidebar": {
+      "home": "Home",
+      "save": "Saved",
+      "request": "Request",
+      "profile": "Profile",
+
+      "admin-btn": "Admin",
+      "login-btn": "Login",
+      "view-btn": "View"
+    },
+
+    "category": {
+      "education": "Education",
+      "business": "Business",
+      "history": "History",
+      "drama": "Drama",
+      "fantasy": "Fantasy",
+      "self-development": "Self Development"
+    },
+
+    "search-box": {
+      "box-text": "Search name of the book"
+    }
+  },
+
+  "save-tab": {
+    "h1-save": "Save",
+    "no-save-text": "You have no saved books",
+
+    "explore-books-btn": "explore books"
+  },
+
+  "request-tab": {
+    "h1-request-status": "Request Status",
+    "no-request-text": "You have no request",
+    "explore-books-btn": "explore books",
+
+    "fetching-request": "Fetching your request",
+    "no-request": "You have no request",
+    "explore-books": "Explore Books",
+    "updating-request": "Updating your request",
+
+    "table": {
+      "book": "Book",
+      "date": "Date",
+      "status": "Status",
+      "action": "Action",
+      "view-btn": "View"
+    }
+  },
+
+  "profile-tab": {
+    "personal-info": "Personal Information",
+    "username": "Username",
+    "phone number": "Phone Number",
+    "email": "Email",
+
+    "privacy-set": "Privacy Setting",
+    "password": "Password",
+
+    "edit-btn": "Edit",
+    "changePass-btn": "Change Password",
+    "logout-btn": "Logout"
+  },
+
+  "edit-modal": {
+    "personal-info": "Personal Information",
+    "username": "Username",
+    "email": "Email",
+    "phone-number": "Phone Number",
+
+    "cancel-btn": "Cancel",
+    "save-btn": "save",
+    "updating-info": "Updating your information"
+  },
+
+  "change-password-modal": {
+    "label": "Change Password",
+    "password": "Current Password",
+    "password-placeholder": "Enter your current password",
+    "new-password": "New Password",
+    "new-password-placeholder": "new password",
+    "confirm-password": "Confirm Password",
+    "confirm-password-placeholder": "Confirm new password",
+
+    "cancel-btn": "Cancel",
+    "save-btn": "save",
+    "updating-password": "Updating your password"
+  },
+
+  "information-update": {
+    "info-update-text": "Your Information have been updated!",
+    "thank-you": "Thanks you!",
+
+    "close-btn": "Close"
+  },
+
+  "logout-modal": {
+    "logout": "Logout",
+    "logout-text": "Are you sure you want to logout?",
+
+    "no-btn": "No",
+    "yes-btn": "Yes"
+  }
+}

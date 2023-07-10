@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { handleFallBackProfileImage } from '@/utils/function';
 import { AnimatePresence, motion } from 'framer-motion';
 import UserSearchBar from '../UserSearchBar';
+import { useTranslation } from 'next-i18next';
 
 export default function HomeLayout({
   currentTab,
@@ -26,6 +27,8 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   const authStore = useRecoilValue(AuthAtom);
+  const router = useRouter();
+  const { t } = useTranslation('homepage');
 
   const [isShowSideBar, setIsShowSideBar] = useState(false);
 
@@ -33,11 +36,11 @@ export default function HomeLayout({
     <div className='w-full h-full overflow-clip flex flex-col relative'>
       {/* search bar row */}
       <div className='w-full h-[100px] gap-2 flex justify-between items-center py-4 px-4 '>
-        <div className='h-full flex justify-center items-center mx-4'>
+        <div className='h-full max-w-[120px] flex justify-center items-center mx-4'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
-            className='w-full  h-full object-scale-down  hidden md:block'
+            className='w-full h-full object-scale-down  hidden md:block'
           />
 
           <button onClick={() => setIsShowSideBar(!isShowSideBar)}>
@@ -62,8 +65,9 @@ export default function HomeLayout({
               box-border border-2 border-alt-secondary hover:border-action
               whitespace-nowrap hidden md:block
             '
+              locale={router.locale}
             >
-              Log In
+              {t('homepage-tab.sidebar.login-btn', 'Login')}
             </Link>
           )}
 
@@ -136,7 +140,7 @@ export default function HomeLayout({
         <div
           className='
             w-full  bg-alt-secondary 
-            rounded-2xl mr-4 ml-4 md:ml-0 
+            rounded-3xl mr-4 ml-4 md:ml-0 
             overflow-scroll scroll-smooth
             relative
           '

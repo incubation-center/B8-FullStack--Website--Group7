@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 import StatusLabel from './StatusLabel';
+import { useTranslation } from 'next-i18next';
+import { useLocale } from '@/utils/function';
 
 export default function RequestTable({
   data,
@@ -17,6 +19,10 @@ export default function RequestTable({
     bgColor: string;
   }[];
 }) {
+  const { t } = useTranslation('homepage');
+
+  const { isKhmer } = useLocale();
+
   return (
     <table className='w-full  '>
       <thead>
@@ -26,13 +32,21 @@ export default function RequestTable({
             font-bold text-base md:text-lg text-primary 
             text-center
             [&>td]:py-4 w-full
-            [&<td]:w-fit [&<td]:whitespace-nowrap
+            [&<td]:w-fit 
           '
         >
-          <td className='w-full text-left pl-2'>Book</td>
-          <td className='hidden lg:table-cell'>Date</td>
-          <td className='hidden md:table-cell'>Status</td>
-          <td>Actions</td>
+          <td className='w-full text-left pl-2 whitespace-nowrap'>
+            {t('request-tab.table.book', 'Book')}
+          </td>
+          <td className='hidden lg:table-cell whitespace-nowrap'>
+            {t('request-tab.table.date', 'Date')}
+          </td>
+          <td className='hidden md:table-cell whitespace-nowrap'>
+            {t('request-tab.table.status', 'Status')}
+          </td>
+          <td className='whitespace-nowrap'>
+            {t('request-tab.table.action', 'Actions')}
+          </td>
         </tr>
       </thead>
       <tbody>
@@ -81,7 +95,8 @@ export default function RequestTable({
                     rounded-full 
                     px-2 py-1 text-xs
                     md:text-sm md:px-4 md:py-2
-                    text-primary font-bold mr-2 
+                    text-primary mr-2 
+                    ${isKhmer ? 'font-medium' : 'font-bold'}
                     ${action.bgColor}
                     hover:bg-opacity-80
                   `}

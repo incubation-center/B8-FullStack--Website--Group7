@@ -20,11 +20,8 @@ import {
   homePageTabAtom
 } from '@/service/recoil';
 import { AuthStore } from '@/types/auth';
-import { Book } from '@/types';
-import { getAllBooks } from '@/service/api/book';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
-import { useUpdateDataInterval } from '@/utils/function';
-import { getAllRequest } from '@/service/api/request';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Home({
   currentTab,
@@ -36,8 +33,6 @@ export default function Home({
   // atoms
   const [_, setAuthObj] = useRecoilState(AuthAtom);
   const [__, setCurrentTab] = useRecoilState(homePageTabAtom);
-  const [___, setAllBooks] = useRecoilState(AllBooksAtom);
-  const [____, setUserRequests] = useRecoilState(UserRequestAtom);
 
   const [tab, setTab] = useState(currentTab);
 
@@ -57,13 +52,18 @@ export default function Home({
         undefined,
         {
           shallow: true,
-          scroll: false
+          scroll: false,
+          locale: router.locale
         }
       );
       return;
     }
 
-    router.push(`/?tab=${tab}`, undefined, { shallow: true, scroll: false });
+    router.push(`/?tab=${tab}`, undefined, {
+      shallow: true,
+      scroll: false,
+      locale: router.locale
+    });
   };
   useEffect(() => {
     const tab = router.query.tab;
@@ -122,23 +122,17 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     tab: HomePageTab;
   } = context.query;
 
-  if (!tab) {
-    return {
-      redirect: {
-        destination: `/?tab=${HomePageTab.HOME}`,
-        permanent: true
-      }
-    };
-  }
-
   // check if user is admin
   const token = context.req.cookies.accessToken;
   const authObj = await processUserToken(token);
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      currentTab: tab,
-      authStore: authObj
+      currentTab: tab || HomePageTab.HOME,
+      authStore: authObj,
+      ...(await serverSideTranslations(locale))
     }
   };
 };

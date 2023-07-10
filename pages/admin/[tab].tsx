@@ -31,6 +31,7 @@ import { useDebounce } from '@/utils/function';
 import BookTab from '@/components/admin/tab/Book.tab';
 import { AxiosError } from 'axios';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function AdminHomePage({
   currentTab
@@ -52,7 +53,10 @@ export default function AdminHomePage({
   const [tab, setTab] = useState(currentTab);
 
   const handlePageRouting = (tab: AdminTab) => {
-    router.push(`/admin/${tab}`, undefined, { shallow: true });
+    router.push(`/admin/${tab}`, undefined, {
+      shallow: true,
+      locale: router.locale
+    });
   };
   useEffect(() => {
     const tab = router.query.tab;
@@ -182,22 +186,25 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let tab = context.query.tab as string;
 
   // check is tab in AdminTab enum
-  if (!Object.values(AdminTab).includes(tab as AdminTab)) {
-    // if not, redirect to dashboard
-    return {
-      redirect: {
-        destination: `/admin/${AdminTab.DASHBOARD}`,
-        permanent: false
-      }
-    };
-  }
+  // if (!Object.values(AdminTab).includes(tab as AdminTab)) {
+  //   // if not, redirect to dashboard
+  //   return {
+  //     redirect: {
+  //       destination: `/admin/${AdminTab.DASHBOARD}`,
+  //       permanent: false
+  //     }
+  //   };
+  // }
 
   // const token = context.req.cookies.accessToken;
   // const requests = await getAllRequestAdmin(token);
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      currentTab: tab || AdminTab.DASHBOARD
+      currentTab: tab || AdminTab.DASHBOARD,
+      ...(await serverSideTranslations(locale))
     }
   };
 }

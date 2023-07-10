@@ -24,6 +24,7 @@ import DramaSvg from '../icon/book-category/Drama';
 import FantasySvg from '../icon/book-category/Fantasy';
 import HistorySvg from '../icon/book-category/History';
 import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
+import { useTranslation } from 'next-i18next';
 
 export default function HomeTab({
   isUseInAdminPage = false,
@@ -33,6 +34,7 @@ export default function HomeTab({
   onClickViewInAdminPage?: (book: Book) => void;
 }) {
   const router = useRouter();
+  const { t } = useTranslation('homepage');
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
   const filterBooks = useRecoilValue(filteredBooksAtom);
@@ -43,7 +45,7 @@ export default function HomeTab({
 
   const handleBookClick = (book: Book) => {
     if (!isUseInAdminPage) {
-      router.push(`/book/${book.id}`);
+      router.push(`/book/${book.id}`, undefined, { locale: router.locale });
       return;
     }
 
@@ -159,11 +161,17 @@ export default function HomeTab({
 
               const isCurrentCategory = currentCategory === value;
 
+              const label = t(
+                'homepage-tab.category.' +
+                  value.toLowerCase().trim().replace(' ', '-')
+              );
+
               return (
                 <CategoryButton
                   key={category}
                   category={category}
                   value={value}
+                  label={label}
                   isCurrentCategory={isCurrentCategory}
                   handleCategory={() => handleCategory(key, value)}
                   disabled={isFetchingBooks || allBooks.length === 0}
@@ -181,7 +189,7 @@ export default function HomeTab({
 
       <div
         ref={scrollingRef}
-        className='overflow-y-scroll overflow-x-hidden w-full scroll-smooth'
+        className='overflow-y-scroll overflow-x-hidden w-full scroll-smooth space-y-4'
       >
         {isFetchingBooks && (
           // fetching books skeleton
@@ -209,11 +217,17 @@ export default function HomeTab({
 
             if (books.length === 0) return null;
 
+            const label = t(
+              'homepage-tab.category.' +
+                category.toLowerCase().trim().replace(' ', '-')
+            );
+
             return (
               <BookSection
                 key={key}
                 categoryKey={key}
                 books={books}
+                label={label}
                 category={category}
                 handleBookClick={handleBookClick}
                 handleVisibleOnScreen={handleVisibleOnScreen}
@@ -297,7 +311,7 @@ function CategoryIcon({
 function CategoryButton({
   category,
   value,
-  // iconPath,
+  label,
   children,
   isCurrentCategory,
   handleCategory,
@@ -305,8 +319,8 @@ function CategoryButton({
 }: {
   category: string;
   value: string;
-  // iconPath: string;
   children: React.ReactNode;
+  label: string;
   isCurrentCategory: boolean;
   handleCategory: () => void;
   disabled?: boolean;
@@ -316,14 +330,14 @@ function CategoryButton({
       id={category.toLowerCase() + '-nav'}
       key={category}
       className={`
-        flex w-fit items-center justify-center space-x-2 cursor-pointer
+        flex w-fit max-w-md items-center justify-center space-x-2 cursor-pointer
         transition-all duration-300
         whitespace-nowrap 
         text-lg
         mr-8 select-none
         ${
           isCurrentCategory
-            ? 'bg-primary p-1 px-8 rounded-lg text-white'
+            ? 'bg-primary p-1 px-8 rounded-full text-white'
             : 'bg-transparent text-primary '
         }
 
@@ -333,7 +347,7 @@ function CategoryButton({
     >
       {/* <img src={iconPath} alt={value} className='h-4 w-fit inline-block' /> */}
       {children}
-      <span>{value}</span>
+      <span>{label}</span>
     </button>
   );
 }
@@ -342,17 +356,21 @@ function BookSection({
   categoryKey,
   category,
   books,
+  label,
   handleBookClick,
   handleVisibleOnScreen
 }: {
   categoryKey: string;
   category: string;
   books: Book[];
+  label: string;
   handleBookClick: (book: Book) => void;
   handleVisibleOnScreen: (categoryKey: string, category: string) => void;
 }) {
   const ref = useRef<any>(null);
   const isVisible = useOnScreen(ref);
+
+  const { t } = useTranslation('homepage');
 
   useEffect(() => {
     if (isVisible) {
@@ -373,7 +391,7 @@ function BookSection({
       </div>
       {/* title */}
       <h1 className='w-1/3 text-4xl text-primary mb-4 mt-2 whitespace-nowrap'>
-        {category}
+        {label}
       </h1>
 
       {/* book */}
@@ -414,11 +432,11 @@ function BookSection({
               <button
                 className='
                 bg-secondary text-white font-light
-                rounded-lg py-1 px-2 w-40 mx-auto
+                rounded-full py-1 px-2 w-32 mx-auto
               '
                 onClick={() => handleBookClick(book)}
               >
-                View
+                {t('homepage-tab.sidebar.view-btn')}
               </button>
             </motion.div>
           ))}

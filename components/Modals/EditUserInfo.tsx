@@ -10,6 +10,7 @@ import { useState } from 'react';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 import { useRecoilState } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
+import { useTranslation } from 'next-i18next';
 
 interface EditUserInfoInputs {
   username: string;
@@ -26,6 +27,8 @@ export default function EditUserInfo({
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
+  const { t } = useTranslation('homepage');
+
   const [isUpdating, setIsUpdating] = useState(false);
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
 
@@ -47,8 +50,8 @@ export default function EditUserInfo({
 
       close();
       showAlert({
-        title: 'Your Information have been updated!',
-        subtitle: 'Thank you!',
+        title: t('information-update.info-update-text'),
+        subtitle: t('information-update.thank-you'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
@@ -77,13 +80,13 @@ export default function EditUserInfo({
           className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
         >
           <h1 className='text-2xl font-bold text-primary'>
-            Personal Information
+            {t('edit-modal.personal-info')}
           </h1>
 
           {/* User Information */}
           <div className='w-full text-left space-y-4'>
             <CustomInput
-              label='Username'
+              label={t('edit-modal.username')}
               name='username'
               type='text'
               defaultValue={userInfo.username}
@@ -96,7 +99,7 @@ export default function EditUserInfo({
             />
 
             <CustomInput
-              label='Email'
+              label={t('edit-modal.email')}
               name='email'
               type='email'
               defaultValue={userInfo.email}
@@ -109,7 +112,7 @@ export default function EditUserInfo({
             />
 
             <CustomInput
-              label='Phone Number'
+              label={t('edit-modal.phone-number')}
               name='phoneNumber'
               type='tel'
               defaultValue={userInfo.phoneNumber}
@@ -132,7 +135,7 @@ export default function EditUserInfo({
               bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
             '
               >
-                Cancel
+                {t('edit-modal.cancel-btn')}
               </button>
             )}
 
@@ -146,11 +149,11 @@ export default function EditUserInfo({
               disabled={isUpdating}
             >
               {!isUpdating ? (
-                <div>save</div>
+                <div> {t('edit-modal.save-btn')}</div>
               ) : (
                 <div className='flex gap-2 justify-center items-center'>
                   <SpinningLoadingSvg className='inline-block w-6 h-6 mr-2' />
-                  <span>Updating your information</span>
+                  <span>{t('edit-modal.updating-info')}</span>
                 </div>
               )}
             </button>

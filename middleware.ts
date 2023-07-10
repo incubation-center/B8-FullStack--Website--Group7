@@ -30,6 +30,8 @@ export async function middleware(request: NextRequest) {
     request.cookies.get('accessToken')?.value ?? ''
   );
 
+  const locale = request.cookies.get('NEXT_LOCALE')?.value ?? 'en';
+
   // if logged in, redirect to homepage page
   if (isAuthRoute) {
     if (accessToken === null) return;
@@ -39,7 +41,7 @@ export async function middleware(request: NextRequest) {
     );
 
     if (tokenValidation) {
-      return NextResponse.redirect(new URL('/', request.nextUrl).href);
+      return NextResponse.redirect(new URL(`/${locale}`, request.nextUrl).href);
     }
 
     return;
@@ -47,7 +49,7 @@ export async function middleware(request: NextRequest) {
     // in case, user try to access admin route via url
     if (!accessToken) {
       return NextResponse.redirect(
-        new URL('/unauthorized-page', request.nextUrl).href
+        new URL(`/${locale}/unauthorized-page`, request.nextUrl).href
       );
     }
 
@@ -55,7 +57,7 @@ export async function middleware(request: NextRequest) {
     const adminValidation = isUserAdmin((accessToken as Token).value);
     if (!adminValidation) {
       return NextResponse.redirect(
-        new URL('/unauthorized-page', request.nextUrl).href
+        new URL(`/${locale}/unauthorized-page`, request.nextUrl).href
       );
     }
 
