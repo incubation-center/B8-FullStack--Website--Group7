@@ -252,7 +252,7 @@ function CategoryIcon({
     case BookCategory.EDUCATION:
       return (
         <EducationSvg
-          className={`h-4 w-fit ${
+          className={`h-4 w-4 ${
             isCurrentCategory ? 'fill-white ' : 'fill-primary '
           }`}
         />
@@ -260,7 +260,7 @@ function CategoryIcon({
     case BookCategory.BUSINESS:
       return (
         <BusinessSvg
-          className={`h-4 w-fit ${
+          className={`h-4 w-4 ${
             isCurrentCategory
               ? 'fill-white stroke-white'
               : 'fill-primary stroke-primary'
@@ -270,7 +270,7 @@ function CategoryIcon({
     case BookCategory.DRAMA:
       return (
         <DramaSvg
-          className={`h-4 w-fit ${
+          className={`h-4 w-4 ${
             isCurrentCategory ? 'fill-white ' : 'fill-primary '
           }`}
         />
@@ -278,7 +278,7 @@ function CategoryIcon({
     case BookCategory.FANTASY:
       return (
         <FantasySvg
-          className={`h-4 w-fit ${
+          className={`h-4 w-4 ${
             isCurrentCategory ? 'fill-white' : 'fill-primary'
           }`}
         />
@@ -286,7 +286,7 @@ function CategoryIcon({
     case BookCategory.HISTORY:
       return (
         <HistorySvg
-          className={`h-4 w-fit ${
+          className={`h-4 w-4 ${
             isCurrentCategory
               ? 'fill-white stroke-white'
               : 'fill-primary stroke-primary'
@@ -296,7 +296,7 @@ function CategoryIcon({
     case BookCategory.SELF_DEVELOPMENT:
       return (
         <SelfDevelopmentSvg
-          className={`h-4 w-fit ${
+          className={`h-4 w-4 ${
             isCurrentCategory
               ? 'fill-white stroke-white'
               : 'fill-primary stroke-primary'

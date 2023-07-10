@@ -127,18 +127,18 @@ export default function CustomListDropDown({
 function CategoryIcon({ category }: { category: string }) {
   switch (category) {
     case BookCategory.EDUCATION:
-      return <EducationSvg className='h-4 w-fit fill-primary' />;
+      return <EducationSvg className='h-4 w-4 fill-primary' />;
     case BookCategory.BUSINESS:
-      return <BusinessSvg className='h-4 w-fit fill-primary stroke-primary' />;
+      return <BusinessSvg className='h-4 w-4 fill-primary stroke-primary' />;
     case BookCategory.DRAMA:
-      return <DramaSvg className='h-4 w-fit fill-primary' />;
+      return <DramaSvg className='h-4 w-4 fill-primary' />;
     case BookCategory.FANTASY:
-      return <FantasySvg className='h-4 w-fit fill-primary' />;
+      return <FantasySvg className='h-4 w-4 fill-primary' />;
     case BookCategory.HISTORY:
-      return <HistorySvg className='h-4 w-fit fill-primary stroke-primary' />;
+      return <HistorySvg className='h-4 w-4 fill-primary stroke-primary' />;
     case BookCategory.SELF_DEVELOPMENT:
       return (
-        <SelfDevelopmentSvg className='h-4 w-fit fill-primary stroke-primary' />
+        <SelfDevelopmentSvg className='h-4 w-4 fill-primary stroke-primary' />
       );
   }
 

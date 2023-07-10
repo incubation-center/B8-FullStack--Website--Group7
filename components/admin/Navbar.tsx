@@ -185,7 +185,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.DASHBOARD:
       return (
         <DahboardSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent
               ? 'fill-primary stroke-primary delay-300'
               : 'fill-secondary stroke-secondary'
@@ -197,7 +197,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.UPLOAD:
       return (
         <UploadSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
           }
           transition-all  
@@ -208,7 +208,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.BOOKS:
       return (
         <BooksSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
           }
             transition-all   
@@ -218,7 +218,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.INCOMING_REQUEST:
       return (
         <IncomingSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent
               ? 'fill-primary stroke-primary delay-300'
               : 'fill-secondary stroke-secondary'
@@ -231,7 +231,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.ACTIVE_REQUEST:
       return (
         <ActiveSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
           }
           transition-all 
@@ -241,7 +241,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.ARCHIVED_REQUEST:
       return (
         <ArchivedSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
           }
           transition-all 
@@ -251,7 +251,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.RENTER:
       return (
         <RenterSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent
               ? 'fill-primary stroke-primary delay-300'
               : 'fill-secondary stroke-secondary'
@@ -264,7 +264,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
     case AdminTab.SETTING:
       return (
         <SettingSvg
-          className={`h-6 w-fit ${
+          className={`h-6 w-6 ${
             isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
           }
         transition-all 
