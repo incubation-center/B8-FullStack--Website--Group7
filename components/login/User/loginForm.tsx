@@ -139,7 +139,7 @@ export default function UserLoginForm() {
               {!isLoggingIn && t('login-btn')}
               {isLoggingIn && (
                 <div className='flex justify-center items-center'>
-                  <h1>{t('btns.logging-in')}</h1>
+                  <h1>{t('logging-in-btn')}</h1>
                   <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
                 </div>
               )}

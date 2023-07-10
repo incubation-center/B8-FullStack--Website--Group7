@@ -12,6 +12,7 @@
   "password-required-alert": "ត្រូវការបញ្ចូលពាក្យ​សម្ងាត់​",
 
   "login-btn": "ចូលគណនី",
+  "logging-in-btn": "កំពុងចូលគណនី...",
 
   "invalid-credential-modal": {
     "invalid-credential-text": "ព័ត៌មានលម្អិតមិន​ត្រឹមត្រូវ!!",

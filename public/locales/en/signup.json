@@ -23,6 +23,7 @@
   "invalid-phone-alert": "Phone number must be at least 9 characters long",
 
   "sign-up": "Sign Up",
+  "signing-up-btn": "Signing Up",
 
   "error-tap": {
     "error": "Error",

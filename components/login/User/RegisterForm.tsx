@@ -9,6 +9,7 @@ import { setCookie } from 'cookies-next';
 import { useState } from 'react';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { useTranslation } from 'next-i18next';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 
 export default function UserRegisterForm({}) {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -169,7 +170,14 @@ export default function UserRegisterForm({}) {
               `}
               disabled={isRegistering}
             >
-              {t('sign-up')}
+              {/* {t('sign-up')} */}
+              {!isRegistering && t('sign-up')}
+              {isRegistering && (
+                <div className='flex justify-center items-center'>
+                  <h1>{t('signing-up-btn')}</h1>
+                  <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
+                </div>
+              )}
             </button>
           </div>
         </form>
