@@ -35,12 +35,12 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full overflow-clip flex flex-col relative'>
       {/* search bar row */}
-      <div className='w-full h-[80px] gap-2 flex justify-between items-center py-4 px-4 '>
-        <div className='h-full max-w-[120px] flex justify-center items-center mx-4'>
+      <div className='w-full h-[var(--home-search-bar-height)] gap-2 flex justify-between items-center py-4 px-4 '>
+        <div className='h-full w-[200px] flex justify-center items-center -ml-4'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
-            className='w-full h-full object-scale-down  hidden md:block'
+            className='w-full h-full object-scale-down  hidden md:block '
           />
 
           <button onClick={() => setIsShowSideBar(!isShowSideBar)}>

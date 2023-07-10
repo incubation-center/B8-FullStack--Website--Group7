@@ -395,7 +395,13 @@ function BookSection({
         element to scroll to{' '}
       </div>
       {/* title */}
-      <h1 className='w-1/3 text-xl md:text-2xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap'>
+      <h1
+        className='
+          w-1/3 text-xl 
+          md:text-2xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap
+          text-bold
+        '
+      >
         {label}
       </h1>
 
