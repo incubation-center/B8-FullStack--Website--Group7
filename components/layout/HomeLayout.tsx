@@ -36,7 +36,7 @@ export default function HomeLayout({
     <div className='w-full h-full overflow-clip flex flex-col relative'>
       {/* search bar row */}
       <div className='w-full h-[var(--home-search-bar-height)] gap-2 flex justify-between items-center py-4 px-4 '>
-        <div className='h-full w-[200px] flex justify-center items-center -ml-4'>
+        <div className='h-full mr-2 md:w-[200px] flex justify-center items-center md:-ml-4'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'

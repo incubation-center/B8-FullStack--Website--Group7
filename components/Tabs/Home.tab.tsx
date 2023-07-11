@@ -109,43 +109,44 @@ export default function HomeTab({
     });
   }, 300);
 
-  const onMounted = useDebounce(() => {
-    // get category from url
-    const categoryKey = router.asPath.split('#')[1];
+  useEffect(
+    useDebounce(() => {
+      // get category from url
+      const categoryKey = router.asPath.split('#')[1];
 
-    if (categoryKey) {
-      const category =
-        BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
+      if (categoryKey) {
+        const category =
+          BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
-      setCurrentCategory(category);
-    } else {
-      setCurrentCategory(BookCategory.EDUCATION);
+        setCurrentCategory(category);
+      } else {
+        setCurrentCategory(BookCategory.EDUCATION);
 
-      if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
-    }
+        if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
+      }
 
-    // setBooks(books);
-    if (allBooks.length === 0) {
-      setIsFetchingBooks(true);
-      getAllBooks()
-        .then((books) => {
-          setAllBooks(books);
-          setIsFetchingBooks(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setAllBooks(BookData);
-          setIsFetchingBooks(false);
-        });
-    }
+      // setBooks(books);
+      if (allBooks.length === 0) {
+        setIsFetchingBooks(true);
+        getAllBooks()
+          .then((books) => {
+            setAllBooks(books);
+            setIsFetchingBooks(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setAllBooks(BookData);
+            setIsFetchingBooks(false);
+          });
+      }
 
-    return () => {
-      setCurrentCategory(BookCategory.EDUCATION);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, 100);
-
-  useEffect(() => onMounted(), [onMounted]);
+      return () => {
+        setCurrentCategory(BookCategory.EDUCATION);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, 100),
+    []
+  );
 
   return (
     <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
@@ -417,7 +418,7 @@ function BookSection({
           overflow-x-auto overscroll-x-contain
           book-scrolling-section relative
           z-0
-          space-x-[35px]
+          space-x-4
         '
       >
         {books.map((book, index) => (
