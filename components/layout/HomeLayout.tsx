@@ -35,12 +35,12 @@ export default function HomeLayout({
   return (
     <div className='w-full h-full overflow-clip flex flex-col relative'>
       {/* search bar row */}
-      <div className='w-full h-[80px] gap-2 flex justify-between items-center py-4 px-4 '>
-        <div className='h-full max-w-[120px] flex justify-center items-center mx-4'>
+      <div className='w-full h-[var(--home-search-bar-height)] gap-2 flex justify-between items-center py-4 px-4 '>
+        <div className='h-full mr-2 md:w-[200px] flex justify-center items-center md:-ml-4'>
           <img
             src='/bootcamp-logo.png'
             alt='logo'
-            className='w-full h-full object-scale-down  hidden md:block'
+            className='w-full h-full object-scale-down  hidden md:block '
           />
 
           <button onClick={() => setIsShowSideBar(!isShowSideBar)}>
@@ -59,7 +59,7 @@ export default function HomeLayout({
             <Link
               href='/auth'
               className='
-              px-4 py-2 rounded-xl
+              px-4 py-2 rounded-full
               bg-alt-secondary text-primary
               transition-colors
               box-border border-2 border-alt-secondary hover:border-action

@@ -126,6 +126,8 @@ function SideBar({
             rounded-full p-2 px-4
             flex items-center justify-center cursor-pointer 
             hover:shadow-xl
+            transition-all duration-300
+            hover:scale-95
           '
           locale={router.locale}
         >
