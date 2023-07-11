@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { BookData } from '@/dummydata';
 import { BookCategory } from '@/utils/enum';
 
+import { useScrollContainer } from 'react-indiana-drag-scroll';
+
 import {
   AllBooksAtom,
   filteredBooksAtom,
@@ -107,44 +109,43 @@ export default function HomeTab({
     });
   }, 300);
 
-  useEffect(
-    useDebounce(() => {
-      // get category from url
-      const categoryKey = router.asPath.split('#')[1];
+  const onMounted = useDebounce(() => {
+    // get category from url
+    const categoryKey = router.asPath.split('#')[1];
 
-      if (categoryKey) {
-        const category =
-          BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
+    if (categoryKey) {
+      const category =
+        BookCategory[categoryKey.toUpperCase() as keyof typeof BookCategory];
 
-        setCurrentCategory(category);
-      } else {
-        setCurrentCategory(BookCategory.EDUCATION);
+      setCurrentCategory(category);
+    } else {
+      setCurrentCategory(BookCategory.EDUCATION);
 
-        if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
-      }
+      if (!isUseInAdminPage) updateRoute(BookCategory.EDUCATION);
+    }
 
-      // setBooks(books);
-      if (allBooks.length === 0) {
-        setIsFetchingBooks(true);
-        getAllBooks()
-          .then((books) => {
-            setAllBooks(books);
-            setIsFetchingBooks(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            setAllBooks(BookData);
-            setIsFetchingBooks(false);
-          });
-      }
+    // setBooks(books);
+    if (allBooks.length === 0) {
+      setIsFetchingBooks(true);
+      getAllBooks()
+        .then((books) => {
+          setAllBooks(books);
+          setIsFetchingBooks(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setAllBooks(BookData);
+          setIsFetchingBooks(false);
+        });
+    }
 
-      return () => {
-        setCurrentCategory(BookCategory.EDUCATION);
-      };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, 100),
-    []
-  );
+    return () => {
+      setCurrentCategory(BookCategory.EDUCATION);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, 100);
+
+  useEffect(() => onMounted(), [onMounted]);
 
   return (
     <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
@@ -377,6 +378,8 @@ function BookSection({
 
   const { t } = useTranslation('homepage');
 
+  const scrollContainer = useScrollContainer();
+
   useEffect(() => {
     if (isVisible) {
       handleVisibleOnScreen(categoryKey, category);
@@ -386,7 +389,7 @@ function BookSection({
   return (
     <div
       ref={ref}
-      className='w-full select-none flex flex-col flex-grow overflow-x-visible relative'
+      className='w-full select-none flex flex-col flex-grow  relative'
     >
       <div
         id={categoryKey.toLowerCase()}
@@ -407,51 +410,51 @@ function BookSection({
 
       {/* book */}
       <div
+        ref={scrollContainer.ref}
         className='
-        w-full pb-4
-        flex flex-row 
-        overflow-x-auto overscroll-x-contain
-        book-scrolling-section relative
-        z-0
-      '
+          w-full pb-4
+          flex flex-row 
+          overflow-x-auto overscroll-x-contain
+          book-scrolling-section relative
+          z-0
+          space-x-[35px]
+        '
       >
-        <div className='flex flex-row shrink-0 space-x-[35px] '>
-          {books.map((book, index) => (
-            <motion.div
-              animate={{ opacity: [0, 1], scale: [0.5, 1] }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              key={book.id}
-              className='flex flex-col space-y-4'
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <div className='relative h-[200px] w-[150px] mx-auto'>
-                <Image
-                  className='w-full h-full object-bottom  object-contain'
-                  src={book.bookImg}
-                  alt={book.title}
-                  draggable={false}
-                  fill
-                  style={{
-                    height: '100%',
-                    width: '100%'
-                  }}
-                  sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
-                  onClick={() => handleBookClick(book)}
-                />
-              </div>
+        {books.map((book, index) => (
+          <motion.div
+            animate={{ opacity: [0, 1], scale: [0.5, 1] }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            key={book.id}
+            className='flex flex-col space-y-4'
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className='relative h-[200px] w-[150px] mx-auto'>
+              <Image
+                className='w-full h-full object-bottom  object-contain'
+                src={book.bookImg}
+                alt={book.title}
+                draggable={false}
+                fill
+                style={{
+                  height: '100%',
+                  width: '100%'
+                }}
+                sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
+                onClick={() => handleBookClick(book)}
+              />
+            </div>
 
-              <button
-                className='
+            <button
+              className='
                 bg-secondary text-white font-light text-small text-base
                 rounded-full py-1 px-2 w-32 mx-auto
               '
-                onClick={() => handleBookClick(book)}
-              >
-                {t('homepage-tab.sidebar.view-btn')}
-              </button>
-            </motion.div>
-          ))}
-        </div>
+              onClick={() => handleBookClick(book)}
+            >
+              {t('homepage-tab.sidebar.view-btn')}
+            </button>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
