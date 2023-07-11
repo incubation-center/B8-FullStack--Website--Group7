@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
+import Image from "next/image";
 
-import { AdminTab } from '@/utils/enum';
-import { formatEnumValue } from '@/utils/function';
-import Link from 'next/link';
-import { HTMLAttributes } from 'react';
-import DashboardSvg from '../icon/admin-sidebar/DashboardSvg';
-import UploadSvg from '../icon/admin-sidebar/UploadSvg';
-import BooksSvg from '../icon/admin-sidebar/BooksSvg';
-import IncomingSvg from '../icon/admin-sidebar/IncomingSvg';
-import ActiveSvg from '../icon/admin-sidebar/ActiveSvg';
-import ArchivedSvg from '../icon/admin-sidebar/ArchivedSvg';
-import RenterSvg from '../icon/admin-sidebar/RenterSvg';
-import SettingSvg from '../icon/admin-sidebar/SettingSvg';
-import { useRouter } from 'next/router';
+import { AdminTab } from "@/utils/enum";
+import { formatEnumValue } from "@/utils/function";
+import Link from "next/link";
+import { HTMLAttributes } from "react";
+import DashboardSvg from "../icon/admin-sidebar/DashboardSvg";
+import UploadSvg from "../icon/admin-sidebar/UploadSvg";
+import BooksSvg from "../icon/admin-sidebar/BooksSvg";
+import IncomingSvg from "../icon/admin-sidebar/IncomingSvg";
+import ActiveSvg from "../icon/admin-sidebar/ActiveSvg";
+import ArchivedSvg from "../icon/admin-sidebar/ArchivedSvg";
+import RenterSvg from "../icon/admin-sidebar/RenterSvg";
+import SettingSvg from "../icon/admin-sidebar/SettingSvg";
+import { useRouter } from "next/router";
 
 export default function Navbar({
   currentTab,
-  handlePageRouting
+  handlePageRouting,
 }: {
   currentTab: AdminTab;
   handlePageRouting: (tab: AdminTab) => void;
@@ -27,21 +27,21 @@ export default function Navbar({
   const handleTranslate = () => {
     switch (currentTab) {
       case AdminTab.DASHBOARD:
-        return 'translate-y-0';
+        return "translate-y-0";
       case AdminTab.UPLOAD:
-        return 'translate-y-12';
+        return "translate-y-12";
       case AdminTab.BOOKS:
-        return 'translate-y-24';
+        return "translate-y-24";
       case AdminTab.INCOMING_REQUEST:
-        return 'translate-y-[9rem]';
+        return "translate-y-[9rem]";
       case AdminTab.ACTIVE_REQUEST:
-        return 'translate-y-[12rem]';
+        return "translate-y-[12rem]";
       case AdminTab.ARCHIVED_REQUEST:
-        return 'translate-y-[15rem]';
+        return "translate-y-[15rem]";
       case AdminTab.RENTER:
-        return 'translate-y-[18rem]';
+        return "translate-y-[18rem]";
       case AdminTab.SETTING:
-        return 'translate-y-[21rem]';
+        return "translate-y-[21rem]";
     }
   };
 
@@ -66,7 +66,7 @@ export default function Navbar({
       </div>
 
       {/* nav button */}
-      <div className='relative px-2'>
+      <div className='relative px-2 '>
         <NavbarBtn
           title={formatEnumValue(AdminTab.DASHBOARD)}
           tab={AdminTab.DASHBOARD}
@@ -127,7 +127,7 @@ export default function Navbar({
         <div
           className={`
           ${handleTranslate()} transition-all duration-300
-          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full
+          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full 
           `}
           style={{ zIndex: -1 }}
         ></div>
@@ -155,7 +155,7 @@ function NavbarBtn({
   title,
   tab,
   isCurrentTab,
-  onClick
+  onClick,
 }: {
   title: string;
   tab: AdminTab;
@@ -165,7 +165,7 @@ function NavbarBtn({
   return (
     <div
       className={`flex items-center justify-start cursor-pointer rounded-full 
-      ${isCurrentTab ? 'text-primary ' : 'text-secondary'}
+      ${isCurrentTab ? "text-primary " : "text-alt-secondary"}
       transition-all duration-300
       whitespace-nowrap 
       p-1 px-2
@@ -187,8 +187,8 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
         <DashboardSvg
           className={`h-6 w-6 ${
             isCurrent
-              ? 'fill-primary stroke-primary delay-300'
-              : 'fill-secondary stroke-secondary'
+              ? "fill-primary stroke-primary delay-400"
+              : "fill-alt-secondary stroke-alt-secondary"
           }
           transition-all 
           `}
@@ -198,7 +198,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <UploadSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? "fill-primary delay-400" : "fill-alt-secondary"
           }
           transition-all  
           
@@ -209,7 +209,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <BooksSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? "fill-primary delay-400" : "fill-alt-secondary"
           }
             transition-all   
           `}
@@ -220,8 +220,8 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
         <IncomingSvg
           className={`h-6 w-6 ${
             isCurrent
-              ? 'fill-primary stroke-primary delay-300'
-              : 'fill-secondary stroke-secondary'
+              ? "fill-primary stroke-primary delay-400"
+              : "fill-alt-secondary stroke-alt-secondary"
           }
           transition-all 
 
@@ -232,7 +232,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <ActiveSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? "fill-primary delay-400" : "fill-alt-secondary"
           }
           transition-all 
         `}
@@ -242,7 +242,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <ArchivedSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? "fill-primary delay-400" : "fill-alt-secondary"
           }
           transition-all 
         `}
@@ -253,8 +253,8 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
         <RenterSvg
           className={`h-6 w-6 ${
             isCurrent
-              ? 'fill-primary stroke-primary delay-300'
-              : 'fill-secondary stroke-secondary'
+              ? "fill-primary stroke-primary delay-400"
+              : "fill-alt-secondary stroke-alt-secondary"
           }
         transition-all 
       `}
@@ -265,7 +265,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <SettingSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? "fill-primary delay-400" : "fill-alt-secondary"
           }
         transition-all 
       `}
