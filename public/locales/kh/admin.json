@@ -1,0 +1,164 @@
+{
+  "tab": {
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "upload": "ផ្ទុកឡើង",
+    "books": "សៀវភៅ",
+    "incoming-request": "សំណើរចូល",
+    "active-request": "សំណើរសកម្ម",
+    "archived-request": "សំណើរដែលបានទុក",
+    "renter": "អ្នកជួល",
+    "setting": "ការកំណត់",
+
+    "back-to-home-btn": "ទៅទំព័រដើម"
+  },
+
+  "dashboard-tab": {
+    "total-incoming": "សំណើរចូលសរុប",
+    "total-active": "សំណើរសកម្ម​សរុប",
+    "total-archived": "សំណើរដែលបានទុកសរុប",
+
+    "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
+
+    "recent-renter": "អ្នកជួលថ្មីៗ",
+    "name": "ឈ្មោះ",
+    "email": "អ៊ីមែល",
+    "approval-date": "កាលបរិច្ឆេទយល់ព្រម",
+    "return-date": "កាលបរិច្ឆេទសងត្រឡប់",
+    "actions": "សកម្មភាព",
+
+    "refresh-btn": "បច្ចុប្បន្នភាព",
+    "view-btn": "មើល"
+  },
+
+  "upload-tab": {
+    "book-cover": "គម្របសៀវភៅ",
+    "upload-img": "បង្ហោះរូបភាពសសៀវភៅ",
+
+    "book-title": "ចំណងជើងសៀវភៅ",
+    "author": "អ្នកនិពន្ធ",
+    "category": "ប្រភេទ",
+    "description": "ការពិពណ៌នា",
+
+    "upload-book-btn": "ផ្ទុកឡើងសៀវភៅ"
+  },
+
+  "books-tab": {
+    "books-h1-education": "ការអប់រំ",
+    "books-h1-business": "អាជីវកម្ម",
+    "books-h1-history": "ប្រវត្តិសាស្ត្រ",
+    "books-h1-drama": "រឿងមនោសញ្ចេតនា",
+    "books-h1-fantasy": "រឿងស្រមើលស្រមៃ",
+    "books-h1-self-development": "ការអភិវឌ្ឍន៍ខ្លួន",
+
+    "books-view-tab": {
+      "author": "អ្នកនិពន្ធ",
+      "genre": "ប្រភេទ",
+      "book-description": "ការពិពណ៌នាសៀវភៅ",
+
+      "delete-btn": "លុប",
+      "edit-btn": "កែសម្រួល",
+      "save-btn": "រក្សាទុក",
+      "cancel-btn": "បោះបង់",
+
+      "success-tab": {
+        "success": "ជោគជ័យ",
+        "book-update-text": "ធ្វើបច្ចុប្បន្នភាពសៀវភៅដោយជោគជ័យ",
+
+        "close-btn": "បិទ"
+      }
+    },
+
+    "delete-book-tab": {
+      "delete-book": "លុបសៀវភៅ",
+      "delete-book-text": "តើអ្នកប្រាកដទេថាអ្នកចង់លុបសៀវភៅនេះ?",
+
+      "yes-btn": "យល់ព្រម",
+      "no-btn": "ទេ",
+
+      "success-tab": {
+        "success": "ជោគជ័យ",
+        "book-delete-text": "បានលុបសៀវភៅដោយជោគជ័យ",
+
+        "close-btn": "បិទ"
+      }
+    }
+  },
+
+  "incoming-request-tab": {
+    "no-request": "គ្មានសំណើរ",
+
+    "book": "សៀវភៅ",
+    "username": "ឈ្មោះ",
+    "request-date": "កាលបរិច្ឆេទស្នើរសុំ",
+    "actions": "សកម្មភាព",
+
+    "approve-btn": "យល់ព្រម",
+    "reject-btn": "បដិសេដ",
+
+    "approve-request-tab": {
+      "approve-request": "យល់ព្រម​សំណើរ",
+      "p-approve-request-tab": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើរនេះទេ?",
+
+      "no-btn": "ទេ",
+      "yes-btn": "យល់ព្រម"
+    },
+
+    "reject-request-tab": {
+      "reject-request": "បដិសេដសំណើរ",
+      "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើរនេះទេ?",
+
+      "reject-reason": "ហេតុផលបដិសេដ",
+      "reject-reason-fill": "សូមបញ្ចូលហេតុផលរបស់អ្នក",
+
+      "no-btn": "ទេ",
+      "yes-btn": "យល់ព្រម"
+    }
+  },
+
+  "active-request-tab": {
+    "no-request": "គ្មានសំណើរ",
+
+    "book": "សៀវភៅ",
+    "username": "ឈ្មោះ",
+    "to-be-returned-date": "កាលបរិច្ឆេទដែលត្រូវប្រគល់មកវិញ",
+    "actions": "សកម្មភាព",
+
+    "receive-btn": "ទទួល"
+  },
+
+  "archived-request-tab": {
+    "no-request": "គ្មានសំណើរ",
+
+    "book": "សៀវភៅ",
+    "username": "ឈ្មោះ",
+    "status": "ស្ថានភាព",
+    "actions": "សកម្មភាព",
+
+    "approved": "យល់ព្រម",
+    "rejected": "បដិសេដ"
+  },
+
+  "renter-tab": {
+    "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
+
+    "name": "ឈ្មោះ",
+    "email": "អ៊ីមែល",
+    "approval-date": "កាលបរិច្ឆេទយល់ព្រម",
+    "return-date": "កាលបរិច្ឆេទសងត្រឡប់",
+    "actions": "សកម្មភាព"
+  },
+
+  "setting-tab": {
+    "general-setting": "ការកំណត់ទូទៅ",
+    "system-name": "ឈ្មោះប្រព័ន្ធ",
+
+    "security-policy": "សុវត្ថិភាព & គោលការណ៏",
+    "password": "ពាក្យសម្ងាត់",
+    "password-placeholder": "អ្នកគ្រប់គ្រងអាចផ្លាស់ប្តូរព័ត៌មានប្រព័ន្",
+    "activity-log": "សកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
+    "activity-log-placeholder": "អ្នកគ្រប់គ្រងអាចឃើញសកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
+
+    "change-btn": "ផ្លាស់ប្តូរ",
+    "view-btn": "មើល"
+  }
+}

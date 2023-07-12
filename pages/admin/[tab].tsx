@@ -204,7 +204,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       currentTab: tab || AdminTab.DASHBOARD,
-      ...(await serverSideTranslations(locale))
+      ...(await serverSideTranslations(locale, ['admin', 'common']))
     }
   };
 }

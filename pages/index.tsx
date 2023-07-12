@@ -132,7 +132,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     props: {
       currentTab: tab || HomePageTab.HOME,
       authStore: authObj,
-      ...(await serverSideTranslations(locale))
+      ...(await serverSideTranslations(locale, ['homepage', 'common']))
     }
   };
 };

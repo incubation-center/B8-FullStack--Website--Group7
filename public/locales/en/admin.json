@@ -1,0 +1,164 @@
+{
+  "tab": {
+    "dashboard": "Dashboard",
+    "upload": "Upload",
+    "books": "Books",
+    "incoming-request": "Incoming Request",
+    "active-request": "Active Request",
+    "archived-request": "Archived Request",
+    "renter": "Renter",
+    "setting": "Setting",
+
+    "back-to-home-btn": "Back to Home"
+  },
+
+  "dashboard-tab": {
+    "total-incoming": "Total Incoming",
+    "total-active": "Total Active",
+    "total-archived": "Total Archived",
+
+    "no-renter-found": "No renter found",
+
+    "recent-renter": "Recent Renter",
+    "name": "Name",
+    "email": "Email",
+    "approval-date": "Approval date",
+    "return-date": "Return date",
+    "actions": "Actions",
+
+    "refresh-btn": "Refresh",
+    "view-btn": "View"
+  },
+
+  "upload-tab": {
+    "book-cover": "Book cover",
+    "upload-img": "Upload Your Image",
+
+    "book-title": "Book Title",
+    "author": "Author",
+    "category": "Category",
+    "description": "Description",
+
+    "upload-book-btn": "Upload book"
+  },
+
+  "books-tab": {
+    "books-h1-education": "Education",
+    "books-h1-business": "Business",
+    "books-h1-history": "History",
+    "books-h1-drama": "Drama",
+    "books-h1-fantasy": "Fantasy",
+    "books-h1-self-development": "Self Development",
+
+    "books-view-tab": {
+      "author": "Author",
+      "genre": "Genre",
+      "book-description": "Book description",
+
+      "delete-btn": "Delete",
+      "edit-btn": "Edit",
+      "save-btn": "Save",
+      "cancel-btn": "Cancel",
+
+      "success-tab": {
+        "success": "Success",
+        "book-update-text": "Book updated successfully",
+
+        "close-btn": "Close"
+      }
+    },
+
+    "delete-book-tab": {
+      "delete-book": "Delete Book",
+      "delete-book-text": "Are you sure you want to delete this book?",
+
+      "yes-btn": "Yes",
+      "no-btn": "No",
+
+      "success-tab": {
+        "success": "Success",
+        "book-delete-text": "Book deleted successfully",
+
+        "close-btn": "Close"
+      }
+    }
+  },
+
+  "incoming-request-tab": {
+    "no-request": "No request",
+
+    "book": "Book",
+    "username": "Username",
+    "request-date": "Request date",
+    "actions": "Actions",
+
+    "approve-btn": "Approve",
+    "reject-btn": "Reject",
+
+    "approve-request-tab": {
+      "approve-request": "Approve Request",
+      "p-approve-request-tab": "Are you sure you want to approve this request?",
+
+      "no-btn": "No",
+      "yes-btn": "Yes"
+    },
+
+    "reject-request-tab": {
+      "reject-request": "Reject Request",
+      "p-reject-request": "Are you sure you want to reject this request?",
+
+      "reject-reason": "Reject reasons",
+      "reject-reason-fill": "Please input your reason",
+
+      "no-btn": "No",
+      "yes-btn": "Yes"
+    }
+  },
+
+  "active-request-tab": {
+    "no-request": "No request",
+
+    "book": "Book",
+    "username": "Username",
+    "to-be-returned-date": "To be returned date",
+    "actions": "Actions",
+
+    "receive-btn": "Receive"
+  },
+
+  "archived-request-tab": {
+    "no-request": "No request",
+
+    "book": "Book",
+    "username": "Username",
+    "status": "Status",
+    "actions": "Actions",
+
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+
+  "renter-tab": {
+    "no-renter-found": "No renter found",
+
+    "name": "Name",
+    "email": "Email",
+    "approval-date": "Approval date",
+    "return-date": "Return date",
+    "actions": "Actions"
+  },
+
+  "setting-tab": {
+    "general-setting": "General Setting",
+    "system-name": "System Name",
+
+    "security-policy": "Security & Policy",
+    "password": "Password",
+    "password-placeholder": "The admin able to change the system credentials",
+    "activity-log": "Activity log",
+    "activity-log-placeholder": "The admin able to see the login activity in the system",
+
+    "change-btn": "Change",
+    "view-btn": "View"
+  }
+}
