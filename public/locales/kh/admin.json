@@ -8,7 +8,7 @@
 
   "tab": {
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
-    "upload": "ផ្ទុកឡើង",
+    "upload-book": "បង្ហោះសៀវភៅ",
     "books": "សៀវភៅ",
     "incoming-request": "សំណើរចូល",
     "active-request": "សំណើរសកម្ម",
@@ -31,14 +31,16 @@
 
   "upload-tab": {
     "book-cover": "គម្របសៀវភៅ",
-    "upload-img": "បង្ហោះរូបភាពសសៀវភៅ",
+    "upload-img": "បង្ហោះរូបភាពសៀវភៅ",
+    "click-to-change-image": "ចុចដើម្បីផ្លាស់ប្ដូររូបភាព",
 
     "book-title": "ចំណងជើងសៀវភៅ",
     "author": "អ្នកនិពន្ធ",
     "category": "ប្រភេទ",
     "description": "ការពិពណ៌នា",
 
-    "upload-book-btn": "ផ្ទុកឡើងសៀវភៅ"
+    "upload-book-btn": "បង្ហោះសៀវភៅ",
+    "uploading-book-btn": "កំពុងបង្ហោះសៀវភៅ..."
   },
 
   "books-tab": {

@@ -8,7 +8,7 @@
 
   "tab": {
     "dashboard": "Dashboard",
-    "upload": "Upload",
+    "upload-book": "Upload Book",
     "books": "Books",
     "incoming-request": "Incoming Request",
     "active-request": "Active Request",
@@ -32,13 +32,15 @@
   "upload-tab": {
     "book-cover": "Book cover",
     "upload-img": "Upload Your Image",
+    "click-to-change-image": "click to change image",
 
     "book-title": "Book Title",
     "author": "Author",
     "category": "Category",
     "description": "Description",
 
-    "upload-book-btn": "Upload book"
+    "upload-book-btn": "Upload book",
+    "uploading-book-btn": "Uploading..."
   },
 
   "books-tab": {

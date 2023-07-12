@@ -80,7 +80,7 @@ export default function Navbar({
           />
 
           <NavbarBtn
-            title={t('tab.upload', formatEnumValue(AdminTab.UPLOAD))}
+            title={t('tab.upload-book', formatEnumValue(AdminTab.UPLOAD))}
             tab={AdminTab.UPLOAD}
             isCurrentTab={currentTab === AdminTab.UPLOAD}
             onClick={() => handlePageRouting(AdminTab.UPLOAD)}
