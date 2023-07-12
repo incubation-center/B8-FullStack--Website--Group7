@@ -304,7 +304,7 @@ function CategoryIcon({
           className={`h-4 w-4 ${
             isCurrentCategory
               ? "fill-white stroke-white"
-              : "fill-primary stroke-t-primary"
+              : "fill-t-primary stroke-t-primary"
           }`}
         />
       );
