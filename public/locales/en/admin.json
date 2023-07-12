@@ -3,13 +3,21 @@
     "back-to-home-btn": "Back to Home",
     "refresh-btn": "Refresh",
     "refreshing-btn": "Refreshing",
-    "view-btn": "View"
+    "view-btn": "View",
+
+    "approve-btn": "Approve",
+    "reject-btn": "Reject",
+
+    "receive-btn": "Receive",
+
+    "approved": "Approved",
+    "rejected": "Rejected"
   },
 
   "tab": {
     "dashboard": "Dashboard",
     "upload-book": "Upload Book",
-    "books": "Books",
+    "books": "Books List",
     "incoming-request": "Incoming Request",
     "active-request": "Active Request",
     "archived-request": "Archived Request",
@@ -83,16 +91,6 @@
   },
 
   "incoming-request-tab": {
-    "no-request": "No request",
-
-    "book": "Book",
-    "username": "Username",
-    "request-date": "Request date",
-    "actions": "Actions",
-
-    "approve-btn": "Approve",
-    "reject-btn": "Reject",
-
     "approve-request-tab": {
       "approve-request": "Approve Request",
       "p-approve-request-tab": "Are you sure you want to approve this request?",
@@ -111,29 +109,6 @@
       "no-btn": "No",
       "yes-btn": "Yes"
     }
-  },
-
-  "active-request-tab": {
-    "no-request": "No request",
-
-    "book": "Book",
-    "username": "Username",
-    "to-be-returned-date": "To be returned date",
-    "actions": "Actions",
-
-    "receive-btn": "Receive"
-  },
-
-  "archived-request-tab": {
-    "no-request": "No request",
-
-    "book": "Book",
-    "username": "Username",
-    "status": "Status",
-    "actions": "Actions",
-
-    "approved": "Approved",
-    "rejected": "Rejected"
   },
 
   "renter-tab": {
@@ -158,5 +133,15 @@
 
     "change-btn": "Change",
     "view-btn": "View"
+  },
+
+  "request-table": {
+    "book": "Book",
+    "username": "Username",
+    "request-date": "Request date",
+    "to-be-returned-date": "To be returned date",
+    "status": "Status",
+    "actions": "Actions",
+    "no-request": "No request"
   }
 }

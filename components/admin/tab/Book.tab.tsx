@@ -12,10 +12,12 @@ import { AnimatePresence } from 'framer-motion';
 import UserSearchBar from '@/components/UserSearchBar';
 import { HomePageTab } from '@/utils/enum';
 import { useRouter } from 'next/router';
-import { i18n } from 'next-i18next';
+import { i18n, useTranslation } from 'next-i18next';
 
 export default function BookTab() {
   const router = useRouter();
+
+  const { t } = useTranslation('admin');
 
   const [_, setAllBooks] = useRecoilState(AllBooksAtom);
   const [__, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
@@ -41,7 +43,7 @@ export default function BookTab() {
   useLoadNamespace('homepage');
 
   return (
-    <AdminTabLayout title='Books Lists' handleRefresh={handleRefreshBook}>
+    <AdminTabLayout title={t('tab.books')} handleRefresh={handleRefreshBook}>
       <div className='w-full flex justify-start mb-4 '>
         <UserSearchBar currentTab={HomePageTab.HOME} />
       </div>

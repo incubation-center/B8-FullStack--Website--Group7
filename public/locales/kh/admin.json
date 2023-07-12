@@ -3,13 +3,21 @@
     "back-to-home-btn": "ទៅទំព័រដើម",
     "refresh-btn": "ធ្វើបច្ចុប្បន្នភាព",
     "refreshing-btn": "កំពុងធ្វើបច្ចុប្បន្នភាព",
-    "view-btn": "មើល"
+    "view-btn": "ពិនិត្យ",
+
+    "approve-btn": "យល់ព្រម",
+    "reject-btn": "បដិសេធ",
+
+    "receive-btn": "ទទួល",
+
+    "approved": "បានយល់ព្រម",
+    "rejected": "បានបដិសេធ"
   },
 
   "tab": {
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
     "upload-book": "បង្ហោះសៀវភៅ",
-    "books": "សៀវភៅ",
+    "books": "បញ្ចីសៀវភៅ",
     "incoming-request": "សំណើរចូល",
     "active-request": "សំណើរសកម្ម",
     "archived-request": "សំណើរដែលបានទុក",
@@ -86,16 +94,6 @@
   },
 
   "incoming-request-tab": {
-    "no-request": "គ្មានសំណើរ",
-
-    "book": "សៀវភៅ",
-    "username": "ឈ្មោះ",
-    "request-date": "កាលបរិច្ឆេទស្នើរសុំ",
-    "actions": "សកម្មភាព",
-
-    "approve-btn": "យល់ព្រម",
-    "reject-btn": "បដិសេដ",
-
     "approve-request-tab": {
       "approve-request": "យល់ព្រម​សំណើរ",
       "p-approve-request-tab": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើរនេះទេ?",
@@ -114,29 +112,6 @@
       "no-btn": "ទេ",
       "yes-btn": "យល់ព្រម"
     }
-  },
-
-  "active-request-tab": {
-    "no-request": "គ្មានសំណើរ",
-
-    "book": "សៀវភៅ",
-    "username": "ឈ្មោះ",
-    "to-be-returned-date": "កាលបរិច្ឆេទដែលត្រូវប្រគល់មកវិញ",
-    "actions": "សកម្មភាព",
-
-    "receive-btn": "ទទួល"
-  },
-
-  "archived-request-tab": {
-    "no-request": "គ្មានសំណើរ",
-
-    "book": "សៀវភៅ",
-    "username": "ឈ្មោះ",
-    "status": "ស្ថានភាព",
-    "actions": "សកម្មភាព",
-
-    "approved": "យល់ព្រម",
-    "rejected": "បដិសេដ"
   },
 
   "renter-tab": {
@@ -161,5 +136,15 @@
 
     "change-btn": "ផ្លាស់ប្តូរ",
     "view-btn": "មើល"
+  },
+
+  "request-table": {
+    "book": "សៀវភៅ",
+    "username": "ឈ្មោះអ្នកខ្ចី",
+    "request-date": "កាលបរិច្ឆេទស្នើសុំ្ចខ្ចី",
+    "to-be-returned-date": "កាលបរិច្ឆេទដែលត្រូវសង",
+    "status": "ស្ថានភាព",
+    "actions": "សកម្មភាព",
+    "no-request": "រកមិនឃើញសំណើរទេ"
   }
 }

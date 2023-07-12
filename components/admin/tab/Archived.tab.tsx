@@ -13,12 +13,15 @@ import RequestDetail from '@/components/Modals/RequestDetail';
 
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import { useTranslation } from 'next-i18next';
 
 export default function ArchivedTab({
   handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
@@ -31,7 +34,7 @@ export default function ArchivedTab({
       </ModalWrapper>
 
       <AdminTabLayout
-        title='Archived Request'
+        title={t('tab.archived-request')}
         handleRefresh={handleRefreshRequest}
       >
         <RequestTable
@@ -41,7 +44,7 @@ export default function ArchivedTab({
           )}
           actions={[
             {
-              label: 'View',
+              label: t('btns.view-btn'),
               bgColor: 'bg-alt-secondary',
               onClick: (request) => {
                 setViewRequest(request);
