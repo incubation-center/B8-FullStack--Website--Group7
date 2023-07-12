@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
 
 import { AdminTab } from '@/utils/enum';
 import { formatEnumValue } from '@/utils/function';
 import Link from 'next/link';
-import { HTMLAttributes } from 'react';
 import DashboardSvg from '../icon/admin-sidebar/DashboardSvg';
 import UploadSvg from '../icon/admin-sidebar/UploadSvg';
 import BooksSvg from '../icon/admin-sidebar/BooksSvg';
@@ -14,6 +12,8 @@ import ArchivedSvg from '../icon/admin-sidebar/ArchivedSvg';
 import RenterSvg from '../icon/admin-sidebar/RenterSvg';
 import SettingSvg from '../icon/admin-sidebar/SettingSvg';
 import { useRouter } from 'next/router';
+import LocaleSwitching from '../LocaleSwitching';
+import { useTranslation } from 'next-i18next';
 
 export default function Navbar({
   currentTab,
@@ -23,6 +23,8 @@ export default function Navbar({
   handlePageRouting: (tab: AdminTab) => void;
 }) {
   const { locale } = useRouter();
+
+  const { t } = useTranslation('admin');
 
   const handleTranslate = () => {
     switch (currentTab) {
@@ -52,6 +54,7 @@ export default function Navbar({
         h-full flex flex-col
         bg-primary
         p-2 z-10
+        overflow-y-auto
       '
     >
       {/* Logo */}
@@ -67,61 +70,73 @@ export default function Navbar({
 
       {/* nav button */}
       <div className='relative px-2'>
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.DASHBOARD)}
-          tab={AdminTab.DASHBOARD}
-          isCurrentTab={currentTab === AdminTab.DASHBOARD}
-          onClick={() => handlePageRouting(AdminTab.DASHBOARD)}
-        />
+        <>
+          <NavbarBtn
+            // title={formatEnumValue(AdminTab.DASHBOARD)}
+            title={t('tab.dashboard', formatEnumValue(AdminTab.DASHBOARD))}
+            tab={AdminTab.DASHBOARD}
+            isCurrentTab={currentTab === AdminTab.DASHBOARD}
+            onClick={() => handlePageRouting(AdminTab.DASHBOARD)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.UPLOAD)}
-          tab={AdminTab.UPLOAD}
-          isCurrentTab={currentTab === AdminTab.UPLOAD}
-          onClick={() => handlePageRouting(AdminTab.UPLOAD)}
-        />
+          <NavbarBtn
+            title={t('tab.upload-book', formatEnumValue(AdminTab.UPLOAD))}
+            tab={AdminTab.UPLOAD}
+            isCurrentTab={currentTab === AdminTab.UPLOAD}
+            onClick={() => handlePageRouting(AdminTab.UPLOAD)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.BOOKS)}
-          tab={AdminTab.BOOKS}
-          isCurrentTab={currentTab === AdminTab.BOOKS}
-          onClick={() => handlePageRouting(AdminTab.BOOKS)}
-        />
+          <NavbarBtn
+            title={t('tab.books', formatEnumValue(AdminTab.BOOKS))}
+            tab={AdminTab.BOOKS}
+            isCurrentTab={currentTab === AdminTab.BOOKS}
+            onClick={() => handlePageRouting(AdminTab.BOOKS)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.INCOMING_REQUEST)}
-          tab={AdminTab.INCOMING_REQUEST}
-          isCurrentTab={currentTab === AdminTab.INCOMING_REQUEST}
-          onClick={() => handlePageRouting(AdminTab.INCOMING_REQUEST)}
-        />
+          <NavbarBtn
+            title={t(
+              'tab.incoming-request',
+              formatEnumValue(AdminTab.INCOMING_REQUEST)
+            )}
+            tab={AdminTab.INCOMING_REQUEST}
+            isCurrentTab={currentTab === AdminTab.INCOMING_REQUEST}
+            onClick={() => handlePageRouting(AdminTab.INCOMING_REQUEST)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.ACTIVE_REQUEST)}
-          tab={AdminTab.ACTIVE_REQUEST}
-          isCurrentTab={currentTab === AdminTab.ACTIVE_REQUEST}
-          onClick={() => handlePageRouting(AdminTab.ACTIVE_REQUEST)}
-        />
+          <NavbarBtn
+            title={t(
+              'tab.active-request',
+              formatEnumValue(AdminTab.ACTIVE_REQUEST)
+            )}
+            tab={AdminTab.ACTIVE_REQUEST}
+            isCurrentTab={currentTab === AdminTab.ACTIVE_REQUEST}
+            onClick={() => handlePageRouting(AdminTab.ACTIVE_REQUEST)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.ARCHIVED_REQUEST)}
-          tab={AdminTab.ARCHIVED_REQUEST}
-          isCurrentTab={currentTab === AdminTab.ARCHIVED_REQUEST}
-          onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
-        />
+          <NavbarBtn
+            title={t(
+              'tab.archived-request',
+              formatEnumValue(AdminTab.ARCHIVED_REQUEST)
+            )}
+            tab={AdminTab.ARCHIVED_REQUEST}
+            isCurrentTab={currentTab === AdminTab.ARCHIVED_REQUEST}
+            onClick={() => handlePageRouting(AdminTab.ARCHIVED_REQUEST)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.RENTER)}
-          tab={AdminTab.RENTER}
-          isCurrentTab={currentTab === AdminTab.RENTER}
-          onClick={() => handlePageRouting(AdminTab.RENTER)}
-        />
+          <NavbarBtn
+            title={t('tab.renter', formatEnumValue(AdminTab.RENTER))}
+            tab={AdminTab.RENTER}
+            isCurrentTab={currentTab === AdminTab.RENTER}
+            onClick={() => handlePageRouting(AdminTab.RENTER)}
+          />
 
-        <NavbarBtn
-          title={formatEnumValue(AdminTab.SETTING)}
-          tab={AdminTab.SETTING}
-          isCurrentTab={currentTab === AdminTab.SETTING}
-          onClick={() => handlePageRouting(AdminTab.SETTING)}
-        />
+          <NavbarBtn
+            title={t('tab.setting', formatEnumValue(AdminTab.SETTING))}
+            tab={AdminTab.SETTING}
+            isCurrentTab={currentTab === AdminTab.SETTING}
+            onClick={() => handlePageRouting(AdminTab.SETTING)}
+          />
+        </>
 
         {/* slide */}
         <div
@@ -135,6 +150,11 @@ export default function Navbar({
 
       {/* admin */}
       <div className='flex-1'></div>
+
+      <div className='mb-2 xl:mb-4'>
+        <LocaleSwitching />
+      </div>
+
       <Link
         href='/'
         className='
@@ -145,7 +165,7 @@ export default function Navbar({
         '
         locale={locale}
       >
-        Back to Home
+        {t('btns.back-to-home-btn')}
       </Link>
     </div>
   );

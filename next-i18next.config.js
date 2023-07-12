@@ -14,7 +14,8 @@ module.exports = {
     'forgot-password',
     'reset-password',
     'login',
-    'signup'
+    'signup',
+    'admin'
   ],
   localePath: path.resolve('./public/locales'),
   reloadOnPrerender: process.env.NODE_ENV === 'development'

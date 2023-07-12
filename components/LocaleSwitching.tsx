@@ -15,6 +15,8 @@ export default function LocaleSwitching({
   const { locales, locale, replace, pathname, asPath, reload, events } = router;
 
   const handleSwitchLocale = (locale: string) => {
+    if (locale === router.locale) return;
+
     setCookie('NEXT_LOCALE', locale);
     replace(pathname, asPath, { locale: locale, shallow: false });
   };

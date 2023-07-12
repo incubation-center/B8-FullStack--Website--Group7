@@ -13,6 +13,7 @@ import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { uploadBookCover } from '@/service/firebase';
 import { updateBookById } from '@/service/api/book';
 import UploadSvg from '@/components/icon/admin-sidebar/UploadSvg';
+import { useTranslation } from 'next-i18next';
 
 interface BookUploadInputs extends Book {}
 
@@ -33,6 +34,8 @@ export default function UploadTab({
 }: {
   handleRefreshRequest: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const [selectedCategory, setSelectedCategory] = useState(CategoryOptions[0]);
 
   const [isUpdating, setIsUpdating] = useState(false);
@@ -131,7 +134,7 @@ export default function UploadTab({
     <>
       <AlertModal />
 
-      <AdminTabLayout title='Book Upload'>
+      <AdminTabLayout title={t('tab.upload-book')}>
         <div className='bg-alt-secondary rounded-xl h-full w-full p-4 flex-1'>
           <form className='space-y-6 h-full flex flex-col flex-grow'>
             <div className='flex gap-8 items-start'>
@@ -149,7 +152,7 @@ export default function UploadTab({
                         />
                       </label>
                       <div className=' w-full text-center mt-1 text-black text-opacity-60'>
-                        (click to change image)
+                        ({t('upload-tab.click-to-change-image')})
                       </div>
                     </div>
 
@@ -180,7 +183,9 @@ export default function UploadTab({
                     '
                     >
                       <UploadSvg className='w-12 h-12 fill-primary' />
-                      <p className='text-primary'>Upload Your Image</p>
+                      <p className='text-primary'>
+                        {t('upload-tab.upload-img')}
+                      </p>
                     </div>
                   </label>
                 )}
@@ -191,7 +196,7 @@ export default function UploadTab({
                 )}
 
                 <h1 className='mt-2 text-center text-primary text-xl font-bold'>
-                  Book cover
+                  {t('upload-tab.book-cover')}
                 </h1>
                 <input
                   {...register('bookImg', {
@@ -235,7 +240,7 @@ export default function UploadTab({
                       htmlFor='title'
                       className='text-primary font-medium whitespace-nowrap'
                     >
-                      Book Title
+                      {t('upload-tab.book-title')}
                       <RequiredIcon />
                     </label>
                     {errors.title && (
@@ -262,7 +267,7 @@ export default function UploadTab({
                       htmlFor='author'
                       className='text-primary font-medium whitespace-nowrap'
                     >
-                      Author
+                      {t('upload-tab.author')}
                       <RequiredIcon />
                     </label>
                     {errors.author && (
@@ -288,7 +293,7 @@ export default function UploadTab({
                   options={CategoryOptions}
                   selectedOption={selectedCategory}
                   setSelectedOption={setSelectedCategory}
-                  label='Category'
+                  label={t('upload-tab.category')}
                   disabled={isUpdating}
                 />
 
@@ -299,7 +304,7 @@ export default function UploadTab({
                       htmlFor='description'
                       className='text-primary font-medium '
                     >
-                      Description
+                      {t('upload-tab.description')}
                     </label>
                     <span className='text-primary text-opacity-70'>
                       (optional)
@@ -335,10 +340,10 @@ export default function UploadTab({
                 {isUpdating ? (
                   <div className='flex justify-center items-center gap-2'>
                     <SpinningLoadingSvg className='w-6 h-6 text-white' />
-                    Uploading...
+                    <span>{t('upload-tab.uploading-book-btn')}</span>
                   </div>
                 ) : (
-                  <span>Upload</span>
+                  <span>{t('upload-tab.upload-book-btn')}</span>
                 )}
               </button>
             </div>
