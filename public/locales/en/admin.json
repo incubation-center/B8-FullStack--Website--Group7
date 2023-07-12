@@ -1,4 +1,11 @@
 {
+  "btns": {
+    "back-to-home-btn": "Back to Home",
+    "refresh-btn": "Refresh",
+    "refreshing-btn": "Refreshing",
+    "view-btn": "View"
+  },
+
   "tab": {
     "dashboard": "Dashboard",
     "upload": "Upload",
@@ -7,27 +14,19 @@
     "active-request": "Active Request",
     "archived-request": "Archived Request",
     "renter": "Renter",
-    "setting": "Setting",
-
-    "back-to-home-btn": "Back to Home"
+    "setting": "Setting"
   },
 
   "dashboard-tab": {
     "total-incoming": "Total Incoming",
     "total-active": "Total Active",
+    "total-renter": "Total Renter",
     "total-archived": "Total Archived",
 
-    "no-renter-found": "No renter found",
+    "today": "Today",
+    "yesterday": "Yesterday",
 
-    "recent-renter": "Recent Renter",
-    "name": "Name",
-    "email": "Email",
-    "approval-date": "Approval date",
-    "return-date": "Return date",
-    "actions": "Actions",
-
-    "refresh-btn": "Refresh",
-    "view-btn": "View"
+    "recent-renter": "Recent Renter"
   },
 
   "upload-tab": {

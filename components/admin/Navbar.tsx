@@ -165,7 +165,7 @@ export default function Navbar({
         '
         locale={locale}
       >
-        {t('tab.back-to-home-btn')}
+        {t('btns.back-to-home-btn')}
       </Link>
     </div>
   );

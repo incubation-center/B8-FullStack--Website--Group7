@@ -20,12 +20,15 @@ import IncomingSvg from '@/components/icon/admin-sidebar/IncomingSvg';
 import ActiveSvg from '@/components/icon/admin-sidebar/ActiveSvg';
 import ArchivedSvg from '@/components/icon/admin-sidebar/ArchivedSvg';
 import RenterSvg from '@/components/icon/admin-sidebar/RenterSvg';
+import { useTranslation } from 'next-i18next';
 
 export default function DashboardTab({
   handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const requestData = useRecoilValue(AdminAllRequestAtom);
   const requestCount = useRecoilValue(AdminAllRequestCountAtom);
 
@@ -34,7 +37,7 @@ export default function DashboardTab({
 
   return (
     <AdminTabLayout
-      title={formatEnumValue(AdminTab.DASHBOARD)}
+      title={t('tab.dashboard', formatEnumValue(AdminTab.DASHBOARD))}
       handleRefresh={handleRefreshRequest}
     >
       <ModalWrapper>
@@ -51,25 +54,25 @@ export default function DashboardTab({
         '
       >
         <RequestDataShow
-          title='Total Incoming'
+          title={t('dashboard-tab.total-incoming')}
           tab={AdminTab.INCOMING_REQUEST}
           value={requestCount.PENDING}
         />
 
         <RequestDataShow
-          title='Total Active'
+          title={t('dashboard-tab.total-active')}
           tab={AdminTab.ACTIVE_REQUEST}
           value={requestCount.ACCEPTED}
         />
 
         <RequestDataShow
-          title='Total Renter'
+          title={t('dashboard-tab.total-renter')}
           tab={AdminTab.RENTER}
           value={requestCount.RENTER}
         />
 
         <RequestDataShow
-          title='Total Archived'
+          title={t('dashboard-tab.total-archived')}
           tab={AdminTab.ARCHIVED_REQUEST}
           value={requestCount.ARCHIVED}
         />
@@ -77,7 +80,9 @@ export default function DashboardTab({
 
       {/* Recent Renter*/}
       <div className='w-full mt-5'>
-        <h1 className='text-primary text-2xl font-bold mb-5'>Recent renter</h1>
+        <h1 className='text-primary text-2xl font-bold mb-5'>
+          {t('dashboard-tab.recent-renter')}
+        </h1>
 
         <RenterTable
           data={requestData
@@ -88,7 +93,7 @@ export default function DashboardTab({
             .slice(0, 5)}
           actions={[
             {
-              label: 'View',
+              label: t('btns.view-btn'),
               onClick: (request) => {
                 setViewRequest(request);
                 toggle();
@@ -115,6 +120,8 @@ const RequestDataShow = ({
     yesterday: number;
   };
 }) => {
+  const { t } = useTranslation('admin');
+
   return (
     <div className='rounded-lg bg-alt-secondary p-4 h-fit min-h-[180px] flex flex-col flex-grow whitespace-nowrap'>
       <h1 className='text-lg text-primary font-bold'>{title}</h1>
@@ -125,8 +132,12 @@ const RequestDataShow = ({
         <NavbarIcon tab={tab} />
       </div>
       <div className='flex justify-between text-primary'>
-        <div>Today {value.today}</div>
-        <div>Yesterday {value.yesterday}</div>
+        <div>
+          {t('dashboard-tab.today')} {value.today}
+        </div>
+        <div>
+          {t('dashboard-tab.yesterday')} {value.yesterday}
+        </div>
       </div>
     </div>
   );

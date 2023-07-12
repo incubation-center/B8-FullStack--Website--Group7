@@ -1,4 +1,11 @@
 {
+  "btns": {
+    "back-to-home-btn": "ទៅទំព័រដើម",
+    "refresh-btn": "ធ្វើបច្ចុប្បន្នភាព",
+    "refreshing-btn": "កំពុងធ្វើបច្ចុប្បន្នភាព",
+    "view-btn": "មើល"
+  },
+
   "tab": {
     "dashboard": "ផ្ទាំងគ្រប់គ្រង",
     "upload": "ផ្ទុកឡើង",
@@ -7,27 +14,19 @@
     "active-request": "សំណើរសកម្ម",
     "archived-request": "សំណើរដែលបានទុក",
     "renter": "អ្នកជួល",
-    "setting": "ការកំណត់",
-
-    "back-to-home-btn": "ទៅទំព័រដើម"
+    "setting": "ការកំណត់"
   },
 
   "dashboard-tab": {
     "total-incoming": "សំណើរចូលសរុប",
     "total-active": "សំណើរសកម្ម​សរុប",
+    "total-renter": "អ្នកជួលសរុប",
     "total-archived": "សំណើរដែលបានទុកសរុប",
 
-    "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
+    "today": "ថ្ងៃនេះ",
+    "yesterday": "ម្សិលមិញ",
 
-    "recent-renter": "អ្នកជួលថ្មីៗ",
-    "name": "ឈ្មោះ",
-    "email": "អ៊ីមែល",
-    "approval-date": "កាលបរិច្ឆេទយល់ព្រម",
-    "return-date": "កាលបរិច្ឆេទសងត្រឡប់",
-    "actions": "សកម្មភាព",
-
-    "refresh-btn": "បច្ចុប្បន្នភាព",
-    "view-btn": "មើល"
+    "recent-renter": "អ្នកខ្ចីថ្មីៗ"
   },
 
   "upload-tab": {
