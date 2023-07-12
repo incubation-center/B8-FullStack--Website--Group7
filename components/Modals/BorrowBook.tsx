@@ -1,36 +1,36 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { Listbox } from '@headlessui/react';
-import { motion } from 'framer-motion';
+import { Listbox } from "@headlessui/react";
+import { motion } from "framer-motion";
 
-import { Book, User } from '@/types';
-import { AlertType, AlertModalTextType } from './Alert';
-import { useRecoilState } from 'recoil';
-import { isMakingRequestAtom } from '@/service/recoil';
-import NotLoggedInLayout from '../layout/NotLoggedInLayout';
-import { AxiosError } from 'axios';
-import { createRequest } from '@/service/api/request';
-import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
-import ExpandSvg from '../icon/ExpandSvg';
-import { useTranslation } from 'next-i18next';
+import { Book, User } from "@/types";
+import { AlertType, AlertModalTextType } from "./Alert";
+import { useRecoilState } from "recoil";
+import { isMakingRequestAtom } from "@/service/recoil";
+import NotLoggedInLayout from "../layout/NotLoggedInLayout";
+import { AxiosError } from "axios";
+import { createRequest } from "@/service/api/request";
+import SpinningLoadingSvg from "../icon/SpinningLoadingSvg";
+import ExpandSvg from "../icon/ExpandSvg";
+import { useTranslation } from "next-i18next";
 
 export default function BorrowBook({
   user,
   book,
   close,
-  showAlert
+  showAlert,
 }: {
   user: User;
   book: Book;
   close: () => void;
   showAlert: (alert: AlertModalTextType) => void;
 }) {
-  const { t } = useTranslation('book-detail');
+  const { t } = useTranslation("book-detail");
 
   const durations = [
-    { value: 7, label: t('modal.borrow.duration-list.1-week') },
-    { value: 14, label: t('modal.borrow.duration-list.2-weeks') },
-    { value: 21, label: t('modal.borrow.duration-list.3-weeks') }
+    { value: 7, label: t("modal.borrow.duration-list.1-week") },
+    { value: 14, label: t("modal.borrow.duration-list.2-weeks") },
+    { value: 21, label: t("modal.borrow.duration-list.3-weeks") },
   ];
   const [selectedDuration, setSelectedDuration] = useState(durations[0]);
   // const [isMakingRequest, setIsMakingRequest] =
@@ -45,7 +45,7 @@ export default function BorrowBook({
       const request = {
         userId: user.userId,
         bookId: book.id,
-        requestDuration: selectedDuration.value
+        requestDuration: selectedDuration.value,
       };
 
       const res = await createRequest(request);
@@ -53,18 +53,18 @@ export default function BorrowBook({
       close();
 
       showAlert({
-        title: t('modal.borrow-success.title'),
-        subtitle: t('modal.borrow-success.subtitle'),
-        type: AlertType.SUCCESS
+        title: t("modal.borrow-success.title"),
+        subtitle: t("modal.borrow-success.subtitle"),
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
       if (err instanceof AxiosError) {
         close();
         showAlert({
-          title: t('modal.borrow-error.title'),
+          title: t("modal.borrow-error.title"),
           subtitle:
-            err.response?.data.error || t('modal.borrow-error.subtitle'),
-          type: AlertType.ERROR
+            err.response?.data.error || t("modal.borrow-error.subtitle"),
+          type: AlertType.ERROR,
         });
       }
     } finally {
@@ -76,17 +76,17 @@ export default function BorrowBook({
   return (
     <motion.div
       animate={{
-        height: 'auto'
+        height: "auto",
       }}
       transition={{
-        duration: 0.5
+        duration: 0.5,
       }}
-      className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10 text-primary'
+      className='w-full h-full p-8 rounded-lg text-center bg-modal space-y-10 text-primary'
     >
       <NotLoggedInLayout>
         <>
-          <h1 className='text-2xl font-bold text-primary'>
-            {t('modal.borrow.label')}
+          <h1 className='text-2xl font-bold text-t-primary'>
+            {t("modal.borrow.label")}
           </h1>
 
           {/* book details */}
@@ -94,9 +94,9 @@ export default function BorrowBook({
             <div>
               <label
                 htmlFor='bookTitle'
-                className='ml-4 font-medium text-primary text-lg'
+                className='ml-4 font-medium text-t-primary text-lg'
               >
-                {t('modal.borrow.book-title')}
+                {t("modal.borrow.book-title")}
               </label>
               <input
                 id='bookTitle'
@@ -114,8 +114,8 @@ export default function BorrowBook({
             </div>
 
             <div>
-              <h1 className='ml-4 font-medium text-primary text-lg'>
-                {t('modal.borrow.book-duration')}
+              <h1 className='ml-4 font-medium text-t-primary text-lg'>
+                {t("modal.borrow.book-duration")}
               </h1>
               <Listbox
                 disabled={isRequestingBook}
@@ -154,7 +154,7 @@ export default function BorrowBook({
                           key={selectedDuration.label}
                           initial={{ height: 0 }}
                           animate={{
-                            height: 'auto'
+                            height: "auto",
                           }}
                           exit={{ height: 0 }}
                         >
@@ -177,8 +177,8 @@ export default function BorrowBook({
                               w-6 h-auto
                               ${
                                 selectedDuration.value === duration.value
-                                  ? 'block'
-                                  : 'invisible'
+                                  ? "block"
+                                  : "invisible"
                               }
                             `}
                               />
@@ -204,25 +204,25 @@ export default function BorrowBook({
                 bg-danger rounded-full text-white py-2 px-4 w-full md:w-40
               '
               >
-                {t('btns.cancel-btn')}
+                {t("btns.cancel-btn")}
               </button>
             )}
             {/* submit button */}
             <button
               className={`
                 bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
-                ${isRequestingBook && 'cursor-not-allowed'}
+                ${isRequestingBook && "cursor-not-allowed"}
               `}
               onClick={handleBorrowBook}
               disabled={isRequestingBook}
             >
               {isRequestingBook ? (
                 <div className='flex justify-center items-center gap-2'>
-                  <h1>{t('btns.sending-request-btn')}</h1>
+                  <h1>{t("btns.sending-request-btn")}</h1>
                   <SpinningLoadingSvg className='w-6 h-6 ' />
                 </div>
               ) : (
-                <span> {t('btns.borrow-btn')}</span>
+                <span> {t("btns.borrow-btn")}</span>
               )}
             </button>
           </div>
