@@ -31,7 +31,7 @@ export default function CustomListDropDown({
         htmlFor='author'
         className='text-primary font-medium whitespace-nowrap'
       >
-        Category
+        {label}
         <RequiredIcon />
       </label>
 

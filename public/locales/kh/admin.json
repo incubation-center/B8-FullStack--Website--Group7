@@ -43,30 +43,30 @@
     "uploading-book-btn": "កំពុងបង្ហោះសៀវភៅ..."
   },
 
-  "books-tab": {
-    "books-h1-education": "ការអប់រំ",
-    "books-h1-business": "អាជីវកម្ម",
-    "books-h1-history": "ប្រវត្តិសាស្ត្រ",
-    "books-h1-drama": "រឿងមនោសញ្ចេតនា",
-    "books-h1-fantasy": "រឿងស្រមើលស្រមៃ",
-    "books-h1-self-development": "ការអភិវឌ្ឍន៍ខ្លួន",
+  "book-view-tab": {
+    "author": "អ្នកនិពន្ធ",
+    "genre": "ប្រភេទ",
+    "book-description": "ការពិពណ៌នាសៀវភៅ",
+    "no-description": "គ្មានការពិពណ៌នាសៀវភៅ",
 
-    "books-view-tab": {
-      "author": "អ្នកនិពន្ធ",
-      "genre": "ប្រភេទ",
-      "book-description": "ការពិពណ៌នាសៀវភៅ",
+    "delete-btn": "លុប",
+    "edit-btn": "កែសម្រួល",
+    "save-btn": "រក្សាទុក",
+    "cancel-btn": "បោះបង់",
 
-      "delete-btn": "លុប",
-      "edit-btn": "កែសម្រួល",
-      "save-btn": "រក្សាទុក",
-      "cancel-btn": "បោះបង់",
+    "updating-btn": "កំពុងធ្វើបច្ចុប្បន្នភាព...",
+    "deleting-btn": "កំពុងលុបសៀវភៅ...",
 
-      "success-tab": {
-        "success": "ជោគជ័យ",
-        "book-update-text": "ធ្វើបច្ចុប្បន្នភាពសៀវភៅដោយជោគជ័យ",
+    "success-tab": {
+      "success": "ជោគជ័យ",
+      "book-update-text": "ធ្វើបច្ចុប្បន្នភាពសៀវភៅដោយជោគជ័យ",
 
-        "close-btn": "បិទ"
-      }
+      "close-btn": "បិទ"
+    },
+
+    "cancel-form": {
+      "cancel": "បោះបង់",
+      "cancel-text": "តើអ្នកប្រាកដទេថាអ្នកចង់បោះបង់ការកែសម្រួលនេះ?"
     },
 
     "delete-book-tab": {

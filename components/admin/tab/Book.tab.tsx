@@ -4,15 +4,19 @@ import { getAllBooks } from '@/service/api/book';
 import { AllBooksAtom } from '@/service/recoil';
 import { isRefreshingRequestAtom } from '@/service/recoil/admin';
 import { Book } from '@/types';
-import { useDebounce } from '@/utils/function';
-import { useState } from 'react';
+import { useDebounce, useLoadNamespace } from '@/utils/function';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import ViewEditBook from '../ViewEditBook';
 import { AnimatePresence } from 'framer-motion';
 import UserSearchBar from '@/components/UserSearchBar';
 import { HomePageTab } from '@/utils/enum';
+import { useRouter } from 'next/router';
+import { i18n } from 'next-i18next';
 
 export default function BookTab() {
+  const router = useRouter();
+
   const [_, setAllBooks] = useRecoilState(AllBooksAtom);
   const [__, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
 
@@ -33,6 +37,8 @@ export default function BookTab() {
       setIsRefreshing(false);
     }
   }, 100);
+
+  useLoadNamespace('homepage');
 
   return (
     <AdminTabLayout title='Books Lists' handleRefresh={handleRefreshBook}>

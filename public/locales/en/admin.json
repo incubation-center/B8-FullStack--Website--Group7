@@ -43,38 +43,35 @@
     "uploading-book-btn": "Uploading..."
   },
 
-  "books-tab": {
-    "books-h1-education": "Education",
-    "books-h1-business": "Business",
-    "books-h1-history": "History",
-    "books-h1-drama": "Drama",
-    "books-h1-fantasy": "Fantasy",
-    "books-h1-self-development": "Self Development",
+  "book-view-tab": {
+    "author": "Author",
+    "genre": "Genre",
+    "book-description": "Book description",
+    "no-description": "No description provided",
 
-    "books-view-tab": {
-      "author": "Author",
-      "genre": "Genre",
-      "book-description": "Book description",
+    "delete-btn": "Delete",
+    "edit-btn": "Edit",
+    "save-btn": "Save",
+    "cancel-btn": "Cancel",
 
-      "delete-btn": "Delete",
-      "edit-btn": "Edit",
-      "save-btn": "Save",
-      "cancel-btn": "Cancel",
+    "updating-btn": "Updating...",
+    "deleting-btn": "Deleting...",
 
-      "success-tab": {
-        "success": "Success",
-        "book-update-text": "Book updated successfully",
+    "success-tab": {
+      "success": "Success",
+      "book-update-text": "Book updated successfully",
 
-        "close-btn": "Close"
-      }
+      "close-btn": "Close"
+    },
+
+    "cancel-form": {
+      "cancel": "Cancel Editing",
+      "cancel-text": "Are you sure you want to cancel this form?"
     },
 
     "delete-book-tab": {
       "delete-book": "Delete Book",
       "delete-book-text": "Are you sure you want to delete this book?",
-
-      "yes-btn": "Yes",
-      "no-btn": "No",
 
       "success-tab": {
         "success": "Success",
