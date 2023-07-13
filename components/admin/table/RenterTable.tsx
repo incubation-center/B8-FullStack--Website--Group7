@@ -1,4 +1,4 @@
-import { BookRequest } from "@/types";
+import { BookRequest } from '@/types';
 
 export default function RenterTable({
   data,

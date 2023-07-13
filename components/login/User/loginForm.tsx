@@ -33,12 +33,12 @@ export default function UserLoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<UserLoginInputs>();
 
   const onSubmit: SubmitHandler<UserLoginInputs> = async ({
     email,
-    password
+    password,
   }) => {
     setIsLoggingIn(true);
     try {
@@ -67,7 +67,7 @@ export default function UserLoginForm() {
       showAlert({
         title: message,
         subtitle: 'Please try again',
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
       });
       setIsLoggingIn(false);
     }
@@ -95,7 +95,7 @@ export default function UserLoginForm() {
             type='email'
             placeholder={t('email-placeholder')}
             register={register('email', {
-              required: t('email-required-alert')
+              required: t('email-required-alert'),
             })}
             error={errors.email}
             labelClassName='text-alt-secondary ml-4 font-medium'
@@ -108,7 +108,7 @@ export default function UserLoginForm() {
             name='password'
             placeholder={t('password-placeholder')}
             register={register('password', {
-              required: t('password-required-alert')
+              required: t('password-required-alert'),
             })}
             error={errors.password}
             labelClassName='text-alt-secondary ml-4 font-medium'

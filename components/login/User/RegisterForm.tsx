@@ -21,7 +21,7 @@ export default function UserRegisterForm({}) {
     register,
     handleSubmit,
     watch,
-    formState: { errors }
+    formState: { errors },
   } = useForm<UserRegisterInputs>();
 
   const onSubmit: SubmitHandler<UserRegisterInputs> = async (data) => {
@@ -33,7 +33,7 @@ export default function UserRegisterForm({}) {
       // add default profile url
       const formData = {
         ...data,
-        profileUrl: `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`
+        profileUrl: `https://ui-avatars.com/api/?name=${usernameWithNoSpace}&background=random&size=128`,
       };
 
       const res = await AuthRegister(formData);
@@ -57,7 +57,7 @@ export default function UserRegisterForm({}) {
       showAlert({
         title: message,
         subtitle: t('error-tap.try-again'),
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
       });
     }
 
@@ -74,14 +74,14 @@ export default function UserRegisterForm({}) {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='min-w-[300px] lg:min-w-[500px] space-y-1 lg:space-y-4
+          className='min-w-[300px] lg:min-w-[500px] max-w[600px] space-y-1 lg:space-y-4
           
           '
           autoComplete='off'
         >
           <CustomInput
             register={register('username', {
-              required: t('user-required-alert')
+              required: t('user-required-alert'),
             })}
             error={errors.username}
             name='username'
@@ -95,7 +95,7 @@ export default function UserRegisterForm({}) {
 
           <CustomInput
             register={register('email', {
-              required: t('email-required-alert')
+              required: t('email-required-alert'),
             })}
             error={errors.email}
             name='email'
@@ -113,8 +113,8 @@ export default function UserRegisterForm({}) {
                 required: t('password-required-alert'),
                 minLength: {
                   value: 8,
-                  message: t('invalid-password-alert')
-                }
+                  message: t('invalid-password-alert'),
+                },
               })}
               error={errors.password}
               name='password'
@@ -132,7 +132,7 @@ export default function UserRegisterForm({}) {
                   if (watch('password') != val) {
                     return t('password-not-matched');
                   }
-                }
+                },
               })}
               error={errors.confirmPassword}
               name='confirmPassword'
@@ -149,8 +149,8 @@ export default function UserRegisterForm({}) {
               required: t('phone-required-alert'),
               minLength: {
                 value: 9,
-                message: t('invalid-phone-alert')
-              }
+                message: t('invalid-phone-alert'),
+              },
             })}
             error={errors.phoneNumber}
             name='phoneNumber'

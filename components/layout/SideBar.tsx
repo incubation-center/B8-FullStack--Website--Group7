@@ -1,26 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image';
+import Image from "next/image";
 
-import { HomePageTab } from '@/utils/enum';
-import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
-import { AuthAtom } from '@/service/recoil';
-import { HTMLAttributes, useEffect } from 'react';
-import HomeSvg from '../icon/side-nav/Home';
-import SavedSvg from '../icon/side-nav/Saved';
-import RequestStatusSvg from '../icon/side-nav/RequestStatus';
-import ProfileSvg from '../icon/side-nav/Profile';
+import { HomePageTab } from "@/utils/enum";
+import Link from "next/link";
+import { useRecoilValue } from "recoil";
+import { AuthAtom } from "@/service/recoil";
+import { HTMLAttributes, useEffect } from "react";
+import HomeSvg from "../icon/side-nav/Home";
+import SavedSvg from "../icon/side-nav/Saved";
+import RequestStatusSvg from "../icon/side-nav/RequestStatus";
+import ProfileSvg from "../icon/side-nav/Profile";
 
-import LocaleSwitching from '../LocaleSwitching';
-import { useTranslation } from 'next-i18next';
-import { useLocale } from '@/utils/function';
-import { useRouter } from 'next/router';
-import ThemeSwitching from '../ThemeSwitching';
+import LocaleSwitching from "../LocaleSwitching";
+import { useTranslation } from "next-i18next";
+import { useLocale } from "@/utils/function";
+import { useRouter } from "next/router";
+import ThemeSwitching from "../ThemeSwitching";
 
 function SideBar({
   currentTab,
   handlePageRouting,
-  isMobile = false
+  isMobile = false,
 }: {
   currentTab: HomePageTab;
   handlePageRouting: (tab: HomePageTab) => void;
@@ -28,18 +28,18 @@ function SideBar({
 }) {
   const authStore = useRecoilValue(AuthAtom);
   const router = useRouter();
-  const { t } = useTranslation('homepage');
+  const { t } = useTranslation("homepage");
 
   const handleTranslate = () => {
     switch (currentTab) {
       case HomePageTab.HOME:
-        return 'translate-y-0';
+        return "translate-y-0";
       case HomePageTab.SAVED:
-        return 'translate-y-12';
+        return "translate-y-12";
       case HomePageTab.REQUEST_STATUS:
-        return 'translate-y-24';
+        return "translate-y-24";
       case HomePageTab.PROFILE:
-        return 'translate-y-[9rem]';
+        return "translate-y-[9rem]";
     }
   };
 
@@ -47,7 +47,7 @@ function SideBar({
     <div
       className={`
         w-[250px] h-full px-[16px] 
-        ${isMobile ? 'flex bg-primary py-10 z-50' : 'hidden md:flex'}
+        ${isMobile ? "flex bg-primary py-10 z-50" : "hidden md:flex"}
          flex-col
          space-y-4
       `}
@@ -62,25 +62,25 @@ function SideBar({
       <div className='relative'>
         <div className='z-10 px-2'>
           <NavbarBtn
-            title={t('homepage-tab.sidebar.home', 'Home')}
+            title={t("homepage-tab.sidebar.home", "Home")}
             Icon={HomeSvg}
             isCurrentTab={currentTab === HomePageTab.HOME}
             onClick={() => handlePageRouting(HomePageTab.HOME)}
           />
           <NavbarBtn
-            title={t('homepage-tab.sidebar.save', 'Saved')}
+            title={t("homepage-tab.sidebar.save", "Saved")}
             Icon={SavedSvg}
             isCurrentTab={currentTab === HomePageTab.SAVED}
             onClick={() => handlePageRouting(HomePageTab.SAVED)}
           />
           <NavbarBtn
-            title={t('homepage-tab.sidebar.request', 'Request Status')}
+            title={t("homepage-tab.sidebar.request", "Request Status")}
             Icon={RequestStatusSvg}
             isCurrentTab={currentTab === HomePageTab.REQUEST_STATUS}
             onClick={() => handlePageRouting(HomePageTab.REQUEST_STATUS)}
           />
           <NavbarBtn
-            title={t('homepage-tab.sidebar.profile', 'Profile')}
+            title={t("homepage-tab.sidebar.profile", "Profile")}
             Icon={ProfileSvg}
             isCurrentTab={currentTab === HomePageTab.PROFILE}
             onClick={() => handlePageRouting(HomePageTab.PROFILE)}
@@ -118,7 +118,7 @@ function SideBar({
             '
           locale={router.locale}
         >
-          {t('homepage-tab.sidebar.login-btn', 'Login')}
+          {t("homepage-tab.sidebar.login-btn", "Login")}
         </Link>
       )}
       {authStore.isAdmin && (
@@ -132,7 +132,7 @@ function SideBar({
           '
           locale={router.locale}
         >
-          {t('homepage-tab.sidebar.admin-btn', 'Admin')}
+          {t("homepage-tab.sidebar.admin-btn", "Admin")}
         </Link>
       )}
     </div>
@@ -145,14 +145,14 @@ function NavbarBtn({
   title,
   Icon,
   isCurrentTab,
-  onClick
+  onClick,
 }: {
   title: string;
   isCurrentTab?: boolean;
   Icon: ({
-    className
+    className,
   }: {
-    className?: HTMLAttributes<HTMLElement>['className'];
+    className?: HTMLAttributes<HTMLElement>["className"];
   }) => JSX.Element;
   onClick: () => void;
 }) {
@@ -161,7 +161,7 @@ function NavbarBtn({
   return (
     <div
       className={`flex items-center justify-start cursor-pointer rounded-xl 
-      ${isCurrentTab ? 'text-primary delay-400' : 'text-alt-secondary'}
+      ${isCurrentTab ? "text-primary delay-400" : "text-alt-secondary"}
       p-2 px-4
       transition-all 
       h-12 z-10 
@@ -171,14 +171,14 @@ function NavbarBtn({
       <Icon
         className={`
         h-6 w-6 z-10 ${
-          isCurrentTab ? 'fill-primary delay-400' : 'fill-alt-secondary'
+          isCurrentTab ? "fill-primary delay-400" : "fill-alt-secondary"
         }
         transition-all
         `}
       />
       <div
         className={`ml-[12px] ${
-          isKhmer ? 'font-medium' : 'font-bold'
+          isKhmer ? "font-medium" : "font-bold"
         } z-10 align-baseline`}
       >
         {title}

@@ -10,7 +10,7 @@ import { useLocale } from '@/utils/function';
 
 export default function RequestTable({
   data,
-  actions
+  actions,
 }: {
   data: BookRequest[];
   actions?: {

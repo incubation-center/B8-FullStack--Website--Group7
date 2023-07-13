@@ -15,7 +15,7 @@ import { getCookie } from 'cookies-next';
 import { processUserToken } from '@/service/token';
 import {
   removeBookFromFavorites,
-  saveBookToFavorites
+  saveBookToFavorites,
 } from '@/service/api/user';
 import { AxiosError } from 'axios';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
@@ -107,7 +107,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       showAlert({
         title: t('modal.save.title'),
         subtitle: t('modal.save.subtitle'),
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
       let message = 'An unknown error occurred';
@@ -119,7 +119,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       showAlert({
         title: 'Save failed',
         subtitle: message,
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
       });
     } finally {
       setIsSaving(false);
@@ -143,7 +143,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       showAlert({
         title: t('modal.remove.title'),
         subtitle: t('modal.remove.subtitle'),
-        type: AlertType.SUCCESS
+        type: AlertType.SUCCESS,
       });
     } catch (err) {
       let message = 'An unknown error occurred';
@@ -155,7 +155,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       showAlert({
         title: 'Remove failed',
         subtitle: message,
-        type: AlertType.ERROR
+        type: AlertType.ERROR,
       });
     } finally {
       setIsSaving(false);
@@ -310,8 +310,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       bookId: id,
-      ...(await serverSideTranslations(locale, ['common', 'book-detail']))
-    }
+      ...(await serverSideTranslations(locale, ['common', 'book-detail'])),
+    },
   };
 }
 

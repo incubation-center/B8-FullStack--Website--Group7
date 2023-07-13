@@ -20,7 +20,7 @@ export default function useConfirmModal() {
       title: '',
       subtitle: '',
       isClosable: true,
-      onConfirm: () => {}
+      onConfirm: () => {},
     });
 
   // close modal
@@ -36,7 +36,7 @@ export default function useConfirmModal() {
   function showConfirmModal(props: ConfirmModal) {
     initModal({
       ...props,
-      isClosable: props.isClosable ? props.isClosable : true
+      isClosable: props.isClosable ? props.isClosable : true,
     });
 
     open();
@@ -47,18 +47,18 @@ export default function useConfirmModal() {
     hidden: {
       opacity: 0,
       y: -100,
-      scale: 0
+      scale: 0,
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1
+      scale: 1,
     },
     exit: {
       opacity: 0,
       y: -100,
-      scale: 0
-    }
+      scale: 0,
+    },
   };
 
   // modal component
@@ -108,7 +108,7 @@ export default function useConfirmModal() {
                   transition={{
                     type: 'spring',
                     damping: 20,
-                    stiffness: 200
+                    stiffness: 200,
                   }}
                 >
                   {/* <Image
@@ -164,6 +164,6 @@ export default function useConfirmModal() {
 
   return {
     ConfirmModal,
-    showConfirmModal
+    showConfirmModal,
   };
 }

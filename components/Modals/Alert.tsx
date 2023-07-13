@@ -15,7 +15,7 @@ const useAlertModal = () => {
       subtitle: '',
       type: null,
       isClosable: true,
-      onModalClose: () => {}
+      onModalClose: () => {},
     });
 
   // close modal
@@ -35,7 +35,7 @@ const useAlertModal = () => {
     subtitle,
     type,
     isClosable,
-    onModalClose
+    onModalClose,
   }: AlertModalTextType) {
     // set text
 
@@ -44,7 +44,7 @@ const useAlertModal = () => {
       subtitle,
       type,
       isClosable: isClosable !== undefined ? isClosable : true,
-      onModalClose: onModalClose ?? (() => {})
+      onModalClose: onModalClose ?? (() => {}),
     });
 
     open();
@@ -54,7 +54,7 @@ const useAlertModal = () => {
   const imagePath = {
     success: '/icon/success.svg',
     error: '/icon/fail.png',
-    warning: '/icon/stop-hand.png'
+    warning: '/icon/stop-hand.png',
   };
 
   // frame motion variants
@@ -62,18 +62,18 @@ const useAlertModal = () => {
     hidden: {
       opacity: 0,
       y: -100,
-      scale: 0
+      scale: 0,
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1
+      scale: 1,
     },
     exit: {
       opacity: 0,
       y: -100,
-      scale: 0
-    }
+      scale: 0,
+    },
   };
 
   // modal component
@@ -104,7 +104,7 @@ const useAlertModal = () => {
                 />
                 <motion.div
                   className='
-                    bg-alt-secondary
+                    bg-modal
                     rounded-lg p-6
                     flex flex-col items-center
                     text-center
@@ -119,7 +119,7 @@ const useAlertModal = () => {
                   transition={{
                     type: 'spring',
                     damping: 20,
-                    stiffness: 200
+                    stiffness: 200,
                   }}
                 >
                   <Image
@@ -131,10 +131,10 @@ const useAlertModal = () => {
                   />
 
                   <div>
-                    <h1 className='font-bold text-xl lg:text-2xl text-primary mt-2'>
+                    <h1 className='font-bold text-xl lg:text-2xl text-t-primary mt-2'>
                       {title}
                     </h1>
-                    <p className='font-medium text-primary whitespace-pre-line mt-2'>
+                    <p className='font-medium text-t-primary whitespace-pre-line mt-2'>
                       {subtitle}
                     </p>
                   </div>
@@ -143,7 +143,7 @@ const useAlertModal = () => {
                     <button
                       className='
                         px-10 py-2 mt-8 rounded-full
-                        text-primary font-bold
+                        text-t-primary font-bold
                         hover:bg-primary hover:bg-opacity-20
                       '
                       onClick={close}
@@ -163,7 +163,7 @@ const useAlertModal = () => {
   return {
     AlertModal, // modal component
     showAlert, // alert service
-    onModalClose: close // close modal
+    onModalClose: close, // close modal
   };
 };
 
@@ -171,7 +171,7 @@ const useAlertModal = () => {
 export enum AlertType {
   SUCCESS = 'success',
   ERROR = 'error',
-  WARNING = 'warning'
+  WARNING = 'warning',
 }
 
 export type AlertModalTextType = {
