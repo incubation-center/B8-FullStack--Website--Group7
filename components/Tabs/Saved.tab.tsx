@@ -1,19 +1,19 @@
-import { useRouter } from "next/router";
-import Image from "next/image";
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
-import NotLoggedInLayout from "../layout/NotLoggedInLayout";
-import { useRecoilValue } from "recoil";
-import { AuthAtom, filteredSavedBooksAtom } from "@/service/recoil";
+import NotLoggedInLayout from '../layout/NotLoggedInLayout';
+import { useRecoilValue } from 'recoil';
+import { AuthAtom, filteredSavedBooksAtom } from '@/service/recoil';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useTranslation } from "next-i18next";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 
 export default function SavedTab({
-  onClickExplore,
+  onClickExplore
 }: {
   onClickExplore: () => void;
 }) {
-  const { t } = useTranslation("homepage");
+  const { t } = useTranslation('homepage');
 
   const authStore = useRecoilValue(AuthAtom);
   const favBooks = useRecoilValue(filteredSavedBooksAtom);
@@ -37,13 +37,13 @@ export default function SavedTab({
               pt-2 md:pt-4
             '
           >
-            {t("save-tab.h1-save", "Saved")}
+            {t('save-tab.h1-save', 'Saved')}
           </h1>
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
             {favBooks.length === 0 && (
               <div className='h-full w-full flex flex-col justify-center items-center'>
                 <h1 className='text-center text-t-primary font-medium'>
-                  {t("save-tab.no-save-text", "You have no saved books")}
+                  {t('save-tab.no-save-text', 'You have no saved books')}
                 </h1>
                 <button
                   className='
@@ -52,7 +52,7 @@ export default function SavedTab({
                   '
                   onClick={onClickExplore}
                 >
-                  {t("save-tab.explore-books-btn", "explore books")}
+                  {t('save-tab.explore-books-btn', 'explore books')}
                 </button>
               </div>
             )}
@@ -62,7 +62,7 @@ export default function SavedTab({
                   layout
                   animate={{ opacity: [0, 1], scale: [0.5, 1] }}
                   exit={{ opacity: [1, 0], scale: [1, 0.5] }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
                   key={book.id!}
                   className='flex flex-col space-y-4'
                 >
@@ -75,8 +75,8 @@ export default function SavedTab({
                       draggable={false}
                       fill
                       style={{
-                        height: "100%",
-                        width: "100%",
+                        height: '100%',
+                        width: '100%'
                       }}
                       onClick={() => handleBookClick(book.id!)}
                     />
@@ -89,7 +89,7 @@ export default function SavedTab({
                         '
                     onClick={() => handleBookClick(book.id!)}
                   >
-                    View
+                    {t('homepage-tab.sidebar.view-btn')}
                   </button>
                 </motion.div>
               ))}

@@ -1,40 +1,40 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
-import { useRouter } from "next/router";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
 
-import { BookData } from "@/dummydata";
-import { BookCategory } from "@/utils/enum";
+import { BookData } from '@/dummydata';
+import { BookCategory } from '@/utils/enum';
 
 import {
   AllBooksAtom,
   filteredBooksAtom,
-  homePageCategoryAtom,
-} from "@/service/recoil";
+  homePageCategoryAtom
+} from '@/service/recoil';
 
-import { useRecoilState, useRecoilValue } from "recoil";
-import { useEffect, useRef, useState } from "react";
-import { useDebounce, useOnScreen } from "@/utils/function";
-import { Book } from "@/types";
-import { getAllBooks } from "@/service/api/book";
-import EducationSvg from "@/components/icon/book-category/Education";
-import BusinessSvg from "@/components/icon/book-category/Business";
-import DramaSvg from "@/components/icon/book-category/Drama";
-import FantasySvg from "@/components/icon/book-category/Fantasy";
-import HistorySvg from "@/components/icon/book-category/History";
-import SelfDevelopmentSvg from "@/components/icon/book-category/SelfDevelopment";
-import { useTranslation } from "next-i18next";
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { useEffect, useRef, useState } from 'react';
+import { useDebounce, useOnScreen } from '@/utils/function';
+import { Book } from '@/types';
+import { getAllBooks } from '@/service/api/book';
+import EducationSvg from '@/components/icon/book-category/Education';
+import BusinessSvg from '@/components/icon/book-category/Business';
+import DramaSvg from '@/components/icon/book-category/Drama';
+import FantasySvg from '@/components/icon/book-category/Fantasy';
+import HistorySvg from '@/components/icon/book-category/History';
+import SelfDevelopmentSvg from '@/components/icon/book-category/SelfDevelopment';
+import { useTranslation } from 'next-i18next';
 
 export default function HomeTab({
   isUseInAdminPage = false,
-  onClickViewInAdminPage,
+  onClickViewInAdminPage
 }: {
   isUseInAdminPage?: boolean;
   onClickViewInAdminPage?: (book: Book) => void;
 }) {
   const router = useRouter();
-  const { t } = useTranslation("homepage");
+  const { t } = useTranslation('homepage');
 
   const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
   const filterBooks = useRecoilValue(filteredBooksAtom);
@@ -57,14 +57,14 @@ export default function HomeTab({
 
   const handleScrollToCategoryNav = (categoryKey: string, timeout: number) => {
     // scroll to id
-    const element = document.getElementById(categoryKey.toLowerCase() + "-nav");
+    const element = document.getElementById(categoryKey.toLowerCase() + '-nav');
 
     if (element) {
       setTimeout(() => {
         element.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
         });
       }, timeout);
     }
@@ -82,7 +82,7 @@ export default function HomeTab({
 
       if (!isUseInAdminPage) {
         router.replace(`/?tab=home#${categoryKey.toLowerCase()}`, undefined, {
-          shallow: true,
+          shallow: true
         });
       }
     },
@@ -103,14 +103,14 @@ export default function HomeTab({
 
   const updateRoute = useDebounce((category: any) => {
     router.replace(`/?tab=home#${category.toLowerCase()}`, undefined, {
-      shallow: true,
+      shallow: true
     });
   }, 300);
 
   useEffect(
     useDebounce(() => {
       // get category from url
-      const categoryKey = router.asPath.split("#")[1];
+      const categoryKey = router.asPath.split('#')[1];
 
       if (categoryKey) {
         const category =
@@ -147,7 +147,7 @@ export default function HomeTab({
   );
 
   return (
-    <div className={`${isUseInAdminPage ? "" : "px-4"} bg-inherit`}>
+    <div className={`${isUseInAdminPage ? '' : 'px-4'} bg-inherit`}>
       {!filterBooks && !isUseInAdminPage && (
         <div
           id='category-section'
@@ -165,8 +165,8 @@ export default function HomeTab({
               const isCurrentCategory = currentCategory === value;
 
               const label = t(
-                "homepage-tab.category." +
-                  value.toLowerCase().trim().replace(" ", "-")
+                'homepage-tab.category.' +
+                  value.toLowerCase().trim().replace(' ', '-')
               );
 
               return (
@@ -223,8 +223,8 @@ export default function HomeTab({
             if (books.length === 0) return null;
 
             const label = t(
-              "homepage-tab.category." +
-                category.toLowerCase().trim().replace(" ", "-")
+              'homepage-tab.category.' +
+                category.toLowerCase().trim().replace(' ', '-')
             );
 
             return (
@@ -248,7 +248,7 @@ export default function HomeTab({
 
 function CategoryIcon({
   category,
-  isCurrentCategory,
+  isCurrentCategory
 }: {
   category: string;
   isCurrentCategory: boolean;
@@ -258,7 +258,7 @@ function CategoryIcon({
       return (
         <EducationSvg
           className={`h-4 w-4 ${
-            isCurrentCategory ? "fill-white " : "fill-t-primary "
+            isCurrentCategory ? 'fill-white ' : 'fill-t-primary '
           }`}
         />
       );
@@ -267,8 +267,8 @@ function CategoryIcon({
         <BusinessSvg
           className={`h-4 w-4 ${
             isCurrentCategory
-              ? "fill-white stroke-white"
-              : "fill-t-primary stroke-t-primary"
+              ? 'fill-white stroke-white'
+              : 'fill-t-primary stroke-t-primary'
           }`}
         />
       );
@@ -276,7 +276,7 @@ function CategoryIcon({
       return (
         <DramaSvg
           className={`h-4 w-4 ${
-            isCurrentCategory ? "fill-white " : "fill-t-primary "
+            isCurrentCategory ? 'fill-white ' : 'fill-t-primary '
           }`}
         />
       );
@@ -284,7 +284,7 @@ function CategoryIcon({
       return (
         <FantasySvg
           className={`h-4 w-4 ${
-            isCurrentCategory ? "fill-white" : "fill-t-primary"
+            isCurrentCategory ? 'fill-white' : 'fill-t-primary'
           }`}
         />
       );
@@ -293,8 +293,8 @@ function CategoryIcon({
         <HistorySvg
           className={`h-4 w-4 ${
             isCurrentCategory
-              ? "fill-white stroke-white"
-              : "fill-t-primary stroke-t-primary"
+              ? 'fill-white stroke-white'
+              : 'fill-t-primary stroke-t-primary'
           }`}
         />
       );
@@ -303,8 +303,8 @@ function CategoryIcon({
         <SelfDevelopmentSvg
           className={`h-4 w-4 ${
             isCurrentCategory
-              ? "fill-white stroke-white"
-              : "fill-t-primary stroke-t-primary"
+              ? 'fill-white stroke-white'
+              : 'fill-t-primary stroke-t-primary'
           }`}
         />
       );
@@ -320,7 +320,7 @@ function CategoryButton({
   children,
   isCurrentCategory,
   handleCategory,
-  disabled,
+  disabled
 }: {
   category: string;
   value: string;
@@ -332,7 +332,7 @@ function CategoryButton({
 }) {
   return (
     <button
-      id={category.toLowerCase() + "-nav"}
+      id={category.toLowerCase() + '-nav'}
       key={category}
       className={`
         flex w-fit max-w-md items-center justify-center space-x-2 cursor-pointer
@@ -342,8 +342,8 @@ function CategoryButton({
         mr-8 select-none
         ${
           isCurrentCategory
-            ? "bg-primary p-1 px-8 rounded-full text-white"
-            : "bg-transparent text-t-primary "
+            ? 'bg-primary p-1 px-8 rounded-full text-white'
+            : 'bg-transparent text-t-primary '
         }
 
       `}
@@ -363,7 +363,7 @@ function BookSection({
   books,
   label,
   handleBookClick,
-  handleVisibleOnScreen,
+  handleVisibleOnScreen
 }: {
   categoryKey: string;
   category: string;
@@ -375,7 +375,7 @@ function BookSection({
   const ref = useRef<any>(null);
   const isVisible = useOnScreen(ref);
 
-  const { t } = useTranslation("homepage");
+  const { t } = useTranslation('homepage');
 
   useEffect(() => {
     if (isVisible) {
@@ -392,7 +392,7 @@ function BookSection({
         id={categoryKey.toLowerCase()}
         className='invisible h-2 w-full absolute -top-[4.5rem] '
       >
-        element to scroll to{" "}
+        element to scroll to{' '}
       </div>
       {/* title */}
       <h1 className='w-1/3 text-xl md:text-2xl text-t-primary mb-4 mt-2 pt-3 whitespace-nowrap'>
@@ -413,7 +413,7 @@ function BookSection({
           {books.map((book, index) => (
             <motion.div
               animate={{ opacity: [0, 1], scale: [0.5, 1] }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               key={book.id}
               className='flex flex-col space-y-4'
             >
@@ -426,8 +426,8 @@ function BookSection({
                   draggable={false}
                   fill
                   style={{
-                    height: "100%",
-                    width: "100%",
+                    height: '100%',
+                    width: '100%'
                   }}
                   sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
                   onClick={() => handleBookClick(book)}
@@ -441,7 +441,7 @@ function BookSection({
               '
                 onClick={() => handleBookClick(book)}
               >
-                {t("homepage-tab.sidebar.view-btn")}
+                {t('homepage-tab.sidebar.view-btn')}
               </button>
             </motion.div>
           ))}
@@ -476,7 +476,7 @@ function BookSectionSkeleton() {
 
 function FilteredBooksList({
   books,
-  handleBookClick,
+  handleBookClick
 }: {
   books: Book[];
   handleBookClick: (book: Book) => void;
@@ -491,7 +491,7 @@ function FilteredBooksList({
               layout
               animate={{ opacity: [0, 1], scale: [0.5, 1] }}
               exit={{ opacity: [1, 0], scale: [1, 0.5] }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               key={book.id}
               className='flex flex-col space-y-4'
             >
@@ -505,8 +505,8 @@ function FilteredBooksList({
                   draggable={false}
                   fill
                   style={{
-                    height: "100%",
-                    width: "100%",
+                    height: '100%',
+                    width: '100%'
                   }}
                   sizes='(max-width: 640px) 150px, (max-width: 768px) 200px, 300px'
                   onClick={() => handleBookClick(book)}

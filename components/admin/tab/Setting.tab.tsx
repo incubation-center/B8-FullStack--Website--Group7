@@ -36,7 +36,7 @@ export default function SettingTab() {
                     className='p-2 px-4 rounded-full cursor-pointer'
                     style={{
                       backgroundColor: theme.primary,
-                      color: theme.secondary,
+                      color: theme.secondary
                     }}
                     onClick={() => setTheme(theme.name)}
                   >
@@ -55,7 +55,7 @@ export default function SettingTab() {
               label: 'Change',
               onClick: () => {
                 console.log('Change Password');
-              },
+              }
             }}
           >
             <div className='flex items-center space-x-2 text-primary text-opacity-70'>
@@ -69,7 +69,7 @@ export default function SettingTab() {
               label: 'View',
               onClick: () => {
                 console.log('View Activity Log');
-              },
+              }
             }}
           >
             <div className='flex items-center space-x-2 text-primary text-opacity-70'>
@@ -84,7 +84,7 @@ export default function SettingTab() {
 
 const Section = ({
   title,
-  children,
+  children
 }: {
   title: string;
   children: React.ReactNode;
@@ -100,7 +100,7 @@ const Section = ({
 const SubSection = ({
   title,
   action,
-  children,
+  children
 }: {
   title: string;
   action?: {

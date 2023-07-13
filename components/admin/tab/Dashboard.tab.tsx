@@ -1,28 +1,28 @@
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-import AdminTabLayout from "@/components/layout/AdminTabLayout";
-import { AdminTab } from "@/utils/enum";
-import { formatEnumValue } from "@/utils/function";
-import RenterTable from "../table/RenterTable";
+import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import { AdminTab } from '@/utils/enum';
+import { formatEnumValue } from '@/utils/function';
+import RenterTable from '../table/RenterTable';
 
-import useModal from "@/components/Modals/useModal";
-import RequestDetail from "@/components/Modals/RequestDetail";
-import { BookRequest, RequestStatus } from "@/types";
+import useModal from '@/components/Modals/useModal';
+import RequestDetail from '@/components/Modals/RequestDetail';
+import { BookRequest, RequestStatus } from '@/types';
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue } from 'recoil';
 import {
   AdminAllRequestAtom,
-  AdminAllRequestCountAtom,
-} from "@/service/recoil/admin";
-import IncomingSvg from "@/components/icon/admin-sidebar/IncomingSvg";
-import ActiveSvg from "@/components/icon/admin-sidebar/ActiveSvg";
-import ArchivedSvg from "@/components/icon/admin-sidebar/ArchivedSvg";
-import RenterSvg from "@/components/icon/admin-sidebar/RenterSvg";
+  AdminAllRequestCountAtom
+} from '@/service/recoil/admin';
+import IncomingSvg from '@/components/icon/admin-sidebar/IncomingSvg';
+import ActiveSvg from '@/components/icon/admin-sidebar/ActiveSvg';
+import ArchivedSvg from '@/components/icon/admin-sidebar/ArchivedSvg';
+import RenterSvg from '@/components/icon/admin-sidebar/RenterSvg';
 
 export default function DashboardTab({
-  handleRefreshRequest,
+  handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
@@ -88,13 +88,13 @@ export default function DashboardTab({
             .slice(0, 5)}
           actions={[
             {
-              label: "View",
+              label: 'View',
               onClick: (request) => {
                 setViewRequest(request);
                 toggle();
               },
-              bgColor: "bg-alt-secondary",
-            },
+              bgColor: 'bg-alt-secondary'
+            }
           ]}
         />
       </div>
@@ -105,7 +105,7 @@ export default function DashboardTab({
 const RequestDataShow = ({
   title,
   tab,
-  value,
+  value
 }: {
   title: string;
   tab: AdminTab;
