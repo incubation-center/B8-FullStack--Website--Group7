@@ -11,7 +11,7 @@
   --text-color-secondary: 164 117 81;
 }
 
-[data-theme='muted-black'] {
+[data-theme='black'] {
   --color-primary: 0 0 0;
   --color-secondary: 40 40 40;
   --color-alt-secondary: 155 157 156;
@@ -24,7 +24,7 @@
   --text-color-secondary: 241 238 227;
 }
 
-[data-theme='muted-sky'] {
+[data-theme='sky'] {
   --color-primary: 82 121 142;
   --color-secondary: 119 157 178;
   --color-alt-secondary: 241 241 241;
@@ -37,7 +37,7 @@
   --text-color-secondary: 0 0 0;
 }
 
-[data-theme='muted-matcha'] {
+[data-theme='matcha'] {
   --color-primary: 78 99 80;
   --color-secondary: 144 167 139;
   --color-alt-secondary: 241 238 227;
@@ -50,9 +50,8 @@
   --text-color-secondary: 0 0 0;
 }
 
-
-[data-theme='muted-taro'] {
-  --color-primary: 142 132 169;   
+[data-theme='taro'] {
+  --color-primary: 142 132 169;
   --color-secondary: 182 168 201;
   --color-alt-secondary: 254 246 242;
   --color-background: 244 235 240;
@@ -64,8 +63,8 @@
   --text-color-secondary: 0 0 0;
 }
 
-[data-theme='muted-ocean'] {
-  --color-primary: 45 50 80;   
+[data-theme='dracula'] {
+  --color-primary: 45 50 80;
   --color-secondary: 66 70 105;
   --color-alt-secondary: 165 172 214;
   --color-background: 255 255 255;

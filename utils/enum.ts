@@ -105,8 +105,8 @@ export const themes: Themes[] = [
     textColorSecondary: '#a47551'
   },
   {
-    title: 'Muted Black',
-    name: 'muted-black',
+    title: 'Midnight',
+    name: 'black',
     primary: '#171717',
     secondary: '#000',
     altSecondary: '#9B9D9C',
@@ -117,8 +117,8 @@ export const themes: Themes[] = [
     textColorSecondary: '#f1eee3'
   },
   {
-    title: 'Muted Sky',
-    name: 'muted-sky',
+    title: 'Sky',
+    name: 'sky',
     primary: '#52798E',
     secondary: '#779DB2',
     altSecondary: '#f1f1f1',
@@ -129,8 +129,8 @@ export const themes: Themes[] = [
     textColorSecondary: '#000'
   },
   {
-    title: 'Muted Matcha',
-    name: 'muted-matcha',
+    title: 'Matcha',
+    name: 'matcha',
     primary: '#4E6350',
     secondary: '#90A78B',
     altSecondary: '#f1eee3',
@@ -141,8 +141,8 @@ export const themes: Themes[] = [
     textColorSecondary: '#000'
   },
   {
-    title: 'Muted Taro',
-    name: 'muted-taro',
+    title: 'Taro',
+    name: 'taro',
     primary: '#8E84A9',
     secondary: '#B6A8C9',
     altSecondary: '#fef6f2',
@@ -153,8 +153,8 @@ export const themes: Themes[] = [
     textColorSecondary: '#000'
   },
   {
-    title: 'Muted Ocean',
-    name: 'muted-ocean',
+    title: 'Dracula',
+    name: 'dracula',
     primary: '#2D3250',
     secondary: '#424669',
     altSecondary: '#A5ACD6',
