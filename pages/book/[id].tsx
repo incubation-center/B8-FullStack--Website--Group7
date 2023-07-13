@@ -27,6 +27,7 @@ import BackArrowSvg from '@/components/icon/BackArrow';
 
 import { useTranslation } from 'next-i18next';
 import { useLocale } from '@/utils/function';
+import BookReview from '@/components/BookReview';
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
@@ -186,7 +187,15 @@ export default function BookDetail({ bookId }: { bookId: string }) {
             />
           </ModalWrapper>
 
-          <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>
+          <div
+            className='
+              min-h-full
+              w-full bg-primary  
+              pb-10 md:pb-0
+
+              overflow-y-scroll 2xl:overflow-hidden
+            '
+          >
             {/* back home */}
             <div className='p-6 flex justify-start '>
               <div
@@ -205,7 +214,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
               </div>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
+            <div className=' grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 px-8 gap-4'>
               {/* book cover */}
               <div className='flex justify-center items-start mb-10 md:mb-0'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -293,6 +302,13 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                     {t('btns.borrow-btn')}
                   </button>
                 )}
+
+                <div className='block 2xl:hidden'>
+                  {authStore.isFetched && <BookReview />}
+                </div>
+              </div>
+              <div className='hidden 2xl:block h-full overflow-y-scroll mb-56'>
+                {authStore.isFetched && <BookReview />}
               </div>
             </div>
           </div>

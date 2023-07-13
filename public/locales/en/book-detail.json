@@ -44,5 +44,25 @@
     "go-back-btn": "Go Back",
     "save-btn": "Save",
     "remove-btn": "Remove"
+  },
+
+  "review": {
+    "title": "Reviews",
+    "your-review": "Your review",
+    "add-your-review": "Add your review",
+
+    "validation": {
+      "stars": "Rating is required",
+      "comment": "Comment is required"
+    },
+
+    "form": {
+      "stars": "Stars",
+      "comment": "Comment",
+      "comment-placeholder": "Write your comment here",
+
+      "cancel-btn": "Cancel",
+      "save-btn": "Submit"
+    }
   }
 }

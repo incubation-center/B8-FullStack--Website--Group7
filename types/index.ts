@@ -49,3 +49,12 @@ export enum RequestStatus {
   ACCEPTED = 'ACCEPTED',
   ACHIEVED = 'ARCHIVED'
 }
+
+export interface BookReview {
+  id?: string;
+  star: number;
+  comment: string;
+  createdAt: Date;
+  user: User;
+  // book: Book;
+}

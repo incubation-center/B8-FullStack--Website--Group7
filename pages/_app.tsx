@@ -1,15 +1,14 @@
 import '@/styles/globals.css';
+import '@smastrom/react-rating/style.css';
+
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 
 import { appWithTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect } from 'react';
-import { setCookie } from 'cookies-next';
 
 import NextNProgress from 'nextjs-progressbar';
-import { Transition } from '@headlessui/react';
 
 function App({ Component, pageProps }: AppProps) {
   const { locale } = useRouter();

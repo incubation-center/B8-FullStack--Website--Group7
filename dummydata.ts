@@ -1,4 +1,4 @@
-import { Book, BookRequest, RequestStatus, User } from './types';
+import { Book, BookRequest, BookReview, RequestStatus, User } from './types';
 
 const BookData: Book[] = [
   {
@@ -222,4 +222,28 @@ const RequestData: BookRequest[] = [
   }
 ];
 
-export { BookData, RequestData, SampleUser };
+const ReviewData: BookReview[] = [
+  {
+    id: '1',
+    star: 5,
+    comment: 'This book is very good',
+    createdAt: new Date(),
+    user: SampleUser
+  },
+  {
+    id: '2',
+    star: 2,
+    comment: 'This book is very good',
+    user: SampleUser,
+    createdAt: new Date()
+  },
+  {
+    id: '3',
+    star: 4,
+    comment: 'This book is very good',
+    user: SampleUser,
+    createdAt: new Date()
+  }
+];
+
+export { BookData, RequestData, SampleUser, ReviewData };
