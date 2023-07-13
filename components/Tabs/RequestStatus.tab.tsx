@@ -91,7 +91,7 @@ export default function RequestStatusTab({
             </div>
           )}
 
-          {isFetched && filteredRequest.length === 0 && (
+          {isFetched && filteredRequest && filteredRequest.length === 0 && (
             <div className='w-full flex-1 flex flex-col justify-center items-center'>
               <h1 className='text-center text-t-primary font-medium text-lg'>
                 {t('request-tab.no-request', 'You have no request')}
@@ -109,7 +109,7 @@ export default function RequestStatusTab({
           )}
 
           {/* table */}
-          {isFetched && filteredRequest.length !== 0 && (
+          {isFetched && filteredRequest && filteredRequest.length !== 0 && (
             <>
               {isRefreshing && (
                 <div className='w-full h-fit flex gap-4 justify-start items-center'>

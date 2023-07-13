@@ -32,7 +32,7 @@ export default function RequestTable({
             font-bold text-lg md:text-lg text-primary 
             text-center
             [&>td]:py-4 w-full 
-            [&<td]:w-fit  text-center
+            [&<td]:w-fit
           '
         >
           <td className='w-full text-left pl-2 whitespace-nowrap'>

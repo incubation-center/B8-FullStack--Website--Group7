@@ -1,20 +1,23 @@
 import { useState } from 'react';
 
-import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import { useTheme } from 'next-themes';
 
 import { themes } from '@/utils/enum';
 import LocaleSwitching from '@/components/LocaleSwitching';
 import ThemeSwitching from '@/components/ThemeSwitching';
+import AdminTabLayout from '@/components/layout/AdminTabLayout';
+import { useTranslation } from 'next-i18next';
 
 export default function SettingTab() {
+  const { t } = useTranslation('admin');
+
   const [systemName, setSystemName] = useState('Kjey Book');
 
   return (
-    <AdminTabLayout title='Setting'>
+    <AdminTabLayout title={t('tab.setting')}>
       <div className='max-w-[1000px] mx-auto space-y-6 text-primary'>
-        <Section title='General Setting'>
-          <SubSection title='System Name'>
+        <Section title={t('setting-tab.general-setting')}>
+          <SubSection title={t('setting-tab.system-name')}>
             <input
               type='text'
               className='
@@ -46,32 +49,32 @@ export default function SettingTab() {
           </SubSection>
         </Section>
 
-        <Section title='Security & Policy'>
+        <Section title={t('setting-tab.security-policy')}>
           <SubSection
-            title='Password'
+            title={t('setting-tab.password')}
             action={{
-              label: 'Change',
+              label: t('setting-tab.change-btn'),
               onClick: () => {
                 console.log('Change Password');
               }
             }}
           >
             <div className='flex items-center space-x-2 text-primary text-opacity-70'>
-              The admin able to change the system credentials
+              {t('setting-tab.password-placeholder')}
             </div>
           </SubSection>
 
           <SubSection
-            title='Activity log'
+            title={t('setting-tab.activity-log')}
             action={{
-              label: 'View',
+              label: t('setting-tab.view-btn'),
               onClick: () => {
                 console.log('View Activity Log');
               }
             }}
           >
             <div className='flex items-center space-x-2 text-primary text-opacity-70'>
-              The admin able to see the login activity in the system
+              {t('setting-tab.activity-log-placeholder')}
             </div>
           </SubSection>
         </Section>

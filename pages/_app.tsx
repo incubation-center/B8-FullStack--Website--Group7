@@ -7,8 +7,11 @@ import { RecoilRoot } from 'recoil';
 
 import { appWithTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { setCookie } from 'cookies-next';
+
+import NextNProgress from 'nextjs-progressbar';
+import { Transition } from '@headlessui/react';
 
 function App({ Component, pageProps }: AppProps) {
   const { locale } = useRouter();
@@ -29,6 +32,12 @@ function App({ Component, pageProps }: AppProps) {
           ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
         `}
       >
+        <NextNProgress
+          options={{ showSpinner: false }}
+          color='var(--progress-bar-color)'
+          showOnShallow={false}
+        />
+
         <div className='flex flex-1'>
           <RecoilRoot>
             <ThemeProvider

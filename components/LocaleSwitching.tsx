@@ -14,11 +14,13 @@ export default function LocaleSwitching({
   className?: HTMLAttributes<HTMLDivElement>['className'];
 }) {
   const router = useRouter();
-  const { locales, locale, push, pathname, asPath, reload, events } = router;
+  const { locales, locale, replace, pathname, asPath, reload, events } = router;
 
   const handleSwitchLocale = (locale: string) => {
+    if (locale === router.locale) return;
+
     setCookie('NEXT_LOCALE', locale);
-    push(pathname, asPath, { locale: locale, shallow: false });
+    replace(pathname, asPath, { locale: locale, shallow: false });
   };
 
   const selectModalPosition = () => {

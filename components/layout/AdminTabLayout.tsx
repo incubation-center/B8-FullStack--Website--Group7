@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { motion } from 'framer-motion';
 
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import { useTranslation } from 'next-i18next';
 
 export default function AdminTabLayout({
   children,
@@ -14,6 +15,7 @@ export default function AdminTabLayout({
   title: string;
   handleRefresh?: () => void;
 }) {
+  const { t } = useTranslation('admin');
   const isRefreshing = useRecoilValue(isRefreshingRequestAtom);
 
   return (
@@ -23,8 +25,8 @@ export default function AdminTabLayout({
 
         {handleRefresh && (
           <motion.button
-            initial={{ width: 100 }}
-            animate={{ width: isRefreshing ? 140 : 100 }}
+            initial={{ width: 150 }}
+            animate={{ width: isRefreshing ? 170 : 150 }}
             onClick={handleRefresh}
             disabled={isRefreshing}
             className={`bg-primary text-white rounded-full px-4 py-2 flex justify-center items-center 
@@ -33,9 +35,12 @@ export default function AdminTabLayout({
                 ? 'opacity-80 cursor-not-allowed'
                 : 'hover:bg-primary-light'
             }
+            whitespace-nowrap
             `}
           >
-            <span>{isRefreshing ? 'Refreshing' : 'Refresh'}</span>
+            <span>
+              {isRefreshing ? t('btns.refreshing-btn') : t('btns.refresh-btn')}
+            </span>
 
             {isRefreshing && (
               <motion.div

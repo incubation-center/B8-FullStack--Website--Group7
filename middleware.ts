@@ -65,7 +65,7 @@ export async function middleware(request: NextRequest) {
     // check if token is valid
     const tokenValidation = await isTokenValid((accessToken as Token).value);
     if (!tokenValidation) {
-      return NextResponse.redirect(new URL('/', request.nextUrl).href);
+      return NextResponse.redirect(new URL(`/${locale}`, request.nextUrl).href);
     }
   }
 }

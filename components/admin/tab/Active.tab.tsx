@@ -19,12 +19,15 @@ import {
 import useConfirmModal from '@/components/Modals/useCofirm';
 import { receiveBook } from '@/service/api/admin';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { useTranslation } from 'next-i18next';
 
 export default function ActiveTab({
   handleRefreshRequest,
 }: {
   handleRefreshRequest: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [_, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
@@ -65,7 +68,7 @@ export default function ActiveTab({
       </ModalWrapper>
 
       <AdminTabLayout
-        title='Active Request'
+        title={t('tab.active-request')}
         handleRefresh={handleRefreshRequest}
       >
         <RequestTable
@@ -75,7 +78,7 @@ export default function ActiveTab({
             .sort((a, b) => (a.dateOfReturn as any) - (b.dateOfReturn as any))}
           actions={[
             {
-              label: 'View',
+              label: t('btns.view-btn'),
               bgColor: 'bg-alt-secondary',
               onClick: (request) => {
                 setViewRequest(request);
@@ -83,7 +86,7 @@ export default function ActiveTab({
               },
             },
             {
-              label: 'Receive',
+              label: t('btns.receive-btn'),
               bgColor: 'bg-success text-white',
               onClick: (request) => {
                 showConfirmModal({

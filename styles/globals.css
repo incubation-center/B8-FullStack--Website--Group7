@@ -8,7 +8,10 @@
 * {
   -webkit-tap-highlight-color: transparent;
 
-  --home-search-bar-height: 100px;
+  --icon-color: #523a28;
+  --progress-bar-color: #d0b49f;
+
+  --home-search-bar-height: 90px;
 }
 
 html,
@@ -17,8 +20,6 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   min-height: -webkit-fill-available;
-  /* height: 100vh;
-  height: 100dvh; */
   display: flex;
   flex-grow: 3;
   /* dvh new height unit that exclude browser element */
@@ -38,8 +39,8 @@ body {
 }
 
 .home-layout-children-height {
-  max-height: calc(100vh - 80px);
-  max-height: calc(100dvh - 80px);
+  max-height: calc(100vh - var(--home-search-bar-height));
+  max-height: calc(100dvh - var(--home-search-bar-height));
 }
 
 /* book scrolling section scrollbar */

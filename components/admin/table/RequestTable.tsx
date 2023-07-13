@@ -3,10 +3,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 
+import { motion } from 'framer-motion';
+
 import { BookRequest } from '@/types';
 import { AdminTab } from '@/utils/enum';
 import { useRecoilValue } from 'recoil';
 import { isRefreshingRequestAtom } from '@/service/recoil/admin';
+import { useTranslation } from 'next-i18next';
 
 interface RequestTableProps {
   data: BookRequest[];
@@ -26,6 +29,8 @@ export default function RequestTable({
   actions,
   useIn
 }: RequestTableProps) {
+  const { t } = useTranslation('admin');
+
   const isRefreshing = useRecoilValue(isRefreshingRequestAtom);
 
   return (
@@ -39,17 +44,24 @@ export default function RequestTable({
             [&<td]:w-fit [&<td]:whitespace-nowrap
           '
         >
-          <td className='w-2/5'>Book</td>
-          <td>Username</td>
-          {useIn === AdminTab.INCOMING_REQUEST && <td>Request date</td>}
-          {useIn === AdminTab.ACTIVE_REQUEST && <td>To be returned date</td>}
-          {useIn === AdminTab.ARCHIVED_REQUEST && <td>Status</td>}
-          <td>Actions</td>
+          <td className='w-2/5'>{t('request-table.book')}</td>
+          <td>{t('request-table.username')}</td>
+          {useIn === AdminTab.INCOMING_REQUEST && (
+            <td>{t('request-table.request-date')}</td>
+          )}
+          {useIn === AdminTab.ACTIVE_REQUEST && (
+            <td>{t('request-table.to-be-returned-date')}</td>
+          )}
+          {useIn === AdminTab.ARCHIVED_REQUEST && (
+            <td>{t('request-table.status')}</td>
+          )}
+          <td>{t('request-table.actions')}</td>
         </tr>
       </thead>
       <tbody>
         {data.map((request) => (
-          <tr
+          <motion.tr
+            layout
             key={request.requestId}
             className='
               border-b-2 border-primary
@@ -103,8 +115,8 @@ export default function RequestTable({
                     ${request.isApproved ? 'bg-success' : 'bg-danger'}
                   `}
                 >
-                  {request.isApproved && 'Approved'}
-                  {!request.isApproved && 'Rejected'}
+                  {request.isApproved && t('btns.approved')}
+                  {!request.isApproved && t('btns.rejected')}
                 </div>
               </td>
             )}
@@ -133,13 +145,13 @@ export default function RequestTable({
                 </button>
               ))}
             </td>
-          </tr>
+          </motion.tr>
         ))}
 
         {data.length === 0 && (
           <tr className='text-primary text-xl'>
             <td colSpan={5} className='text-center p-4'>
-              No request
+              {t('request-table.no-request')}
             </td>
           </tr>
         )}
