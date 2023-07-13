@@ -36,9 +36,9 @@ export default function UserAuthentication({}) {
       <div className='flex flex-col justify-center items-center'>
         <div
           className='relative 
-          h-24 w-52
+          h-32 w-56 mb-4
           overflow-clip rounded-[20px]
-          hidden md:block lg:hidden
+          block lg:hidden
          '
         >
           <Image
@@ -98,7 +98,7 @@ export default function UserAuthentication({}) {
           </div>
         </div>
 
-        <div className='flex flex-col md:flex-row w-2/3 max-w-[400px] gap-2 mt-4 lg:absolute right-4 bottom-4'>
+        <div className='flex flex-col md:flex-row w-2/3 max-w-[400px] gap-2 mt-6 lg:absolute right-4 bottom-4'>
           <ThemeSwitching className='bg-opacity-10 fill-alt-secondary' />
 
           <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
@@ -111,6 +111,7 @@ export default function UserAuthentication({}) {
           className='relative 
           w-[350px] h-[450px]
           overflow-clip rounded-[20px]
+          z-0
          '
         >
           <Image

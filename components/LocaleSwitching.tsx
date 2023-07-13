@@ -86,6 +86,8 @@ export default function LocaleSwitching({
               bg-alt-secondary text-t-primary rounded-3xl shadow-sm
               flex  flex-col gap-2 items-start
               overflow-hidden
+              z-[99999]
+
             `}
             >
               {(locales as string[]).map((locale) => (

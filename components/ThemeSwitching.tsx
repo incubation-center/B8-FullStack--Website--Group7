@@ -73,6 +73,7 @@ export default function ThemeSwitching({
               overflow-hidden
               ring-2 ring-background ring-opacity-20
               shadow-xl
+              z-[99999]
             `}
             >
               {themes.map((theme) => (
