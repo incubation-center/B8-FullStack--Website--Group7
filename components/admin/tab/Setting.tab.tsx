@@ -38,11 +38,11 @@ export default function SettingTab() {
               '
             >
               <LocaleSwitching
-                className='bg-opacity-50 text-t-primary fill-primary shadow-sm'
+                className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
                 position='bottom'
               />
               <ThemeSwitching
-                className='bg-opacity-50 text-t-primary fill-primary shadow-sm'
+                className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
                 position='bottom'
               />
             </div>

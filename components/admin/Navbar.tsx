@@ -151,10 +151,6 @@ export default function Navbar({
       {/* admin */}
       <div className='flex-1'></div>
 
-      <div className='mb-2 xl:mb-4'>
-        <LocaleSwitching />
-      </div>
-
       <Link
         href='/'
         className='
