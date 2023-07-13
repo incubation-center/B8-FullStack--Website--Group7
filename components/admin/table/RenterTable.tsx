@@ -45,6 +45,7 @@ export default function RenterTable({
                 text-left   
                 border-y-2 border-primary 
                 [&>*]:py-2 [&>*]:px-1
+                text-primary
               '
             >
               <td className='w-1/5'>{renter.username}</td>

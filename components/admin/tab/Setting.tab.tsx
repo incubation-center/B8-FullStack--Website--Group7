@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+import { useTheme } from 'next-themes';
+
+import { themes } from '@/utils/enum';
+import LocaleSwitching from '@/components/LocaleSwitching';
+import ThemeSwitching from '@/components/ThemeSwitching';
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import { useTranslation } from 'next-i18next';
 
@@ -10,7 +15,7 @@ export default function SettingTab() {
 
   return (
     <AdminTabLayout title={t('tab.setting')}>
-      <div className='max-w-[1000px] mx-auto space-y-6'>
+      <div className='max-w-[1000px] mx-auto space-y-6 text-primary'>
         <Section title={t('setting-tab.general-setting')}>
           <SubSection title={t('setting-tab.system-name')}>
             <input
@@ -22,6 +27,25 @@ export default function SettingTab() {
               value={systemName}
               onChange={(e) => setSystemName(e.target.value)}
             />
+          </SubSection>
+
+          {/* color themes */}
+          <SubSection title='Personal setting'>
+            <div
+              className='
+                
+                flex gap-2 p-2 rounded-lg 
+              '
+            >
+              <LocaleSwitching
+                className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
+                position='bottom'
+              />
+              <ThemeSwitching
+                className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
+                position='bottom'
+              />
+            </div>
           </SubSection>
         </Section>
 
@@ -69,7 +93,9 @@ const Section = ({
   return (
     <div className='mb-4'>
       <h2 className='text-lg font-semibold mb-2 px-2 text-primary'>{title}</h2>
-      <div className='bg-background rounded-lg p-4'>{children}</div>
+      <div className='bg-alt-secondary bg-opacity-50 rounded-lg p-4'>
+        {children}
+      </div>
     </div>
   );
 };

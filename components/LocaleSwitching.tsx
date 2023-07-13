@@ -4,12 +4,14 @@ import { Listbox, Transition } from '@headlessui/react';
 
 import Image from 'next/image';
 import { setCookie } from 'cookies-next';
-import { Fragment } from 'react';
+import { Fragment, HTMLAttributes } from 'react';
 
 export default function LocaleSwitching({
-  position = 'top'
+  position = 'top',
+  className = ''
 }: {
   position?: 'bottom' | 'top';
+  className?: HTMLAttributes<HTMLDivElement>['className'];
 }) {
   const router = useRouter();
   const { locales, locale, replace, pathname, asPath, reload, events } = router;
@@ -46,12 +48,13 @@ export default function LocaleSwitching({
           <Listbox.Button
             className={`
             text-alt-secondary font-medium flex items-center gap-1 w-full px-4
-            hover:scale-95 transition-transform duration-300
-            bg-alt-secondary bg-opacity-10 p-2 rounded-full
+            hover:scale-95 transition-transform duration-300 p-2 rounded-full
             ${locale === 'en' ? 'font-poppins' : 'font-kantumruy'}
+            bg-alt-secondary bg-opacity-10
+            ${className} 
             `}
           >
-            <LanguageSvg className='w-6 h-6 fill-alt-secondary' />
+            <LanguageSvg className='w-6 h-6 fill-inherit' />
 
             {locale === 'en' ? 'English' : 'ខ្មែរ'}
 
@@ -80,7 +83,7 @@ export default function LocaleSwitching({
               className={`
               absolute ${selectModalPosition()} left-0 my-2
               w-full
-              bg-alt-secondary text-primary rounded-3xl shadow-sm
+              bg-alt-secondary text-t-primary rounded-3xl shadow-sm
               flex  flex-col gap-2 items-start
               overflow-hidden
             `}

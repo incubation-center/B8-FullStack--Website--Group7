@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
+import SuccessSvg from '../icon/Success';
 
 const useAlertModal = () => {
   const { t } = useTranslation('common');
@@ -51,10 +52,22 @@ const useAlertModal = () => {
   }
 
   // modal image variants
-  const imagePath = {
-    success: '/icon/success.svg',
-    error: '/icon/fail.png',
-    warning: '/icon/stop-hand.png'
+  const ImageRender = ({ type }: { type: AlertType | null }) => {
+    if (!type) return <></>;
+
+    if (type === AlertType.SUCCESS) {
+      return <SuccessSvg className='h-[80px] w-[80px]  mb-2 fill-primary' />;
+    }
+
+    return (
+      <Image
+        src={`/icon/${type === AlertType.ERROR ? 'fail.png' : 'stop-hand.png'}`}
+        width={80}
+        height={80}
+        alt='successful icon'
+        className='mb-2'
+      />
+    );
   };
 
   // frame motion variants
@@ -104,7 +117,7 @@ const useAlertModal = () => {
                 />
                 <motion.div
                   className='
-                    bg-alt-secondary
+                    bg-modal
                     rounded-lg p-6
                     flex flex-col items-center
                     text-center
@@ -122,19 +135,13 @@ const useAlertModal = () => {
                     stiffness: 200
                   }}
                 >
-                  <Image
-                    src={imagePath[type ?? 'success']}
-                    width={80}
-                    height={80}
-                    alt='successful icon'
-                    className='mb-2'
-                  />
+                  <ImageRender type={type} />
 
                   <div>
-                    <h1 className='font-bold text-xl lg:text-2xl text-primary mt-2'>
+                    <h1 className='font-bold text-xl lg:text-2xl text-t-primary mt-2'>
                       {title}
                     </h1>
-                    <p className='font-medium text-primary whitespace-pre-line mt-2'>
+                    <p className='font-medium text-t-primary whitespace-pre-line mt-2'>
                       {subtitle}
                     </p>
                   </div>
@@ -143,7 +150,7 @@ const useAlertModal = () => {
                     <button
                       className='
                         px-10 py-2 mt-8 rounded-full
-                        text-primary font-bold
+                        text-t-primary font-bold
                         hover:bg-primary hover:bg-opacity-20
                       '
                       onClick={close}

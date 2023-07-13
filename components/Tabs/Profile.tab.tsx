@@ -240,14 +240,14 @@ export default function ProfileTab() {
 
             {/* personal information */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
+              <h1 className='font-extrabold text-t-primary text-start text-xl md:text-2xl'>
                 {t('profile-tab.personal-info')}
               </h1>
-              <div className='w-full my-5 p-5 h-fit flex flex-col justify-center items-end bg-[#EBEBEB] rounded-xl relative'>
-                <div className='w-full flex flex-grow flex-wrap gap-4'>
+              <div className='w-full my-5 p-5 h-fit flex flex-col justify-center items-end bg-background rounded-xl relative'>
+                <div className='w-full flex flex-grow flex-wrap gap-4 text-t-primary'>
                   <div
-                    className=' 
-                    text-primary text-start text-lg 
+                    className=' primary
+                     text-start text-lg 
                       col-span-2 w-full
                     '
                   >
@@ -258,7 +258,7 @@ export default function ProfileTab() {
                       {authStore.user.username}
                     </div>
                   </div>
-                  <div className=' text-primary text-lg flex-1   '>
+                  <div className=' text-lg flex-1   '>
                     <div className=' font-extrabold  text-lg'>
                       {t('profile-tab.phone number')}
                     </div>
@@ -266,7 +266,7 @@ export default function ProfileTab() {
                       {authStore.user.phoneNumber}
                     </div>
                   </div>
-                  <div className=' text-primary text-start text-xl  flex-1  '>
+                  <div className='text-start text-xl  flex-1  '>
                     <div className=' font-extrabold text-lg md:text-lg'>
                       {t('profile-tab.email')}
                     </div>
@@ -279,7 +279,7 @@ export default function ProfileTab() {
                 <button
                   onClick={() => toggleInformationModal()}
                   className='
-                    bg-secondary text-white font-light rounded-lg py-1 px-7 
+                    bg-primary text-white font-light rounded-lg py-1 px-7 
                     transition-colors duration-300 box-border border-2 border-secondary hover:border-white
                     md:absolute md:top-5 md:right-5
                     mt-5 md:mt-0 w-full md:w-fit
@@ -293,13 +293,13 @@ export default function ProfileTab() {
 
             {/* Privacy setting */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
+              <h1 className='font-extrabold text-t-primary text-start text-xl md:text-2xl'>
                 {t('profile-tab.privacy-set')}
               </h1>
-              <div className='w-full my-5 p-5 h-fit flex justify-between items-center flex-wrap bg-[#EBEBEB] rounded-xl  '>
+              <div className='w-full my-5 p-5 h-fit flex justify-between items-center flex-wrap bg-background rounded-xl  '>
                 <div
                   className=' 
-                text-primary text-start text-lg 
+                text-t-primary text-start text-lg 
                  flex-1 w-full
                 '
                 >
@@ -311,7 +311,7 @@ export default function ProfileTab() {
                 <button
                   onClick={() => toggleChangePasswordModal()}
                   className='
-                bg-secondary text-white font-light rounded-lg py-1 px-7 
+                bg-primary text-white font-light rounded-lg py-1 px-7 
                 transition-colors duration-300 box-border border-2 border-secondary hover:border-white
                 w-full md:w-fit
                 mt-2 md:mt-0

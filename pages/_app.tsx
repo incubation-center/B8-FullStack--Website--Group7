@@ -1,4 +1,6 @@
 import '@/styles/globals.css';
+import { ThemeProvider } from 'next-themes';
+import { deleteCookie, getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
@@ -17,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Library</title>
+        <title>{locale === 'en' ? 'Kjey Book' : 'ខ្ចីសៀវភៅ'}</title>
         <link
           rel='icon'
           type='image/x-icon'
@@ -38,7 +40,13 @@ function App({ Component, pageProps }: AppProps) {
 
         <div className='flex flex-1'>
           <RecoilRoot>
-            <Component {...pageProps} />
+            <ThemeProvider
+              defaultTheme='default'
+              enableSystem={false}
+              disableTransitionOnChange
+            >
+              <Component {...pageProps} />
+            </ThemeProvider>
           </RecoilRoot>
         </div>
 

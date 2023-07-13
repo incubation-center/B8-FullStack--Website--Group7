@@ -73,7 +73,7 @@ export default function RequestStatusTab({
         <div className='w-full h-full flex flex-col overflow-y-scroll p-4'>
           <h1
             className='
-              font-bold text-primary text-center
+              font-bold text-t-primary text-center
               text-2xl md:text-4xl
               pb-4 md:pb-8 
               pt-2 md:pt-4 
@@ -93,7 +93,7 @@ export default function RequestStatusTab({
 
           {isFetched && filteredRequest && filteredRequest.length === 0 && (
             <div className='w-full flex-1 flex flex-col justify-center items-center'>
-              <h1 className='text-center text-primary font-medium text-lg'>
+              <h1 className='text-center text-t-primary font-medium text-lg'>
                 {t('request-tab.no-request', 'You have no request')}
               </h1>
               <button
@@ -113,7 +113,7 @@ export default function RequestStatusTab({
             <>
               {isRefreshing && (
                 <div className='w-full h-fit flex gap-4 justify-start items-center'>
-                  <SpinningLoadingSvg className='w-8 h-8 text-primary' />
+                  <SpinningLoadingSvg className='w-8 h-8 text-t-primary' />
                   <div className='text-center text-primary font-medium'>
                     {t('request-tab.updating-request', 'Updating your request')}
                   </div>

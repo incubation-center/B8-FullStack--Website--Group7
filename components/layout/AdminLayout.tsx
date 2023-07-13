@@ -14,7 +14,7 @@ export default function AdminLayout({
     <div className='w-screen max-h-screen flex flex-grow overflow-clip'>
       <Navbar currentTab={currentTab} handlePageRouting={handlePageRouting} />
 
-      <div className='w-full h-full overflow-clip flex flex-grow'>
+      <div className='w-full h-full overflow-clip flex flex-grow bg-background'>
         {children}
       </div>
     </div>

@@ -20,12 +20,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useDebounce, useOnScreen } from '@/utils/function';
 import { Book } from '@/types';
 import { getAllBooks } from '@/service/api/book';
-import EducationSvg from '../icon/book-category/Education';
-import BusinessSvg from '../icon/book-category/Business';
-import DramaSvg from '../icon/book-category/Drama';
-import FantasySvg from '../icon/book-category/Fantasy';
-import HistorySvg from '../icon/book-category/History';
-import SelfDevelopmentSvg from '../icon/book-category/SelfDevelopment';
+import EducationSvg from '@/components/icon/book-category/Education';
+import BusinessSvg from '@/components/icon/book-category/Business';
+import DramaSvg from '@/components/icon/book-category/Drama';
+import FantasySvg from '@/components/icon/book-category/Fantasy';
+import HistorySvg from '@/components/icon/book-category/History';
+import SelfDevelopmentSvg from '@/components/icon/book-category/SelfDevelopment';
 import { useTranslation } from 'next-i18next';
 
 export default function HomeTab({
@@ -260,7 +260,7 @@ function CategoryIcon({
       return (
         <EducationSvg
           className={`h-4 w-4 ${
-            isCurrentCategory ? 'fill-white ' : 'fill-primary '
+            isCurrentCategory ? 'fill-white ' : 'fill-t-primary '
           }`}
         />
       );
@@ -270,7 +270,7 @@ function CategoryIcon({
           className={`h-4 w-4 ${
             isCurrentCategory
               ? 'fill-white stroke-white'
-              : 'fill-primary stroke-primary'
+              : 'fill-t-primary stroke-t-primary'
           }`}
         />
       );
@@ -278,7 +278,7 @@ function CategoryIcon({
       return (
         <DramaSvg
           className={`h-4 w-4 ${
-            isCurrentCategory ? 'fill-white ' : 'fill-primary '
+            isCurrentCategory ? 'fill-white ' : 'fill-t-primary '
           }`}
         />
       );
@@ -286,7 +286,7 @@ function CategoryIcon({
       return (
         <FantasySvg
           className={`h-4 w-4 ${
-            isCurrentCategory ? 'fill-white' : 'fill-primary'
+            isCurrentCategory ? 'fill-white' : 'fill-t-primary'
           }`}
         />
       );
@@ -296,7 +296,7 @@ function CategoryIcon({
           className={`h-4 w-4 ${
             isCurrentCategory
               ? 'fill-white stroke-white'
-              : 'fill-primary stroke-primary'
+              : 'fill-t-primary stroke-t-primary'
           }`}
         />
       );
@@ -306,7 +306,7 @@ function CategoryIcon({
           className={`h-4 w-4 ${
             isCurrentCategory
               ? 'fill-white stroke-white'
-              : 'fill-primary stroke-primary'
+              : 'fill-t-primary stroke-t-primary'
           }`}
         />
       );
@@ -345,7 +345,7 @@ function CategoryButton({
         ${
           isCurrentCategory
             ? 'bg-primary p-1 px-8 rounded-full text-white'
-            : 'bg-transparent text-primary '
+            : 'bg-transparent text-t-primary '
         }
 
       `}
@@ -402,7 +402,7 @@ function BookSection({
       <h1
         className='
           w-1/3 text-xl 
-          md:text-2xl text-primary mb-4 mt-2 pt-3 whitespace-nowrap
+          md:text-2xl text-t-primary mb-4 mt-2 pt-3 whitespace-nowrap
           text-bold
         '
       >

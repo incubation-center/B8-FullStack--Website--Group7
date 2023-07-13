@@ -15,6 +15,7 @@ import LocaleSwitching from '../LocaleSwitching';
 import { useTranslation } from 'next-i18next';
 import { useLocale } from '@/utils/function';
 import { useRouter } from 'next/router';
+import ThemeSwitching from '../ThemeSwitching';
 
 function SideBar({
   currentTab,
@@ -54,7 +55,7 @@ function SideBar({
       {/* logo */}
       {isMobile && (
         <div className='flex justify-center items-center mb-10'>
-          <img src='/bootcamp-logo.png' alt='logo' className='w-full h-auto' />
+          <img src='/bootcamp-logo.png' alt='logo' className='w-2/3 h-auto' />
         </div>
       )}
 
@@ -99,8 +100,10 @@ function SideBar({
 
       <div className='flex-1'></div>
 
+      <ThemeSwitching className='bg-opacity-10 fill-alt-secondary' />
+
       {/* switching locale */}
-      <LocaleSwitching />
+      <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
 
       {/* admin */}
       {!authStore.isLoggedIn && (

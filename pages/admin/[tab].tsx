@@ -32,6 +32,7 @@ import BookTab from '@/components/admin/tab/Book.tab';
 import { AxiosError } from 'axios';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 
 export default function AdminHomePage({
   currentTab
@@ -141,6 +142,14 @@ export default function AdminHomePage({
 
   return (
     <>
+      <Head>
+        {router.locale === 'en' ? (
+          <title>Kjey Book | Admin</title>
+        ) : (
+          <title>ខ្ចីសៀវភៅ | គ្រប់គ្រង</title>
+        )}
+      </Head>
+
       <AlertModal />
 
       <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>

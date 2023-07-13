@@ -77,3 +77,91 @@ export const API_ENDPOINT = {
     RECEIVE_BOOK: (id: string) => '/request/' + id + '/return'
   }
 };
+
+export type Themes = {
+  title: string;
+  name: string;
+  primary: string;
+  secondary: string;
+  altSecondary: string;
+  background: string;
+  iconColor: string;
+  iconColorActive: string;
+  textColorPrimary: string;
+  textColorSecondary: string;
+};
+
+export const themes: Themes[] = [
+  {
+    title: 'Default',
+    name: 'default',
+    primary: '#523a28',
+    secondary: '#a47551',
+    altSecondary: '#d0b49f',
+    background: '#ebebeb',
+    iconColor: '#a47551',
+    iconColorActive: '#523a28',
+    textColorPrimary: '#523a28',
+    textColorSecondary: '#a47551'
+  },
+  {
+    title: 'Muted Black',
+    name: 'muted-black',
+    primary: '#171717',
+    secondary: '#000',
+    altSecondary: '#9B9D9C',
+    background: '#171717',
+    iconColor: '#a47551',
+    iconColorActive: '#523a28',
+    textColorPrimary: '#171717',
+    textColorSecondary: '#f1eee3'
+  },
+  {
+    title: 'Muted Sky',
+    name: 'muted-sky',
+    primary: '#52798E',
+    secondary: '#779DB2',
+    altSecondary: '#f1f1f1',
+    background: '#DDEDF2',
+    iconColor: '#a47551',
+    iconColorActive: '#523a28',
+    textColorPrimary: '#52798E',
+    textColorSecondary: '#000'
+  },
+  {
+    title: 'Muted Matcha',
+    name: 'muted-matcha',
+    primary: '#4E6350',
+    secondary: '#90A78B',
+    altSecondary: '#f1eee3',
+    background: '#ebebeb',
+    iconColor: '#a47551',
+    iconColorActive: '#523a28',
+    textColorPrimary: '#c8c5bb',
+    textColorSecondary: '#000'
+  },
+  {
+    title: 'Muted Taro',
+    name: 'muted-taro',
+    primary: '#8E84A9',
+    secondary: '#B6A8C9',
+    altSecondary: '#fef6f2',
+    background: '#F4EBF0',
+    iconColor: '#a47551',
+    iconColorActive: '#523a28',
+    textColorPrimary: '#210e07',
+    textColorSecondary: '#000'
+  },
+  {
+    title: 'Muted Ocean',
+    name: 'muted-ocean',
+    primary: '#2D3250',
+    secondary: '#424669',
+    altSecondary: '#A5ACD6',
+    background: '#FFFFFF',
+    iconColor: '#a47551',
+    iconColorActive: '#523a28',
+    textColorPrimary: '#2D3250',
+    textColorSecondary: '#000'
+  }
+];

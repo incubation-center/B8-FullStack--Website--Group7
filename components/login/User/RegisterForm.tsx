@@ -74,7 +74,7 @@ export default function UserRegisterForm({}) {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='min-w-[300px] lg:min-w-[500px] space-y-1 lg:space-y-4
+          className='min-w-[300px] lg:min-w-[500px] max-w[600px] space-y-1 lg:space-y-4
           
           '
           autoComplete='off'

@@ -33,7 +33,7 @@ export default function LinkExpired() {
       </div>
 
       <div className='w-2/3 md:w-1/3 max-w-[300px]'>
-        <LocaleSwitching />
+        <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
       </div>
     </div>
   );

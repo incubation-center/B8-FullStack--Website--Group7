@@ -81,11 +81,11 @@ export default function BorrowBook({
       transition={{
         duration: 0.5
       }}
-      className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
+      className='w-full h-full p-8 rounded-lg text-center bg-modal space-y-10 text-primary'
     >
       <NotLoggedInLayout>
         <>
-          <h1 className='text-2xl font-bold text-primary'>
+          <h1 className='text-2xl font-bold text-t-primary'>
             {t('modal.borrow.label')}
           </h1>
 
@@ -94,7 +94,7 @@ export default function BorrowBook({
             <div>
               <label
                 htmlFor='bookTitle'
-                className='ml-4 font-medium text-primary text-lg'
+                className='ml-4 font-medium text-t-primary text-lg'
               >
                 {t('modal.borrow.book-title')}
               </label>
@@ -114,7 +114,7 @@ export default function BorrowBook({
             </div>
 
             <div>
-              <h1 className='ml-4 font-medium text-primary text-lg'>
+              <h1 className='ml-4 font-medium text-t-primary text-lg'>
                 {t('modal.borrow.book-duration')}
               </h1>
               <Listbox

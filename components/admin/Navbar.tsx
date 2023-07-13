@@ -142,7 +142,7 @@ export default function Navbar({
         <div
           className={`
           ${handleTranslate()} transition-all duration-300
-          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full
+          absolute top-0 left-0 w-full h-12 bg-alt-secondary rounded-full 
           `}
           style={{ zIndex: -1 }}
         ></div>
@@ -150,10 +150,6 @@ export default function Navbar({
 
       {/* admin */}
       <div className='flex-1'></div>
-
-      <div className='mb-2 xl:mb-4'>
-        <LocaleSwitching />
-      </div>
 
       <Link
         href='/'
@@ -185,7 +181,7 @@ function NavbarBtn({
   return (
     <div
       className={`flex items-center justify-start cursor-pointer rounded-full 
-      ${isCurrentTab ? 'text-primary ' : 'text-secondary'}
+      ${isCurrentTab ? 'text-primary ' : 'text-alt-secondary'}
       transition-all duration-300
       whitespace-nowrap 
       p-1 px-2
@@ -207,8 +203,8 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
         <DashboardSvg
           className={`h-6 w-6 ${
             isCurrent
-              ? 'fill-primary stroke-primary delay-300'
-              : 'fill-secondary stroke-secondary'
+              ? 'fill-primary stroke-primary delay-400'
+              : 'fill-alt-secondary stroke-alt-secondary'
           }
           transition-all 
           `}
@@ -218,7 +214,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <UploadSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? 'fill-primary delay-400' : 'fill-alt-secondary'
           }
           transition-all  
           
@@ -229,7 +225,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <BooksSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? 'fill-primary delay-400' : 'fill-alt-secondary'
           }
             transition-all   
           `}
@@ -240,8 +236,8 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
         <IncomingSvg
           className={`h-6 w-6 ${
             isCurrent
-              ? 'fill-primary stroke-primary delay-300'
-              : 'fill-secondary stroke-secondary'
+              ? 'fill-primary stroke-primary delay-400'
+              : 'fill-alt-secondary stroke-alt-secondary'
           }
           transition-all 
 
@@ -252,7 +248,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <ActiveSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? 'fill-primary delay-400' : 'fill-alt-secondary'
           }
           transition-all 
         `}
@@ -262,7 +258,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <ArchivedSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? 'fill-primary delay-400' : 'fill-alt-secondary'
           }
           transition-all 
         `}
@@ -273,8 +269,8 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
         <RenterSvg
           className={`h-6 w-6 ${
             isCurrent
-              ? 'fill-primary stroke-primary delay-300'
-              : 'fill-secondary stroke-secondary'
+              ? 'fill-primary stroke-primary delay-400'
+              : 'fill-alt-secondary stroke-alt-secondary'
           }
         transition-all 
       `}
@@ -285,7 +281,7 @@ function NavbarIcon({ tab, isCurrent }: { tab: AdminTab; isCurrent: boolean }) {
       return (
         <SettingSvg
           className={`h-6 w-6 ${
-            isCurrent ? 'fill-primary delay-300' : 'fill-secondary'
+            isCurrent ? 'fill-primary delay-400' : 'fill-alt-secondary'
           }
         transition-all 
       `}

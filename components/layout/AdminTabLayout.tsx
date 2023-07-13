@@ -50,7 +50,7 @@ export default function AdminTabLayout({
                   delay: 0.3
                 }}
               >
-                <SpinningLoadingSvg className='w-5 h-fit ml-2' />
+                <SpinningLoadingSvg className='w-5 h-fit ml-2 ' />
               </motion.div>
             )}
           </motion.button>
