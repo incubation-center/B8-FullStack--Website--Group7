@@ -1,11 +1,30 @@
+/* eslint-disable @next/next/no-img-element */
 import { Listbox, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, HTMLAttributes, useEffect } from 'react';
 import ThemeSwitchingSvg from './icon/ThemeSwitchingSvg';
 import { Themes, themes } from '@/utils/enum';
 import { useTheme } from 'next-themes';
+import SelectedSvg from './icon/SelectedSvg';
 
-export default function ThemeSwitching() {
-  const { theme, setTheme } = useTheme();
+export default function ThemeSwitching({
+  className = '',
+  position = 'top'
+}: {
+  className?: HTMLAttributes<HTMLDivElement>['className'];
+  position?: 'bottom' | 'top';
+}) {
+  const { theme: currentTheme, setTheme } = useTheme();
+
+  const selectModalPosition = () => {
+    switch (position) {
+      case 'bottom':
+        return 'top-full';
+      case 'top':
+        return 'bottom-full';
+      default:
+        return 'top-full';
+    }
+  };
 
   return (
     <div className='w-full'>
@@ -14,7 +33,7 @@ export default function ThemeSwitching() {
           as='div'
           className='w-full 
           '
-          value={theme}
+          value={currentTheme}
           onChange={(theme: string) => setTheme(theme)}
         >
           <Listbox.Button
@@ -23,9 +42,10 @@ export default function ThemeSwitching() {
               hover:scale-95 transition-transform duration-300
               bg-alt-secondary bg-opacity-10  rounded-full
               box-border border-0 border-alt-secondary p-2
+              ${className}
             `}
           >
-            <ThemeSwitchingSvg className='w-6 h-6 fill-alt-secondary' />
+            <ThemeSwitchingSvg className='w-6 h-6 fill-inherit' />
 
             <div className='flex-1'></div>
             <div className='flex gap-2'>
@@ -46,12 +66,13 @@ export default function ThemeSwitching() {
           >
             <Listbox.Options
               className={`
-              absolute bottom-full left-0 my-2
+              absolute ${selectModalPosition()} left-0 my-2
               w-full
-              rounded-3xl shadow-sm
+              rounded-3xl
               flex  flex-col  items-start
               overflow-hidden
-              border-2 border-white
+              ring-2 ring-background ring-opacity-20
+              shadow-xl
             `}
             >
               {themes.map((theme) => (
@@ -59,24 +80,20 @@ export default function ThemeSwitching() {
                   key={theme.name}
                   value={theme.name}
                   className={`
-                    w-full p-2 px-4 font-medium
+                    w-full p-2 pl-3 font-medium
                     hover:bg-stone-900 hover:bg-opacity-10 flex gap-2 items-center
                     select-none cursor-pointer
                   `}
                   style={{
                     backgroundColor: theme.primary,
-                    color: theme.textColorSecondary
+                    color: theme.altSecondary
                   }}
                 >
-                  {/* <div className='relative h-6 w-6'>
-                    <Image
-                      src={`/icon/${locale === 'en' ? 'english' : 'khmer'}.svg`}
-                      alt='locale'
-                      fill
-                      className='mr-2 object-contain'
-                    />
-                  </div>
-                  {locale === 'en' ? 'English' : 'ខ្មែរ'} */}
+                  <SelectedSvg
+                    className={`w-4 h-4 fill-alt-secondary ${
+                      theme.name === currentTheme ? 'block' : 'invisible'
+                    }`}
+                  />
                   <div>{theme.title}</div>
                 </Listbox.Option>
               ))}

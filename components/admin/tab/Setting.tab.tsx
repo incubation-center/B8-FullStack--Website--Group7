@@ -4,11 +4,11 @@ import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import { useTheme } from 'next-themes';
 
 import { themes } from '@/utils/enum';
+import LocaleSwitching from '@/components/LocaleSwitching';
+import ThemeSwitching from '@/components/ThemeSwitching';
 
 export default function SettingTab() {
   const [systemName, setSystemName] = useState('Kjey Book');
-
-  const { theme, setTheme } = useTheme();
 
   return (
     <AdminTabLayout title='Setting'>
@@ -27,23 +27,21 @@ export default function SettingTab() {
           </SubSection>
 
           {/* color themes */}
-          <SubSection title='themes'>
-            <div className='flex gap-2'>
-              {themes.map((theme) => {
-                return (
-                  <div
-                    key={theme.name}
-                    className='p-2 px-4 rounded-full cursor-pointer'
-                    style={{
-                      backgroundColor: theme.primary,
-                      color: theme.secondary
-                    }}
-                    onClick={() => setTheme(theme.name)}
-                  >
-                    <div>{theme.title}</div>
-                  </div>
-                );
-              })}
+          <SubSection title='Personal setting'>
+            <div
+              className='
+                
+                flex gap-2 p-2 rounded-lg 
+              '
+            >
+              <LocaleSwitching
+                className='bg-opacity-50 text-t-primary fill-primary shadow-sm'
+                position='bottom'
+              />
+              <ThemeSwitching
+                className='bg-opacity-50 text-t-primary fill-primary shadow-sm'
+                position='bottom'
+              />
             </div>
           </SubSection>
         </Section>
@@ -92,7 +90,9 @@ const Section = ({
   return (
     <div className='mb-4'>
       <h2 className='text-lg font-semibold mb-2 px-2 text-primary'>{title}</h2>
-      <div className='bg-background rounded-lg p-4'>{children}</div>
+      <div className='bg-background bg-opacity-50 rounded-lg p-4'>
+        {children}
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Library</title>
+        <title>{locale === 'en' ? 'Kjey Book' : 'ខ្ចីសៀវភៅ'}</title>
         <link
           rel='icon'
           type='image/x-icon'

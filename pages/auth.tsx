@@ -8,6 +8,7 @@ import LocaleSwitching from '@/components/LocaleSwitching';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import ThemeSwitching from '@/components/ThemeSwitching';
 
 export default function UserAuthentication({}) {
   const router = useRouter();
@@ -97,8 +98,10 @@ export default function UserAuthentication({}) {
           </div>
         </div>
 
-        <div className='w-2/3 max-w-[250px] mt-4 lg:absolute right-4 bottom-4'>
-          <LocaleSwitching />
+        <div className='flex flex-col md:flex-row w-2/3 max-w-[400px] gap-2 mt-4 lg:absolute right-4 bottom-4'>
+          <ThemeSwitching className='bg-opacity-10 fill-alt-secondary' />
+
+          <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
         </div>
       </div>
 

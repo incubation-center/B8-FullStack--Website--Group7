@@ -5,7 +5,7 @@ export enum HomePageTab {
   HOME = 'home',
   SAVED = 'saved',
   REQUEST_STATUS = 'request-status',
-  PROFILE = 'profile',
+  PROFILE = 'profile'
 }
 
 export const BookCategory = {
@@ -14,7 +14,7 @@ export const BookCategory = {
   HISTORY: 'History',
   DRAMA: 'Drama',
   FANTASY: 'Fantasy',
-  SELF_DEVELOPMENT: 'Self Development',
+  SELF_DEVELOPMENT: 'Self Development'
 };
 
 // admin homepage tab
@@ -26,7 +26,7 @@ export enum AdminTab {
   ACTIVE_REQUEST = 'active-request',
   ARCHIVED_REQUEST = 'archived-request',
   RENTER = 'renter',
-  SETTING = 'setting',
+  SETTING = 'setting'
 }
 
 // auths
@@ -34,7 +34,7 @@ export enum AuthType {
   LOGIN = 'login',
   REGISTER = 'register',
   FORGOT_PASSWORD = 'forgot-password',
-  RESET_PASSWORD = 'reset-password',
+  RESET_PASSWORD = 'reset-password'
 }
 
 // api endpoints
@@ -46,7 +46,7 @@ export const API_ENDPOINT = {
     VALIDATE_TOKEN: (id: string) => '/auth/validate-token/' + id,
     REFRESH_TOKEN: '/auth/refresh-token/',
     VALIDATE_RESET_PASSWORD_TOKEN: (token: string) =>
-      '/user/validate/reset-password-token/?resetPwdToken=' + token,
+      '/user/validate/reset-password-token/?resetPwdToken=' + token
   },
   USER: {
     INFO: (id: string) => '/user/' + id,
@@ -54,7 +54,7 @@ export const API_ENDPOINT = {
     BOOK_TO_FAVORITES: (id: string, bookId: string) =>
       `/user/${id}/favorites/${bookId}`,
     FORGOT_PASSWORD: (email: string) => '/user/forgot-password?email=' + email,
-    RESET_PASSWORD: '/user/forgot-password/update',
+    RESET_PASSWORD: '/user/forgot-password/update'
   },
   BOOK: {
     GET_ALL_BOOKS: '/book',
@@ -63,19 +63,19 @@ export const API_ENDPOINT = {
     GET_BOOK_BY_AUTHOR: (author: string) => '/book/author?author=' + author,
     CREATE_BOOK: '/book',
     UPDATE_BOOK_BY_ID: (id: string) => '/book/' + id,
-    DELETE_BOOK_BY_ID: (id: string) => '/book/' + id,
+    DELETE_BOOK_BY_ID: (id: string) => '/book/' + id
   },
   REQUEST: {
     GET_ALL_REQUEST: (userId: string) => '/request/user?userId=' + userId,
-    CREATE_REQUEST: '/request',
+    CREATE_REQUEST: '/request'
   },
   ADMIN: {
     GET_ALL_REQUEST_COUNT: '/request/count',
     GET_ALL_REQUEST: '/request',
     APPROVE_INCOMING_REQUEST: (id: string) => '/request/' + id + '/accept',
     REJECT_INCOMING_REQUEST: (id: string) => '/request/' + id + '/reject',
-    RECEIVE_BOOK: (id: string) => '/request/' + id + '/return',
-  },
+    RECEIVE_BOOK: (id: string) => '/request/' + id + '/return'
+  }
 };
 
 export type Themes = {
@@ -102,19 +102,19 @@ export const themes: Themes[] = [
     iconColor: '#a47551',
     iconColorActive: '#523a28',
     textColorPrimary: '#523a28',
-    textColorSecondary: '#a47551',
+    textColorSecondary: '#a47551'
   },
   {
     title: 'Muted Black',
     name: 'muted-black',
     primary: '#171717',
     secondary: '#000',
-    altSecondary: '#000',
+    altSecondary: '#9B9D9C',
     background: '#171717',
     iconColor: '#a47551',
     iconColorActive: '#523a28',
     textColorPrimary: '#171717',
-    textColorSecondary: '#f1eee3',
+    textColorSecondary: '#f1eee3'
   },
   {
     title: 'Muted Sky',
@@ -126,7 +126,7 @@ export const themes: Themes[] = [
     iconColor: '#a47551',
     iconColorActive: '#523a28',
     textColorPrimary: '#52798E',
-    textColorSecondary: '#000',
+    textColorSecondary: '#000'
   },
   {
     title: 'Muted Matcha',
@@ -138,7 +138,7 @@ export const themes: Themes[] = [
     iconColor: '#a47551',
     iconColorActive: '#523a28',
     textColorPrimary: '#c8c5bb',
-    textColorSecondary: '#000',
+    textColorSecondary: '#000'
   },
   {
     title: 'Muted Taro',
@@ -150,7 +150,7 @@ export const themes: Themes[] = [
     iconColor: '#a47551',
     iconColorActive: '#523a28',
     textColorPrimary: '#210e07',
-    textColorSecondary: '#000',
+    textColorSecondary: '#000'
   },
   {
     title: 'Muted Ocean',
@@ -162,6 +162,6 @@ export const themes: Themes[] = [
     iconColor: '#a47551',
     iconColorActive: '#523a28',
     textColorPrimary: '#2D3250',
-    textColorSecondary: '#000',
-  },
+    textColorSecondary: '#000'
+  }
 ];
