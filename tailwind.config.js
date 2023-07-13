@@ -13,7 +13,7 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}'
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -24,6 +24,8 @@ module.exports = {
           primary: 'rgb(var(--color-primary) / <alpha-value>)',
           secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
           'alt-secondary': 'rgb(var(--color-alt-secondary) / <alpha-value>)',
+          'alt-background': 'rgb(var(--color-alt-background) / <alpha-value>)',
+          modal: 'rgb(var(--color-modal) / <alpha-value>)',
           background: 'rgb(var(--color-background) / <alpha-value>)',
           icon: 'rgb(var(--color-icon) / <alpha-value>)',
           'icon-active': 'rgb(var(--color-icon-active) / <alpha-value>)',
@@ -32,14 +34,14 @@ module.exports = {
           action: '#EBEBEB',
           success: '#52B788',
           warning: '#fcd34d',
-          danger: '#ef4444'
-        }
+          danger: '#ef4444',
+        },
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
-        kantumruy: ['Kantumruy Pro', 'sans-serif']
-      }
-    }
+        kantumruy: ['Kantumruy Pro', 'sans-serif'],
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
