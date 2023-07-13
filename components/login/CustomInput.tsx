@@ -29,7 +29,7 @@ export default function CustomInput({
   required?: boolean;
 }) {
   return (
-    <div className='flex flex-col items-start w-full'>
+    <div className='flex flex-col items-start w-full z-0'>
       <label htmlFor={name} className={labelClassName}>
         {label}
         {required && <RequiredIcon />}
