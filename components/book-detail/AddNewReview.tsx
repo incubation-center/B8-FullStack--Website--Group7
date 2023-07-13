@@ -150,7 +150,7 @@ export default function AddNewReviewButton() {
                 className='
                   w-full
                   flex justify-center items-center
-                  p-4 border-alt-secondary border rounded-lg
+                  p-2 border-alt-secondary border rounded-lg
                   text-alt-secondary
                   hover:bg-alt-secondary hover:text-primary
                   font-medium
@@ -169,7 +169,7 @@ export default function AddNewReviewButton() {
               className={`
                 w-full
                 flex justify-center items-center
-                p-4 border-alt-secondary border rounded-lg
+                p-2 border-alt-secondary border rounded-lg
               
                 bg-alt-secondary text-primary
                 ${!isSubmitting && 'hover:scale-95'}
@@ -196,18 +196,18 @@ export default function AddNewReviewButton() {
         {!isCreating && !isSubmitting && (
           <button
             className='
-          w-full
-          flex justify-center items-center
-          p-4 border-alt-secondary border rounded-lg
-         
-          hover:bg-alt-secondary 
-          text-alt-secondary hover:text-primary
-          hover:scale-95
-          
-          font-medium
-          transition duration-300
-          stroke-alt-secondary hover:stroke-primary
-        '
+              w-full
+              flex justify-center items-center
+              p-2 border-alt-secondary border rounded-lg
+            
+              hover:bg-alt-secondary 
+              text-alt-secondary hover:text-primary
+              hover:scale-95
+              
+              font-medium
+              transition duration-300
+              stroke-alt-secondary hover:stroke-primary
+            '
             type='button'
             onClick={() => setIsCreating(!isCreating)}
           >
