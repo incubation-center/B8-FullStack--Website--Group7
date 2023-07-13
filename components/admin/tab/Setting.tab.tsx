@@ -90,7 +90,7 @@ const Section = ({
   return (
     <div className='mb-4'>
       <h2 className='text-lg font-semibold mb-2 px-2 text-primary'>{title}</h2>
-      <div className='bg-background bg-opacity-50 rounded-lg p-4'>
+      <div className='bg-alt-secondary bg-opacity-50 rounded-lg p-4'>
         {children}
       </div>
     </div>
