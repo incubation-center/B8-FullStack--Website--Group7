@@ -40,8 +40,6 @@ export default function BookTab() {
     }
   }, 100);
 
-  useLoadNamespace('homepage');
-
   return (
     <AdminTabLayout title={t('tab.books')} handleRefresh={handleRefreshBook}>
       <div className='w-full flex justify-start mb-4 '>
