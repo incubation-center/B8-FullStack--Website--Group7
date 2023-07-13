@@ -72,7 +72,7 @@
     "phone-number": "Phone Number",
 
     "cancel-btn": "Cancel",
-    "save-btn": "save",
+    "save-btn": "Save",
     "updating-info": "Updating your information"
   },
 
@@ -83,10 +83,10 @@
     "new-password": "New Password",
     "new-password-placeholder": "new password",
     "confirm-password": "Confirm Password",
-    "confirm-password-placeholder": "Confirm new password",
+    "confirm-password-placeholder": "Confirm New Password",
 
     "cancel-btn": "Cancel",
-    "save-btn": "save",
+    "save-btn": "Save",
     "updating-password": "Updating your password"
   },
 

@@ -18,15 +18,15 @@
       "category": "ប្រភេទសៀវភៅ"
     },
     "request": {
-      "label": "ការស្នើសុំសៀវភៅ",
+      "label": "សំណើរខ្ចីសៀវភៅ",
       "name": "ឈ្មោះ",
       "email": "អ៊ីម៉ែល",
       "phone-number": "លេខទូរស័ព្ទ",
       "duration": "រយៈពេលខ្ចី",
-      "request-status": "ស្ថានភាពការខ្ចី",
-      "request-date": "កាលបរិច្ឆេទស្នើសុំសៀវភៅ",
+      "request-status": "ស្ថានភាពនៃសំណើរ",
+      "request-date": "កាលបរិច្ឆេទនៃសំណើរ",
       "approved-date": "កាលបរិច្ឆេទបានអនុម័ត",
-      "to-be-returned-on": "ថ្ងៃដែលត្រូវសងសៀវភៅមកវិញ",
+      "to-be-returned-on": "ថ្ងៃដែលត្រូវសងសៀវភៅ",
       "returned-date": "កាលបរិច្ឆេទសៀវភៅត្រូវបានសង"
     }
   },
@@ -43,7 +43,7 @@
   },
 
   "auth": {
-    "no-account-text": "មិនទាន់មានគណនី?",
+    "no-account-text": "មិនទាន់មានគណនីនៅឡើយ?",
     "Sign-up-btn": "បង្កើតគណនី",
     "already-got-account": "មានគណនីរួចហើយ?",
     "login-btn": "ចូលគណនី",
