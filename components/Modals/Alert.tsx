@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
+import SuccessSvg from '../icon/Success';
 
 const useAlertModal = () => {
   const { t } = useTranslation('common');
@@ -15,7 +16,7 @@ const useAlertModal = () => {
       subtitle: '',
       type: null,
       isClosable: true,
-      onModalClose: () => {},
+      onModalClose: () => {}
     });
 
   // close modal
@@ -35,7 +36,7 @@ const useAlertModal = () => {
     subtitle,
     type,
     isClosable,
-    onModalClose,
+    onModalClose
   }: AlertModalTextType) {
     // set text
 
@@ -44,17 +45,29 @@ const useAlertModal = () => {
       subtitle,
       type,
       isClosable: isClosable !== undefined ? isClosable : true,
-      onModalClose: onModalClose ?? (() => {}),
+      onModalClose: onModalClose ?? (() => {})
     });
 
     open();
   }
 
   // modal image variants
-  const imagePath = {
-    success: '/icon/success.svg',
-    error: '/icon/fail.png',
-    warning: '/icon/stop-hand.png',
+  const ImageRender = ({ type }: { type: AlertType | null }) => {
+    if (!type) return <></>;
+
+    if (type === AlertType.SUCCESS) {
+      return <SuccessSvg className='h-[80px] w-[80px]  mb-2 fill-primary' />;
+    }
+
+    return (
+      <Image
+        src={`/icon/${type === AlertType.ERROR ? 'fail.png' : 'stop-hand.png'}`}
+        width={80}
+        height={80}
+        alt='successful icon'
+        className='mb-2'
+      />
+    );
   };
 
   // frame motion variants
@@ -62,18 +75,18 @@ const useAlertModal = () => {
     hidden: {
       opacity: 0,
       y: -100,
-      scale: 0,
+      scale: 0
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
+      scale: 1
     },
     exit: {
       opacity: 0,
       y: -100,
-      scale: 0,
-    },
+      scale: 0
+    }
   };
 
   // modal component
@@ -119,16 +132,10 @@ const useAlertModal = () => {
                   transition={{
                     type: 'spring',
                     damping: 20,
-                    stiffness: 200,
+                    stiffness: 200
                   }}
                 >
-                  <Image
-                    src={imagePath[type ?? 'success']}
-                    width={80}
-                    height={80}
-                    alt='successful icon'
-                    className='mb-2'
-                  />
+                  <ImageRender type={type} />
 
                   <div>
                     <h1 className='font-bold text-xl lg:text-2xl text-t-primary mt-2'>
@@ -163,7 +170,7 @@ const useAlertModal = () => {
   return {
     AlertModal, // modal component
     showAlert, // alert service
-    onModalClose: close, // close modal
+    onModalClose: close // close modal
   };
 };
 
@@ -171,7 +178,7 @@ const useAlertModal = () => {
 export enum AlertType {
   SUCCESS = 'success',
   ERROR = 'error',
-  WARNING = 'warning',
+  WARNING = 'warning'
 }
 
 export type AlertModalTextType = {

@@ -8,8 +8,6 @@ export default function SuccessSvg({
   return (
     <svg
       className={className}
-      width='111'
-      height='122'
       viewBox='0 0 111 122'
       fill='inherit'
       xmlns='http://www.w3.org/2000/svg'
