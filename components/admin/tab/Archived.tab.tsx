@@ -1,7 +1,7 @@
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import dynamic from 'next/dynamic';
 const RequestTable = dynamic(() => import('../table/RequestTable'), {
-  ssr: false
+  ssr: false,
 });
 
 import { RequestData } from '@/dummydata';
@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
 
 export default function ArchivedTab({
-  handleRefreshRequest
+  handleRefreshRequest,
 }: {
   handleRefreshRequest: () => void;
 }) {
@@ -46,8 +46,8 @@ export default function ArchivedTab({
               onClick: (request) => {
                 setViewRequest(request);
                 toggle();
-              }
-            }
+              },
+            },
           ]}
         />
       </AdminTabLayout>

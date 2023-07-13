@@ -8,7 +8,7 @@ import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 export default function AdminTabLayout({
   children,
   title,
-  handleRefresh
+  handleRefresh,
 }: {
   children: React.ReactNode;
   title: string;
@@ -42,10 +42,10 @@ export default function AdminTabLayout({
                 initial={{ x: 1 }}
                 animate={{ x: 0 }}
                 transition={{
-                  delay: 0.3
+                  delay: 0.3,
                 }}
               >
-                <SpinningLoadingSvg className='w-5 h-fit ml-2' />
+                <SpinningLoadingSvg className='w-5 h-fit ml-2 ' />
               </motion.div>
             )}
           </motion.button>

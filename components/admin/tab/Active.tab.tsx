@@ -1,7 +1,7 @@
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import dynamic from 'next/dynamic';
 const RequestTable = dynamic(() => import('../table/RequestTable'), {
-  ssr: false
+  ssr: false,
 });
 
 // import { RequestData } from '@/dummydata';
@@ -14,14 +14,14 @@ import RequestDetail from '@/components/Modals/RequestDetail';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   AdminAllRequestAtom,
-  isRefreshingRequestAtom
+  isRefreshingRequestAtom,
 } from '@/service/recoil/admin';
 import useConfirmModal from '@/components/Modals/useCofirm';
 import { receiveBook } from '@/service/api/admin';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 
 export default function ActiveTab({
-  handleRefreshRequest
+  handleRefreshRequest,
 }: {
   handleRefreshRequest: () => void;
 }) {
@@ -42,7 +42,7 @@ export default function ActiveTab({
         title: 'Success',
         subtitle: 'Book has been received.',
         type: AlertType.SUCCESS,
-        onModalClose: () => handleRefreshRequest()
+        onModalClose: () => handleRefreshRequest(),
       });
     } catch (err) {
       console.log(err);
@@ -50,7 +50,7 @@ export default function ActiveTab({
         title: 'Error',
         subtitle: 'Something went wrong. Please try again later.',
         type: AlertType.ERROR,
-        onModalClose: () => handleRefreshRequest()
+        onModalClose: () => handleRefreshRequest(),
       });
     }
   };
@@ -80,7 +80,7 @@ export default function ActiveTab({
               onClick: (request) => {
                 setViewRequest(request);
                 toggle();
-              }
+              },
             },
             {
               label: 'Receive',
@@ -92,10 +92,10 @@ export default function ActiveTab({
                   onConfirm: () => {
                     setIsRefreshing(true);
                     handleReceiveBook(request);
-                  }
+                  },
                 });
-              }
-            }
+              },
+            },
           ]}
         />
       </AdminTabLayout>
