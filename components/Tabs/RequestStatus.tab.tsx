@@ -11,7 +11,7 @@ import { getAllRequest } from '@/service/api/request';
 import {
   AuthAtom,
   UserRequestAtom,
-  filteredUserRequestAtom,
+  filteredUserRequestAtom
 } from '@/service/recoil';
 import useModal from '../Modals/useModal';
 import RequestDetail from '../Modals/RequestDetail';
@@ -21,7 +21,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 
 export default function RequestStatusTab({
-  onClickExplore,
+  onClickExplore
 }: {
   onClickExplore: () => void;
 }) {
@@ -129,8 +129,8 @@ export default function RequestStatusTab({
                         setViewRequest(request);
                         toggle();
                       },
-                      bgColor: 'bg-primary text-white',
-                    },
+                      bgColor: 'bg-primary text-white'
+                    }
                   ]}
                 />
               </motion.div>

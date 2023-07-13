@@ -4,7 +4,7 @@ import StatusLabel from '../RequestStatus/StatusLabel';
 import { useTranslation } from 'next-i18next';
 
 export default function RequestDetail({
-  request,
+  request
 }: {
   request: BookRequest | null;
 }) {
