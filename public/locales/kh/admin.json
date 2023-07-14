@@ -11,7 +11,9 @@
     "receive-btn": "ទទួល",
 
     "approved": "បានយល់ព្រម",
-    "rejected": "បានបដិសេធ"
+    "rejected": "បានបដិសេធ",
+
+    "logout-btn": "ចាកចេញ"
   },
 
   "tab": {
@@ -21,24 +23,24 @@
     "incoming-request": "សំណើរចូល",
     "active-request": "សំណើរសកម្ម",
     "archived-request": "សំណើរដែលបានទុក",
-    "renter": "អ្នកជួល",
+    "renter": "អ្នកបានខ្ចី",
     "setting": "ការកំណត់"
   },
 
   "dashboard-tab": {
     "total-incoming": "សំណើរចូលសរុប",
     "total-active": "សំណើរសកម្ម​សរុប",
-    "total-renter": "អ្នកជួលសរុប",
+    "total-renter": "អ្នកបានខ្ចីសរុប",
     "total-archived": "សំណើរដែលបានទុកសរុប",
 
     "today": "ថ្ងៃនេះ",
     "yesterday": "ម្សិលមិញ",
 
-    "recent-renter": "អ្នកខ្ចីថ្មីៗ"
+    "recent-renter": "អ្នកបានខ្ចីថ្មីៗ"
   },
 
   "upload-tab": {
-    "book-cover": "គម្របសៀវភៅ",
+    "book-cover": "ក្របសៀវភៅ",
     "upload-img": "បង្ហោះរូបភាពសៀវភៅ",
     "click-to-change-image": "ចុចដើម្បីផ្លាស់ប្ដូររូបភាព",
 
@@ -55,7 +57,7 @@
     "author": "អ្នកនិពន្ធ",
     "genre": "ប្រភេទ",
     "book-description": "ការពិពណ៌នាសៀវភៅ",
-    "no-description": "គ្មានការពិពណ៌នាសៀវភៅ",
+    "no-description": "មិនមានការពិពណ៌នាសៀវភៅ",
 
     "delete-btn": "លុប",
     "edit-btn": "កែសម្រួល",
@@ -81,12 +83,12 @@
       "delete-book": "លុបសៀវភៅ",
       "delete-book-text": "តើអ្នកប្រាកដទេថាអ្នកចង់លុបសៀវភៅនេះ?",
 
-      "yes-btn": "យល់ព្រម",
+      "yes-btn": "បាទ/ចាស",
       "no-btn": "ទេ",
 
       "success-tab": {
         "success": "ជោគជ័យ",
-        "book-delete-text": "បានលុបសៀវភៅដោយជោគជ័យ",
+        "book-delete-text": "សៀវភៅត្រូវបានលុបដោយជោគជ័យ",
 
         "close-btn": "បិទ"
       }
@@ -95,42 +97,43 @@
 
   "incoming-request-tab": {
     "approve-request-tab": {
-      "approve-request": "យល់ព្រម​សំណើរ",
+      "approve-request": "​សំណើរត្រូវបានអនុម័ត",
       "p-approve-request-tab": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើរនេះទេ?",
 
       "no-btn": "ទេ",
-      "yes-btn": "យល់ព្រម"
+      "yes-btn": "បាទ/ចាស"
     },
 
     "reject-request-tab": {
-      "reject-request": "បដិសេដសំណើរ",
+      "reject-request": "សំណើរត្រូវបានបដិសេធ",
       "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើរនេះទេ?",
 
       "reject-reason": "ហេតុផលបដិសេដ",
       "reject-reason-fill": "សូមបញ្ចូលហេតុផលរបស់អ្នក",
 
       "no-btn": "ទេ",
-      "yes-btn": "យល់ព្រម"
+      "yes-btn": "បាទ/ចាស"
     }
   },
 
   "renter-tab": {
-    "no-renter-found": "រកមិនឃើញអ្នកខ្ចីទេ",
+    "no-renter-found": "មិនមានអ្នកដាក់សំណើរ",
 
     "name": "ឈ្មោះ",
-    "email": "អ៊ីមែល",
-    "approval-date": "កាលបរិច្ឆេទយល់ព្រម",
-    "return-date": "កាលបរិច្ឆេទសងត្រឡប់",
+    "email": "អ៊ីម៉ែល",
+    "approval-date": "កាលបរិច្ឆេទបានអនុម័ត",
+    "return-date": "កាលបរិច្ឆេទដែលត្រូវសង",
     "actions": "សកម្មភាព"
   },
 
   "setting-tab": {
     "general-setting": "ការកំណត់ទូទៅ",
     "system-name": "ឈ្មោះប្រព័ន្ធ",
+    "personal-setting": "ការកំណត់ផ្ទាល់ខ្លួន",
 
-    "security-policy": "សុវត្ថិភាព & គោលការណ៏",
+    "security-policy": "សុវត្ថិភាព&គោលការណ៏",
     "password": "ពាក្យសម្ងាត់",
-    "password-placeholder": "អ្នកគ្រប់គ្រងអាចផ្លាស់ប្តូរព័ត៌មានប្រព័ន្",
+    "password-placeholder": "ផ្លាស់ប្តូរពាក្យសម្ងាត់គណនីគ្រប់គ្រងរបស់អ្នក",
     "activity-log": "សកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
     "activity-log-placeholder": "អ្នកគ្រប់គ្រងអាចឃើញសកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
 
@@ -141,10 +144,15 @@
   "request-table": {
     "book": "សៀវភៅ",
     "username": "ឈ្មោះអ្នកខ្ចី",
-    "request-date": "កាលបរិច្ឆេទស្នើសុំ្ចខ្ចី",
+    "request-date": "កាលបរិច្ឆេទសំណើរ",
     "to-be-returned-date": "កាលបរិច្ឆេទដែលត្រូវសង",
     "status": "ស្ថានភាព",
     "actions": "សកម្មភាព",
-    "no-request": "រកមិនឃើញសំណើរទេ"
+    "no-request": "មិនមានសំណើរ"
+  },
+
+  "logout-modal": {
+    "logout": "ចាកចេញ",
+    "logout-text": "តើអ្នកប្រាកដជាចង់ចេញពីគណនីមែនទេ?"
   }
 }

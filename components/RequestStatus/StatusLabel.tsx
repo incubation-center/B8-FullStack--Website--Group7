@@ -15,8 +15,8 @@ export default function StatusLabel({ request }: { request: BookRequest }) {
             rounded-full 
             px-2 py-1 text-xs 
             md:text-sm md:px-4 md:py-2
-            font-bold text-white w-28
-            bg-secondary
+            font-bold text-stone-900 w-28
+            bg-warning
           `}
         >
           {t('request-status.pending', 'Pending')}
@@ -43,7 +43,7 @@ export default function StatusLabel({ request }: { request: BookRequest }) {
             md:text-sm md:px-4 md:py-2
             ${isKhmer ? 'font-medium' : 'font-bold'}
              text-white w-28
-            ${request.isApproved ? 'bg-primary' : 'bg-danger'}
+            ${request.isApproved ? 'bg-alt-background' : 'bg-danger'}
           `}
         >
           {request.isApproved

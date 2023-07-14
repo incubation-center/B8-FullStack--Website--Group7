@@ -30,7 +30,7 @@ export default function SavedTab({
         <div className='p-4 w-full h-full  flex flex-col justify-center px-4 space-y-4 md:px-8 md:space-y-8'>
           <h1
             className='
-              font-bold text-primary text-center
+              font-bold text-t-primary text-center
               text-2xl md:text-4xl
               w-full border-b-2 border-primary
               pb-4 md:pb-8
@@ -42,7 +42,7 @@ export default function SavedTab({
           <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
             {favBooks.length === 0 && (
               <div className='h-full w-full flex flex-col justify-center items-center'>
-                <h1 className='text-center text-primary font-medium'>
+                <h1 className='text-center text-t-primary font-medium'>
                   {t('save-tab.no-save-text', 'You have no saved books')}
                 </h1>
                 <button
@@ -85,11 +85,11 @@ export default function SavedTab({
                   <button
                     className='
                           bg-secondary text-white font-light
-                          rounded-lg py-1 px-2 w-40 mx-auto 
+                          rounded-full py-1 px-2 w-40 mx-auto 
                         '
                     onClick={() => handleBookClick(book.id!)}
                   >
-                    View
+                    {t('homepage-tab.sidebar.view-btn')}
                   </button>
                 </motion.div>
               ))}

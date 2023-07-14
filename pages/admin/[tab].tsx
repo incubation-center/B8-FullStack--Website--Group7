@@ -26,18 +26,22 @@ import {
   isRefreshingRequestAtom
 } from '@/service/recoil/admin';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
-import { useDebounce } from '@/utils/function';
+import { useDebounce, useLoadNamespace } from '@/utils/function';
 
 import BookTab from '@/components/admin/tab/Book.tab';
 import { AxiosError } from 'axios';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
 
 export default function AdminHomePage({
   currentTab
 }: {
   currentTab: AdminTab;
 }) {
+  const { t } = useTranslation('common');
+
   const [isFetched, setIsFetched] = useState(false);
 
   const [_, setAllRequests] = useRecoilState(AdminAllRequestAtom);
@@ -65,6 +69,7 @@ export default function AdminHomePage({
     }
   }, [router.query.tab, setTab]);
   // end: handling page routing
+  useLoadNamespace('homepage');
 
   const initializeData = async () => {
     try {
@@ -141,13 +146,21 @@ export default function AdminHomePage({
 
   return (
     <>
+      <Head>
+        {router.locale === 'en' ? (
+          <title>Kjey Book | Admin</title>
+        ) : (
+          <title>ខ្ចីសៀវភៅ | គ្រប់គ្រង</title>
+        )}
+      </Head>
+
       <AlertModal />
 
       <AdminLayout currentTab={tab} handlePageRouting={handlePageRouting}>
         {!isFetched && (
           <div className='w-full flex-1 flex gap-4 justify-center items-center'>
             <div className='text-center text-primary font-medium'>
-              Fetching the data
+              {t('loading.admin')}
             </div>
             <SpinningLoadingSvg className='w-8 h-8 text-primary' />
           </div>

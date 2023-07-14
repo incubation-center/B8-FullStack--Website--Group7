@@ -77,9 +77,9 @@ export default function EditUserInfo({
           transition={{
             duration: 0.5
           }}
-          className='w-full h-full p-8 rounded-lg text-center bg-alt-secondary space-y-10'
+          className='w-full h-full p-8 rounded-lg text-center bg-modal space-y-10'
         >
-          <h1 className='text-2xl font-bold text-primary'>
+          <h1 className='text-2xl font-bold text-t-primary'>
             {t('edit-modal.personal-info')}
           </h1>
 
@@ -94,7 +94,7 @@ export default function EditUserInfo({
                 required: 'Username cannot be empty'
               })}
               error={errors.username}
-              labelClassName='text-primary ml-4 font-medium text-lg'
+              labelClassName='text-t-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
 
@@ -107,7 +107,7 @@ export default function EditUserInfo({
                 required: 'Email cannot be empty'
               })}
               error={errors.email}
-              labelClassName='text-primary ml-4 font-medium text-lg'
+              labelClassName='text-t-primary ml-4 font-medium text-lg'
               disabled={isUpdating}
             />
 
@@ -120,7 +120,7 @@ export default function EditUserInfo({
                 required: 'Phone Number cannot be empty'
               })}
               error={errors.phoneNumber}
-              labelClassName='text-primary ml-4 font-medium '
+              labelClassName='text-t-primary ml-4 font-medium '
               disabled={isUpdating}
             />
           </div>

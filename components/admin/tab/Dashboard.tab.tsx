@@ -50,7 +50,7 @@ export default function DashboardTab({
           gap-4
           lg:grid grid-cols-4 
           flex flex-wrap
-          w-full max-w-[1000px] mx-auto
+          w-full max-w-[1000px] mx-auto 
         '
       >
         <RequestDataShow
@@ -123,15 +123,17 @@ const RequestDataShow = ({
   const { t } = useTranslation('admin');
 
   return (
-    <div className='rounded-lg bg-alt-secondary p-4 h-fit min-h-[180px] flex flex-col flex-grow whitespace-nowrap'>
-      <h1 className='text-lg text-primary font-bold'>{title}</h1>
+    <div className='rounded-lg bg-primary p-4 h-fit min-h-[180px] flex flex-col flex-grow whitespace-nowrap'>
+      <h1 className='text-lg text-alt-secondary font-bold'>{title}</h1>
       <div className='flex flex-1 h-full items-center justify-between py-4 mb-2 border-b-2'>
-        <h1 className='text-5xl text-primary font-extrabold'>{value.total}</h1>
+        <h1 className='text-5xl text-alt-secondary font-extrabold'>
+          {value.total}
+        </h1>
 
         {/* <img src={icon} alt={title} className='h-6 md:h-8 lg:h-10' /> */}
         <NavbarIcon tab={tab} />
       </div>
-      <div className='flex justify-between text-primary'>
+      <div className='flex justify-between text-alt-secondary'>
         <div>
           {t('dashboard-tab.today')} {value.today}
         </div>
@@ -148,7 +150,7 @@ function NavbarIcon({ tab }: { tab: AdminTab }) {
     case AdminTab.INCOMING_REQUEST:
       return (
         <IncomingSvg
-          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-alt-secondary  delay-300
           transition-all 
 
           `}
@@ -157,7 +159,7 @@ function NavbarIcon({ tab }: { tab: AdminTab }) {
     case AdminTab.ACTIVE_REQUEST:
       return (
         <ActiveSvg
-          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-alt-secondary  delay-300
           transition-all 
         `}
         />
@@ -165,7 +167,7 @@ function NavbarIcon({ tab }: { tab: AdminTab }) {
     case AdminTab.ARCHIVED_REQUEST:
       return (
         <ArchivedSvg
-          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary  delay-300
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-alt-secondary delay-300
           transition-all 
         `}
         />
@@ -173,7 +175,7 @@ function NavbarIcon({ tab }: { tab: AdminTab }) {
     case AdminTab.RENTER:
       return (
         <RenterSvg
-          className={`h-6 md:h-8 lg:h-10 w-fit fill-primary stroke-primary delay-300
+          className={`h-6 md:h-8 lg:h-10 w-fit fill-alt-secondary stroke-alt-secondary delay-300
         transition-all 
       `}
         />

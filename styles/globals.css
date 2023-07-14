@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('./themes.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,12 +17,15 @@
 html,
 body {
   font-family: 'Poppins', sans-serif;
+
   min-height: 100vh;
   min-height: 100dvh;
   min-height: -webkit-fill-available;
+  /* height: 100%; */
   display: flex;
   flex-grow: 3;
   /* dvh new height unit that exclude browser element */
+  background: rgb(var(--color-primary));
 }
 
 .app-wrapper {
@@ -30,6 +35,10 @@ body {
 /* remove scrollbar */
 *::-webkit-scrollbar {
   width: 0;
+}
+
+.home-search-bar-height {
+  height: var(--home-search-bar-height);
 }
 
 .home-layout-children-height {
@@ -42,13 +51,13 @@ body {
   margin-top: 10px;
   width: fit-content;
   height: 10px;
-  background-color: #a47551;
+  background-color: rgb(var(--color-background));
   border-radius: 10px;
   opacity: 30%;
 }
 
 .book-scrolling-section::-webkit-scrollbar-thumb {
-  background-color: #523a28;
+  background-color: rgb(var(--color-primary));
   width: 10px;
   border-radius: 10px;
 }
@@ -57,13 +66,13 @@ body {
   margin-top: 5px;
   width: fit-content;
   height: 5px;
-  background-color: #a47551;
+  background-color: rgb(var(--color-background));
   border-radius: 10px;
   opacity: 30%;
 }
 
 .category-section::-webkit-scrollbar-thumb {
-  background-color: #523a28;
+  background-color: rgb(var(--color-primary));
   /* width: 10px;    */
   border-radius: 10px;
 }
@@ -72,13 +81,13 @@ body {
   margin-top: 5px;
   width: 5px;
   height: fit-content;
-  background-color: #a47551;
+  background-color: rgb(var(--color-background));
   border-radius: 10px;
   opacity: 30%;
 }
 
 .vertical-scroll::-webkit-scrollbar-thumb {
-  background-color: #523a28;
+  background-color: rgb(var(--color-primary));
   /* width: 10px;    */
   border-radius: 10px;
 }

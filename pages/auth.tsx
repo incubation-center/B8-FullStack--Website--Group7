@@ -8,6 +8,9 @@ import LocaleSwitching from '@/components/LocaleSwitching';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import ThemeSwitching from '@/components/ThemeSwitching';
+import { HomePageTab } from '@/utils/enum';
+import Link from 'next/link';
 
 export default function UserAuthentication({}) {
   const router = useRouter();
@@ -16,17 +19,17 @@ export default function UserAuthentication({}) {
   const { t } = useTranslation(['common', 'signup', 'login']);
 
   useEffect(() => {
-    router.prefetch('/', undefined, {
+    router.prefetch(`/?tab=${HomePageTab.HOME}`, undefined, {
       locale: router.locale
     });
-  }, []);
+  }, [router]);
 
   return (
     <div
       className='
-        h-full w-full bg-primary
+        min-h-screen w-full bg-primary
         grid grid-cols-1 lg:grid-cols-2
-        p-4 md:space-x-4
+        p-4 py-8 md:space-x-4
         overflow-y-scroll
 
         relative
@@ -35,14 +38,14 @@ export default function UserAuthentication({}) {
       <div className='flex flex-col justify-center items-center'>
         <div
           className='relative 
-          h-24 w-52
+          h-32 w-56 mb-4
           overflow-clip rounded-[20px]
-          hidden md:block lg:hidden
+          block lg:hidden
          '
         >
           <Image
             src='/bootcamp-logo.png'
-            alt='bookshelf'
+            alt='logo'
             fill
             quality={100}
             className='object-contain'
@@ -97,22 +100,38 @@ export default function UserAuthentication({}) {
           </div>
         </div>
 
-        <div className='w-2/3 max-w-[250px] mt-4 lg:absolute right-4 bottom-4'>
-          <LocaleSwitching />
+        <div className='flex flex-col w-2/3 max-w-[400px] gap-2 mt-6 lg:absolute right-4 bottom-4'>
+          <div className='flex flex-col md:flex-row gap-2'>
+            <ThemeSwitching className='bg-opacity-10 fill-alt-secondary' />
+
+            <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
+          </div>
+          <Link
+            href={`/?tab=${HomePageTab.HOME}`}
+            className={`
+              text-alt-secondary font-medium flex items-center justify-center gap-1 w-full px-4
+              hover:scale-95 transition-transform duration-300
+              bg-alt-secondary bg-opacity-10  rounded-full
+              box-border border-0 border-alt-secondary p-2
+            `}
+          >
+            {t('back-to-homepage')}
+          </Link>
         </div>
       </div>
 
-      {/* bookshelf image */}
+      {/* logo image */}
       <div className='hidden lg:flex justify-center items-center'>
         <div
           className='relative 
           w-[350px] h-[450px]
           overflow-clip rounded-[20px]
+          z-0
          '
         >
           <Image
             src='/bootcamp-logo.png'
-            alt='bookshelf'
+            alt='logo'
             fill
             quality={100}
             className='object-contain'

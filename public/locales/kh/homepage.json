@@ -3,7 +3,7 @@
     "sidebar": {
       "home": "ទំព័រដើម",
       "save": "រក្សាទុក",
-      "request": "ការស្នើរសុំ",
+      "request": "សំណើរ",
       "profile": "គណនី",
 
       "admin-btn": "អ្នកគ្រប់គ្រង",
@@ -13,7 +13,7 @@
 
     "category": {
       "education": "ការអប់រំ",
-      "business": "អាជីវកម្ម",
+      "business": "ការធ្វើជំនួញ",
       "history": "ប្រវត្តិសាស្ត្រ",
       "drama": "រឿងមនោសញ្ចេតនា",
       "fantasy": "រឿងស្រមើលស្រមៃ",
@@ -33,8 +33,8 @@
   },
 
   "request-tab": {
-    "h1-request-status": "ស្ថានភាពការខ្ចីសៀវភៅ",
-    "no-request-text": "អ្នកគ្មានសំណើរទេ",
+    "h1-request-status": "ស្ថានភាពនៃសំណើរ",
+    "no-request-text": "អ្នកមិនមានសំណើរទេ",
     "explore-books-btn": "ស្វែងរកសៀវភៅ",
 
     "fetching-request": "កំពុងទាញយក​​ព័ត៌មាន",
@@ -44,7 +44,7 @@
 
     "table": {
       "book": "ឈ្មោះសៀវភៅ",
-      "date": "កាលបរិច្ឆេទខ្ចី",
+      "date": "កាលបរិច្ឆេទសំណើរ",
       "status": "ស្ថានភាព",
       "action": "សកម្មភាព",
       "view-btn": "មើល"
@@ -55,7 +55,7 @@
     "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
     "username": "ឈ្មោះ",
     "phone number": "លេខទូរស័ព្ទ",
-    "email": "អ៊ីមែល",
+    "email": "អ៊ីម៉ែល",
 
     "privacy-set": "ការកំណត់​ ឯកជនភាព",
     "password": "ពាក្យសម្ងាត់",
@@ -68,7 +68,7 @@
   "edit-modal": {
     "personal-info": "ព័ត៌មាន​​​ផ្ទាល់ខ្លួន",
     "username": "ឈ្មោះ",
-    "email": "អ៊ីមែល",
+    "email": "អ៊ីម៉ែល",
     "phone-number": "លេខទូរស័ព្ទ",
 
     "cancel-btn": "បោះបង់",
@@ -99,7 +99,7 @@
 
   "logout-modal": {
     "logout": "ចាកចេញ",
-    "logout-text": "តើអ្នកប្រាកដថាអ្នកចង់ចេញពីគណនី",
+    "logout-text": "តើអ្នកប្រាកដជាចង់ចេញពីគណនីមែនទេ?",
 
     "no-btn": "ទេ",
     "yes-btn": "យល់ព្រម"
