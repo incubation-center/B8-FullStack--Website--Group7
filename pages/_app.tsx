@@ -38,7 +38,7 @@ function App({ Component, pageProps }: AppProps) {
           showOnShallow={false}
         />
 
-        <div className='flex flex-1'>
+        <div className='flex flex-1 bg-primary'>
           <RecoilRoot>
             <ThemeProvider
               defaultTheme='default'

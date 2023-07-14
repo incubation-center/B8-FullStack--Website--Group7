@@ -55,7 +55,12 @@ export default function ForgotPassword() {
     <>
       <AlertModal />
 
-      <div className='w-full h-full flex justify-center items-center bg-primary'>
+      <div
+        className='
+          w-full min-h-full flex justify-center items-center bg-primary
+          px-8
+        '
+      >
         <div
           className='
           flex flex-col justify-center items-center
@@ -112,7 +117,7 @@ export default function ForgotPassword() {
             </form>
 
             <Link href='/auth' locale={router.locale}>
-              <span className='text-alt-secondary'>
+              <span className='text-alt-secondary whitespace-nowrap'>
                 {t('btns.go-back-to-login')}
               </span>
             </Link>

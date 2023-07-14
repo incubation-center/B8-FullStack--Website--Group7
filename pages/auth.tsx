@@ -25,9 +25,9 @@ export default function UserAuthentication({}) {
   return (
     <div
       className='
-        h-full w-full bg-primary
+        min-h-screen w-full bg-primary
         grid grid-cols-1 lg:grid-cols-2
-        p-4 md:space-x-4
+        p-4 py-8 md:space-x-4
         overflow-y-scroll
 
         relative
