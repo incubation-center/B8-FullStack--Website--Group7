@@ -11,7 +11,9 @@
     "receive-btn": "Receive",
 
     "approved": "Approved",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+
+    "logout-btn": "Logout"
   },
 
   "tab": {
@@ -144,5 +146,10 @@
     "status": "Status",
     "actions": "Actions",
     "no-request": "No request"
+  },
+
+  "logout-modal": {
+    "logout": "Logout",
+    "logout-text": "Are you sure you want to logout?"
   }
 }

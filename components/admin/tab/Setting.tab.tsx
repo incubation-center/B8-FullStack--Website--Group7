@@ -1,27 +1,30 @@
 import { useState } from 'react';
 
-import { useTheme } from 'next-themes';
-
-import { themes } from '@/utils/enum';
+import { HomePageTab } from '@/utils/enum';
 import LocaleSwitching from '@/components/LocaleSwitching';
 import ThemeSwitching from '@/components/ThemeSwitching';
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import { useTranslation } from 'next-i18next';
 import ChangePassword from '@/components/Modals/ChangePassword';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
 import useAlertModal from '@/components/Modals/Alert';
 import useModal from '@/components/Modals/useModal';
 import { User } from '@/types';
+import { deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
+import useConfirmModal from '@/components/Modals/useCofirm';
 
 export default function SettingTab() {
   const { t } = useTranslation('admin');
+  const router = useRouter();
 
-  const authStore = useRecoilValue(AuthAtom);
+  const [authStore, setAuthStore] = useRecoilState(AuthAtom);
 
   const [systemName, setSystemName] = useState('Kjey Book');
 
   const { showAlert, AlertModal } = useAlertModal();
+  const { ConfirmModal, showConfirmModal } = useConfirmModal();
 
   const {
     toggle: toggleChangePasswordModal,
@@ -29,9 +32,24 @@ export default function SettingTab() {
     ModalWrapper: ChangePasswordModalWrapper
   } = useModal();
 
+  const handleLogout = () => {
+    deleteCookie('accessToken');
+    deleteCookie('refreshToken');
+
+    setAuthStore({
+      user: null,
+      isAdmin: false,
+      isLoggedIn: false,
+      isFetched: true
+    });
+
+    router.push(`/?tab=${HomePageTab.HOME}`);
+  };
+
   return (
     <>
       <AlertModal />
+      <ConfirmModal />
 
       <ChangePasswordModalWrapper>
         <ChangePassword
@@ -90,21 +108,29 @@ export default function SettingTab() {
                 {t('setting-tab.password-placeholder')}
               </div>
             </SubSection>
-
-            <SubSection
-              title={t('setting-tab.activity-log')}
-              action={{
-                label: t('setting-tab.view-btn'),
-                onClick: () => {
-                  console.log('View Activity Log');
-                }
-              }}
-            >
-              <div className='flex items-center space-x-2 text-primary text-opacity-70'>
-                {t('setting-tab.activity-log-placeholder')}
-              </div>
-            </SubSection>
           </Section>
+          <div className='w-full text-right'>
+            <button
+              onClick={() => {
+                showConfirmModal({
+                  title: t('logout-modal.logout'),
+                  subtitle: t('logout-modal.logout-text'),
+                  onConfirm: () => {
+                    handleLogout();
+                  }
+                });
+              }}
+              className='
+                bg-danger text-white font-light rounded-lg py-2 px-7 
+                w-full md:w-fit
+                mt-2 md:mt-0
+                box-border border-2 border-danger hover:border-white
+                transition-colors duration-300
+              '
+            >
+              {t('btns.logout-btn')}
+            </button>
+          </div>
         </div>
       </AdminTabLayout>
     </>

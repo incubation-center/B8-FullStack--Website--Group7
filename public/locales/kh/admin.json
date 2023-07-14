@@ -11,7 +11,9 @@
     "receive-btn": "ទទួល",
 
     "approved": "បានយល់ព្រម",
-    "rejected": "បានបដិសេធ"
+    "rejected": "បានបដិសេធ",
+
+    "logout-btn": "ចាកចេញ"
   },
 
   "tab": {
@@ -147,5 +149,10 @@
     "status": "ស្ថានភាព",
     "actions": "សកម្មភាព",
     "no-request": "មិនមានសំណើរ"
+  },
+
+  "logout-modal": {
+    "logout": "ចាកចេញ",
+    "logout-text": "តើអ្នកប្រាកដជាចង់ចេញពីគណនីមែនទេ?"
   }
 }

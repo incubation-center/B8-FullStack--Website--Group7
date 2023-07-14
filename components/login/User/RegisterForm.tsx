@@ -10,8 +10,11 @@ import { useState } from 'react';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { useTranslation } from 'next-i18next';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { useRouter } from 'next/router';
 
 export default function UserRegisterForm({}) {
+  const router = useRouter();
+
   const [isRegistering, setIsRegistering] = useState(false);
   const { showAlert, AlertModal } = useAlertModal();
 
@@ -48,6 +51,8 @@ export default function UserRegisterForm({}) {
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
       setCookie('refreshToken', refreshToken);
+
+      router.reload();
     } catch (errors) {
       let message;
       if (errors instanceof AxiosError) {
