@@ -127,10 +127,11 @@
   "setting-tab": {
     "general-setting": "ការកំណត់ទូទៅ",
     "system-name": "ឈ្មោះប្រព័ន្ធ",
+    "personal-setting": "ការកំណត់ផ្ទាល់ខ្លួន",
 
     "security-policy": "សុវត្ថិភាព&គោលការណ៏",
     "password": "ពាក្យសម្ងាត់",
-    "password-placeholder": "អ្នកគ្រប់គ្រងអាចផ្លាស់ប្តូរព័ត៌មានលើប្រព័ន្ធ",
+    "password-placeholder": "ផ្លាស់ប្តូរពាក្យសម្ងាត់គណនីគ្រប់គ្រងរបស់អ្នក",
     "activity-log": "សកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
     "activity-log-placeholder": "អ្នកគ្រប់គ្រងអាចឃើញសកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
 

@@ -124,10 +124,11 @@
   "setting-tab": {
     "general-setting": "General Setting",
     "system-name": "System Name",
+    "personal-setting": "Personal Setting",
 
     "security-policy": "Security & Policy",
     "password": "Password",
-    "password-placeholder": "The admin able to change the system credentials",
+    "password-placeholder": "Change your admin password here",
     "activity-log": "Activity log",
     "activity-log-placeholder": "The admin able to see the login activity in the system",
 

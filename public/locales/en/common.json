@@ -1,4 +1,9 @@
 {
+  "loading": {
+    "homepage": "Loading...",
+    "admin": "Fetching the data"
+  },
+
   "search-placeholder": {
     "home-tab": "Title, Author",
     "saved-tab": "Title, Author, Category",

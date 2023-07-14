@@ -48,16 +48,18 @@ export default function SettingTab() {
               <input
                 type='text'
                 className='
-                w-full bg-transparent 
-              '
+                  w-full bg-transparent 
+                  text-xl 
+                '
                 placeholder='System Name'
                 value={systemName}
-                onChange={(e) => setSystemName(e.target.value)}
+                // onChange={(e) => setSystemName(e.target.value)}
+                readOnly
               />
             </SubSection>
 
             {/* color themes */}
-            <SubSection title='Personal setting'>
+            <SubSection title={t('setting-tab.personal-setting')}>
               <div
                 className='
                 
