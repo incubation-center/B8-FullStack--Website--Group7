@@ -7,79 +7,105 @@ import LocaleSwitching from '@/components/LocaleSwitching';
 import ThemeSwitching from '@/components/ThemeSwitching';
 import AdminTabLayout from '@/components/layout/AdminTabLayout';
 import { useTranslation } from 'next-i18next';
+import ChangePassword from '@/components/Modals/ChangePassword';
+import { useRecoilValue } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
+import useAlertModal from '@/components/Modals/Alert';
+import useModal from '@/components/Modals/useModal';
+import { User } from '@/types';
 
 export default function SettingTab() {
   const { t } = useTranslation('admin');
 
+  const authStore = useRecoilValue(AuthAtom);
+
   const [systemName, setSystemName] = useState('Kjey Book');
 
+  const { showAlert, AlertModal } = useAlertModal();
+
+  const {
+    toggle: toggleChangePasswordModal,
+    close: closeChangePasswordModal,
+    ModalWrapper: ChangePasswordModalWrapper
+  } = useModal();
+
   return (
-    <AdminTabLayout title={t('tab.setting')}>
-      <div className='max-w-[1000px] mx-auto space-y-6 text-primary'>
-        <Section title={t('setting-tab.general-setting')}>
-          <SubSection title={t('setting-tab.system-name')}>
-            <input
-              type='text'
-              className='
+    <>
+      <AlertModal />
+
+      <ChangePasswordModalWrapper>
+        <ChangePassword
+          close={closeChangePasswordModal}
+          showAlert={showAlert}
+          userInfo={authStore.user as User}
+        />
+      </ChangePasswordModalWrapper>
+
+      <AdminTabLayout title={t('tab.setting')}>
+        <div className='max-w-[1000px] mx-auto space-y-6 text-primary'>
+          <Section title={t('setting-tab.general-setting')}>
+            <SubSection title={t('setting-tab.system-name')}>
+              <input
+                type='text'
+                className='
                 w-full bg-transparent 
               '
-              placeholder='System Name'
-              value={systemName}
-              onChange={(e) => setSystemName(e.target.value)}
-            />
-          </SubSection>
+                placeholder='System Name'
+                value={systemName}
+                onChange={(e) => setSystemName(e.target.value)}
+              />
+            </SubSection>
 
-          {/* color themes */}
-          <SubSection title='Personal setting'>
-            <div
-              className='
+            {/* color themes */}
+            <SubSection title='Personal setting'>
+              <div
+                className='
                 
                 flex gap-2 p-2 rounded-lg 
               '
+              >
+                <LocaleSwitching
+                  className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
+                  position='bottom'
+                />
+                <ThemeSwitching
+                  className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
+                  position='bottom'
+                />
+              </div>
+            </SubSection>
+          </Section>
+
+          <Section title={t('setting-tab.security-policy')}>
+            <SubSection
+              title={t('setting-tab.password')}
+              action={{
+                label: t('setting-tab.change-btn'),
+                onClick: () => toggleChangePasswordModal()
+              }}
             >
-              <LocaleSwitching
-                className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
-                position='bottom'
-              />
-              <ThemeSwitching
-                className='bg-primary bg-opacity-20 text-t-primary fill-primary shadow-sm'
-                position='bottom'
-              />
-            </div>
-          </SubSection>
-        </Section>
+              <div className='flex items-center space-x-2 text-primary text-opacity-70'>
+                {t('setting-tab.password-placeholder')}
+              </div>
+            </SubSection>
 
-        <Section title={t('setting-tab.security-policy')}>
-          <SubSection
-            title={t('setting-tab.password')}
-            action={{
-              label: t('setting-tab.change-btn'),
-              onClick: () => {
-                console.log('Change Password');
-              }
-            }}
-          >
-            <div className='flex items-center space-x-2 text-primary text-opacity-70'>
-              {t('setting-tab.password-placeholder')}
-            </div>
-          </SubSection>
-
-          <SubSection
-            title={t('setting-tab.activity-log')}
-            action={{
-              label: t('setting-tab.view-btn'),
-              onClick: () => {
-                console.log('View Activity Log');
-              }
-            }}
-          >
-            <div className='flex items-center space-x-2 text-primary text-opacity-70'>
-              {t('setting-tab.activity-log-placeholder')}
-            </div>
-          </SubSection>
-        </Section>
-      </div>
-    </AdminTabLayout>
+            <SubSection
+              title={t('setting-tab.activity-log')}
+              action={{
+                label: t('setting-tab.view-btn'),
+                onClick: () => {
+                  console.log('View Activity Log');
+                }
+              }}
+            >
+              <div className='flex items-center space-x-2 text-primary text-opacity-70'>
+                {t('setting-tab.activity-log-placeholder')}
+              </div>
+            </SubSection>
+          </Section>
+        </div>
+      </AdminTabLayout>
+    </>
   );
 }
 
