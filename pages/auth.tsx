@@ -9,6 +9,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import ThemeSwitching from '@/components/ThemeSwitching';
+import { HomePageTab } from '@/utils/enum';
+import Link from 'next/link';
 
 export default function UserAuthentication({}) {
   const router = useRouter();
@@ -17,10 +19,10 @@ export default function UserAuthentication({}) {
   const { t } = useTranslation(['common', 'signup', 'login']);
 
   useEffect(() => {
-    router.prefetch('/', undefined, {
+    router.prefetch(`/?tab=${HomePageTab.HOME}`, undefined, {
       locale: router.locale
     });
-  }, []);
+  }, [router]);
 
   return (
     <div
@@ -43,7 +45,7 @@ export default function UserAuthentication({}) {
         >
           <Image
             src='/bootcamp-logo.png'
-            alt='bookshelf'
+            alt='logo'
             fill
             quality={100}
             className='object-contain'
@@ -98,14 +100,27 @@ export default function UserAuthentication({}) {
           </div>
         </div>
 
-        <div className='flex flex-col md:flex-row w-2/3 max-w-[400px] gap-2 mt-6 lg:absolute right-4 bottom-4'>
-          <ThemeSwitching className='bg-opacity-10 fill-alt-secondary' />
+        <div className='flex flex-col w-2/3 max-w-[400px] gap-2 mt-6 lg:absolute right-4 bottom-4'>
+          <div className='flex flex-col md:flex-row gap-2'>
+            <ThemeSwitching className='bg-opacity-10 fill-alt-secondary' />
 
-          <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
+            <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
+          </div>
+          <Link
+            href={`/?tab=${HomePageTab.HOME}`}
+            className={`
+              text-alt-secondary font-medium flex items-center justify-center gap-1 w-full px-4
+              hover:scale-95 transition-transform duration-300
+              bg-alt-secondary bg-opacity-10  rounded-full
+              box-border border-0 border-alt-secondary p-2
+            `}
+          >
+            {t('back-to-homepage')}
+          </Link>
         </div>
       </div>
 
-      {/* bookshelf image */}
+      {/* logo image */}
       <div className='hidden lg:flex justify-center items-center'>
         <div
           className='relative 
@@ -116,7 +131,7 @@ export default function UserAuthentication({}) {
         >
           <Image
             src='/bootcamp-logo.png'
-            alt='bookshelf'
+            alt='logo'
             fill
             quality={100}
             className='object-contain'
