@@ -31,13 +31,7 @@ export default function BookReview() {
       <div>
         <h1 className='text-xl text-alt-secondary mt-8'>{t('review.title')}</h1>
 
-        <div className='mt-4 space-y-4 border-t border-alt-secondary '>
-          {ReviewData.map((review) => (
-            <ReviewCmt key={review.id} review={review} />
-          ))}
-          {ReviewData.map((review) => (
-            <ReviewCmt key={review.id} review={review} />
-          ))}
+        <div className='mt-4 border-t border-alt-secondary '>
           {ReviewData.map((review) => (
             <ReviewCmt key={review.id} review={review} />
           ))}

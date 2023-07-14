@@ -214,7 +214,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
               </div>
             </div>
 
-            <div className=' grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 px-8 gap-4'>
+            <div className=' grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
               {/* book cover */}
               <div className='flex justify-center items-start mb-10 md:mb-0'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -303,12 +303,9 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   </button>
                 )}
 
-                <div className='block 2xl:hidden'>
+                <div className='block '>
                   {authStore.isFetched && <BookReview />}
                 </div>
-              </div>
-              <div className='hidden 2xl:block h-full overflow-y-scroll mb-56'>
-                {authStore.isFetched && <BookReview />}
               </div>
             </div>
           </div>

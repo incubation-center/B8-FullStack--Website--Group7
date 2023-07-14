@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 import { Rating, RoundedStar } from '@smastrom/react-rating';
+import Reaction from './Reaction';
 
 export default function ReviewCmt({
   review,
@@ -11,12 +12,20 @@ export default function ReviewCmt({
   review: BookReview;
   isSelf?: boolean;
 }) {
+  const [isSeeMore, setIsSeeMore] = useState(false);
+
+  const toggleSeeMore = () => {
+    setIsSeeMore((prev) => !prev);
+  };
+
+  const commentNeedSeeMore = review.comment.length > 100;
+
   return (
     <div
       className={`
             w-full
             flex gap-4
-            p-2 py-4   border-alt-secondary
+            p-2 pt-4   border-alt-secondary
             ${isSelf ? 'border rounded-lg' : 'border-b'}
           `}
     >
@@ -55,9 +64,27 @@ export default function ReviewCmt({
         </div>
 
         <div className='mt-4 text-alt-secondary'>
-          {review.comment.length > 100
-            ? review.comment.slice(0, 100) + '...'
-            : review.comment}
+          {commentNeedSeeMore &&
+            !isSeeMore &&
+            review.comment.slice(0, 100) + '...'}
+
+          {commentNeedSeeMore && isSeeMore && review.comment}
+
+          {!commentNeedSeeMore && review.comment}
+        </div>
+        <div className='mt-4 w-full flex justify-between'>
+          <Reaction selected='like' />
+          {commentNeedSeeMore && (
+            <button
+              className='
+                text-sm text-alt-secondary
+               
+              '
+              onClick={toggleSeeMore}
+            >
+              {isSeeMore ? 'See less' : 'See more'}
+            </button>
+          )}
         </div>
       </div>
     </div>
