@@ -1,4 +1,9 @@
 {
+  "loading": {
+    "homepage": "Loading...",
+    "admin": "Fetching the data"
+  },
+
   "search-placeholder": {
     "home-tab": "Title, Author",
     "saved-tab": "Title, Author, Category",
@@ -60,5 +65,7 @@
     "p-not-authorized": "You are not authorized to access this page",
 
     "go-back-to-home-btn": "Go back to home"
-  }
+  },
+
+  "back-to-homepage": "Back to Homepage"
 }

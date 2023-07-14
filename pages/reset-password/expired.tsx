@@ -15,12 +15,12 @@ export default function LinkExpired() {
       className='
         p-4
         bg-primary text-alt-secondary 
-        w-full h-full flex flex-col justify-center items-center space-y-8
+        w-full min-h-full flex flex-col justify-center items-center space-y-8
         text-center
       '
     >
       <div>
-        <LinkExpiredSvg className='w-20 h-20 stroke-alt-secondary' />
+        <LinkExpiredSvg className='w-20 h-20 stroke-alt-secondary mx-auto' />
         <h1>{t('expired-tab.link-expired')}</h1>
       </div>
       <p className='whitespace-pre-line'>{t('expired-tab.expired-tab-p')}</p>

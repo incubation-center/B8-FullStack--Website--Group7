@@ -110,9 +110,9 @@ export default function IncomingTab({
       >
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}
-          data={requestData.filter(
-            (request) => request.status === RequestStatus.PENDING
-          )}
+          data={requestData
+            .filter((request) => request.status === RequestStatus.PENDING)
+            .reverse()}
           actions={[
             {
               label: t('btns.view-btn'),

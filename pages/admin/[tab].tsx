@@ -23,7 +23,7 @@ import { useRecoilState } from 'recoil';
 import {
   AdminAllRequestAtom,
   AdminAllRequestCountAtom,
-  isRefreshingRequestAtom,
+  isRefreshingRequestAtom
 } from '@/service/recoil/admin';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import { useDebounce, useLoadNamespace } from '@/utils/function';
@@ -33,12 +33,15 @@ import { AxiosError } from 'axios';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
 
 export default function AdminHomePage({
-  currentTab,
+  currentTab
 }: {
   currentTab: AdminTab;
 }) {
+  const { t } = useTranslation('common');
+
   const [isFetched, setIsFetched] = useState(false);
 
   const [_, setAllRequests] = useRecoilState(AdminAllRequestAtom);
@@ -56,7 +59,7 @@ export default function AdminHomePage({
   const handlePageRouting = (tab: AdminTab) => {
     router.push(`/admin/${tab}`, undefined, {
       shallow: true,
-      locale: router.locale,
+      locale: router.locale
     });
   };
   useEffect(() => {
@@ -72,7 +75,7 @@ export default function AdminHomePage({
     try {
       const [requestsResult, countResult] = await Promise.allSettled([
         getAllRequestAdmin(),
-        getAllRequestCount(),
+        getAllRequestCount()
       ]);
       if (requestsResult.status === 'fulfilled') {
         setAllRequests(requestsResult.value);
@@ -103,7 +106,7 @@ export default function AdminHomePage({
     try {
       const [requestsResult, countResult] = await Promise.allSettled([
         getAllRequestAdmin(),
-        getAllRequestCount(),
+        getAllRequestCount()
       ]);
       if (requestsResult.status === 'fulfilled') {
         setAllRequests(requestsResult.value);
@@ -122,7 +125,7 @@ export default function AdminHomePage({
             err.response?.data.error ||
             'Something went wrong. Please try again later.',
           type: AlertType.ERROR,
-          onModalClose: () => handleRefreshRequest(),
+          onModalClose: () => handleRefreshRequest()
         });
       }
     } finally {
@@ -157,7 +160,7 @@ export default function AdminHomePage({
         {!isFetched && (
           <div className='w-full flex-1 flex gap-4 justify-center items-center'>
             <div className='text-center text-primary font-medium'>
-              Fetching the data
+              {t('loading.admin')}
             </div>
             <SpinningLoadingSvg className='w-8 h-8 text-primary' />
           </div>
@@ -214,7 +217,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       currentTab: tab || AdminTab.DASHBOARD,
-      ...(await serverSideTranslations(locale, ['admin', 'common'])),
-    },
+      ...(await serverSideTranslations(locale, ['admin', 'common']))
+    }
   };
 }

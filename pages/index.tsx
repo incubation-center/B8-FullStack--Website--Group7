@@ -22,6 +22,7 @@ import {
 import { AuthStore } from '@/types/auth';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function Home({
   currentTab,
@@ -30,6 +31,8 @@ export default function Home({
   currentTab: HomePageTab;
   authStore: AuthStore;
 }) {
+  const { t } = useTranslation('common');
+
   // atoms
   const [_, setAuthObj] = useRecoilState(AuthAtom);
   const [__, setCurrentTab] = useRecoilState(homePageTabAtom);
@@ -92,7 +95,9 @@ export default function Home({
       {!isFetched && (
         <div className='h-full w-full flex justify-center items-center gap-4'>
           <SpinningLoadingSvg className='h-8 w-8 text-white' />
-          <div className='text-white text-lg font-normal'> Loading...</div>
+          <div className='text-white text-lg font-normal'>
+            {t('loading.homepage')}
+          </div>
         </div>
       )}
       {isFetched && (

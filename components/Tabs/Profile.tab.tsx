@@ -24,10 +24,12 @@ import { updateUserInfo } from '@/service/api/user';
 import useConfirmModal from '../Modals/useCofirm';
 import { HomePageTab } from '@/utils/enum';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 interface ProfileUploadInputs {}
 
 export default function ProfileTab() {
+  const router = useRouter();
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
 
   const { t } = useTranslation('homepage');
@@ -99,7 +101,7 @@ export default function ProfileTab() {
       isFetched: true
     });
 
-    window.location.href = `/?tab=${HomePageTab.HOME}`;
+    router.push(`/?tab=${HomePageTab.HOME}`);
   };
 
   const { showAlert, AlertModal } = useAlertModal();
