@@ -23,7 +23,7 @@ import { useRecoilState } from 'recoil';
 import {
   AdminAllRequestAtom,
   AdminAllRequestCountAtom,
-  isRefreshingRequestAtom,
+  isRefreshingRequestAtom
 } from '@/service/recoil/admin';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import { useDebounce, useLoadNamespace } from '@/utils/function';
@@ -35,7 +35,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 
 export default function AdminHomePage({
-  currentTab,
+  currentTab
 }: {
   currentTab: AdminTab;
 }) {
@@ -56,7 +56,7 @@ export default function AdminHomePage({
   const handlePageRouting = (tab: AdminTab) => {
     router.push(`/admin/${tab}`, undefined, {
       shallow: true,
-      locale: router.locale,
+      locale: router.locale
     });
   };
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function AdminHomePage({
     try {
       const [requestsResult, countResult] = await Promise.allSettled([
         getAllRequestAdmin(),
-        getAllRequestCount(),
+        getAllRequestCount()
       ]);
       if (requestsResult.status === 'fulfilled') {
         setAllRequests(requestsResult.value);
@@ -103,7 +103,7 @@ export default function AdminHomePage({
     try {
       const [requestsResult, countResult] = await Promise.allSettled([
         getAllRequestAdmin(),
-        getAllRequestCount(),
+        getAllRequestCount()
       ]);
       if (requestsResult.status === 'fulfilled') {
         setAllRequests(requestsResult.value);
@@ -122,7 +122,7 @@ export default function AdminHomePage({
             err.response?.data.error ||
             'Something went wrong. Please try again later.',
           type: AlertType.ERROR,
-          onModalClose: () => handleRefreshRequest(),
+          onModalClose: () => handleRefreshRequest()
         });
       }
     } finally {
@@ -214,7 +214,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       currentTab: tab || AdminTab.DASHBOARD,
-      ...(await serverSideTranslations(locale, ['admin', 'common'])),
-    },
+      ...(await serverSideTranslations(locale, ['admin', 'common']))
+    }
   };
 }

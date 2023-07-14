@@ -63,7 +63,7 @@ export default function Navbar({
           src='/bootcamp-logo.png'
           alt=''
           className='
-            h-fit w-full
+            h-20 lg:h-28 w-full object-contain
           '
         />
       </div>

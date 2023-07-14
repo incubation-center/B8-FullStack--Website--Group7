@@ -81,7 +81,7 @@ export default function ThemeSwitching({
                   key={theme.name}
                   value={theme.name}
                   className={`
-                    w-full p-2 pl-3 font-medium
+                    w-full p-2 pl-3 font-medium font-poppins
                     hover:bg-stone-900 hover:bg-opacity-10 flex gap-2 items-center
                     select-none cursor-pointer
                   `}
