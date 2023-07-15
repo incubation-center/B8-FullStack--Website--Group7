@@ -8,8 +8,7 @@ import Reaction from './Reaction';
 import { handleFallBackProfileImage, useDebounce } from '@/utils/function';
 import { reactToReview, removeReaction } from '@/service/api/review';
 import { useTranslation } from 'next-i18next';
-import useModal from '../Modals/useModal';
-import NotLoggedInLayout from '../layout/NotLoggedInLayout';
+import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 
 export default function ReviewCmt({
   review,
@@ -18,7 +17,8 @@ export default function ReviewCmt({
   updateReviewState,
   deleteReview,
   toggleEditing,
-  showLoginModal
+  showLoginModal,
+  isDeleting = false
 }: {
   review: BookReview;
   isSelf?: boolean;
@@ -27,6 +27,7 @@ export default function ReviewCmt({
   deleteReview?: (review: BookReview) => void;
   toggleEditing?: (review: BookReview) => void;
   showLoginModal: () => void;
+  isDeleting?: boolean;
 }) {
   const { t } = useTranslation('book-detail');
 
@@ -183,18 +184,34 @@ export default function ReviewCmt({
       {/* comment actions */}
       {isSelf && (
         <div className='mt-2 w-full flex justify-end gap-2'>
-          <button
-            className='w-full text-white bg-danger p-1 px-2 rounded-lg'
-            onClick={() => deleteReview && deleteReview(review)}
-          >
-            {t('review.delete-btn')}
-          </button>
-          <button
-            onClick={() => toggleEditing && toggleEditing(review)}
-            className='w-full bg-alt-secondary text-primary p-1 px-2 rounded-lg font-medium'
-          >
-            {t('review.edit-btn')}
-          </button>
+          {!isDeleting && (
+            <>
+              <button
+                className='w-full text-white bg-danger p-2 rounded-lg'
+                onClick={() => deleteReview && deleteReview(review)}
+              >
+                {t('review.delete-btn')}
+              </button>
+              <button
+                onClick={() => toggleEditing && toggleEditing(review)}
+                className='w-full bg-alt-secondary text-primary p-2 rounded-lg font-medium'
+              >
+                {t('review.edit-btn')}
+              </button>
+            </>
+          )}
+          {isDeleting && (
+            <button
+              disabled
+              className='
+                w-full bg-danger text-white p-2  rounded-lg font-medium
+                flex justify-center items-center
+              '
+            >
+              <SpinningLoadingSvg className='w-6 h-6 mr-2' />
+              {t('review.deleting-btn')}
+            </button>
+          )}
         </div>
       )}
     </>

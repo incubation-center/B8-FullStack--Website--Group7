@@ -75,6 +75,7 @@
 
     "edit-btn": "កែប្រែ",
     "delete-btn": "លុបចោល",
+    "deleting-btn": "កំពុងលុបចោលមតិយោបល់",
 
     "delete-modal": {
       "title": "លុបមតិយោបល់",

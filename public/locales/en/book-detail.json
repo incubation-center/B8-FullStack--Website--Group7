@@ -72,9 +72,9 @@
     },
 
     "edited": "Edited",
-
     "edit-btn": "Edit",
     "delete-btn": "Delete",
+    "deleting-btn": "Deleting",
 
     "delete-modal": {
       "title": "Delete review",

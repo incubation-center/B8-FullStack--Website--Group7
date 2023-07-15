@@ -25,6 +25,7 @@ export default function BookReview({
 
   const [isEditing, setIsEditing] = useState(false);
   const [reviewToEdit, setReviewToEdit] = useState<BookReview | undefined>();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const { t } = useTranslation('book-detail');
 
@@ -84,6 +85,7 @@ export default function BookReview({
       title: t('review.delete-modal.title'),
       subtitle: t('review.delete-modal.subtitle'),
       onConfirm: async () => {
+        setIsDeleting(true);
         await deleteReview(review.reviewId as string)
           .then(() => {
             setReviews((prev) => {
@@ -97,6 +99,9 @@ export default function BookReview({
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            setIsDeleting(false);
           });
       }
     });
@@ -180,6 +185,7 @@ export default function BookReview({
                     setIsEditing(true);
                   }}
                   deleteReview={removeReview}
+                  isDeleting={isDeleting}
                 />
               ) : (
                 <AddNewReviewButton
