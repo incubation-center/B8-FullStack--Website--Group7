@@ -5,6 +5,14 @@ import createAxiosInstance from '../axios';
 
 const axiosClient: AxiosInstance = createAxiosInstance();
 
+const formattingReview = (review: any) => {
+  review.timestamp = new Date(review.timestamp);
+  if (review.reviewer) return;
+  review.reviewer = review.reveiwer; // in case wrong spelling
+
+  return review;
+};
+
 // review
 export async function getAllReviews(bookId: string) {
   try {
@@ -14,13 +22,45 @@ export async function getAllReviews(bookId: string) {
 
     const { data } = response;
 
-    data.forEach((review: any) => {
-      review.timestamp = new Date(review.timestamp);
-      if (review.reviewer) return;
-      review.reviewer = review.reveiwer; // in case wrong spelling
-    });
+    data.forEach((review: any) => formattingReview(review));
 
     return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function reactToReview(
+  reviewId: string,
+  userId: string,
+  action: 'like' | 'dislike'
+) {
+  try {
+    const response = await axiosClient.post(
+      API_ENDPOINT.REVIEW.REACTION(reviewId, userId, action)
+    );
+
+    const { data } = response;
+
+    return formattingReview(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function removeReaction(
+  reviewId: string,
+  userId: string,
+  action: 'like' | 'dislike'
+) {
+  try {
+    const response = await axiosClient.delete(
+      API_ENDPOINT.REVIEW.REACTION(reviewId, userId, action)
+    );
+
+    const { data } = response;
+
+    return formattingReview(data);
   } catch (error) {
     throw error;
   }

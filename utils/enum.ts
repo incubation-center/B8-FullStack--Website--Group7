@@ -57,7 +57,9 @@ export const API_ENDPOINT = {
     RESET_PASSWORD: '/user/forgot-password/update'
   },
   REVIEW: {
-    GET_ALL_REVIEWS: (bookId: string) => '/review/book/' + bookId
+    GET_ALL_REVIEWS: (bookId: string) => '/review/book/' + bookId,
+    REACTION: (reviewId: string, userId: string, action: 'like' | 'dislike') =>
+      '/review/' + reviewId + '/reaction?userId=' + userId + '&action=' + action
   },
   BOOK: {
     GET_ALL_BOOKS: '/book',

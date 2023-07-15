@@ -54,8 +54,8 @@ export interface BookReview {
   reviewId?: string;
   comment: string;
   rating: number;
-  likeUsersIds: string[];
-  dislikeUsersIds: string[];
+  likeUserIds: string[];
+  dislikeUserIds: string[];
   timestamp: Date;
   bookId: string;
   reviewer: User;

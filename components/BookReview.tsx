@@ -30,6 +30,19 @@ export default function BookReview({ book }: { book: Book }) {
       });
   }, []);
 
+  const updateReview = (review: BookReview) => {
+    setReviews((prev) => {
+      if (prev === null) return prev;
+      if (prev === undefined) return prev;
+      return prev.map((prevReview) => {
+        if (prevReview.reviewId === review.reviewId) {
+          return review;
+        }
+        return prevReview;
+      });
+    });
+  };
+
   return (
     <div className='mb-4 w-full md:max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
       {/* error fetching review */}
@@ -88,7 +101,14 @@ export default function BookReview({ book }: { book: Book }) {
                 if (review.reviewer.userId === authStore.user?.userId) {
                   return <></>;
                 }
-                return <ReviewCmt key={review.reviewId} review={review} />;
+                return (
+                  <ReviewCmt
+                    key={review.reviewId}
+                    review={review}
+                    userId={authStore.user?.userId as string}
+                    updateReview={updateReview}
+                  />
+                );
               })}
 
               {/* no review */}
