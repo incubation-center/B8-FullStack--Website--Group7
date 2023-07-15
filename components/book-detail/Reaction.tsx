@@ -2,13 +2,14 @@ import DislikeSvg from '../icon/DislikeSvg';
 import LikeSvg from '../icon/LikeSvg';
 
 export default function Reaction({
-  selected
+  selected,
+  likes,
+  dislikes
 }: {
   selected: 'like' | 'dislike' | null;
+  likes: number;
+  dislikes: number;
 }) {
-  const likes = 24;
-  const dislikes = 2;
-
   return (
     <div className='flex flex-nowrap items-center gap-4'>
       <button

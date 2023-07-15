@@ -20,21 +20,25 @@ export default function ReviewCmt({
 
   const commentNeedSeeMore = review.comment.length > 100;
 
+  const commentReaction = () => {
+    return null;
+  };
+
   return (
     <div
       className={`
-            w-full
-            flex gap-4
-            p-2 pt-4   border-alt-secondary
-            ${isSelf ? 'border rounded-lg' : 'border-b'}
-          `}
+        w-full
+        flex gap-4
+        p-2 pt-4   border-alt-secondary
+        ${isSelf ? 'border rounded-lg' : 'border-b'}
+      `}
     >
       <div className='w-full flex flex-col justify-start items-start '>
-        <div className='w-full flex justify-between flex-wrap-reverse'>
-          <div className='flex items-center gap-2'>
+        <div className='w-full flex  justify-between flex-wrap-reverse gap-2'>
+          <div className='flex items-start gap-2'>
             <div className='relative w-10 h-10'>
               <Image
-                src={review.user.profileImg}
+                src={review.reviewer.profileImg}
                 alt='avatar'
                 fill
                 className='rounded-full'
@@ -42,17 +46,21 @@ export default function ReviewCmt({
             </div>
             <div>
               <h1 className='font-medium text-alt-secondary'>
-                {review.user.username}
+                {review.reviewer.username}
               </h1>
               <p className='text-sm text-alt-secondary'>
-                {review.createdAt.toLocaleDateString()}
+                {review.timestamp.toLocaleDateString()}
               </p>
             </div>
+            {review.edited && (
+              <span className='text-sm text-alt-secondary mt-1'>(Edited)</span>
+            )}
           </div>
+
           <div>
             <Rating
               style={{ maxWidth: 100 }}
-              value={review.star}
+              value={review.rating}
               readOnly
               itemStyles={{
                 itemShapes: RoundedStar,
@@ -73,7 +81,11 @@ export default function ReviewCmt({
           {!commentNeedSeeMore && review.comment}
         </div>
         <div className='mt-4 w-full flex justify-between'>
-          <Reaction selected='like' />
+          <Reaction
+            selected={commentReaction()}
+            likes={review.likeUsersIds?.length || 0}
+            dislikes={review.dislikeUsersIds?.length || 0}
+          />
           {commentNeedSeeMore && (
             <button
               className='

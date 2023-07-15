@@ -51,10 +51,13 @@ export enum RequestStatus {
 }
 
 export interface BookReview {
-  id?: string;
-  star: number;
+  reviewId?: string;
   comment: string;
-  createdAt: Date;
-  user: User;
-  // book: Book;
+  rating: number;
+  likeUsersIds: string[];
+  dislikeUsersIds: string[];
+  timestamp: Date;
+  bookId: string;
+  reviewer: User;
+  edited: boolean;
 }

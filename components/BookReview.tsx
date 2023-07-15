@@ -2,41 +2,97 @@ import { ReviewData } from '@/dummydata';
 
 import Image from 'next/image';
 import { Rating, RoundedStar } from '@smastrom/react-rating';
-import { BookReview } from '@/types';
+import { Book, BookReview } from '@/types';
 import AddNewReviewButton from './book-detail/AddNewReview';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewCmt from './book-detail/ReviewCmt';
+import SpinningLoadingSvg from './icon/SpinningLoadingSvg';
+import { getAllReviews } from '@/service/api/review';
+import { useRecoilValue } from 'recoil';
+import { AuthAtom } from '@/service/recoil';
 
-export default function BookReview() {
-  const selfReview = ReviewData[0];
+export default function BookReview({ book }: { book: Book }) {
+  const authStore = useRecoilValue(AuthAtom);
+  const [reviews, setReviews] = useState<BookReview[] | undefined | null>();
 
   const { t } = useTranslation('book-detail');
 
+  useEffect(() => {
+    // fetch review
+    getAllReviews(book.id as string)
+      .then((res) => {
+        setReviews(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        setReviews(null);
+      });
+  }, []);
+
   return (
-    <div className='mb-4 min-w-[320px] max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
-      {/* self review */}
-      <div>
-        <h1 className='text-xl text-alt-secondary mb-4'>
-          {t('review.your-review')}
-        </h1>
+    <div className='mb-4 w-full max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
+      {/* error fetching review */}
+      {reviews === null && (
+        <>
+          <h1 className='text-xl text-alt-secondary mb-4'>
+            {t('review.title')}
+          </h1>
+          <div className='flex gap-2'>
+            <h1 className='text-lg text-alt-secondary'>
+              Error fetching book review
+            </h1>
+          </div>
+        </>
+      )}
 
-        {/* <ReviewCmt review={selfReview} isSelf /> */}
+      {/* fetching review */}
+      {reviews === undefined && (
+        <>
+          <h1 className='text-xl text-alt-secondary mb-4'>
+            {t('review.title')}
+          </h1>
+          <div className='flex gap-2'>
+            <SpinningLoadingSvg className='w-6 h-6 text-alt-secondary' />
+            <h1 className='text-lg text-alt-secondary'>Loading book review</h1>
+          </div>
+        </>
+      )}
 
-        {/* add review */}
-        <AddNewReviewButton />
-      </div>
+      {/* review fetched */}
+      {reviews && (
+        <>
+          {/* self review */}
+          <div>
+            <h1 className='text-xl text-alt-secondary mb-4'>
+              {t('review.your-review')}
+            </h1>
 
-      {/* others review*/}
-      <div>
-        <h1 className='text-xl text-alt-secondary mt-8'>{t('review.title')}</h1>
+            {/* <ReviewCmt review={selfReview} isSelf /> */}
 
-        <div className='mt-4 border-t border-alt-secondary '>
-          {ReviewData.map((review) => (
-            <ReviewCmt key={review.id} review={review} />
-          ))}
-        </div>
-      </div>
+            {/* add review */}
+            <AddNewReviewButton />
+          </div>
+
+          {/* others review*/}
+          <div>
+            <h1 className='text-xl text-alt-secondary mt-8'>
+              {t('review.title')}
+            </h1>
+
+            <div className='mt-4 border-t border-alt-secondary '>
+              {reviews.map((review) => {
+                if (review.reviewer.userId === authStore.user?.userId) {
+                  return <></>;
+                }
+                return <ReviewCmt key={review.reviewId} review={review} />;
+              })}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
+
+const LoadingReview = () => {};

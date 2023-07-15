@@ -303,9 +303,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   </button>
                 )}
 
-                <div className='block '>
-                  {authStore.isFetched && <BookReview />}
-                </div>
+                <div>{book && <BookReview book={book} />}</div>
               </div>
             </div>
           </div>
