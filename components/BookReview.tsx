@@ -59,6 +59,7 @@ export default function BookReview({
         return prevReview;
       });
     });
+    updateBook();
   };
 
   const createReview = async (review: {
@@ -222,7 +223,7 @@ export default function BookReview({
             {/* others review*/}
             <div>
               <h1 className='text-xl text-alt-secondary mt-8'>
-                {t('review.title')}
+                {t('review.title')} ( {reviews.length - 1} )
               </h1>
 
               <div className='mt-4 pt-2 border-t border-alt-secondary '>

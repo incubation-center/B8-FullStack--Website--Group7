@@ -36,7 +36,6 @@ export default function Reaction({
       <button
         className={`
         p-1 px-2 rounded-full
-        hover:bg-alt-secondary hover:bg-opacity-10
         ${
           selected === 'like'
             ? 'fill-alt-secondary '
@@ -46,7 +45,7 @@ export default function Reaction({
         disabled={disabled}
         onClick={() => handleOnClickReaction('like')}
       >
-        <div className='flex items-center gap-2 text-alt-secondary font-medium'>
+        <div className='flex items-center  gap-2 text-alt-secondary font-medium'>
           <AnimatePresence>
             {disabled && isReacting === 'like' ? (
               <motion.span
@@ -54,7 +53,7 @@ export default function Reaction({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
               >
-                <SpinningLoadingSvg className='h-5 w-5 mb-1' />
+                <SpinningLoadingSvg className='h-6 w-6 mb-1' />
               </motion.span>
             ) : (
               <motion.span
@@ -67,15 +66,13 @@ export default function Reaction({
             )}
           </AnimatePresence>
 
-          <p>{likes}</p>
+          <div>{likes}</div>
         </div>
       </button>
 
       <button
         className={`
         p-1 px-2 rounded-full
-        hover:bg-alt-secondary hover:bg-opacity-10
-
         ${
           selected === 'dislike'
             ? 'fill-alt-secondary'
@@ -94,7 +91,7 @@ export default function Reaction({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
               >
-                <SpinningLoadingSvg className='h-5 w-5 mb-1' />
+                <SpinningLoadingSvg className='h-6 w-6 mb-1' />
               </motion.span>
             ) : (
               <motion.span

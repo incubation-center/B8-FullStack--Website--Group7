@@ -250,6 +250,8 @@ export default function AddNewReviewButton({
                   <SpinningLoadingSvg className='w-6 h-6 mr-2' />
                   {t('review.form.saving-btn')}
                 </>
+              ) : isEditing ? (
+                t('review.edit-btn')
               ) : (
                 t('review.form.save-btn')
               )}
