@@ -11,12 +11,14 @@ export default function ReviewCmt({
   review,
   isSelf,
   userId,
-  updateReview
+  updateReview,
+  toggleEditing
 }: {
   review: BookReview;
   isSelf?: boolean;
   userId: string;
   updateReview: (review: BookReview) => void;
+  toggleEditing?: (review: BookReview) => void;
 }) {
   const [isSeeMore, setIsSeeMore] = useState(false);
   const [reaction, setReaction] = useState<'like' | 'dislike' | null>(null);
@@ -153,6 +155,21 @@ export default function ReviewCmt({
             </button>
           )}
         </div>
+
+        {/* comment actions */}
+        {isSelf && (
+          <div className='mt-4 w-full flex justify-end gap-2'>
+            <button className='w-full text-sm text-white bg-danger p-1 px-2 rounded-full'>
+              Delete
+            </button>
+            <button
+              onClick={() => toggleEditing && toggleEditing(review)}
+              className='w-full text-sm bg-alt-secondary p-1 px-2 rounded-full'
+            >
+              Edit
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

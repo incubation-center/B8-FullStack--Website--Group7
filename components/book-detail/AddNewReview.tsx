@@ -5,6 +5,8 @@ import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
 import { useTranslation } from 'next-i18next';
 
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { BookReview } from '@/types';
+import { updateReview } from '@/service/api/review';
 
 interface RatingForm {
   rating: number;
@@ -12,21 +14,35 @@ interface RatingForm {
 }
 
 export default function AddNewReviewButton({
-  createReview
+  createReview,
+  isEditing,
+  reviewToEdit,
+  updateReviewState,
+  cancelEdit
 }: {
   createReview: (review: { rating: number; comment: string }) => Promise<void>;
+  isEditing: boolean;
+  reviewToEdit: BookReview | undefined;
+  updateReviewState: (review: BookReview) => void;
+  cancelEdit: () => void;
 }) {
   const { t } = useTranslation('book-detail');
 
-  const [isCreating, setIsCreating] = useState(false);
+  const [isCreating, setIsCreating] = useState(isEditing);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors }
-  } = useForm<RatingForm>();
+  } = useForm<RatingForm>({
+    defaultValues: {
+      rating: reviewToEdit?.rating || 0,
+      comment: reviewToEdit?.comment || ''
+    }
+  });
 
   const onSubmit: SubmitHandler<RatingForm> = async ({ rating, comment }) => {
     const review = {
@@ -36,10 +52,30 @@ export default function AddNewReviewButton({
 
     setIsSubmitting(true);
 
-    await createReview(review).finally(() => {
-      setIsSubmitting(false);
-      setIsCreating(false);
-    });
+    if (isEditing && reviewToEdit) {
+      await updateReview(reviewToEdit.reviewId as string, review)
+        .then((res) => {
+          updateReviewState(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+          setIsCreating(false);
+          cancelEdit();
+        });
+      return;
+    }
+
+    await createReview(review)
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        setIsCreating(false);
+      });
   };
 
   return (
@@ -68,6 +104,7 @@ export default function AddNewReviewButton({
                   onChange={onChange}
                   value={value}
                   onBlur={onBlur}
+                  isDisabled={isSubmitting}
                   itemStyles={{
                     itemShapes: RoundedStar,
                     activeFillColor: '#f59e0b',
@@ -111,6 +148,7 @@ export default function AddNewReviewButton({
                       border-b
                       placeholder-alt-secondary placeholder-opacity-50
                     '
+                    disabled={isSubmitting}
                     id='comment'
                     autoFocus
                     placeholder={t('review.form.comment-placeholder')}
@@ -169,7 +207,11 @@ export default function AddNewReviewButton({
 
                 '
                 type='button'
-                onClick={() => setIsCreating(!isCreating)}
+                onClick={() => {
+                  reset();
+                  setIsCreating(false);
+                  cancelEdit();
+                }}
               >
                 {t('review.form.cancel-btn')}
               </button>

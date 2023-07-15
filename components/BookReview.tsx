@@ -14,6 +14,9 @@ export default function BookReview({ book }: { book: Book }) {
   const [selfReview, setSelfReview] = useState<BookReview | undefined>();
   const [reviews, setReviews] = useState<BookReview[] | undefined | null>();
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [reviewToEdit, setReviewToEdit] = useState<BookReview | undefined>();
+
   const { t } = useTranslation('book-detail');
 
   useEffect(() => {
@@ -118,15 +121,31 @@ export default function BookReview({ book }: { book: Book }) {
               {t('review.your-review')}
             </h1>
 
-            {selfReview ? (
+            {selfReview && !isEditing ? (
               <ReviewCmt
                 review={selfReview}
                 isSelf
                 userId={authStore.user?.userId as string}
                 updateReview={updateReview}
+                toggleEditing={(review) => {
+                  setReviewToEdit(review);
+                  setIsEditing(true);
+                }}
               />
             ) : (
-              <AddNewReviewButton createReview={createReview} />
+              <AddNewReviewButton
+                createReview={createReview}
+                isEditing={isEditing}
+                reviewToEdit={reviewToEdit}
+                updateReviewState={updateReview}
+                cancelEdit={() => {
+                  console.log('====================================');
+                  console.log('cancel edit');
+                  console.log('====================================');
+                  setIsEditing(false);
+                  setReviewToEdit(undefined);
+                }}
+              />
             )}
 
             {/* add review */}

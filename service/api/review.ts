@@ -54,6 +54,32 @@ export async function addReview({
   }
 }
 
+export async function updateReview(
+  reviewId: string,
+  {
+    rating,
+    comment
+  }: {
+    rating: number;
+    comment: string;
+  }
+) {
+  try {
+    const response = await axiosClient.patch(
+      API_ENDPOINT.REVIEW.UPDATE_REVIEW(reviewId, {
+        rating,
+        comment
+      })
+    );
+
+    const { data } = response;
+
+    return formattingReview(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function reactToReview(
   reviewId: string,
   userId: string,
