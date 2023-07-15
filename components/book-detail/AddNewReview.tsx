@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { BookReview } from '@/types';
 import { updateReview } from '@/service/api/review';
+import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 
 interface RatingForm {
   rating: number;
@@ -18,13 +19,17 @@ export default function AddNewReviewButton({
   isEditing,
   reviewToEdit,
   updateReviewState,
-  cancelEdit
+  cancelEdit,
+  showLoginModal,
+  userId
 }: {
   createReview: (review: { rating: number; comment: string }) => Promise<void>;
   isEditing: boolean;
   reviewToEdit: BookReview | undefined;
   updateReviewState: (review: BookReview) => void;
   cancelEdit: () => void;
+  showLoginModal: () => void;
+  userId: string | undefined;
 }) {
   const { t } = useTranslation('book-detail');
 
@@ -78,15 +83,23 @@ export default function AddNewReviewButton({
       });
   };
 
+  const handleCreateReview = () => {
+    if (!userId) {
+      showLoginModal();
+      return;
+    }
+    setIsCreating(!isCreating);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='h-fit w-full'>
       {isCreating && (
         <div
           className='
-            w-full mb-4 rounded-lg
-            border border-alt-secondary p-4
-             h-fit
-          '
+          w-full mb-4 rounded-lg
+          border border-alt-secondary p-4
+           h-fit
+        '
         >
           <div className='flex gap-2 items-baseline'>
             <h1 className='font-medium text-alt-secondary text-lg'>
@@ -144,10 +157,10 @@ export default function AddNewReviewButton({
                     })}
                     data-gramm='false'
                     className='
-                      w-full bg-transparent focus:outline-none text-alt-secondary
-                      border-b
-                      placeholder-alt-secondary placeholder-opacity-50
-                    '
+                    w-full bg-transparent focus:outline-none text-alt-secondary
+                    border-b
+                    placeholder-alt-secondary placeholder-opacity-50
+                  '
                     disabled={isSubmitting}
                     id='comment'
                     autoFocus
@@ -195,17 +208,17 @@ export default function AddNewReviewButton({
             {!isSubmitting && (
               <button
                 className='
-                  w-full
-                  flex justify-center items-center
-                  p-2 border-alt-secondary border rounded-lg
-                  text-alt-secondary
-                  hover:bg-alt-secondary hover:text-primary
-                  font-medium
-                  transition duration-300
-                  stroke-alt-secondary hover:stroke-primary
-                  hover:scale-95
+                w-full
+                flex justify-center items-center
+                p-2 border-alt-secondary border rounded-lg
+                text-alt-secondary
+                hover:bg-alt-secondary hover:text-primary
+                font-medium
+                transition duration-300
+                stroke-alt-secondary hover:stroke-primary
+                hover:scale-95
 
-                '
+              '
                 type='button'
                 onClick={() => {
                   reset();
@@ -218,17 +231,17 @@ export default function AddNewReviewButton({
             )}
             <button
               className={`
-                w-full
-                flex justify-center items-center
-                p-2 border-alt-secondary border rounded-lg
+              w-full
+              flex justify-center items-center
+              p-2 border-alt-secondary border rounded-lg
+            
+              bg-alt-secondary text-primary
+              ${!isSubmitting && 'hover:scale-95'}
               
-                bg-alt-secondary text-primary
-                ${!isSubmitting && 'hover:scale-95'}
-                
-                font-medium
-                transition duration-300
-                stroke-primary
-              `}
+              font-medium
+              transition duration-300
+              stroke-primary
+            `}
               type='submit'
               disabled={isSubmitting}
             >
@@ -246,20 +259,20 @@ export default function AddNewReviewButton({
         {!isCreating && !isSubmitting && (
           <button
             className='
-              w-full
-              flex justify-center items-center
-              p-2 border-alt-secondary border rounded-lg
+            w-full
+            flex justify-center items-center
+            p-2 border-alt-secondary border rounded-lg
+          
+            hover:bg-alt-secondary 
+            text-alt-secondary hover:text-primary
+            hover:scale-95
             
-              hover:bg-alt-secondary 
-              text-alt-secondary hover:text-primary
-              hover:scale-95
-              
-              font-medium
-              transition duration-300
-              stroke-alt-secondary hover:stroke-primary
-            '
+            font-medium
+            transition duration-300
+            stroke-alt-secondary hover:stroke-primary
+          '
             type='button'
-            onClick={() => setIsCreating(!isCreating)}
+            onClick={handleCreateReview}
           >
             <PlusIcon className='w-6 h-6 mr-2 ' />
             {t('review.add-your-review')}

@@ -8,6 +8,8 @@ import Reaction from './Reaction';
 import { handleFallBackProfileImage, useDebounce } from '@/utils/function';
 import { reactToReview, removeReaction } from '@/service/api/review';
 import { useTranslation } from 'next-i18next';
+import useModal from '../Modals/useModal';
+import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 
 export default function ReviewCmt({
   review,
@@ -15,7 +17,8 @@ export default function ReviewCmt({
   userId,
   updateReviewState,
   deleteReview,
-  toggleEditing
+  toggleEditing,
+  showLoginModal
 }: {
   review: BookReview;
   isSelf?: boolean;
@@ -23,6 +26,7 @@ export default function ReviewCmt({
   updateReviewState: (review: BookReview) => void;
   deleteReview?: (review: BookReview) => void;
   toggleEditing?: (review: BookReview) => void;
+  showLoginModal: () => void;
 }) {
   const { t } = useTranslation('book-detail');
 
@@ -51,6 +55,11 @@ export default function ReviewCmt({
   }, [review, userId]);
 
   const handleReaction = useDebounce(async (reaction: 'like' | 'dislike') => {
+    if (!userId) {
+      showLoginModal();
+      return;
+    }
+
     setIsReacting(true);
     reactToReview(review.reviewId as string, userId, reaction)
       .then((res: any) => {
@@ -66,8 +75,12 @@ export default function ReviewCmt({
 
   const handleRemoveReaction = useDebounce(
     async (reaction: 'like' | 'dislike') => {
-      setIsReacting(true);
+      if (!userId) {
+        showLoginModal();
+        return;
+      }
 
+      setIsReacting(true);
       removeReaction(review.reviewId as string, userId, reaction)
         .then((res: BookReview) => {
           updateReviewState(res as BookReview);

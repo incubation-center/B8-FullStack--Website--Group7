@@ -8,6 +8,8 @@ import { addReview, deleteReview, getAllReviews } from '@/service/api/review';
 import { useRecoilValue } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
 import useConfirmModal from './Modals/useCofirm';
+import useModal from './Modals/useModal';
+import NotLoggedInLayout from './layout/NotLoggedInLayout';
 
 export default function BookReview({
   book,
@@ -113,115 +115,128 @@ export default function BookReview({
     setSelfReview(selfReview);
   }, [reviews, authStore.user]);
 
+  const { ModalWrapper, open } = useModal();
   const { ConfirmModal, showConfirmModal } = useConfirmModal();
 
   return (
-    <div className='mb-4 w-full md:max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
-      {/* error fetching review */}
-      {reviews === null && (
-        <>
-          <h1 className='text-xl text-alt-secondary mb-4 '>
-            {t('review.title')}
-          </h1>
-          <div className='flex gap-2'>
-            <h1 className='text-lg text-alt-secondary'>
-              {t('review.error-fetching')}
-            </h1>
-          </div>
-        </>
-      )}
+    <>
+      <ModalWrapper>
+        <div className='bg-alt-secondary rounded-lg py-4'>
+          <NotLoggedInLayout />
+        </div>
+      </ModalWrapper>
 
-      {/* fetching review */}
-      {reviews === undefined && (
-        <>
-          <h1 className='text-xl text-alt-secondary mb-4'>
-            {t('review.title')}
-          </h1>
-          <div className='flex gap-2'>
-            <SpinningLoadingSvg className='w-6 h-6 text-alt-secondary' />
-            <h1 className='text-lg text-alt-secondary'>
-              {' '}
-              {t('review.loading-review')}
-            </h1>
-          </div>
-        </>
-      )}
-
-      {/* review fetched */}
-      {reviews && (
-        <>
-          <ConfirmModal />
-
-          {/* self review */}
-          <div>
-            <h1 className='text-xl text-alt-secondary mb-4'>
-              {t('review.your-review')}
-            </h1>
-
-            {selfReview && !isEditing ? (
-              <ReviewCmt
-                review={selfReview}
-                isSelf
-                userId={authStore.user?.userId as string}
-                updateReviewState={updateReview}
-                toggleEditing={(review) => {
-                  setReviewToEdit(review);
-                  setIsEditing(true);
-                }}
-                deleteReview={removeReview}
-              />
-            ) : (
-              <AddNewReviewButton
-                createReview={createReview}
-                isEditing={isEditing}
-                reviewToEdit={reviewToEdit}
-                updateReviewState={updateReview}
-                cancelEdit={() => {
-                  setIsEditing(false);
-                  setReviewToEdit(undefined);
-                }}
-              />
-            )}
-
-            {/* add review */}
-          </div>
-
-          {/* others review*/}
-          <div>
-            <h1 className='text-xl text-alt-secondary mt-8'>
+      <div className='mb-4 w-full md:max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
+        {/* error fetching review */}
+        {reviews === null && (
+          <>
+            <h1 className='text-xl text-alt-secondary mb-4 '>
               {t('review.title')}
             </h1>
-
-            <div className='mt-4 pt-2 border-t border-alt-secondary '>
-              {reviews.map((review) => {
-                if (review.reviewer.userId === authStore.user?.userId) {
-                  return null;
-                }
-                return (
-                  <ReviewCmt
-                    key={review.reviewId}
-                    review={review}
-                    userId={authStore.user?.userId as string}
-                    updateReviewState={updateReview}
-                  />
-                );
-              })}
-
-              {/* no review */}
-              {reviews.filter(
-                (review) => review.reviewer.userId !== authStore.user?.userId
-              ).length === 0 && (
-                <div className='flex flex-col items-center justify-center h-full p-4'>
-                  <h1 className='text-lg text-alt-secondary'>
-                    {t('review.no-review')}
-                  </h1>
-                </div>
-              )}
+            <div className='flex gap-2'>
+              <h1 className='text-lg text-alt-secondary'>
+                {t('review.error-fetching')}
+              </h1>
             </div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+
+        {/* fetching review */}
+        {reviews === undefined && (
+          <>
+            <h1 className='text-xl text-alt-secondary mb-4'>
+              {t('review.title')}
+            </h1>
+            <div className='flex gap-2'>
+              <SpinningLoadingSvg className='w-6 h-6 text-alt-secondary' />
+              <h1 className='text-lg text-alt-secondary'>
+                {' '}
+                {t('review.loading-review')}
+              </h1>
+            </div>
+          </>
+        )}
+
+        {/* review fetched */}
+        {reviews && (
+          <>
+            <ConfirmModal />
+
+            {/* self review */}
+            <div>
+              <h1 className='text-xl text-alt-secondary mb-4'>
+                {t('review.your-review')}
+              </h1>
+
+              {selfReview && !isEditing ? (
+                <ReviewCmt
+                  review={selfReview}
+                  isSelf
+                  showLoginModal={open}
+                  userId={authStore.user?.userId as string}
+                  updateReviewState={updateReview}
+                  toggleEditing={(review) => {
+                    setReviewToEdit(review);
+                    setIsEditing(true);
+                  }}
+                  deleteReview={removeReview}
+                />
+              ) : (
+                <AddNewReviewButton
+                  createReview={createReview}
+                  isEditing={isEditing}
+                  reviewToEdit={reviewToEdit}
+                  updateReviewState={updateReview}
+                  cancelEdit={() => {
+                    setIsEditing(false);
+                    setReviewToEdit(undefined);
+                  }}
+                  showLoginModal={open}
+                  userId={authStore.user?.userId}
+                />
+              )}
+
+              {/* add review */}
+            </div>
+
+            {/* others review*/}
+            <div>
+              <h1 className='text-xl text-alt-secondary mt-8'>
+                {t('review.title')}
+              </h1>
+
+              <div className='mt-4 pt-2 border-t border-alt-secondary '>
+                {reviews.map((review) => {
+                  if (review.reviewer.userId === authStore.user?.userId) {
+                    return null;
+                  }
+                  return (
+                    <ReviewCmt
+                      key={review.reviewId}
+                      review={review}
+                      showLoginModal={open}
+                      userId={authStore.user?.userId as string}
+                      updateReviewState={updateReview}
+                    />
+                  );
+                })}
+
+                {/* no review */}
+                {reviews.filter(
+                  (review) => review.reviewer.userId !== authStore.user?.userId
+                ).length === 0 && (
+                  <div className='flex flex-col items-center justify-center h-full p-4'>
+                    <h1 className='text-lg text-alt-secondary'>
+                      {t('review.no-review')}
+                    </h1>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }
 
