@@ -80,6 +80,20 @@ export async function updateReview(
   }
 }
 
+export async function deleteReview(reviewId: string) {
+  try {
+    const response = await axiosClient.delete(
+      API_ENDPOINT.REVIEW.DELETE(reviewId)
+    );
+
+    const { data } = response;
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function reactToReview(
   reviewId: string,
   userId: string,

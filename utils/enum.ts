@@ -89,6 +89,7 @@ export const API_ENDPOINT = {
         comment: string;
       }
     ) => '/review/' + reviewId + '?rating=' + rating + '&comment=' + comment,
+    DELETE: (reviewId: string) => '/review/' + reviewId,
     GET_ALL_REVIEWS: (bookId: string) => '/review/book/' + bookId,
     REACTION: (reviewId: string, userId: string, action: 'like' | 'dislike') =>
       '/review/' + reviewId + '/reaction?userId=' + userId + '&action=' + action

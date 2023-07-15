@@ -6,20 +6,25 @@ import { Rating, RoundedStar } from '@smastrom/react-rating';
 import Reaction from './Reaction';
 import { useDebounce } from '@/utils/function';
 import { reactToReview, removeReaction } from '@/service/api/review';
+import { useTranslation } from 'next-i18next';
 
 export default function ReviewCmt({
   review,
   isSelf,
   userId,
-  updateReview,
+  updateReviewState,
+  deleteReview,
   toggleEditing
 }: {
   review: BookReview;
   isSelf?: boolean;
   userId: string;
-  updateReview: (review: BookReview) => void;
+  updateReviewState: (review: BookReview) => void;
+  deleteReview?: (review: BookReview) => void;
   toggleEditing?: (review: BookReview) => void;
 }) {
+  const { t } = useTranslation('book-detail');
+
   const [isSeeMore, setIsSeeMore] = useState(false);
   const [reaction, setReaction] = useState<'like' | 'dislike' | null>(null);
   const [isReacting, setIsReacting] = useState(false);
@@ -48,7 +53,7 @@ export default function ReviewCmt({
     setIsReacting(true);
     reactToReview(review.reviewId as string, userId, reaction)
       .then((res: any) => {
-        updateReview(res as BookReview);
+        updateReviewState(res as BookReview);
       })
       .catch((err) => {
         console.log(err);
@@ -64,7 +69,7 @@ export default function ReviewCmt({
 
       removeReaction(review.reviewId as string, userId, reaction)
         .then((res: BookReview) => {
-          updateReview(res as BookReview);
+          updateReviewState(res as BookReview);
         })
         .catch((err) => {
           console.log(err);
@@ -77,100 +82,104 @@ export default function ReviewCmt({
   );
 
   return (
-    <div
-      className={`
+    <>
+      <div
+        className={`
         w-full
         flex gap-4
         p-4 border-alt-secondary
         ${isSelf ? 'border rounded-lg' : 'border-b'}
       `}
-    >
-      <div className='w-full flex flex-col justify-start items-start '>
-        <div className='w-full flex  justify-between flex-wrap-reverse gap-2'>
-          <div className='flex items-start gap-2'>
-            <div className='relative w-12 h-12'>
-              <Image
-                src={review.reviewer.profileImg}
-                alt='avatar'
-                fill
-                className='rounded-full object-cover'
+      >
+        <div className='w-full flex flex-col justify-start items-start '>
+          <div className='w-full flex  justify-between flex-wrap-reverse gap-2'>
+            <div className='flex items-start gap-2'>
+              <div className='relative w-12 h-12'>
+                <Image
+                  src={review.reviewer.profileImg}
+                  alt='avatar'
+                  fill
+                  className='rounded-full object-cover'
+                />
+              </div>
+              <div>
+                <h1 className='font-medium text-alt-secondary'>
+                  {review.reviewer.username}
+                </h1>
+                <p className='text-sm text-alt-secondary'>
+                  {review.timestamp.toLocaleDateString()}
+                </p>
+              </div>
+              {review.edited && (
+                <span className='text-sm text-alt-secondary text-opacity-70'>
+                  ({t('review.edited')})
+                </span>
+              )}
+            </div>
+
+            <div>
+              <Rating
+                style={{ maxWidth: 100 }}
+                value={review.rating}
+                readOnly
+                itemStyles={{
+                  itemShapes: RoundedStar,
+                  activeFillColor: '#f59e0b',
+                  inactiveFillColor: '#ffedd5'
+                }}
               />
             </div>
-            <div>
-              <h1 className='font-medium text-alt-secondary'>
-                {review.reviewer.username}
-              </h1>
-              <p className='text-sm text-alt-secondary'>
-                {review.timestamp.toLocaleDateString()}
-              </p>
-            </div>
-            {review.edited && (
-              <span className='text-sm text-alt-secondary text-opacity-70'>
-                (Edited)
-              </span>
-            )}
           </div>
 
-          <div>
-            <Rating
-              style={{ maxWidth: 100 }}
-              value={review.rating}
-              readOnly
-              itemStyles={{
-                itemShapes: RoundedStar,
-                activeFillColor: '#f59e0b',
-                inactiveFillColor: '#ffedd5'
-              }}
+          <div className='mt-4 text-alt-secondary'>
+            {commentNeedSeeMore &&
+              !isSeeMore &&
+              review.comment.slice(0, 100) + '...'}
+
+            {commentNeedSeeMore && isSeeMore && review.comment}
+
+            {!commentNeedSeeMore && review.comment}
+          </div>
+          <div className='mt-4 w-full flex justify-between'>
+            <Reaction
+              selected={reaction}
+              likes={review.likeUserIds?.length || 0}
+              dislikes={review.dislikeUserIds?.length || 0}
+              onClickReaction={handleReaction}
+              onRemoveReaction={handleRemoveReaction}
+              disabled={isReacting}
             />
-          </div>
-        </div>
-
-        <div className='mt-4 text-alt-secondary'>
-          {commentNeedSeeMore &&
-            !isSeeMore &&
-            review.comment.slice(0, 100) + '...'}
-
-          {commentNeedSeeMore && isSeeMore && review.comment}
-
-          {!commentNeedSeeMore && review.comment}
-        </div>
-        <div className='mt-4 w-full flex justify-between'>
-          <Reaction
-            selected={reaction}
-            likes={review.likeUserIds?.length || 0}
-            dislikes={review.dislikeUserIds?.length || 0}
-            onClickReaction={handleReaction}
-            onRemoveReaction={handleRemoveReaction}
-            disabled={isReacting}
-          />
-          {commentNeedSeeMore && (
-            <button
-              className='
+            {commentNeedSeeMore && (
+              <button
+                className='
                 text-sm text-alt-secondary
                
               '
-              onClick={toggleSeeMore}
-            >
-              {isSeeMore ? 'See less' : 'See more'}
-            </button>
-          )}
-        </div>
-
-        {/* comment actions */}
-        {isSelf && (
-          <div className='mt-4 w-full flex justify-end gap-2'>
-            <button className='w-full text-sm text-white bg-danger p-1 px-2 rounded-full'>
-              Delete
-            </button>
-            <button
-              onClick={() => toggleEditing && toggleEditing(review)}
-              className='w-full text-sm bg-alt-secondary p-1 px-2 rounded-full'
-            >
-              Edit
-            </button>
+                onClick={toggleSeeMore}
+              >
+                {isSeeMore ? 'See less' : 'See more'}
+              </button>
+            )}
           </div>
-        )}
+        </div>
       </div>
-    </div>
+      {/* comment actions */}
+      {isSelf && (
+        <div className='mt-2 w-full flex justify-end gap-2'>
+          <button
+            className='w-full text-white bg-danger p-1 px-2 rounded-lg'
+            onClick={() => deleteReview && deleteReview(review)}
+          >
+            {t('review.delete-btn')}
+          </button>
+          <button
+            onClick={() => toggleEditing && toggleEditing(review)}
+            className='w-full bg-alt-secondary text-primary p-1 px-2 rounded-lg font-medium'
+          >
+            {t('review.edit-btn')}
+          </button>
+        </div>
+      )}
+    </>
   );
 }

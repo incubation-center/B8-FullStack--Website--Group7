@@ -4,9 +4,10 @@ import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import ReviewCmt from './book-detail/ReviewCmt';
 import SpinningLoadingSvg from './icon/SpinningLoadingSvg';
-import { addReview, getAllReviews } from '@/service/api/review';
+import { addReview, deleteReview, getAllReviews } from '@/service/api/review';
 import { useRecoilValue } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
+import useConfirmModal from './Modals/useCofirm';
 
 export default function BookReview({ book }: { book: Book }) {
   const authStore = useRecoilValue(AuthAtom);
@@ -29,6 +30,7 @@ export default function BookReview({ book }: { book: Book }) {
         console.log(err);
         setReviews(null);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateReview = (review: BookReview) => {
@@ -67,6 +69,29 @@ export default function BookReview({ book }: { book: Book }) {
       });
   };
 
+  const removeReview = async (review: BookReview) => {
+    // delete review
+    showConfirmModal({
+      title: t('review.delete-modal.title'),
+      subtitle: t('review.delete-modal.subtitle'),
+      onConfirm: async () => {
+        await deleteReview(review.reviewId as string)
+          .then(() => {
+            setReviews((prev) => {
+              if (prev === null) return prev;
+              if (prev === undefined) return prev;
+              return prev.filter(
+                (prevReview) => prevReview.reviewId !== review.reviewId
+              );
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
+
   useEffect(() => {
     if (reviews === null) return;
     if (reviews === undefined) return;
@@ -79,6 +104,8 @@ export default function BookReview({ book }: { book: Book }) {
 
     setSelfReview(selfReview);
   }, [reviews, authStore.user]);
+
+  const { ConfirmModal, showConfirmModal } = useConfirmModal();
 
   return (
     <div className='mb-4 w-full md:max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
@@ -115,6 +142,8 @@ export default function BookReview({ book }: { book: Book }) {
       {/* review fetched */}
       {reviews && (
         <>
+          <ConfirmModal />
+
           {/* self review */}
           <div>
             <h1 className='text-xl text-alt-secondary mb-4'>
@@ -126,11 +155,12 @@ export default function BookReview({ book }: { book: Book }) {
                 review={selfReview}
                 isSelf
                 userId={authStore.user?.userId as string}
-                updateReview={updateReview}
+                updateReviewState={updateReview}
                 toggleEditing={(review) => {
                   setReviewToEdit(review);
                   setIsEditing(true);
                 }}
+                deleteReview={removeReview}
               />
             ) : (
               <AddNewReviewButton
@@ -139,9 +169,6 @@ export default function BookReview({ book }: { book: Book }) {
                 reviewToEdit={reviewToEdit}
                 updateReviewState={updateReview}
                 cancelEdit={() => {
-                  console.log('====================================');
-                  console.log('cancel edit');
-                  console.log('====================================');
                   setIsEditing(false);
                   setReviewToEdit(undefined);
                 }}
@@ -167,13 +194,15 @@ export default function BookReview({ book }: { book: Book }) {
                     key={review.reviewId}
                     review={review}
                     userId={authStore.user?.userId as string}
-                    updateReview={updateReview}
+                    updateReviewState={updateReview}
                   />
                 );
               })}
 
               {/* no review */}
-              {reviews.length === 0 && (
+              {reviews.filter(
+                (review) => review.reviewer.userId !== authStore.user?.userId
+              ).length === 0 && (
                 <div className='flex flex-col items-center justify-center h-full p-4'>
                   <h1 className='text-lg text-alt-secondary'>
                     {t('review.no-review')}
