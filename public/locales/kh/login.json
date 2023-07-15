@@ -1,0 +1,22 @@
+{
+  "welcome-text": "សូមស្វាគមន៍មកកាន់បណ្ណាល័យខ្ចីសៀវភៅ",
+  "p-details-login-tab": "សូមបញ្ចូលព័ត៌មានលម្អិតរបស់អ្នក",
+
+  "email": "អ៊ីម៉ែល",
+  "password": "ពាក្យសម្ងាត់",
+
+  "forget-password": "ភ្លេចពាក្យសម្ងាត់?",
+  "email-placeholder": "សូមបញ្ចូលអ៊ីមែលរបស់អ្នក",
+  "password-placeholder": "សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក",
+  "email-required-alert": "តម្រូវឲ្យបញ្ចូលអ៊ីម៉ែល",
+  "password-required-alert": "តម្រូវឲ្យបញ្ចូលពាក្យសម្ងាត់​",
+
+  "login-btn": "ចូលគណនី",
+  "logging-in-btn": "កំពុងចូលទៅគណនី...",
+
+  "invalid-credential-modal": {
+    "invalid-credential-text": "ព័ត៌មានលម្អិតមិន​ត្រឹមត្រូវ!!",
+    "try-again-text": "សូម​ព្យាយាម​ម្តង​ទៀត",
+    "close-btn": "បិទ"
+  }
+}

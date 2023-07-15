@@ -21,6 +21,7 @@ import EditBookCategory from './EditBookCategory';
 import EditSvg from '../icon/EditSvg';
 import { updateCoverImage } from '@/service/firebase';
 import { deleteBookById } from '@/service/api/admin';
+import { useTranslation } from 'next-i18next';
 
 interface BookUploadInputs extends Book {}
 
@@ -40,6 +41,8 @@ export default function ViewEditBook({
   book: Book;
   close: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const { ConfirmModal, showConfirmModal } = useConfirmModal();
   const { AlertModal, showAlert } = useAlertModal();
 
@@ -122,8 +125,8 @@ export default function ViewEditBook({
       imageRef.current?.value && (imageRef.current.value = '');
 
       showAlert({
-        title: 'Success',
-        subtitle: 'Book updated successfully',
+        title: t('book-view-tab.success-tab.success'),
+        subtitle: t('book-view-tab.success-tab.book-update-text'),
         type: AlertType.SUCCESS,
         onModalClose: () => {
           setAllBooks((prev) => {
@@ -154,8 +157,8 @@ export default function ViewEditBook({
 
   const onCancelForm = () => {
     showConfirmModal({
-      title: 'Cancel Editing',
-      subtitle: 'Are you sure you want to cancel the form?',
+      title: t('book-view-tab.cancel-form.cancel'),
+      subtitle: t('book-view-tab.cancel-form.cancel-text'),
       onConfirm: () => {
         reset({
           title: book.title,
@@ -177,8 +180,8 @@ export default function ViewEditBook({
     }
 
     showConfirmModal({
-      title: 'Cancel',
-      subtitle: 'Are you sure you want to close and cancel the form?',
+      title: t('book-view-tab.cancel-form.cancel'),
+      subtitle: t('book-view-tab.cancel-form.cancel-text'),
       onConfirm: () => {
         reset({
           title: book.title,
@@ -199,8 +202,10 @@ export default function ViewEditBook({
       await deleteBookById(book.id as string);
       setIsDeleting(false);
       showAlert({
-        title: 'Success',
-        subtitle: 'Book deleted successfully',
+        title: t('book-view-tab.delete-book-tab.success-tab.success'),
+        subtitle: t(
+          'book-view-tab.delete-book-tab.success-tab.book-delete-text'
+        ),
         type: AlertType.SUCCESS,
         onModalClose: () => {
           setAllBooks((prev) => {
@@ -406,7 +411,7 @@ export default function ViewEditBook({
 
                 <h2>
                   <span className='font-medium'>
-                    Author
+                    {t('book-view-tab.author')}
                     {isEditing && <RequiredIcon />}
                   </span>
                   <br />
@@ -424,7 +429,7 @@ export default function ViewEditBook({
                 </h2>
                 <div>
                   <h2 className='font-medium'>
-                    Genre
+                    {t('book-view-tab.genre')}
                     {isEditing && <RequiredIcon />}
                   </h2>
                   <EditBookCategory
@@ -439,7 +444,7 @@ export default function ViewEditBook({
 
             <div className='text-alt-secondary mt-4'>
               <h2 className='font-bold'>
-                Book Description
+                {t('book-view-tab.book-description')}
                 {isEditing && (
                   <span className='ml-2 text-alt-secondary text-opacity-70'>
                     (optional)
@@ -450,7 +455,7 @@ export default function ViewEditBook({
               <div className='mt-[10px] text-alt-secondary font-light w-full'>
                 {isViewing && description.length <= 0 && (
                   <div className='text-alt-secondary text-opacity-70'>
-                    No description provided
+                    {t('book-view-tab.no-description')}
                   </div>
                 )}
                 <div
@@ -479,15 +484,17 @@ export default function ViewEditBook({
                   type='button'
                   onClick={() => {
                     showConfirmModal({
-                      title: 'Delete Book',
-                      subtitle: 'Are you sure you want to delete this book?',
+                      title: t('book-view-tab.delete-book-tab.delete-book'),
+                      subtitle: t(
+                        'book-view-tab.delete-book-tab.delete-book-text'
+                      ),
                       onConfirm: () => {
                         onDeleteBook();
                       }
                     });
                   }}
                 >
-                  Delete
+                  {t('book-view-tab.delete-btn')}
                 </button>
                 <button
                   className=' bg-secondary w-32 p-2 px-8 text-white rounded-full flex justify-center items-baseline'
@@ -495,7 +502,7 @@ export default function ViewEditBook({
                     setIsEditing(true);
                   }}
                 >
-                  Edit
+                  {t('book-view-tab.edit-btn')}
                 </button>
               </>
             )}
@@ -506,26 +513,25 @@ export default function ViewEditBook({
                   onClick={onCancelForm}
                   type='button'
                 >
-                  Cancel
+                  {t('book-view-tab.cancel-btn')}
                 </button>
                 <button
                   className=' bg-secondary  w-32 p-2 px-8 text-white rounded-full'
                   type='submit'
                 >
-                  Save
+                  {t('book-view-tab.save-btn')}
                 </button>
               </>
             )}
             {isUpdating && (
               <div className='bg-secondary w-fit p-2 px-4 text-white rounded-full flex gap-2 font-medium opacity-80'>
-                <SpinningLoadingSvg className='h-6 w-6 text-white' />
-                Updating...
+                {t('book-view-tab.updating-btn')}
               </div>
             )}
             {isDeleting && (
               <div className='bg-danger w-fit p-2 px-4 text-white rounded-full flex gap-2 font-medium opacity-80'>
                 <SpinningLoadingSvg className='h-6 w-6 text-white' />
-                Deleting...
+                {t('book-view-tab.deleting-btn')}
               </div>
             )}
           </div>

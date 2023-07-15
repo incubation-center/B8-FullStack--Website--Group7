@@ -3,11 +3,16 @@ import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import CustomInput from '@/components/login/CustomInput';
 import { AuthForgotPassword } from '@/service/api/auth';
 import { AxiosError } from 'axios';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 export default function ForgotPassword() {
+  const router = useRouter();
+  const { t } = useTranslation('forgot-password');
   const [sendingEmail, setSendingEmail] = useState(false);
 
   const { AlertModal, showAlert } = useAlertModal();
@@ -28,15 +33,15 @@ export default function ForgotPassword() {
     try {
       await AuthForgotPassword(email);
       showAlert({
-        title: 'Email sent!!!',
-        subtitle: 'Check your email to reset your password',
+        title: t('email-sent-modal.email-sent'),
+        subtitle: t('email-sent-modal.check-email'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
       if (err instanceof AxiosError) {
         showAlert({
-          title: 'Error',
-          subtitle: err.response?.data?.error || 'An unknown error occurred',
+          title: t('email-send-fail.email-send-fail'),
+          subtitle: err.response?.data?.error || t('email-send-fail.try-again'),
           type: AlertType.ERROR
         });
       }
@@ -50,7 +55,12 @@ export default function ForgotPassword() {
     <>
       <AlertModal />
 
-      <div className='w-full h-full flex justify-center items-center bg-primary'>
+      <div
+        className='
+          w-full min-h-full flex justify-center items-center bg-primary
+          px-8
+        '
+      >
         <div
           className='
           flex flex-col justify-center items-center
@@ -61,11 +71,10 @@ export default function ForgotPassword() {
         >
           <div className='space-y-4 text-center flex flex-col items-center'>
             <h1 className='text-2xl font-extrabold text-alt-secondary'>
-              Forgot Your Password?
+              {t('forgot-pass-text')}
             </h1>
-            <p className='text-alt-secondary text-base'>
-              Please enter your email to <br />
-              reset your password
+            <p className='text-alt-secondary text-base whitespace-pre-line'>
+              {t('forgot-pass-p')}
             </p>
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -75,8 +84,8 @@ export default function ForgotPassword() {
                 label=''
                 name='email'
                 type='email'
-                placeholder='email'
-                register={register('email', { required: 'Email is required' })}
+                placeholder={t('email-placeholder')}
+                register={register('email', { required: t('email-required') })}
                 error={errors.email}
                 labelClassName='hidden'
                 errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
@@ -102,17 +111,29 @@ export default function ForgotPassword() {
                     <span>Sending...</span>
                   </div>
                 ) : (
-                  <span>Send</span>
+                  <span>{t('btns.send-btn')}</span>
                 )}
               </button>
             </form>
 
-            <Link href='/auth'>
-              <span className='text-alt-secondary'>Go back to Login</span>
+            <Link href='/auth' locale={router.locale}>
+              <span className='text-alt-secondary whitespace-nowrap'>
+                {t('btns.go-back-to-login')}
+              </span>
             </Link>
           </div>
         </div>
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const locale = context.locale as string;
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'forgot-password']))
+    }
+  };
 }

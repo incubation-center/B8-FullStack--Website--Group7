@@ -7,9 +7,11 @@ export default function AdminHomePage() {
 export function getServerSideProps(context: any) {
   // redirect to the first tab
 
+  const locale = context.locale;
+
   return {
     redirect: {
-      destination: `/admin/${AdminTab.DASHBOARD}`,
+      destination: `/${locale}/admin/${AdminTab.DASHBOARD}`,
       permanent: false
     }
   };

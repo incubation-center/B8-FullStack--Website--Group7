@@ -8,10 +8,17 @@ import { AuthRegister } from '@/service/api/auth';
 import { setCookie } from 'cookies-next';
 import { useState } from 'react';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
+import { useTranslation } from 'next-i18next';
+import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
+import { useRouter } from 'next/router';
 
 export default function UserRegisterForm({}) {
+  const router = useRouter();
+
   const [isRegistering, setIsRegistering] = useState(false);
   const { showAlert, AlertModal } = useAlertModal();
+
+  const { t } = useTranslation('signup');
 
   const {
     register,
@@ -44,14 +51,17 @@ export default function UserRegisterForm({}) {
       // set access token to cookies using next-cookies
       setCookie('accessToken', accessToken);
       setCookie('refreshToken', refreshToken);
+
+      router.reload();
     } catch (errors) {
       let message;
       if (errors instanceof AxiosError) {
-        message = errors.response?.data.error || 'An unknown error occurred';
+        message =
+          errors.response?.data.error || t('error-tap.error-occur-text');
       }
       showAlert({
         title: message,
-        subtitle: 'Please try again',
+        subtitle: t('error-tap.try-again'),
         type: AlertType.ERROR
       });
     }
@@ -62,90 +72,99 @@ export default function UserRegisterForm({}) {
   return (
     <>
       <AlertModal />
-      <div className='lg:min-w-[500px] space-y-8 text-center flex flex-col items-center '>
-        <h1 className='text-4xl font-extrabold text-alt-secondary'>
-          Create an account
+      <div className=' space-y-8 text-center flex flex-col items-center '>
+        <h1 className='text-2xl font-extrabold text-alt-secondary'>
+          {t('title')}
         </h1>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-full space-y-4'
+          className='min-w-[300px] lg:min-w-[500px] max-w-[550px] space-y-1 lg:space-y-4
+          
+          '
           autoComplete='off'
         >
           <CustomInput
             register={register('username', {
-              required: 'Username is required'
+              required: t('user-required-alert')
             })}
             error={errors.username}
             name='username'
             type='text'
-            placeholder='Enter your username'
-            label='Username'
+            showRequiredIcon
+            placeholder={t('username-placeholder')}
+            label={t('username')}
             labelClassName='text-alt-secondary ml-4 font-medium '
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
             disabled={isRegistering}
           />
 
           <CustomInput
-            register={register('email', { required: 'Email is required' })}
+            register={register('email', {
+              required: t('email-required-alert')
+            })}
             error={errors.email}
             name='email'
             type='email'
-            placeholder='Enter your email address'
-            label='Email address'
+            placeholder={t('email-placeholder')}
+            showRequiredIcon
+            label={t('email')}
             labelClassName='text-alt-secondary ml-4 font-medium '
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
             disabled={isRegistering}
           />
 
-          <PasswordInput
-            register={register('password', {
-              required: 'Password is required',
-              minLength: {
-                value: 8,
-                message: 'Password must be at least 8 characters long'
-              }
-            })}
-            error={errors.password}
-            name='password'
-            placeholder='Enter your password'
-            label='Password'
-            labelClassName='text-alt-secondary ml-4 font-medium'
-            errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
-            disabled={isRegistering}
-          />
-
-          <PasswordInput
-            register={register('confirmPassword', {
-              required: 'Confirm password is required',
-              validate: (val: string) => {
-                if (watch('password') != val) {
-                  return 'Confirm password do not match';
+          <div className='flex flex-col md:flex-row gap-2'>
+            <PasswordInput
+              register={register('password', {
+                required: t('password-required-alert'),
+                minLength: {
+                  value: 8,
+                  message: t('invalid-password-alert')
                 }
-              }
-            })}
-            error={errors.confirmPassword}
-            name='confirmPassword'
-            placeholder='Confirm your password'
-            label='Confirm Password'
-            labelClassName='text-alt-secondary ml-4 font-medium'
-            errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
-            disabled={isRegistering}
-          />
+              })}
+              error={errors.password}
+              name='password'
+              placeholder={t('password-placeholder')}
+              label={t('password')}
+              labelClassName='text-alt-secondary ml-4 font-medium'
+              errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
+              disabled={isRegistering}
+            />
+
+            <PasswordInput
+              register={register('confirmPassword', {
+                required: t('cfm-password-required-alert'),
+                validate: (val: string) => {
+                  if (watch('password') != val) {
+                    return t('password-not-matched');
+                  }
+                }
+              })}
+              error={errors.confirmPassword}
+              name='confirmPassword'
+              placeholder={t('cfm-password-placeholder')}
+              label={t('cfm-password')}
+              labelClassName='text-alt-secondary ml-4 font-medium'
+              errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
+              disabled={isRegistering}
+            />
+          </div>
 
           <CustomInput
             register={register('phoneNumber', {
-              required: 'Phone number is required',
+              required: t('phone-required-alert'),
               minLength: {
                 value: 9,
-                message: 'Phone number must be at least 9 characters long'
+                message: t('invalid-phone-alert')
               }
             })}
             error={errors.phoneNumber}
             name='phoneNumber'
+            showRequiredIcon
             type='tel'
-            placeholder='Enter your phone number'
-            label='Phone Number'
+            placeholder={t('phone-placeholder')}
+            label={t('phone')}
             labelClassName='text-alt-secondary ml-4 font-medium '
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
             disabled={isRegistering}
@@ -163,7 +182,14 @@ export default function UserRegisterForm({}) {
               `}
               disabled={isRegistering}
             >
-              Sign Up
+              {/* {t('sign-up')} */}
+              {!isRegistering && t('sign-up')}
+              {isRegistering && (
+                <div className='flex justify-center items-center'>
+                  <h1>{t('signing-up-btn')}</h1>
+                  <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
+                </div>
+              )}
             </button>
           </div>
         </form>

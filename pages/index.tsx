@@ -20,11 +20,9 @@ import {
   homePageTabAtom
 } from '@/service/recoil';
 import { AuthStore } from '@/types/auth';
-import { Book } from '@/types';
-import { getAllBooks } from '@/service/api/book';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
-import { useUpdateDataInterval } from '@/utils/function';
-import { getAllRequest } from '@/service/api/request';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export default function Home({
   currentTab,
@@ -33,11 +31,11 @@ export default function Home({
   currentTab: HomePageTab;
   authStore: AuthStore;
 }) {
+  const { t } = useTranslation('common');
+
   // atoms
   const [_, setAuthObj] = useRecoilState(AuthAtom);
   const [__, setCurrentTab] = useRecoilState(homePageTabAtom);
-  const [___, setAllBooks] = useRecoilState(AllBooksAtom);
-  const [____, setUserRequests] = useRecoilState(UserRequestAtom);
 
   const [tab, setTab] = useState(currentTab);
 
@@ -57,13 +55,18 @@ export default function Home({
         undefined,
         {
           shallow: true,
-          scroll: false
+          scroll: false,
+          locale: router.locale
         }
       );
       return;
     }
 
-    router.push(`/?tab=${tab}`, undefined, { shallow: true, scroll: false });
+    router.push(`/?tab=${tab}`, undefined, {
+      shallow: true,
+      scroll: false,
+      locale: router.locale
+    });
   };
   useEffect(() => {
     const tab = router.query.tab;
@@ -92,7 +95,9 @@ export default function Home({
       {!isFetched && (
         <div className='h-full w-full flex justify-center items-center gap-4'>
           <SpinningLoadingSvg className='h-8 w-8 text-white' />
-          <div className='text-white text-lg font-normal'> Loading...</div>
+          <div className='text-white text-lg font-normal'>
+            {t('loading.homepage')}
+          </div>
         </div>
       )}
       {isFetched && (
@@ -122,23 +127,17 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     tab: HomePageTab;
   } = context.query;
 
-  if (!tab) {
-    return {
-      redirect: {
-        destination: `/?tab=${HomePageTab.HOME}`,
-        permanent: true
-      }
-    };
-  }
-
   // check if user is admin
   const token = context.req.cookies.accessToken;
   const authObj = await processUserToken(token);
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      currentTab: tab,
-      authStore: authObj
+      currentTab: tab || HomePageTab.HOME,
+      authStore: authObj,
+      ...(await serverSideTranslations(locale, ['homepage', 'common']))
     }
   };
 };

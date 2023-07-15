@@ -24,12 +24,15 @@ import {
 } from '@/service/api/admin';
 import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { AxiosError } from 'axios';
+import { useTranslation } from 'next-i18next';
 
 export default function IncomingTab({
   handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [_, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
@@ -102,17 +105,17 @@ export default function IncomingTab({
       </ModalWrapper>
 
       <AdminTabLayout
-        title='Incoming Request'
+        title={t('tab.incoming-request')}
         handleRefresh={handleRefreshRequest}
       >
         <RequestTable
           useIn={AdminTab.INCOMING_REQUEST}
-          data={requestData.filter(
-            (request) => request.status === RequestStatus.PENDING
-          )}
+          data={requestData
+            .filter((request) => request.status === RequestStatus.PENDING)
+            .reverse()}
           actions={[
             {
-              label: 'View',
+              label: t('btns.view-btn'),
               bgColor: 'bg-alt-secondary',
               onClick: (request) => {
                 setViewRequest(request);
@@ -120,12 +123,16 @@ export default function IncomingTab({
               }
             },
             {
-              label: 'Approve',
+              label: t('btns.approve-btn'),
               bgColor: 'bg-success text-white',
               onClick: (request) => {
                 showConfirmModal({
-                  title: 'Approve Request',
-                  subtitle: 'Are you sure you want to approve this request?',
+                  title: t(
+                    'incoming-request-tab.approve-request-tab.approve-request'
+                  ),
+                  subtitle: t(
+                    'incoming-request-tab.approve-request-tab.p-approve-request-tab'
+                  ),
                   onConfirm: () => {
                     setIsRefreshing(true);
                     handleApproveRequest(request);
@@ -134,12 +141,16 @@ export default function IncomingTab({
               }
             },
             {
-              label: 'Reject',
+              label: t('btns.reject-btn'),
               bgColor: 'bg-danger text-white',
               onClick: (request) => {
                 showRejectModal({
-                  title: 'Reject Request',
-                  subtitle: 'Are you sure you want to reject this request?',
+                  title: t(
+                    'incoming-request-tab.reject-request-tab.reject-request'
+                  ),
+                  subtitle: t(
+                    'incoming-request-tab.reject-request-tab.p-reject-request'
+                  ),
                   onConfirm: (reason) => {
                     setIsRefreshing(true);
                     handleRejectRequest(reason, request);

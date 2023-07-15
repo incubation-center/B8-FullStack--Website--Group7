@@ -1,0 +1,48 @@
+{
+  "book": {
+    "author": "Author",
+    "genre": "Genre",
+    "book-description": "Book description"
+  },
+  "book-not-found": {
+    "label": "Book not found",
+    "back-to-homepage": "Back to homepage"
+  },
+  "fetching-book": "Fetching book",
+  "modal": {
+    "save": {
+      "title": "Success",
+      "subtitle": "Book saved successfully"
+    },
+    "remove": {
+      "title": "Success",
+      "subtitle": "Book removed successfully"
+    },
+    "borrow": {
+      "label": "Book Rental Form",
+      "book-title": "Book Title",
+      "book-duration": "Duration",
+      "duration-list": {
+        "1-week": "1 week",
+        "2-weeks": "2 weeks",
+        "3-weeks": "3 weeks"
+      }
+    },
+    "borrow-success": {
+      "title": "You successfully requesting!",
+      "subtitle": "Please wait for confirmation form Admin! Stay Tune! Thank you!"
+    },
+    "borrow-error": {
+      "title": "Request failed",
+      "subtitle": "somethings went wrong, please try again later!"
+    }
+  },
+  "btns": {
+    "borrow-btn": "Borrow",
+    "sending-request-btn": "Sending request",
+    "cancel-btn": "Cancel",
+    "go-back-btn": "Go Back",
+    "save-btn": "Save",
+    "remove-btn": "Remove"
+  }
+}

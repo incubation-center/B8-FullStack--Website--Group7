@@ -1,4 +1,5 @@
 import { BookRequest } from '@/types';
+import { useTranslation } from 'next-i18next';
 
 export default function RenterTable({
   data,
@@ -11,6 +12,8 @@ export default function RenterTable({
     bgColor: string;
   }[];
 }) {
+  const { t } = useTranslation('admin');
+
   return (
     <table className='w-full'>
       <thead>
@@ -22,11 +25,11 @@ export default function RenterTable({
             [&>*]:py-1 [&>*]:px-1
           '
         >
-          <td className='w-1/5'>Name</td>
-          <td className='w-2/5'>Email</td>
-          <td className='w-1/5'>Approval date</td>
-          <td className='w-1/5'>Return date</td>
-          <td className='w-fit'>Actions</td>
+          <td className='w-1/5'>{t('renter-tab.name')}</td>
+          <td className='w-2/5'>{t('renter-tab.email')}</td>
+          <td className='w-1/5'>{t('renter-tab.approval-date')}</td>
+          <td className='w-1/5'>{t('renter-tab.return-date')}</td>
+          <td className='w-fit'>{t('renter-tab.actions')}</td>
         </tr>
       </thead>
 
@@ -42,6 +45,7 @@ export default function RenterTable({
                 text-left   
                 border-y-2 border-primary 
                 [&>*]:py-2 [&>*]:px-1
+                text-primary
               '
             >
               <td className='w-1/5'>{renter.username}</td>
@@ -49,7 +53,9 @@ export default function RenterTable({
               <td className='w-1/5'>
                 {request.dateOfAccepted!.toDateString()}
               </td>
-              <td className='w-1/5'>{request.dateOfReturn!.toDateString()}</td>
+              <td className='w-1/5'>
+                {request.dateOfReceived!.toDateString()}
+              </td>
               <td className='w-fit'>
                 {actions.map((action) => (
                   <button
@@ -74,7 +80,7 @@ export default function RenterTable({
         {data.length === 0 && (
           <tr className='text-center h-full '>
             <td colSpan={5} className='p-4 font-medium text-lg text-primary'>
-              No renter found
+              {t('renter-tab.no-renter-found')}
             </td>
           </tr>
         )}

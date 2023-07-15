@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { UserLoginInputs } from '@/types/auth';
@@ -16,8 +17,11 @@ import { processUserToken } from '@/service/token';
 import { useRecoilState } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 export default function UserLoginForm() {
+  const { t } = useTranslation('login');
+
   const [_, setAuthStore] = useRecoilState(AuthAtom);
 
   const [rememberMe, setRememberMe] = useState(true);
@@ -73,21 +77,27 @@ export default function UserLoginForm() {
     <>
       <AlertModal />
 
-      <div className='space-y-8 text-center flex flex-col items-center'>
-        <h1 className='text-4xl font-extrabold text-alt-secondary'>
-          Welcome to Digital Library
+      <div className='space-y-4 text-center flex flex-col items-center overflow-auto'>
+        <h1 className='text-2xl font-extrabold text-alt-secondary'>
+          {t('welcome-text')}
         </h1>
-        <p className='text-alt-secondary'>Please enter your details</p>
+        <p className='text-alt-secondary'>{t('p-details-login-tab')}</p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className='w-5/6 space-y-4'>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='w-5/6 min-w-[300px] space-y-4'
+        >
           {/* email address */}
 
           <CustomInput
-            label='Email Address'
+            label={t('email')}
             name='email'
             type='email'
-            placeholder='Please enter your email'
-            register={register('email', { required: 'Email is required' })}
+            placeholder={t('email-placeholder')}
+            register={register('email', {
+              required: t('email-required-alert')
+            })}
+            showRequiredIcon
             error={errors.email}
             labelClassName='text-alt-secondary ml-4 font-medium'
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
@@ -95,11 +105,11 @@ export default function UserLoginForm() {
           />
           {/* password */}
           <PasswordInput
-            label='Password'
+            label={t('password')}
             name='password'
-            placeholder='Please enter your password'
+            placeholder={t('password-placeholder')}
             register={register('password', {
-              required: 'Password is required'
+              required: t('password-required-alert')
             })}
             error={errors.password}
             labelClassName='text-alt-secondary ml-4 font-medium'
@@ -111,32 +121,31 @@ export default function UserLoginForm() {
             <Link
               href='/forgot-password'
               className=' text-sm text-alt-secondary font-medium'
+              locale={router.locale}
             >
-              Forgot password?
+              {t('forget-password')}
             </Link>
           </div>
           {/* submit button */}
-          <div>
-            <button
-              type='submit'
-              className={`
+
+          <button
+            type='submit'
+            className={`
               w-full px-4 py-2 mt-6 rounded-full
               bg-secondary text-white text-xl tracking-wide 
               focus:outline-none
-              font-poppins
               ${isLoggingIn && 'cursor-not-allowed bg-opacity-50'}
             `}
-              disabled={isLoggingIn}
-            >
-              {!isLoggingIn && 'Login'}
-              {isLoggingIn && (
-                <div className='flex justify-center items-center'>
-                  <h1>Logging in</h1>
-                  <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
-                </div>
-              )}
-            </button>
-          </div>
+            disabled={isLoggingIn}
+          >
+            {!isLoggingIn && t('login-btn')}
+            {isLoggingIn && (
+              <div className='flex justify-center items-center'>
+                <h1>{t('logging-in-btn')}</h1>
+                <SpinningLoadingSvg className='w-6 h-6 ml-2 text-white' />
+              </div>
+            )}
+          </button>
         </form>
       </div>
     </>

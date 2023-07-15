@@ -1,5 +1,7 @@
 'use client';
 import { User } from '@/types';
+import { i18n } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { RefObject, useEffect, useMemo, useState } from 'react';
 
 export const formatEnumValue = (value: string) => {
@@ -62,4 +64,34 @@ export function useUpdateDataInterval(callback: Function, minute: number) {
     }, minute * 60 * 1000);
     return () => clearInterval(timer);
   }, [callback, minute]);
+}
+
+export function useLocale() {
+  const { locale } = useRouter();
+
+  const isKhmer = useMemo(() => {
+    return locale === 'kh';
+  }, [locale]);
+
+  return { isKhmer };
+}
+
+export function useLoadNamespace(name: string | string[]) {
+  const router = useRouter();
+
+  useEffect(() => {
+    // progressive load homepage.json only for book.tab.tsx
+    const loadNamespace = async (locale: any, namespace: any) => {
+      const resources = await fetch(
+        `/locales/${locale}/${namespace}.json`
+      ).then((res) => res.json());
+      if (i18n) {
+        i18n.addResourceBundle(locale, namespace, resources, true, true);
+      }
+    };
+
+    if (i18n?.addResourceBundle) {
+      loadNamespace(router.locale, name);
+    }
+  }, [name, router.locale]);
 }

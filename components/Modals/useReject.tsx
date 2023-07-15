@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import CustomInput from '../login/CustomInput';
+import { useTranslation } from 'next-i18next';
 
 export interface ConfirmRejectModal {
   title: string;
@@ -68,6 +69,8 @@ export default function useConfirmRejectModal() {
   // modal component
   // this component need to be used in the root of the component that you're using the service
   function ConfirmRejectModal() {
+    const { t } = useTranslation('admin');
+
     const ref = useRef<Element | null>(null);
     const [mounted, setMounted] = useState(false);
 
@@ -130,24 +133,28 @@ export default function useConfirmRejectModal() {
                       <h1 className='font-bold text-xl lg:text-2xl text-primary'>
                         {title}
                       </h1>
-                      <p className='font-medium text-primary whitespace-pre-line'>
+                      <p className='font-medium text-primary whitespace-pre-line mt-3'>
                         {subtitle}
                       </p>
                     </div>
 
                     <div className='w-full mt-4'>
                       <CustomInput
-                        label='Reject reason:'
-                        required
+                        label={t(
+                          'incoming-request-tab.reject-request-tab.reject-reason'
+                        )}
+                        showRequiredIcon
                         name='reason'
                         type='textfield'
-                        labelClassName='text-primary font-medium'
+                        labelClassName='text-primary font-bold'
                         errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
                         register={register('reason', {
                           required: 'reject reason is required'
                         })}
                         error={errors.reason}
-                        placeholder='Please input your reason'
+                        placeholder={t(
+                          'incoming-request-tab.reject-request-tab.reject-reason-fill'
+                        )}
                       />
                     </div>
 
@@ -160,7 +167,7 @@ export default function useConfirmRejectModal() {
                       '
                         onClick={close}
                       >
-                        No
+                        {t('incoming-request-tab.reject-request-tab.no-btn')}
                       </button>
                       <button
                         className='
@@ -170,7 +177,7 @@ export default function useConfirmRejectModal() {
                       '
                         type='submit'
                       >
-                        Yes
+                        {t('incoming-request-tab.reject-request-tab.yes-btn')}
                       </button>
                     </div>
                   </motion.div>

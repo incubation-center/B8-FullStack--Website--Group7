@@ -23,11 +23,16 @@ import { uploadImage } from '@/service/firebase';
 import { updateUserInfo } from '@/service/api/user';
 import useConfirmModal from '../Modals/useCofirm';
 import { HomePageTab } from '@/utils/enum';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 interface ProfileUploadInputs {}
 
 export default function ProfileTab() {
+  const router = useRouter();
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
+
+  const { t } = useTranslation('homepage');
 
   // handle image upload
   const [image, setImage] = useState<File | null | undefined>();
@@ -96,7 +101,7 @@ export default function ProfileTab() {
       isFetched: true
     });
 
-    window.location.href = `/?tab=${HomePageTab.HOME}`;
+    router.push(`/?tab=${HomePageTab.HOME}`);
   };
 
   const { showAlert, AlertModal } = useAlertModal();
@@ -237,70 +242,84 @@ export default function ProfileTab() {
 
             {/* personal information */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
-                Personal Information
+              <h1 className='font-extrabold text-t-primary text-start text-xl md:text-2xl'>
+                {t('profile-tab.personal-info')}
               </h1>
-              <div className='w-full my-5 p-5 h-fit flex flex-col justify-center items-end bg-[#EBEBEB] rounded-xl relative'>
-                <div className='w-full flex flex-grow flex-wrap gap-4'>
+              <div className='w-full my-5 p-5 h-fit flex flex-col justify-center items-end bg-background rounded-xl relative'>
+                <div className='w-full flex flex-grow flex-wrap gap-4 text-t-primary'>
                   <div
-                    className=' 
-                text-primary text-start text-lg 
-                  col-span-2 w-full
-                '
+                    className=' primary
+                     text-start text-lg 
+                      col-span-2 w-full
+                    '
                   >
-                    <div className='font-extrabold'>Username</div>
-                    <div>{authStore.user.username}</div>
+                    <div className='font-extrabold'>
+                      {t('profile-tab.username')}
+                    </div>
+                    <div className='mt-2 text-lg'>
+                      {authStore.user.username}
+                    </div>
                   </div>
-                  <div className=' text-primary text-lg flex-1   '>
-                    <div className=' font-extrabold'>Phone Number</div>
-                    <div>{authStore.user.phoneNumber}</div>
+                  <div className=' text-lg flex-1   '>
+                    <div className=' font-extrabold  text-lg'>
+                      {t('profile-tab.phone number')}
+                    </div>
+                    <div className='mt-2 text-lg'>
+                      {authStore.user.phoneNumber}
+                    </div>
                   </div>
-                  <div className=' text-primary text-start text-lg  flex-1  '>
-                    <div className=' font-extrabold'>Email</div>
-                    <div>{authStore.user.email}</div>
+                  <div className='text-start text-xl  flex-1  '>
+                    <div className=' font-extrabold text-lg md:text-lg'>
+                      {t('profile-tab.email')}
+                    </div>
+                    <div className='mt-2 text-lg md:text-lg'>
+                      {authStore.user.email}
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={() => toggleInformationModal()}
                   className='
-                bg-secondary text-white font-light rounded-lg py-1 px-7 
-                transition-colors duration-300 box-border border-2 border-secondary hover:border-white
-                md:absolute md:top-5 md:right-5
-                mt-5 md:mt-0 w-full md:w-fit
-              
-              '
+                    bg-primary text-white font-light rounded-lg py-1 px-7 
+                    transition-colors duration-300 box-border border-2 border-secondary hover:border-white
+                    md:absolute md:top-5 md:right-5
+                    mt-5 md:mt-0 w-full md:w-fit
+                  
+                  '
                 >
-                  Edit
+                  {t('profile-tab.edit-btn')}
                 </button>
               </div>
             </div>
 
             {/* Privacy setting */}
             <div className='relative justify-start w-full  mx-auto mt-5'>
-              <h1 className='font-extrabold text-primary text-start text-xl md:text-2xl'>
-                Privacy Setting
+              <h1 className='font-extrabold text-t-primary text-start text-xl md:text-2xl'>
+                {t('profile-tab.privacy-set')}
               </h1>
-              <div className='w-full my-5 p-5 h-fit flex justify-between items-center flex-wrap bg-[#EBEBEB] rounded-xl  '>
+              <div className='w-full my-5 p-5 h-fit flex justify-between items-center flex-wrap bg-background rounded-xl  '>
                 <div
                   className=' 
-                text-primary text-start text-lg 
+                text-t-primary text-start text-lg 
                  flex-1 w-full
                 '
                 >
-                  <div className='font-extrabold'>Password</div>
+                  <div className='font-extrabold text-lg'>
+                    {t('profile-tab.password')}
+                  </div>
                 </div>
 
                 <button
                   onClick={() => toggleChangePasswordModal()}
                   className='
-                bg-secondary text-white font-light rounded-lg py-1 px-7 
+                bg-primary text-white font-light rounded-lg py-1 px-7 
                 transition-colors duration-300 box-border border-2 border-secondary hover:border-white
                 w-full md:w-fit
                 mt-2 md:mt-0
               '
                 >
-                  Change Password
+                  {t('profile-tab.changePass-btn')}
                 </button>
               </div>
             </div>
@@ -309,8 +328,8 @@ export default function ProfileTab() {
               <button
                 onClick={() => {
                   showConfirmModal({
-                    title: 'Logout',
-                    subtitle: 'Are you sure you want to logout?',
+                    title: t('logout-modal.logout'),
+                    subtitle: t('logout-modal.logout-text'),
                     onConfirm: () => {
                       handleLogout();
                     }
@@ -324,7 +343,7 @@ export default function ProfileTab() {
                 transition-colors duration-300
               '
               >
-                Logout
+                {t('profile-tab.logout-btn')}
               </button>
             </div>
           </motion.div>

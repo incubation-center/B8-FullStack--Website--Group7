@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from 'next';
-import Image from 'next/image';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 
 import { Book, User } from '@/types';
@@ -10,12 +10,7 @@ import useAlertModal, { AlertType } from '@/components/Modals/Alert';
 import { useEffect, useState } from 'react';
 import { HomePageTab } from '@/utils/enum';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  AllBooksAtom,
-  AuthAtom,
-  getBookByIdAtom,
-  isBookAlreadySaved
-} from '@/service/recoil';
+import { AllBooksAtom, AuthAtom, isBookAlreadySaved } from '@/service/recoil';
 import { getCookie } from 'cookies-next';
 import { processUserToken } from '@/service/token';
 import {
@@ -26,13 +21,17 @@ import { AxiosError } from 'axios';
 import SpinningLoadingSvg from '@/components/icon/SpinningLoadingSvg';
 import SaveToFavSvg from '@/components/icon/SaveToFavSvg';
 
-import { BookData } from '@/dummydata';
 import { getBookById } from '@/service/api/book';
 import Link from 'next/link';
 import BackArrowSvg from '@/components/icon/BackArrow';
 
+import { useTranslation } from 'next-i18next';
+import { useLocale } from '@/utils/function';
+
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
+  const { t } = useTranslation('book-detail');
+  const { isKhmer } = useLocale();
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
   const allBooks = useRecoilValue(AllBooksAtom);
   const [book, setBook] = useState<Book | undefined | null>();
@@ -106,8 +105,8 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       await getAuthObj(); // update user's fav list
 
       showAlert({
-        title: 'Save success',
-        subtitle: res.data,
+        title: t('modal.save.title'),
+        subtitle: t('modal.save.subtitle'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
@@ -142,8 +141,8 @@ export default function BookDetail({ bookId }: { bookId: string }) {
       await getAuthObj(); // update user's fav list
 
       showAlert({
-        title: 'Remove success',
-        subtitle: res.data,
+        title: t('modal.remove.title'),
+        subtitle: t('modal.remove.subtitle'),
         type: AlertType.SUCCESS
       });
     } catch (err) {
@@ -192,15 +191,17 @@ export default function BookDetail({ bookId }: { bookId: string }) {
             <div className='p-6 flex justify-start '>
               <div
                 className='
-                  flex cursor-pointer select-none 
+                  flex items-center cursor-pointer select-none 
                   hover:bg-alt-secondary hover:bg-opacity-20
                   transition duration-300 ease-in-out
                   p-2 px-4 rounded-full
                 '
                 onClick={() => router.back()}
               >
-                <BackArrowSvg className='w-6 h-6 fill-alt-secondary' />
-                <h1 className='ml-8 text-alt-secondary'>Go Back</h1>
+                <BackArrowSvg className='w-4 h-4 fill-alt-secondary' />
+                <h1 className='ml-4 text-alt-secondary'>
+                  {t('btns.go-back-btn')}
+                </h1>
               </div>
             </div>
 
@@ -221,27 +222,33 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   <div className='space-y-[10px] text-alt-secondary font-light'>
                     <h1 className='font-bold text-2xl'>{book.title}</h1>
 
-                    <h2>Author: {book.author}</h2>
-                    <h2>Genre: {book.category}</h2>
+                    <h2>
+                      {t('book.author')}: {book.author}
+                    </h2>
+                    <h2>
+                      {t('book.genre')}: {book.category}
+                    </h2>
 
-                    <h2 className='font-bold'>Book Description</h2>
+                    <h2 className={`${isKhmer ? 'font-medium' : 'font-bold'}`}>
+                      {t('book.book-description')}
+                    </h2>
                   </div>
 
                   {authStore.isFetched && (
                     <div className='w-20'>
                       <button
                         className={`
-                     bg-white w-12 h-12 
-                      flex justify-center items-center
-                      rounded-full mx-auto
-                      overflow-hidden
-                      ${
-                        isSaving
-                          ? 'cursor-not-allowed shadow-inner shadow-primary'
-                          : 'cursor-pointer hover:shadow-inner hover:shadow-primary'
-                      }
-                      transition-all duration-300
-                    `}
+                        bg-white w-12 h-12 
+                          flex justify-center items-center
+                          rounded-full mx-auto
+                          overflow-hidden
+                          ${
+                            isSaving
+                              ? 'cursor-not-allowed shadow-inner shadow-primary'
+                              : 'cursor-pointer hover:shadow-inner hover:shadow-primary'
+                          }
+                          transition-all duration-300
+                        `}
                         disabled={isSaving}
                         onClick={
                           isSaved ? handleRemoveFromFav : handleSaveToFav
@@ -258,7 +265,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                       </button>
                       {!isSaving && (
                         <div className='w-full text-center text-alt-secondary text-sm mt-1'>
-                          {isSaved ? 'Remove' : 'Save'}
+                          {isSaved ? t('btns.remove-btn') : t('btns.save-btn')}
                         </div>
                       )}
                     </div>
@@ -278,9 +285,12 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                 {authStore.isFetched && (
                   <button
                     onClick={() => open()}
-                    className='bg-secondary text-white font-bold py-4 md:py-2 px-4 w-full md:w-40 rounded-lg my-10'
+                    className={`
+                      bg-secondary text-white 
+                      ${isKhmer ? 'font-medium' : 'font-bold'} 
+                      py-4 md:py-2 px-4 w-full md:w-40 rounded-full my-10`}
                   >
-                    Borrow
+                    {t('btns.borrow-btn')}
                   </button>
                 )}
               </div>
@@ -295,14 +305,21 @@ export default function BookDetail({ bookId }: { bookId: string }) {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
 
+  const locale = context.locale as string;
+
   return {
     props: {
-      bookId: id
+      bookId: id,
+      ...(await serverSideTranslations(locale, ['common', 'book-detail']))
     }
   };
 }
 
 const BookNotFound = () => {
+  const { t } = useTranslation('book-detail');
+
+  const router = useRouter();
+
   return (
     <div className='min-h-screen w-full flex flex-col space-y-6 justify-center items-center bg-primary text-center'>
       <div>
@@ -313,12 +330,14 @@ const BookNotFound = () => {
         >
           401
         </h1>
-        <h1 className='text-lg text-alt-secondary'>Book not found</h1>
+        <h1 className='text-lg text-alt-secondary'>
+          {t('book-not-found.label')}
+        </h1>
       </div>
 
-      <Link href={`/?tab=${HomePageTab.HOME}`}>
+      <Link href={`/?tab=${HomePageTab.HOME}`} locale={router.locale}>
         <span className='bg-alt-secondary px-4 py-2 rounded-full text-primary font-medium'>
-          Back to Homepage
+          {t('book-not-found.back-to-homepage')}
         </span>
       </Link>
     </div>
@@ -326,10 +345,12 @@ const BookNotFound = () => {
 };
 
 const FetchingBook = () => {
+  const { t } = useTranslation('book-detail');
+
   return (
     <div className='w-full flex-1 flex gap-4 justify-center items-center bg-primary'>
       <div className='text-center text-alt-secondary font-medium'>
-        Fetching book
+        {t('fetching-book')}
       </div>
       <SpinningLoadingSvg className='w-8 h-8 text-alt-secondary' />
     </div>

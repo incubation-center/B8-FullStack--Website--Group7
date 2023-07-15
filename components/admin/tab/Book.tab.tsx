@@ -4,15 +4,21 @@ import { getAllBooks } from '@/service/api/book';
 import { AllBooksAtom } from '@/service/recoil';
 import { isRefreshingRequestAtom } from '@/service/recoil/admin';
 import { Book } from '@/types';
-import { useDebounce } from '@/utils/function';
-import { useState } from 'react';
+import { useDebounce, useLoadNamespace } from '@/utils/function';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import ViewEditBook from '../ViewEditBook';
 import { AnimatePresence } from 'framer-motion';
 import UserSearchBar from '@/components/UserSearchBar';
 import { HomePageTab } from '@/utils/enum';
+import { useRouter } from 'next/router';
+import { i18n, useTranslation } from 'next-i18next';
 
 export default function BookTab() {
+  const router = useRouter();
+
+  const { t } = useTranslation('admin');
+
   const [_, setAllBooks] = useRecoilState(AllBooksAtom);
   const [__, setIsRefreshing] = useRecoilState(isRefreshingRequestAtom);
 
@@ -35,7 +41,7 @@ export default function BookTab() {
   }, 100);
 
   return (
-    <AdminTabLayout title='Books' handleRefresh={handleRefreshBook}>
+    <AdminTabLayout title={t('tab.books')} handleRefresh={handleRefreshBook}>
       <div className='w-full flex justify-start mb-4 '>
         <UserSearchBar currentTab={HomePageTab.HOME} />
       </div>

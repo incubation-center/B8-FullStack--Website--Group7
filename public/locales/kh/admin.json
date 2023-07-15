@@ -1,0 +1,158 @@
+{
+  "btns": {
+    "back-to-home-btn": "ទៅទំព័រដើម",
+    "refresh-btn": "ធ្វើបច្ចុប្បន្នភាព",
+    "refreshing-btn": "កំពុងធ្វើបច្ចុប្បន្នភាព",
+    "view-btn": "ពិនិត្យ",
+
+    "approve-btn": "យល់ព្រម",
+    "reject-btn": "បដិសេធ",
+
+    "receive-btn": "ទទួល",
+
+    "approved": "បានយល់ព្រម",
+    "rejected": "បានបដិសេធ",
+
+    "logout-btn": "ចាកចេញ"
+  },
+
+  "tab": {
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "upload-book": "បង្ហោះសៀវភៅ",
+    "books": "បញ្ចីសៀវភៅ",
+    "incoming-request": "សំណើរចូល",
+    "active-request": "សំណើរសកម្ម",
+    "archived-request": "សំណើរដែលបានទុក",
+    "renter": "អ្នកបានខ្ចី",
+    "setting": "ការកំណត់"
+  },
+
+  "dashboard-tab": {
+    "total-incoming": "សំណើរចូលសរុប",
+    "total-active": "សំណើរសកម្ម​សរុប",
+    "total-renter": "អ្នកបានខ្ចីសរុប",
+    "total-archived": "សំណើរដែលបានទុកសរុប",
+
+    "today": "ថ្ងៃនេះ",
+    "yesterday": "ម្សិលមិញ",
+
+    "recent-renter": "អ្នកបានខ្ចីថ្មីៗ"
+  },
+
+  "upload-tab": {
+    "book-cover": "ក្របសៀវភៅ",
+    "upload-img": "បង្ហោះរូបភាពសៀវភៅ",
+    "click-to-change-image": "ចុចដើម្បីផ្លាស់ប្ដូររូបភាព",
+
+    "book-title": "ចំណងជើងសៀវភៅ",
+    "author": "អ្នកនិពន្ធ",
+    "category": "ប្រភេទ",
+    "description": "ការពិពណ៌នា",
+
+    "upload-book-btn": "បង្ហោះសៀវភៅ",
+    "uploading-book-btn": "កំពុងបង្ហោះសៀវភៅ..."
+  },
+
+  "book-view-tab": {
+    "author": "អ្នកនិពន្ធ",
+    "genre": "ប្រភេទ",
+    "book-description": "ការពិពណ៌នាសៀវភៅ",
+    "no-description": "មិនមានការពិពណ៌នាសៀវភៅ",
+
+    "delete-btn": "លុប",
+    "edit-btn": "កែសម្រួល",
+    "save-btn": "រក្សាទុក",
+    "cancel-btn": "បោះបង់",
+
+    "updating-btn": "កំពុងធ្វើបច្ចុប្បន្នភាព...",
+    "deleting-btn": "កំពុងលុបសៀវភៅ...",
+
+    "success-tab": {
+      "success": "ជោគជ័យ",
+      "book-update-text": "ធ្វើបច្ចុប្បន្នភាពសៀវភៅដោយជោគជ័យ",
+
+      "close-btn": "បិទ"
+    },
+
+    "cancel-form": {
+      "cancel": "បោះបង់",
+      "cancel-text": "តើអ្នកប្រាកដទេថាអ្នកចង់បោះបង់ការកែសម្រួលនេះ?"
+    },
+
+    "delete-book-tab": {
+      "delete-book": "លុបសៀវភៅ",
+      "delete-book-text": "តើអ្នកប្រាកដទេថាអ្នកចង់លុបសៀវភៅនេះ?",
+
+      "yes-btn": "បាទ/ចាស",
+      "no-btn": "ទេ",
+
+      "success-tab": {
+        "success": "ជោគជ័យ",
+        "book-delete-text": "សៀវភៅត្រូវបានលុបដោយជោគជ័យ",
+
+        "close-btn": "បិទ"
+      }
+    }
+  },
+
+  "incoming-request-tab": {
+    "approve-request-tab": {
+      "approve-request": "​សំណើរត្រូវបានអនុម័ត",
+      "p-approve-request-tab": "តើអ្នកប្រាកដថាចង់យល់ព្រមលើសំណើរនេះទេ?",
+
+      "no-btn": "ទេ",
+      "yes-btn": "បាទ/ចាស"
+    },
+
+    "reject-request-tab": {
+      "reject-request": "សំណើរត្រូវបានបដិសេធ",
+      "p-reject-request": "តើអ្នកប្រាកដថាចង់បដិសេធសំណើរនេះទេ?",
+
+      "reject-reason": "ហេតុផលបដិសេដ",
+      "reject-reason-fill": "សូមបញ្ចូលហេតុផលរបស់អ្នក",
+
+      "no-btn": "ទេ",
+      "yes-btn": "បាទ/ចាស"
+    }
+  },
+
+  "renter-tab": {
+    "no-renter-found": "មិនមានអ្នកដាក់សំណើរ",
+
+    "name": "ឈ្មោះ",
+    "email": "អ៊ីម៉ែល",
+    "approval-date": "កាលបរិច្ឆេទបានអនុម័ត",
+    "return-date": "កាលបរិច្ឆេទដែលត្រូវសង",
+    "actions": "សកម្មភាព"
+  },
+
+  "setting-tab": {
+    "general-setting": "ការកំណត់ទូទៅ",
+    "system-name": "ឈ្មោះប្រព័ន្ធ",
+    "personal-setting": "ការកំណត់ផ្ទាល់ខ្លួន",
+
+    "security-policy": "សុវត្ថិភាព&គោលការណ៏",
+    "password": "ពាក្យសម្ងាត់",
+    "password-placeholder": "ផ្លាស់ប្តូរពាក្យសម្ងាត់គណនីគ្រប់គ្រងរបស់អ្នក",
+    "activity-log": "សកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
+    "activity-log-placeholder": "អ្នកគ្រប់គ្រងអាចឃើញសកម្មភាពចូលនៅក្នុងប្រព័ន្ធ",
+
+    "change-btn": "ផ្លាស់ប្តូរ",
+    "view-btn": "មើល"
+  },
+
+  "request-table": {
+    "book": "សៀវភៅ",
+    "username": "ឈ្មោះអ្នកខ្ចី",
+    "request-date": "កាលបរិច្ឆេទសំណើរ",
+    "to-be-returned-date": "កាលបរិច្ឆេទដែលត្រូវសង",
+    "status": "ស្ថានភាព",
+    "actions": "សកម្មភាព",
+    "no-request": "មិនមានសំណើរ"
+  },
+
+  "logout-modal": {
+    "logout": "ចាកចេញ",
+    "logout-text": "តើអ្នកប្រាកដជាចង់ចេញពីគណនីមែនទេ?"
+  }
+}

@@ -41,6 +41,8 @@ export const filteredUserRequestAtom = selector<BookRequest[]>({
     const keyword = get(searchKeywordAtom);
     const tab = get(homePageTabAtom);
 
+    if (requests === undefined) return [];
+
     if (tab !== HomePageTab.REQUEST_STATUS || keyword === '') return requests;
 
     const options = {
