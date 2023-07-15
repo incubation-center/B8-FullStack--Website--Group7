@@ -42,6 +42,20 @@ export default function useConfirmModal() {
     open();
   }
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isShowing) {
+        window.document
+          .querySelector('body')!
+          .classList.add('!overflow-hidden');
+      } else {
+        window.document
+          .querySelector('body')!
+          .classList.remove('!overflow-hidden');
+      }
+    }
+  }, [isShowing]);
+
   // frame motion variants
   const modalVariants = {
     hidden: {
