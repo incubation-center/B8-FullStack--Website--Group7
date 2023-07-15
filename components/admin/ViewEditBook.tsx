@@ -306,7 +306,7 @@ export default function ViewEditBook({
               transition: { delay: 0.3, duration: 0.5 }
             }}
           >
-            <RightArrowSvg className='h-5 w-5 2xl:h-7 2xl:w-7 text-alt-secondary translate-x-1' />
+            <RightArrowSvg className='h-5 w-5 2xl:h-7 2xl:w-7 fill-alt-secondary translate-x-1' />
           </motion.div>
         </button>
 
