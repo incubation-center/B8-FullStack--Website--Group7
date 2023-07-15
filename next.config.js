@@ -4,7 +4,12 @@ const { i18n } = require('./next-i18next.config');
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['firebasestorage.googleapis.com', 'encrypted-tbn2.gstatic.com']
+    domains: [
+      'firebasestorage.googleapis.com',
+      'ui-avatars.com',
+      'encrypted-tbn2.gstatic.com',
+      'i.pinimg.com'
+    ]
   },
   i18n
 };

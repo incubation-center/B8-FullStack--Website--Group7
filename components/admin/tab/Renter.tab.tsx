@@ -8,12 +8,15 @@ import { useState } from 'react';
 
 import { useRecoilValue } from 'recoil';
 import { AdminAllRequestAtom } from '@/service/recoil/admin';
+import { useTranslation } from 'react-i18next';
 
 export default function RenterTab({
   handleRefreshRequest
 }: {
   handleRefreshRequest: () => void;
 }) {
+  const { t } = useTranslation('admin');
+
   const requestData = useRecoilValue(AdminAllRequestAtom);
 
   const [viewRequest, setViewRequest] = useState<BookRequest | null>(null);
@@ -32,7 +35,7 @@ export default function RenterTab({
         )}
         actions={[
           {
-            label: 'View',
+            label: t('btns.view-btn'),
             onClick: (request) => {
               setViewRequest(request);
               toggle();

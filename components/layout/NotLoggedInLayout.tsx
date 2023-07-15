@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil';
 export default function NotLoggedInLayout({
   children
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   const router = useRouter();
   const { t } = useTranslation('common');

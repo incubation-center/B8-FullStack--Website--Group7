@@ -1,4 +1,4 @@
-import { Book, BookRequest, RequestStatus, User } from './types';
+import { Book, BookRequest, BookReview, RequestStatus, User } from './types';
 
 const BookData: Book[] = [
   {
@@ -222,4 +222,38 @@ const RequestData: BookRequest[] = [
   }
 ];
 
-export { BookData, RequestData, SampleUser };
+const ReviewData: BookReview[] = [
+  {
+    id: '1',
+    star: 5,
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque vel nisi tempus tincidunt. Curabitur posuere malesuada feugiat. Aenean in arcu lacus. Cras eleifend neque ullamcorper euismod efficitur. Maecenas egestas enim dui, non scelerisque odio consequat a. Nunc interdum, urna sed ultrices fringilla, massa neque laoreet massa, id faucibus ex odio sit amet lectus. Praesent ultrices sodales maximus. Donec molestie cursus consequat. Praesent tempus rutrum ex in interdum. Vestibulum vel quam mi. Donec euismod interdum nisi, non auctor libero varius in. Proin laoreet vitae dui et viverra. Aenean nulla sem, dapibus fermentum quam blandit, tincidunt volutpat turpis.',
+    createdAt: new Date(),
+    user: SampleUser
+  },
+  {
+    id: '2',
+    star: 2,
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque vel nisi tempus tincidunt. Curabitur posuere malesuada feugiat. Aenean in arcu lacus. Cras eleifend neque ullamcorper euismod efficitur. Maecenas egestas enim dui, non scelerisque odio consequat a. Nunc interdum, urna sed ultrices fringilla, massa neque laoreet massa, id faucibus ex odio sit amet lectus. Praesent ultrices sodales maximus. Donec molestie cursus consequat. Praesent tempus rutrum ex in interdum. Vestibulum vel quam mi. Donec euismod interdum nisi, non auctor libero varius in. Proin laoreet vitae dui et viverra. Aenean nulla sem, dapibus fermentum quam blandit, tincidunt volutpat turpis.',
+    user: SampleUser,
+    createdAt: new Date()
+  },
+  {
+    id: '3',
+    star: 4,
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque vel nisi tempus tincidunt. Curabitur posuere malesuada feugiat. Aenean in arcu lacus. Cras eleifend neque ullamcorper euismod efficitur. Maecenas egestas enim dui, non scelerisque odio consequat a. Nunc interdum, urna sed ultrices fringilla, massa neque laoreet massa, id faucibus ex odio sit amet lectus. Praesent ultrices sodales maximus. Donec molestie cursus consequat. Praesent tempus rutrum ex in interdum. Vestibulum vel quam mi. Donec euismod interdum nisi, non auctor libero varius in. Proin laoreet vitae dui et viverra. Aenean nulla sem, dapibus fermentum quam blandit, tincidunt volutpat turpis.',
+    user: SampleUser,
+    createdAt: new Date()
+  },
+  {
+    id: '4',
+    star: 4,
+    comment: 'loy tah',
+    user: SampleUser,
+    createdAt: new Date()
+  }
+];
+
+export { BookData, RequestData, SampleUser, ReviewData };
