@@ -79,19 +79,19 @@ export default function ReviewCmt({
       className={`
         w-full
         flex gap-4
-        p-2 pt-4   border-alt-secondary
+        p-4 border-alt-secondary
         ${isSelf ? 'border rounded-lg' : 'border-b'}
       `}
     >
       <div className='w-full flex flex-col justify-start items-start '>
         <div className='w-full flex  justify-between flex-wrap-reverse gap-2'>
           <div className='flex items-start gap-2'>
-            <div className='relative w-10 h-10'>
+            <div className='relative w-12 h-12'>
               <Image
                 src={review.reviewer.profileImg}
                 alt='avatar'
                 fill
-                className='rounded-full'
+                className='rounded-full object-cover'
               />
             </div>
             <div>
@@ -103,7 +103,9 @@ export default function ReviewCmt({
               </p>
             </div>
             {review.edited && (
-              <span className='text-sm text-alt-secondary mt-1'>(Edited)</span>
+              <span className='text-sm text-alt-secondary text-opacity-70'>
+                (Edited)
+              </span>
             )}
           </div>
 

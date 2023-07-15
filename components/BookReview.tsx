@@ -1,19 +1,17 @@
-import { ReviewData } from '@/dummydata';
-
-import Image from 'next/image';
-import { Rating, RoundedStar } from '@smastrom/react-rating';
 import { Book, BookReview } from '@/types';
 import AddNewReviewButton from './book-detail/AddNewReview';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import ReviewCmt from './book-detail/ReviewCmt';
 import SpinningLoadingSvg from './icon/SpinningLoadingSvg';
-import { getAllReviews } from '@/service/api/review';
+import { addReview, getAllReviews } from '@/service/api/review';
 import { useRecoilValue } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
 
 export default function BookReview({ book }: { book: Book }) {
   const authStore = useRecoilValue(AuthAtom);
+
+  const [selfReview, setSelfReview] = useState<BookReview | undefined>();
   const [reviews, setReviews] = useState<BookReview[] | undefined | null>();
 
   const { t } = useTranslation('book-detail');
@@ -42,6 +40,42 @@ export default function BookReview({ book }: { book: Book }) {
       });
     });
   };
+
+  const createReview = async (review: {
+    rating: number;
+    comment: string;
+  }): Promise<void> => {
+    // create review
+    await addReview({
+      userId: authStore.user?.userId as string,
+      bookId: book.id as string,
+      rating: review.rating,
+      comment: review.comment
+    })
+      .then((res) => {
+        setReviews((prev) => {
+          if (prev === null) return prev;
+          if (prev === undefined) return prev;
+          return [...prev, res];
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    if (reviews === null) return;
+    if (reviews === undefined) return;
+    if (authStore.user === null) return;
+    if (authStore.user === undefined) return;
+
+    const selfReview = reviews.find(
+      (review) => review.reviewer.userId === authStore.user?.userId
+    );
+
+    setSelfReview(selfReview);
+  }, [reviews, authStore.user]);
 
   return (
     <div className='mb-4 w-full md:max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
@@ -84,10 +118,18 @@ export default function BookReview({ book }: { book: Book }) {
               {t('review.your-review')}
             </h1>
 
-            {/* <ReviewCmt review={selfReview} isSelf /> */}
+            {selfReview ? (
+              <ReviewCmt
+                review={selfReview}
+                isSelf
+                userId={authStore.user?.userId as string}
+                updateReview={updateReview}
+              />
+            ) : (
+              <AddNewReviewButton createReview={createReview} />
+            )}
 
             {/* add review */}
-            <AddNewReviewButton />
           </div>
 
           {/* others review*/}
@@ -96,10 +138,10 @@ export default function BookReview({ book }: { book: Book }) {
               {t('review.title')}
             </h1>
 
-            <div className='mt-4 border-t border-alt-secondary '>
+            <div className='mt-4 pt-2 border-t border-alt-secondary '>
               {reviews.map((review) => {
                 if (review.reviewer.userId === authStore.user?.userId) {
-                  return <></>;
+                  return null;
                 }
                 return (
                   <ReviewCmt

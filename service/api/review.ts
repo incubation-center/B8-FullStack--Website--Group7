@@ -30,6 +30,30 @@ export async function getAllReviews(bookId: string) {
   }
 }
 
+export async function addReview({
+  userId,
+  bookId,
+  rating,
+  comment
+}: {
+  userId: string;
+  bookId: string;
+  rating: number;
+  comment: string;
+}) {
+  try {
+    const response = await axiosClient.post(
+      API_ENDPOINT.REVIEW.CREATE_REVIEW({ userId, bookId, rating, comment })
+    );
+
+    const { data } = response;
+
+    return formattingReview(data);
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function reactToReview(
   reviewId: string,
   userId: string,

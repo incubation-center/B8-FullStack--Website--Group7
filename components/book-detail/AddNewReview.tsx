@@ -11,13 +11,14 @@ interface RatingForm {
   comment: string;
 }
 
-export default function AddNewReviewButton() {
+export default function AddNewReviewButton({
+  createReview
+}: {
+  createReview: (review: { rating: number; comment: string }) => Promise<void>;
+}) {
   const { t } = useTranslation('book-detail');
 
   const [isCreating, setIsCreating] = useState(false);
-
-  const [comment, setComment] = useState('');
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -28,9 +29,17 @@ export default function AddNewReviewButton() {
   } = useForm<RatingForm>();
 
   const onSubmit: SubmitHandler<RatingForm> = async ({ rating, comment }) => {
-    console.log('====================================');
-    console.log('rating: ', rating);
-    console.log('====================================');
+    const review = {
+      rating,
+      comment
+    };
+
+    setIsSubmitting(true);
+
+    await createReview(review).finally(() => {
+      setIsSubmitting(false);
+      setIsCreating(false);
+    });
   };
 
   return (
@@ -211,7 +220,7 @@ export default function AddNewReviewButton() {
             onClick={() => setIsCreating(!isCreating)}
           >
             <PlusIcon className='w-6 h-6 mr-2 ' />
-            Add your review
+            {t('review.add-your-review')}
           </button>
         )}
       </div>
