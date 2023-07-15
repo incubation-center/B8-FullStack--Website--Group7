@@ -143,7 +143,7 @@ export default function useConfirmRejectModal() {
                         label={t(
                           'incoming-request-tab.reject-request-tab.reject-reason'
                         )}
-                        required
+                        showRequiredIcon
                         name='reason'
                         type='textfield'
                         labelClassName='text-primary font-bold'
