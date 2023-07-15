@@ -71,13 +71,18 @@ export default function UserSearchBar({
             w-full max-w-[500px] xl:max-w-[700px] w-inherit
             flex justify-center items-center
           bg-white 
-            p-2 px-4 rounded-full space-x-6
+            p-2 px-4 rounded-full space-x-4 md:space-x-6
             box-border border-2 border-primary border-opacity-60 focus-within:border-opacity-100
             transition-colors
             group
           '
         >
-          <SearchSvg className='h-6 w-6 fill-primary opacity-60 group-focus-within:opacity-100 transition-all duration-300' />
+          <SearchSvg
+            className='
+          h-6 w-6 
+          fill-primary opacity-60 
+          group-focus-within:opacity-100 transition-all duration-300'
+          />
 
           <input
             type='text'

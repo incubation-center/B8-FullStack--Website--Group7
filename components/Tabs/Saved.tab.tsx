@@ -27,7 +27,14 @@ export default function SavedTab({
   return (
     <NotLoggedInLayout>
       {authStore.user && (
-        <div className='p-4 w-full h-full  flex flex-col justify-center px-4 space-y-4 md:px-8 md:space-y-8'>
+        <div
+          className='
+            w-full min-h-full 
+            flex flex-col justify-start
+            p-2 md:p-4 md:px-8 
+            space-y-4 md:space-y-8
+          '
+        >
           <h1
             className='
               font-bold text-t-primary text-center
@@ -39,7 +46,14 @@ export default function SavedTab({
           >
             {t('save-tab.h1-save', 'Saved')}
           </h1>
-          <div className='w-full h-full flex flex-wrap gap-8 justify-center'>
+          <div
+            className='
+              w-full h-full 
+              flex flex-wrap 
+              gap-4 md:gap-8 
+              justify-center 
+            '
+          >
             {favBooks.length === 0 && (
               <div className='h-full w-full flex flex-col justify-center items-center'>
                 <h1 className='text-center text-t-primary font-medium'>
@@ -85,7 +99,7 @@ export default function SavedTab({
                   <button
                     className='
                           bg-secondary text-white font-light
-                          rounded-full py-1 px-2 w-40 mx-auto 
+                          rounded-full py-1 px-2 w-32 mx-auto 
                         '
                     onClick={() => handleBookClick(book.id!)}
                   >
