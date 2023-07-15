@@ -31,16 +31,16 @@ export default function BookReview({ book }: { book: Book }) {
   }, []);
 
   return (
-    <div className='mb-4 w-full max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
+    <div className='mb-4 w-full md:max-w-[500px] flex flex-col justify-center md:justify-start h-full overscroll-auto'>
       {/* error fetching review */}
       {reviews === null && (
         <>
-          <h1 className='text-xl text-alt-secondary mb-4'>
+          <h1 className='text-xl text-alt-secondary mb-4 '>
             {t('review.title')}
           </h1>
           <div className='flex gap-2'>
             <h1 className='text-lg text-alt-secondary'>
-              Error fetching book review
+              {t('review.error-fetching')}
             </h1>
           </div>
         </>
@@ -54,7 +54,10 @@ export default function BookReview({ book }: { book: Book }) {
           </h1>
           <div className='flex gap-2'>
             <SpinningLoadingSvg className='w-6 h-6 text-alt-secondary' />
-            <h1 className='text-lg text-alt-secondary'>Loading book review</h1>
+            <h1 className='text-lg text-alt-secondary'>
+              {' '}
+              {t('review.loading-review')}
+            </h1>
           </div>
         </>
       )}
@@ -87,6 +90,15 @@ export default function BookReview({ book }: { book: Book }) {
                 }
                 return <ReviewCmt key={review.reviewId} review={review} />;
               })}
+
+              {/* no review */}
+              {reviews.length === 0 && (
+                <div className='flex flex-col items-center justify-center h-full p-4'>
+                  <h1 className='text-lg text-alt-secondary'>
+                    {t('review.no-review')}
+                  </h1>
+                </div>
+              )}
             </div>
           </div>
         </>

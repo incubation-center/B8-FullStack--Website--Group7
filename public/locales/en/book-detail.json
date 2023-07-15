@@ -50,6 +50,9 @@
     "title": "Reviews",
     "your-review": "Your review",
     "add-your-review": "Add your review",
+    "no-review": "No reviews yet",
+    "error-fetching": "Error fetching reviews",
+    "loading-review": "Loading reviews",
 
     "validation": {
       "stars": "Rating is required",
@@ -62,7 +65,8 @@
       "comment-placeholder": "Write your comment here",
 
       "cancel-btn": "Cancel",
-      "save-btn": "Submit"
+      "save-btn": "Submit",
+      "saving-btn": "Submitting"
     }
   }
 }

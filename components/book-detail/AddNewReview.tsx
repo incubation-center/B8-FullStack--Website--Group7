@@ -162,7 +162,7 @@ export default function AddNewReviewButton() {
                 type='button'
                 onClick={() => setIsCreating(!isCreating)}
               >
-                Cancel
+                {t('review.form.cancel-btn')}
               </button>
             )}
             <button
@@ -179,16 +179,15 @@ export default function AddNewReviewButton() {
                 stroke-primary
               `}
               type='submit'
-              // onClick={() => setIsSubmitting(true)}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <>
                   <SpinningLoadingSvg className='w-6 h-6 mr-2' />
-                  Submitting...
+                  {t('review.form.saving-btn')}
                 </>
               ) : (
-                'Submit'
+                t('review.form.save-btn')
               )}
             </button>
           </>
