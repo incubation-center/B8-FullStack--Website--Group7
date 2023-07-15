@@ -10,7 +10,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '2',
@@ -21,7 +23,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '3',
@@ -32,7 +36,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '4',
@@ -43,7 +49,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '5',
@@ -54,7 +62,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '6',
@@ -65,7 +75,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '7',
@@ -76,7 +88,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '8',
@@ -87,7 +101,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '9',
@@ -98,7 +114,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '10',
@@ -109,7 +127,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '11',
@@ -120,7 +140,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   }
 ];
 
@@ -222,38 +244,4 @@ const RequestData: BookRequest[] = [
   }
 ];
 
-const ReviewData: BookReview[] = [
-  {
-    id: '1',
-    star: 5,
-    comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque vel nisi tempus tincidunt. Curabitur posuere malesuada feugiat. Aenean in arcu lacus. Cras eleifend neque ullamcorper euismod efficitur. Maecenas egestas enim dui, non scelerisque odio consequat a. Nunc interdum, urna sed ultrices fringilla, massa neque laoreet massa, id faucibus ex odio sit amet lectus. Praesent ultrices sodales maximus. Donec molestie cursus consequat. Praesent tempus rutrum ex in interdum. Vestibulum vel quam mi. Donec euismod interdum nisi, non auctor libero varius in. Proin laoreet vitae dui et viverra. Aenean nulla sem, dapibus fermentum quam blandit, tincidunt volutpat turpis.',
-    createdAt: new Date(),
-    user: SampleUser
-  },
-  {
-    id: '2',
-    star: 2,
-    comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque vel nisi tempus tincidunt. Curabitur posuere malesuada feugiat. Aenean in arcu lacus. Cras eleifend neque ullamcorper euismod efficitur. Maecenas egestas enim dui, non scelerisque odio consequat a. Nunc interdum, urna sed ultrices fringilla, massa neque laoreet massa, id faucibus ex odio sit amet lectus. Praesent ultrices sodales maximus. Donec molestie cursus consequat. Praesent tempus rutrum ex in interdum. Vestibulum vel quam mi. Donec euismod interdum nisi, non auctor libero varius in. Proin laoreet vitae dui et viverra. Aenean nulla sem, dapibus fermentum quam blandit, tincidunt volutpat turpis.',
-    user: SampleUser,
-    createdAt: new Date()
-  },
-  {
-    id: '3',
-    star: 4,
-    comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque vel nisi tempus tincidunt. Curabitur posuere malesuada feugiat. Aenean in arcu lacus. Cras eleifend neque ullamcorper euismod efficitur. Maecenas egestas enim dui, non scelerisque odio consequat a. Nunc interdum, urna sed ultrices fringilla, massa neque laoreet massa, id faucibus ex odio sit amet lectus. Praesent ultrices sodales maximus. Donec molestie cursus consequat. Praesent tempus rutrum ex in interdum. Vestibulum vel quam mi. Donec euismod interdum nisi, non auctor libero varius in. Proin laoreet vitae dui et viverra. Aenean nulla sem, dapibus fermentum quam blandit, tincidunt volutpat turpis.',
-    user: SampleUser,
-    createdAt: new Date()
-  },
-  {
-    id: '4',
-    star: 4,
-    comment: 'loy tah',
-    user: SampleUser,
-    createdAt: new Date()
-  }
-];
-
-export { BookData, RequestData, SampleUser, ReviewData };
+export { BookData, RequestData, SampleUser };
