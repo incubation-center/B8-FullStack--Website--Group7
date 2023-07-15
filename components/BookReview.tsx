@@ -10,6 +10,8 @@ import { AuthAtom } from '@/service/recoil';
 import useConfirmModal from './Modals/useCofirm';
 import useModal from './Modals/useModal';
 import NotLoggedInLayout from './layout/NotLoggedInLayout';
+import useAlertModal, { AlertType } from './Modals/Alert';
+import { type } from 'os';
 
 export default function BookReview({
   book,
@@ -28,6 +30,10 @@ export default function BookReview({
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { t } = useTranslation('book-detail');
+
+  const { AlertModal, showAlert } = useAlertModal();
+  const { ModalWrapper, open } = useModal();
+  const { ConfirmModal, showConfirmModal } = useConfirmModal();
 
   useEffect(() => {
     // fetch review
@@ -76,6 +82,11 @@ export default function BookReview({
       })
       .catch((err) => {
         console.log(err);
+        showAlert({
+          title: t('review.create-failed.title'),
+          subtitle: t('review.create-failed.subtitle'),
+          type: AlertType.ERROR
+        });
       });
   };
 
@@ -99,6 +110,11 @@ export default function BookReview({
           })
           .catch((err) => {
             console.log(err);
+            showAlert({
+              title: t('review.create-failed.title'),
+              subtitle: t('review.create-failed.subtitle'),
+              type: AlertType.ERROR
+            });
           })
           .finally(() => {
             setIsDeleting(false);
@@ -120,11 +136,11 @@ export default function BookReview({
     setSelfReview(selfReview);
   }, [reviews, authStore.user]);
 
-  const { ModalWrapper, open } = useModal();
-  const { ConfirmModal, showConfirmModal } = useConfirmModal();
-
   return (
     <>
+      <AlertModal />
+      <ConfirmModal />
+
       <ModalWrapper>
         <div className='bg-alt-secondary rounded-lg py-4'>
           <NotLoggedInLayout />
@@ -165,8 +181,6 @@ export default function BookReview({
         {/* review fetched */}
         {reviews && (
           <>
-            <ConfirmModal />
-
             {/* self review */}
             <div>
               <h1 className='text-xl text-alt-secondary mb-4'>

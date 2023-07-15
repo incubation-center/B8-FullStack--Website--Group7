@@ -80,6 +80,21 @@
     "delete-modal": {
       "title": "លុបមតិយោបល់",
       "subtitle": "តើអ្នកពិតជាចង់លុបមតិយោបល់នេះមែនទេ?"
+    },
+
+    "create-failed": {
+      "title": "កំហុស",
+      "subtitle": "កំហុសក្នុងការបង្កើតមតិយោបល់"
+    },
+
+    "delete-failed": {
+      "title": "កំហុស",
+      "subtitle": "កំហុសក្នុងការលុបមតិយោបល់"
+    },
+
+    "reaction": {
+      "error-title": "កំហុស",
+      "error-subtitle": "កំហុសក្នុងការបង្កើតមតិយោបល់"
     }
   }
 }

@@ -9,6 +9,7 @@ import { handleFallBackProfileImage, useDebounce } from '@/utils/function';
 import { reactToReview, removeReaction } from '@/service/api/review';
 import { useTranslation } from 'next-i18next';
 import SpinningLoadingSvg from '../icon/SpinningLoadingSvg';
+import useAlertModal, { AlertType } from '../Modals/Alert';
 
 export default function ReviewCmt({
   review,
@@ -34,6 +35,8 @@ export default function ReviewCmt({
   const [isSeeMore, setIsSeeMore] = useState(false);
   const [reaction, setReaction] = useState<'like' | 'dislike' | null>(null);
   const [isReacting, setIsReacting] = useState(false);
+
+  const { AlertModal, showAlert } = useAlertModal();
 
   const toggleSeeMore = () => {
     setIsSeeMore((prev) => !prev);
@@ -68,6 +71,11 @@ export default function ReviewCmt({
       })
       .catch((err) => {
         console.log(err);
+        showAlert({
+          title: t('review.reaction.error'),
+          subtitle: t('review.reaction.error-occurred'),
+          type: AlertType.ERROR
+        });
       })
       .finally(() => {
         setIsReacting(false);
@@ -88,6 +96,11 @@ export default function ReviewCmt({
         })
         .catch((err) => {
           console.log(err);
+          showAlert({
+            title: t('review.reaction.error-title'),
+            subtitle: t('review.reaction.error-subtitle'),
+            type: AlertType.ERROR
+          });
         })
         .finally(() => {
           setIsReacting(false);
@@ -98,6 +111,8 @@ export default function ReviewCmt({
 
   return (
     <>
+      <AlertModal />
+
       <div
         className={`
         w-full
