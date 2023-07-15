@@ -21,7 +21,8 @@
     },
 
     "search-box": {
-      "box-text": "Search name of the book"
+      "box-text": "Search name of the book",
+      "search-result": "Search result"
     }
   },
 

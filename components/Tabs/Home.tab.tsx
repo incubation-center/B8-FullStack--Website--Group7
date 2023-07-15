@@ -491,9 +491,13 @@ function FilteredBooksList({
   books: Book[];
   handleBookClick: (book: Book) => void;
 }) {
+  const { t } = useTranslation('homepage');
+
   return (
     <div className='w-full h-full py-4 space-y-8'>
-      <h1 className='font-medium text-lg text-primary'>Search result:</h1>
+      <h1 className='font-medium text-lg text-primary'>
+        {t('homepage-tab.search-box.search-result')}:
+      </h1>
       <div className='flex flex-row flex-wrap shrink-0 justify-center gap-4'>
         <AnimatePresence>
           {books.map((book, index) => (
@@ -530,7 +534,7 @@ function FilteredBooksList({
               '
                 onClick={() => handleBookClick(book)}
               >
-                View
+                {t('homepage-tab.sidebar.view-btn')}
               </button>
             </motion.div>
           ))}
