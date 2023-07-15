@@ -196,7 +196,7 @@ export default function HomeTab({
         ref={scrollingRef}
         className='overflow-y-scroll overflow-x-hidden w-full scroll-smooth space-y-4'
       >
-        {isFetchingBooks && (
+        {isFetchingBooks && allBooks.length === 0 && (
           // fetching books skeleton
           <>
             <BookSectionSkeleton />
