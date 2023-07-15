@@ -91,6 +91,7 @@ export default function UserRegisterForm({}) {
             error={errors.username}
             name='username'
             type='text'
+            showRequiredIcon
             placeholder={t('username-placeholder')}
             label={t('username')}
             labelClassName='text-alt-secondary ml-4 font-medium '
@@ -106,6 +107,7 @@ export default function UserRegisterForm({}) {
             name='email'
             type='email'
             placeholder={t('email-placeholder')}
+            showRequiredIcon
             label={t('email')}
             labelClassName='text-alt-secondary ml-4 font-medium '
             errorClassName='bg-red-500 text-white rounded-full w-fit px-2 mt-2 ml-4 text-sm text-center'
@@ -159,6 +161,7 @@ export default function UserRegisterForm({}) {
             })}
             error={errors.phoneNumber}
             name='phoneNumber'
+            showRequiredIcon
             type='tel'
             placeholder={t('phone-placeholder')}
             label={t('phone')}
