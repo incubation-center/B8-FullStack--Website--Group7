@@ -9,7 +9,13 @@ import { useRecoilValue } from 'recoil';
 import { AuthAtom } from '@/service/recoil';
 import useConfirmModal from './Modals/useCofirm';
 
-export default function BookReview({ book }: { book: Book }) {
+export default function BookReview({
+  book,
+  updateBook
+}: {
+  book: Book;
+  updateBook: () => void;
+}) {
   const authStore = useRecoilValue(AuthAtom);
 
   const [selfReview, setSelfReview] = useState<BookReview | undefined>();
@@ -63,6 +69,7 @@ export default function BookReview({ book }: { book: Book }) {
           if (prev === undefined) return prev;
           return [...prev, res];
         });
+        updateBook();
       })
       .catch((err) => {
         console.log(err);
@@ -84,6 +91,7 @@ export default function BookReview({ book }: { book: Book }) {
                 (prevReview) => prevReview.reviewId !== review.reviewId
               );
             });
+            updateBook();
           })
           .catch((err) => {
             console.log(err);

@@ -1,10 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import { BookReview } from '@/types';
 import { useState, useEffect } from 'react';
 
 import Image from 'next/image';
 import { Rating, RoundedStar } from '@smastrom/react-rating';
 import Reaction from './Reaction';
-import { useDebounce } from '@/utils/function';
+import { handleFallBackProfileImage, useDebounce } from '@/utils/function';
 import { reactToReview, removeReaction } from '@/service/api/review';
 import { useTranslation } from 'next-i18next';
 
@@ -96,9 +97,12 @@ export default function ReviewCmt({
             <div className='flex items-start gap-2'>
               <div className='relative w-12 h-12'>
                 <Image
-                  src={review.reviewer.profileImg}
+                  loader={() => handleFallBackProfileImage(review.reviewer)}
+                  unoptimized
+                  src={handleFallBackProfileImage(review.reviewer)}
                   alt='avatar'
                   fill
+                  sizes='50px'
                   className='rounded-full object-cover'
                 />
               </div>

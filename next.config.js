@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     domains: [
       'firebasestorage.googleapis.com',
+      'ui-avatars.com',
       'encrypted-tbn2.gstatic.com',
       'i.pinimg.com'
     ]

@@ -6,6 +6,8 @@ export interface Book {
   description: string;
   title: string;
   maximumRequestPeriod: number;
+  overAllRating: number;
+  reviewsCount: number;
 }
 
 export interface User {

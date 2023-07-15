@@ -28,6 +28,7 @@ import BackArrowSvg from '@/components/icon/BackArrow';
 import { useTranslation } from 'next-i18next';
 import { useLocale } from '@/utils/function';
 import BookReview from '@/components/BookReview';
+import { Rating, RoundedStar } from '@smastrom/react-rating';
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
@@ -73,6 +74,15 @@ export default function BookDetail({ bookId }: { bookId: string }) {
     }
 
     setBook(book);
+  };
+
+  const updateBook = async () => {
+    try {
+      const book = await getBookById(bookId);
+      setBook(book);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -238,6 +248,23 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                       {t('book.genre')}: {book.category}
                     </h2>
 
+                    <div className='flex items-start gap-2 flex-wrap'>
+                      {t('book.rating')}:{' '}
+                      <Rating
+                        style={{ maxWidth: 100 }}
+                        value={book.overAllRating}
+                        readOnly
+                        itemStyles={{
+                          itemShapes: RoundedStar,
+                          activeFillColor: '#f59e0b',
+                          inactiveFillColor: '#ffedd5'
+                        }}
+                      />
+                      <span>
+                        ( {book.reviewsCount} {t('book.reviews')} )
+                      </span>
+                    </div>
+
                     <h2 className={`${isKhmer ? 'font-medium' : 'font-bold'}`}>
                       {t('book.book-description')}
                     </h2>
@@ -303,7 +330,9 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   </button>
                 )}
 
-                <div>{book && <BookReview book={book} />}</div>
+                <div>
+                  {book && <BookReview book={book} updateBook={updateBook} />}
+                </div>
               </div>
             </div>
           </div>

@@ -2,7 +2,9 @@
   "book": {
     "author": "Author",
     "genre": "Genre",
-    "book-description": "Book description"
+    "book-description": "Book description",
+    "rating": "Rating",
+    "reviews": "reviews"
   },
   "book-not-found": {
     "label": "Book not found",
