@@ -116,13 +116,13 @@ export default function ReviewCmt({
       <div
         className={`
         w-full
-        flex gap-4
+        flex
         p-4 border-alt-secondary
         ${isSelf ? 'border rounded-lg' : 'border-b'}
       `}
       >
         <div className='w-full flex flex-col justify-start items-start '>
-          <div className='w-full flex  justify-between flex-wrap-reverse gap-2'>
+          <div className='w-full flex justify-between flex-wrap-reverse gap-2 gap-y-4'>
             <div className='flex items-start gap-2'>
               <div className='relative w-12 h-12'>
                 <Image

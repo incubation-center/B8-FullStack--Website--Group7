@@ -36,6 +36,7 @@ export default function Reaction({
       <button
         className={`
         p-1 px-2 rounded-full
+        hover:scale-110 transition-transform duration-300
         ${
           selected === 'like'
             ? 'fill-alt-secondary '
@@ -73,6 +74,7 @@ export default function Reaction({
       <button
         className={`
         p-1 px-2 rounded-full
+        hover:scale-110 transition-transform duration-300
         ${
           selected === 'dislike'
             ? 'fill-alt-secondary'

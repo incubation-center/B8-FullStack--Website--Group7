@@ -22,8 +22,10 @@ export default function BookReview({
 }) {
   const authStore = useRecoilValue(AuthAtom);
 
-  const [selfReview, setSelfReview] = useState<BookReview | undefined>();
   const [reviews, setReviews] = useState<BookReview[] | undefined | null>();
+
+  const [selfReview, setSelfReview] = useState<BookReview | undefined>();
+  const [othersReview, setOthersReview] = useState<BookReview[] | undefined>();
 
   const [isEditing, setIsEditing] = useState(false);
   const [reviewToEdit, setReviewToEdit] = useState<BookReview | undefined>();
@@ -134,7 +136,12 @@ export default function BookReview({
       (review) => review.reviewer.userId === authStore.user?.userId
     );
 
+    const otherReviews = reviews.filter(
+      (review) => review.reviewer.userId !== authStore.user?.userId
+    );
+
     setSelfReview(selfReview);
+    setOthersReview(otherReviews);
   }, [reviews, authStore.user]);
 
   return (
@@ -184,7 +191,7 @@ export default function BookReview({
           <>
             {/* self review */}
             <div>
-              <h1 className='text-xl text-alt-secondary mb-4'>
+              <h1 className='text-lg text-alt-secondary mb-4'>
                 {t('review.your-review')}
               </h1>
 
@@ -221,39 +228,36 @@ export default function BookReview({
             </div>
 
             {/* others review*/}
-            <div>
-              <h1 className='text-xl text-alt-secondary mt-8'>
-                {t('review.title')} ( {reviews.length - 1} )
-              </h1>
+            {othersReview && (
+              <div>
+                <h1 className='text-lg text-alt-secondary mt-8'>
+                  {t('review.title')} ( {othersReview.length} )
+                </h1>
 
-              <div className='mt-4 pt-2 border-t border-alt-secondary '>
-                {reviews.map((review) => {
-                  if (review.reviewer.userId === authStore.user?.userId) {
-                    return null;
-                  }
-                  return (
-                    <ReviewCmt
-                      key={review.reviewId}
-                      review={review}
-                      showLoginModal={open}
-                      userId={authStore.user?.userId as string}
-                      updateReviewState={updateReview}
-                    />
-                  );
-                })}
+                <div className='mt-4 pt-2 border-t border-alt-secondary '>
+                  {othersReview.map((review) => {
+                    return (
+                      <ReviewCmt
+                        key={review.reviewId}
+                        review={review}
+                        showLoginModal={open}
+                        userId={authStore.user?.userId as string}
+                        updateReviewState={updateReview}
+                      />
+                    );
+                  })}
 
-                {/* no review */}
-                {reviews.filter(
-                  (review) => review.reviewer.userId !== authStore.user?.userId
-                ).length === 0 && (
-                  <div className='flex flex-col items-center justify-center h-full p-4'>
-                    <h1 className='text-lg text-alt-secondary'>
-                      {t('review.no-review')}
-                    </h1>
-                  </div>
-                )}
+                  {/* no review */}
+                  {othersReview.length === 0 && (
+                    <div className='flex flex-col items-center justify-center h-full p-4'>
+                      <h1 className='text-lg text-alt-secondary'>
+                        {t('review.no-review')}
+                      </h1>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </>
         )}
       </div>
