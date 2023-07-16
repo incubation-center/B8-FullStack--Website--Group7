@@ -129,8 +129,12 @@ export default function BookReview({
   useEffect(() => {
     if (reviews === null) return;
     if (reviews === undefined) return;
-    if (authStore.user === null) return;
-    if (authStore.user === undefined) return;
+
+    if (authStore.user === null) {
+      setSelfReview(undefined);
+      setOthersReview(reviews);
+      return;
+    }
 
     const selfReview = reviews.find(
       (review) => review.reviewer.userId === authStore.user?.userId
