@@ -99,19 +99,6 @@ export default function EditUserInfo({
             />
 
             <CustomInput
-              label={t('edit-modal.email')}
-              name='email'
-              type='email'
-              defaultValue={userInfo.email}
-              register={register('email', {
-                required: 'Email cannot be empty'
-              })}
-              error={errors.email}
-              labelClassName='text-t-primary ml-4 font-medium text-lg'
-              disabled={isUpdating}
-            />
-
-            <CustomInput
               label={t('edit-modal.phone-number')}
               name='phoneNumber'
               type='tel'
