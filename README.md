@@ -8,6 +8,7 @@
   - [Backend repo](#backend-repo)
 - [Technologies](#technologies)
 - [Project Setup](#project-setup)
+- [Team Members](#team-members)
 
 ## Project Introduction
 
