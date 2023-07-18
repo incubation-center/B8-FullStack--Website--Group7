@@ -71,4 +71,4 @@ Our website also comes with the Admin dashboard where the librarian that has the
 
 | Kanhchana | Sokchhunly | Huameng | Channa | Colin | Sreyne | Sopheaktra |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| <img src="public/team/kanhchana.png" height="100"/> | <img src="public/team/chhunly.png" height="100"/> | <img src="public/team/huameng.jpg" height="100"/> | <img src="public/team/channa.png" height="100"/> | <img src="public/team/colin.jpg" height="100"/> | <img src="public/team/sreyne.png" height="100"/> | <img src="public/team/sopheaktra.png" height="100"/> |
+| <img src="public/team/kanhchana.PNG" height="100"/> | <img src="public/team/chhunly.png" height="100"/> | <img src="public/team/huameng.jpg" height="100"/> | <img src="public/team/channa.png" height="100"/> | <img src="public/team/colin.jpg" height="100"/> | <img src="public/team/sreyne.png" height="100"/> | <img src="public/team/sopheaktra.png" height="100"/> |
