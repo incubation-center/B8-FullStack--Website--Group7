@@ -6,6 +6,8 @@ export interface Book {
   description: string;
   title: string;
   maximumRequestPeriod: number;
+  overAllRating: number;
+  reviewsCount: number;
 }
 
 export interface User {
@@ -48,4 +50,16 @@ export enum RequestStatus {
   PENDING = 'PENDING',
   ACCEPTED = 'ACCEPTED',
   ACHIEVED = 'ARCHIVED'
+}
+
+export interface BookReview {
+  reviewId?: string;
+  comment: string;
+  rating: number;
+  likeUserIds: string[];
+  dislikeUserIds: string[];
+  timestamp: Date;
+  bookId: string;
+  reviewer: User;
+  edited: boolean;
 }

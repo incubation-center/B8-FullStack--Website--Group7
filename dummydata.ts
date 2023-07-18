@@ -1,4 +1,4 @@
-import { Book, BookRequest, RequestStatus, User } from './types';
+import { Book, BookRequest, BookReview, RequestStatus, User } from './types';
 
 const BookData: Book[] = [
   {
@@ -10,7 +10,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '2',
@@ -21,7 +23,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '3',
@@ -32,7 +36,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '4',
@@ -43,7 +49,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '5',
@@ -54,7 +62,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '6',
@@ -65,7 +75,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '7',
@@ -76,7 +88,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '8',
@@ -87,7 +101,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '9',
@@ -98,7 +114,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '10',
@@ -109,7 +127,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   },
   {
     id: '11',
@@ -120,7 +140,9 @@ const BookData: Book[] = [
       'https://firebasestorage.googleapis.com/v0/b/kjeybook-81ae5.appspot.com/o/business%2F1.jpeg?alt=media&token=4fbfaa96-edb7-4fcf-88fe-38182c3624a5',
     description:
       'The Hobbit, or There and Back Again is a childrens fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in childrens literature.',
-    maximumRequestPeriod: 14
+    maximumRequestPeriod: 14,
+    overAllRating: 4.5,
+    reviewsCount: 100
   }
 ];
 

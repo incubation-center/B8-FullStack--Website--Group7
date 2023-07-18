@@ -13,10 +13,32 @@ export default function useModal() {
   const close = () => setIsShowing(false);
   const open = () => setIsShowing(true);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isShowing) {
+        window.document
+          .querySelector('body')!
+          .classList.add('!overflow-hidden');
+      } else {
+        window.document
+          .querySelector('body')!
+          .classList.remove('!overflow-hidden');
+      }
+    }
+  }, [isShowing]);
+
   const ModalWrapper = ({ children }: { children: React.ReactNode }) => {
     const handleClickedOutside = (e: any) => close();
 
-    return (
+    const ref = useRef<Element | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+      ref.current = document.querySelector<HTMLElement>('#modal-root');
+      setMounted(true);
+    }, []);
+
+    return mounted && ref.current ? (
       <AnimatePresence mode='popLayout'>
         {isShowing && (
           <motion.div
@@ -58,7 +80,7 @@ export default function useModal() {
           </motion.div>
         )}
       </AnimatePresence>
-    );
+    ) : null;
   };
 
   return {

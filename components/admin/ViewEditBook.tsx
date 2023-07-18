@@ -22,6 +22,7 @@ import EditSvg from '../icon/EditSvg';
 import { updateCoverImage } from '@/service/firebase';
 import { deleteBookById } from '@/service/api/admin';
 import { useTranslation } from 'next-i18next';
+import TextArea from 'textarea-autosize-reactjs';
 
 interface BookUploadInputs extends Book {}
 
@@ -66,11 +67,8 @@ export default function ViewEditBook({
     }
   };
 
+  const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
   const [description, setDescription] = useState(book.description);
-
-  const onChangeDescription = useDebounce((text: string) => {
-    setDescription(text);
-  }, 300);
 
   const {
     register,
@@ -81,7 +79,8 @@ export default function ViewEditBook({
     defaultValues: {
       title: book.title,
       author: book.author,
-      category: book.category
+      category: book.category,
+      description: book.description
     }
   });
 
@@ -93,7 +92,7 @@ export default function ViewEditBook({
         title: data.title.trim(),
         author: data.author.trim(),
         category: selectedCategory.value,
-        description: description.trim(),
+        description: data.description.trim(),
         bookImg: book.bookImg
       };
 
@@ -118,7 +117,8 @@ export default function ViewEditBook({
       reset({
         title: res.data.title,
         author: res.data.author,
-        category: res.data.category
+        category: res.data.category,
+        description: res.data.description
       });
       setDescription(res.data.description);
       setImage(undefined);
@@ -163,7 +163,8 @@ export default function ViewEditBook({
         reset({
           title: book.title,
           author: book.author,
-          category: book.category
+          category: book.category,
+          description: book.description
         });
         setDescription(book.description);
         setImage(undefined);
@@ -186,7 +187,8 @@ export default function ViewEditBook({
         reset({
           title: book.title,
           author: book.author,
-          category: book.category
+          category: book.category,
+          description: book.description
         });
         setDescription(book.description);
         setIsEditing(false);
@@ -306,7 +308,7 @@ export default function ViewEditBook({
               transition: { delay: 0.3, duration: 0.5 }
             }}
           >
-            <RightArrowSvg className='h-5 w-5 2xl:h-7 2xl:w-7 text-alt-secondary translate-x-1' />
+            <RightArrowSvg className='h-5 w-5 2xl:h-7 2xl:w-7 fill-alt-secondary translate-x-1' />
           </motion.div>
         </button>
 
@@ -458,18 +460,16 @@ export default function ViewEditBook({
                     {t('book-view-tab.no-description')}
                   </div>
                 )}
-                <div
-                  suppressContentEditableWarning={true}
-                  contentEditable={isEditing && !isUpdating}
-                  onInput={(e) =>
-                    onChangeDescription(e.currentTarget.textContent || '')
-                  }
-                  className={`
-                    ${isEditing ? activeClassName : defaultClassName} 
-                    transition-all duration-300 w-full  
-                  `}
-                >
-                  {description}
+                <div>
+                  <TextArea
+                    {...register('description')}
+                    disabled={!isEditing || isUpdating}
+                    className={`
+                      ${isEditing ? activeClassName : defaultClassName} 
+                      transition-all duration-300 w-full
+                      placeholder:text-alt-secondary placeholder:text-opacity-50
+                    `}
+                  />
                 </div>
                 <InputError error={errors.description?.message} />
               </div>
@@ -525,6 +525,7 @@ export default function ViewEditBook({
             )}
             {isUpdating && (
               <div className='bg-secondary w-fit p-2 px-4 text-white rounded-full flex gap-2 font-medium opacity-80'>
+                <SpinningLoadingSvg className='h-6 w-6 text-white' />
                 {t('book-view-tab.updating-btn')}
               </div>
             )}

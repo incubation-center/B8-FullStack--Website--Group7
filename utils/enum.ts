@@ -56,6 +56,44 @@ export const API_ENDPOINT = {
     FORGOT_PASSWORD: (email: string) => '/user/forgot-password?email=' + email,
     RESET_PASSWORD: '/user/forgot-password/update'
   },
+  REVIEW: {
+    CREATE_REVIEW: ({
+      userId,
+      bookId,
+      rating,
+      comment
+    }: {
+      userId: string;
+      bookId: string;
+      rating: number;
+      comment: string;
+    }) => {
+      return (
+        '/review?userId=' +
+        userId +
+        '&bookId=' +
+        bookId +
+        '&rating=' +
+        rating +
+        '&comment=' +
+        comment
+      );
+    },
+    UPDATE_REVIEW: (
+      reviewId: string,
+      {
+        rating,
+        comment
+      }: {
+        rating: number;
+        comment: string;
+      }
+    ) => '/review/' + reviewId + '?rating=' + rating + '&comment=' + comment,
+    DELETE: (reviewId: string) => '/review/' + reviewId,
+    GET_ALL_REVIEWS: (bookId: string) => '/review/book/' + bookId,
+    REACTION: (reviewId: string, userId: string, action: 'like' | 'dislike') =>
+      '/review/' + reviewId + '/reaction?userId=' + userId + '&action=' + action
+  },
   BOOK: {
     GET_ALL_BOOKS: '/book',
     GET_BOOK_BY_ID: (id: string) => '/book/' + id,

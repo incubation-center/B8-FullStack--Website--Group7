@@ -41,7 +41,7 @@ export default function RequestTable({
             border-b-2 border-primary 
             font-bold text-xl text-primary 
             [&>td]:py-4 w-full
-            [&<td]:w-fit [&<td]:whitespace-nowrap
+            [&>td]:w-fit [&>td]:whitespace-nowrap
           '
         >
           <td className='w-2/5'>{t('request-table.book')}</td>

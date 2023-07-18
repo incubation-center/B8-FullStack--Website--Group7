@@ -27,6 +27,8 @@ import BackArrowSvg from '@/components/icon/BackArrow';
 
 import { useTranslation } from 'next-i18next';
 import { useLocale } from '@/utils/function';
+import BookReview from '@/components/BookReview';
+import { Rating, RoundedStar } from '@smastrom/react-rating';
 
 export default function BookDetail({ bookId }: { bookId: string }) {
   const router = useRouter();
@@ -72,6 +74,15 @@ export default function BookDetail({ bookId }: { bookId: string }) {
     }
 
     setBook(book);
+  };
+
+  const updateBook = async () => {
+    try {
+      const book = await getBookById(bookId);
+      setBook(book);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -186,7 +197,15 @@ export default function BookDetail({ bookId }: { bookId: string }) {
             />
           </ModalWrapper>
 
-          <div className='min-h-full w-full bg-primary overflow-y-scroll pb-10 md:pb-0'>
+          <div
+            className='
+              min-h-full
+              w-full bg-primary  
+              pb-10 md:pb-0
+
+              overflow-y-scroll 2xl:overflow-hidden
+            '
+          >
             {/* back home */}
             <div className='p-6 flex justify-start '>
               <div
@@ -205,7 +224,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
               </div>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
+            <div className=' grid grid-cols-1 md:grid-cols-3 px-8 gap-4'>
               {/* book cover */}
               <div className='flex justify-center items-start mb-10 md:mb-0'>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -228,6 +247,23 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                     <h2>
                       {t('book.genre')}: {book.category}
                     </h2>
+
+                    <div className='flex items-start gap-2 flex-wrap'>
+                      {t('book.rating')}:{' '}
+                      <Rating
+                        style={{ maxWidth: 100 }}
+                        value={book.overAllRating}
+                        readOnly
+                        itemStyles={{
+                          itemShapes: RoundedStar,
+                          activeFillColor: '#f59e0b',
+                          inactiveFillColor: '#ffedd5'
+                        }}
+                      />
+                      <span>
+                        ( {book.reviewsCount} {t('book.reviews')} )
+                      </span>
+                    </div>
 
                     <h2 className={`${isKhmer ? 'font-medium' : 'font-bold'}`}>
                       {t('book.book-description')}
@@ -272,7 +308,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   )}
                 </div>
 
-                <p className='mt-[10px] text-alt-secondary font-light'>
+                <p className='mt-[10px] text-alt-secondary font-light whitespace-pre'>
                   {book.description}
                 </p>
 
@@ -293,6 +329,10 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                     {t('btns.borrow-btn')}
                   </button>
                 )}
+
+                <div>
+                  {book && <BookReview book={book} updateBook={updateBook} />}
+                </div>
               </div>
             </div>
           </div>

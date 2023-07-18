@@ -195,6 +195,10 @@ export default function ResetPassword({
                 )}
               </button>
             </form>
+
+            <div className='flex flex-col w-2/3 md:max-w-[250px] gap-2 mt-6 lg:absolute right-4 bottom-4'>
+              <LocaleSwitching className='bg-opacity-10 fill-alt-secondary' />
+            </div>
           </div>
         </div>
       </div>
