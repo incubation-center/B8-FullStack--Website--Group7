@@ -210,15 +210,17 @@ export default function BorrowBook({
             {/* submit button */}
             <button
               className={`
-                bg-primary rounded-full text-white py-2 px-4 w-full md:w-40
-                ${isRequestingBook && 'cursor-not-allowed'}
+                bg-primary rounded-full text-white py-2 px-4 w-full  max-w-[250px]
+                ${isRequestingBook ? 'cursor-not-allowed' : 'md:w-40'}
               `}
               onClick={handleBorrowBook}
               disabled={isRequestingBook}
             >
               {isRequestingBook ? (
                 <div className='flex justify-center items-center gap-2'>
-                  <h1>{t('btns.sending-request-btn')}</h1>
+                  <h1 className='whitespace-nowrap'>
+                    {t('btns.sending-request-btn')}
+                  </h1>
                   <SpinningLoadingSvg className='w-6 h-6 ' />
                 </div>
               ) : (
