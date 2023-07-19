@@ -12,6 +12,16 @@
   --progress-bar-color: #d0b49f;
 
   --home-search-bar-height: 90px;
+
+  --admin-sidebar-width: 250px;
+}
+
+.admin-tab-width {
+  width: calc(100vw - var(--admin-sidebar-width));
+}
+
+.admin-sidebar-width {
+  width: var(--admin-sidebar-width);
 }
 
 html,
