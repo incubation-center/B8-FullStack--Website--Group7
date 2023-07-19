@@ -317,7 +317,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   )}
                 </div>
 
-                <p className='mt-[10px] text-alt-secondary font-light whitespace-pre'>
+                <p className='mt-[10px] text-alt-secondary font-light whitespace-pre-line'>
                   {book.description}
                 </p>
 
