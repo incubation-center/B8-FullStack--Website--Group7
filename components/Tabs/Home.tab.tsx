@@ -109,6 +109,7 @@ export default function HomeTab({
     });
   }, 300);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(
     useDebounce(() => {
       // get category from url
