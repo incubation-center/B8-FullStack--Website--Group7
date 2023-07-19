@@ -50,11 +50,12 @@ export default function Navbar({
   return (
     <div
       className='
-        w-[300px]
+        admin-sidebar-width
         h-full flex flex-col
         bg-primary
         p-2 z-10
         overflow-y-auto
+        flex-shrink-0
       '
     >
       {/* Logo */}

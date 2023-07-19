@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { AuthAtom, searchKeywordAtom } from '@/service/recoil';
 import { HomePageTab } from '@/utils/enum';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SearchSvg from './icon/Search';
 import { useTranslation } from 'next-i18next';
@@ -16,6 +16,8 @@ export default function UserSearchBar({
   currentTab: HomePageTab;
   initialAnimation?: boolean;
 }) {
+  const [isPending, startTransition] = useTransition();
+
   const { t } = useTranslation('common');
 
   const authStore = useRecoilValue(AuthAtom);
@@ -51,9 +53,16 @@ export default function UserSearchBar({
     }
   }, [authStore.isLoggedIn, currentTab, setSearchText, t]);
 
-  const handleSearch = useDebounce(() => {
-    setSearchTextRecoil(searchText);
-  }, 300);
+  const handleSearch = useCallback(() => {
+    startTransition(() => {
+      setSearchTextRecoil(searchText);
+    });
+  }, [searchText, setSearchTextRecoil]);
+
+  const handleUpdateSearchText = useDebounce(
+    (text: string) => setSearchText(text),
+    250
+  );
 
   useEffect(() => {
     handleSearch(); // update recoil state only when user stop typing for 300ms
@@ -92,8 +101,7 @@ export default function UserSearchBar({
               placeholder-gray-400
             '
             placeholder={placeholder}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(e) => handleUpdateSearchText(e.target.value)}
             disabled={isDisabled}
           />
         </motion.div>

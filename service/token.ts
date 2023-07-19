@@ -90,8 +90,6 @@ export const processUserToken = async (token: any): Promise<AuthStore> => {
         };
       }
 
-      isLoggedIn = true;
-
       const fetchUserInfo = getUserInfo(token, tokenData.id);
       const fetchTokenValidation = isTokenValid(token);
 
@@ -103,6 +101,7 @@ export const processUserToken = async (token: any): Promise<AuthStore> => {
 
       if (userInfoRes.status === 'fulfilled') {
         user = userInfoRes.value.data;
+        isLoggedIn = true;
       }
 
       let tokenValidation = false;
