@@ -8,7 +8,10 @@
 
       "admin-btn": "Admin",
       "login-btn": "Login",
-      "view-btn": "View"
+      "view-btn": "View",
+
+      "expand-btn": "Expand",
+      "collapse-btn": "Collapse"
     },
 
     "category": {

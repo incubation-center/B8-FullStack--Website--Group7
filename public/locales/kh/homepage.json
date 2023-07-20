@@ -8,7 +8,10 @@
 
       "admin-btn": "អ្នកគ្រប់គ្រង",
       "login-btn": "ចូលគណនី",
-      "view-btn": "មើល"
+      "view-btn": "មើល",
+
+      "expand-btn": "ពង្រីក",
+      "collapse-btn": "បង្រួម"
     },
 
     "category": {
