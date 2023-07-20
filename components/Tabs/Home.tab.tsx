@@ -482,7 +482,6 @@ function BookSection({
           </motion.div>
         ))}
       </div>
-
       {isExpand && (
         <button
           className='
