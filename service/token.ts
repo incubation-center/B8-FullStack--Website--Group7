@@ -1,8 +1,9 @@
 import jwtDecode from 'jwt-decode';
 import createAxiosInstance from './axios';
 import { API_ENDPOINT } from '@/utils/enum';
-import { getUserInfo } from './api/user';
+import { getUserFavoriteBooks, getUserInfo } from './api/user';
 import { AuthStore } from '@/types/auth';
+import { User } from '@/types';
 
 export interface Token {
   id: string;
@@ -75,7 +76,7 @@ export const isTokenValid = async (token: any) => {
 export const processUserToken = async (token: any): Promise<AuthStore> => {
   let isLoggedIn = false;
   let isAdmin = false;
-  let user = null;
+  let user: User | null = null;
 
   if (token) {
     const tokenData = decodeToken(token);
@@ -90,19 +91,26 @@ export const processUserToken = async (token: any): Promise<AuthStore> => {
         };
       }
 
-      isLoggedIn = true;
-
       const fetchUserInfo = getUserInfo(token, tokenData.id);
+      const fetchUserFavoriteBook = getUserFavoriteBooks(token, tokenData.id);
       const fetchTokenValidation = isTokenValid(token);
 
       // promise allSettled
-      const [userInfoRes, tokenValidationRes] = await Promise.allSettled([
-        fetchUserInfo,
-        fetchTokenValidation
-      ]);
+      const [userInfoRes, userFavBooksRes, tokenValidationRes] =
+        await Promise.allSettled([
+          fetchUserInfo,
+          fetchUserFavoriteBook,
+          fetchTokenValidation
+        ]);
 
       if (userInfoRes.status === 'fulfilled') {
-        user = userInfoRes.value.data;
+        user = userInfoRes.value.data satisfies User;
+        if (user) user.favoriteBooks = [];
+        isLoggedIn = true;
+      }
+
+      if (userFavBooksRes.status === 'fulfilled') {
+        if (user) user.favoriteBooks = userFavBooksRes.value.data;
       }
 
       let tokenValidation = false;

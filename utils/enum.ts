@@ -50,6 +50,7 @@ export const API_ENDPOINT = {
   },
   USER: {
     INFO: (id: string) => '/user/' + id,
+    GET_FAVORITES: (id: string) => '/user/' + id + '/favorites',
     CHANGE_PASSWORD: (id: string) => `/user/${id}/password`,
     BOOK_TO_FAVORITES: (id: string, bookId: string) =>
       `/user/${id}/favorites/${bookId}`,

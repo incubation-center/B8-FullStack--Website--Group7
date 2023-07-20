@@ -35,7 +35,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
   const { t } = useTranslation('book-detail');
   const { isKhmer } = useLocale();
   const [authStore, setAuthStore] = useRecoilState(AuthAtom);
-  const allBooks = useRecoilValue(AllBooksAtom);
+  const [allBooks, setAllBooks] = useRecoilState(AllBooksAtom);
   const [book, setBook] = useState<Book | undefined | null>();
 
   const isSaved = useRecoilValue(isBookAlreadySaved(bookId as string));
@@ -80,6 +80,15 @@ export default function BookDetail({ bookId }: { bookId: string }) {
     try {
       const book = await getBookById(bookId);
       setBook(book);
+
+      setAllBooks((prev) => {
+        const newBooks = prev.map((b) => {
+          if (b.id === book.id) return book;
+          return b;
+        });
+
+        return newBooks;
+      });
     } catch (err) {
       console.error(err);
     }
@@ -308,7 +317,7 @@ export default function BookDetail({ bookId }: { bookId: string }) {
                   )}
                 </div>
 
-                <p className='mt-[10px] text-alt-secondary font-light whitespace-pre'>
+                <p className='mt-[10px] text-alt-secondary font-light whitespace-pre-line'>
                   {book.description}
                 </p>
 

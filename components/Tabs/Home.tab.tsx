@@ -27,6 +27,7 @@ import FantasySvg from '@/components/icon/book-category/Fantasy';
 import HistorySvg from '@/components/icon/book-category/History';
 import SelfDevelopmentSvg from '@/components/icon/book-category/SelfDevelopment';
 import { useTranslation } from 'next-i18next';
+import ExpandSvg from '../icon/ExpandSvg';
 
 export default function HomeTab({
   isUseInAdminPage = false,
@@ -109,6 +110,7 @@ export default function HomeTab({
     });
   }, 300);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(
     useDebounce(() => {
       // get category from url
@@ -381,6 +383,8 @@ function BookSection({
 
   const scrollContainer = useScrollContainer();
 
+  const [isExpand, setIsExpand] = useState(false);
+
   useEffect(() => {
     if (isVisible) {
       handleVisibleOnScreen(categoryKey, category);
@@ -399,30 +403,50 @@ function BookSection({
         element to scroll to{' '}
       </div>
       {/* title */}
-      <h1
-        className='
+      <div className='flex items-center justify-between'>
+        <h1
+          className='
           w-1/3 text-xl 
           md:text-2xl text-t-primary mb-4 mt-2 pt-3 whitespace-nowrap
           text-bold
         '
-      >
-        {label}
-      </h1>
+        >
+          {label}
+        </h1>
+
+        <button
+          className='
+            flex items-center gap-2
+            hover:rounded-full hover:bg-primary hover:bg-opacity-10 px-2
+            transition-all duration-300
+          '
+          onClick={() => setIsExpand((prev) => !prev)}
+        >
+          <span>
+            {isExpand
+              ? t('homepage-tab.sidebar.collapse-btn')
+              : t('homepage-tab.sidebar.expand-btn')}
+          </span>
+          <ExpandSvg className='w-5 h-5 stroke-primary' isExpanded={isExpand} />
+        </button>
+      </div>
 
       {/* book */}
       <div
         ref={scrollContainer.ref}
-        className='
+        className={`
           w-full pb-4
           flex flex-row 
           overflow-x-auto overscroll-x-contain
           book-scrolling-section relative
-          z-0
-          space-x-4
-        '
+          z-0 gap-4 overflow-y-hidden
+          transition-all duration-300
+          ${isExpand && 'flex-wrap justify-center'}
+        `}
       >
         {books.map((book, index) => (
           <motion.div
+            layout
             animate={{ opacity: [0, 1], scale: [0.5, 1] }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             key={book.id}
@@ -431,7 +455,7 @@ function BookSection({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <div className='relative h-[200px] w-[150px] mx-auto'>
               <Image
-                className='w-full h-full object-bottom  object-contain'
+                className='w-full h-full object-bottom object-contain'
                 src={book.bookImg}
                 alt={book.title}
                 draggable={false}
@@ -457,6 +481,23 @@ function BookSection({
           </motion.div>
         ))}
       </div>
+      {isExpand && (
+        <button
+          className='
+            flex items-center gap-2 mx-auto 
+            hover:rounded-full hover:bg-primary hover:bg-opacity-10 px-2
+            transition-all duration-300
+          '
+          onClick={() => setIsExpand((prev) => !prev)}
+        >
+          <span>
+            {isExpand
+              ? t('homepage-tab.sidebar.collapse-btn')
+              : t('homepage-tab.sidebar.expand-btn')}
+          </span>
+          <ExpandSvg className='w-5 h-5 stroke-primary' isExpanded={isExpand} />
+        </button>
+      )}
     </div>
   );
 }

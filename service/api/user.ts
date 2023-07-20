@@ -23,6 +23,23 @@ export async function getUserInfo(token: string, id: string) {
   }
 }
 
+export async function getUserFavoriteBooks(token: string, id: string) {
+  try {
+    const response = await axiosClient.get(
+      API_ENDPOINT.USER.GET_FAVORITES(id),
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function updateUserInfo(id: string, data: any) {
   try {
     const response = await axiosClient.patch(API_ENDPOINT.USER.INFO(id), data);

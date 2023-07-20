@@ -11,7 +11,7 @@
   "email-placeholder": "Please enter your email address",
   "password-placeholder": "Please enter your password",
   "cfm-password-placeholder": "confirm your password",
-  "phone-placeholder": "Please enter your username",
+  "phone-placeholder": "Please enter your phone number",
 
   "email-required-alert": "Email is required",
   "user-required-alert": "Username is required",
