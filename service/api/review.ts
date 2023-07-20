@@ -22,8 +22,6 @@ export async function getAllReviews(bookId: string) {
 
     const { data } = response;
 
-    console.log(typeof data);
-
     data.forEach((review: any) => formattingReview(review));
 
     return data;
