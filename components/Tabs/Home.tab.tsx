@@ -403,7 +403,7 @@ function BookSection({
         element to scroll to{' '}
       </div>
       {/* title */}
-      <div className='flex items-center justify-between'>
+      <div className='flex items-baseline justify-between'>
         <h1
           className='
           w-1/3 text-xl 
@@ -432,6 +432,7 @@ function BookSection({
       </div>
 
       {/* book */}
+
       <div
         ref={scrollContainer.ref}
         className={`
@@ -439,7 +440,7 @@ function BookSection({
           flex flex-row 
           overflow-x-auto overscroll-x-contain
           book-scrolling-section relative
-          z-0 gap-4 overflow-y-hidden
+          z-0 gap-2 gap-y-4 md:gap-4 overflow-y-hidden
           transition-all duration-300
           ${isExpand && 'flex-wrap justify-center'}
         `}
